@@ -1,0 +1,268 @@
+@font-face {
+    font-family:'IRANSans' ;
+    src: url('../fonts/IRANSans.ttf');
+}
+@font-face {
+    font-family: 'IRANSansBold';
+    src: url('../fonts/IRANSansBold.ttf');
+}
+@font-face {
+    font-family: 'IRANSansMedium';
+    src: url('../fonts/IRANSansMedium.ttf');
+}
+@font-face {
+    font-family: 'IRANSansLight';
+    src: url('../fonts/IRANSansLight.ttf');
+}
+@font-face {
+    font-family: 'IRANSansDn';
+    src: url('../fonts/IRANSansDn.ttf');
+}
+@font-face {
+    font-family: 'IRANSansDnBold';
+    src: url('../fonts/IRANSansDNBold.ttf');
+}
+@font-face {
+    font-family: 'IRANSansDnLight';
+    src: url('../fonts/IRANSansDNLight.ttf');
+}
+:root {
+    --dark-green: #009959;
+    --orange: #FF6900;
+    --yellow: #FFD200;
+    --light-green:#C9D1B1;
+    --light-red:#FEF5EC;
+    --back-gray: #E2E3E4;
+    --c-gray-1: #f4f4f4;
+    --c-gray-2: #f7F6F9;
+    --black:#000;
+  }
+  .test{
+    color: var(--dark-green);
+  }
+  body{
+    direction: rtl;
+  }
+  .greenBtn{
+    background-color: var(--dark-green) !important;
+    border: none !important;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 153, 89, 0.24);
+    height: 36px;
+    min-width: 170px;
+    color: #fff;
+    font-family: 'IRANSansMedium';
+    font-size: 15px;
+    padding-right: 25px !important;
+    padding-left:25px !important;
+  }
+  .greenBtn:hover{
+    background-color: var(--yellow) !important;
+    box-shadow:3px 6px 15px rgba(255, 227, 77, 0.6);
+  }
+  .ta-right{
+    text-align: right;
+  }
+  textarea:focus, input:focus{
+    border-color: rgba(229, 103, 23, 0.8);
+    box-shadow:0px 4px 10px rgba(0, 0, 0, 0.16);
+    outline: 0 none;
+  }
+  .passwordBox:focus{
+  border-color: rgba(229, 103, 23, 0.8);
+  box-shadow:0px 4px 10px rgba(0, 0, 0, 0.16);
+  outline: 0 none;
+  }
+  a:hover{
+    color: var(--yellow) !important;
+  }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+  /**********login*************/
+  .loginBody{
+    background-color: var(--c-gray-1);
+    height: 100vh;
+    padding: 5%;
+  }
+  .loginBox{
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    height: 500px;
+  }
+  .grayBack{
+    background-color: #fbfbfb;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    text-align: right;
+    position: relative;
+  }
+  .whiteBack{
+    background-color: #fff;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  
+  }
+  .loginImg{
+    width: 55%;
+    position: absolute;
+    bottom: 0;
+  }
+  .loginDetailBox{
+    padding:5% 15%;
+  }
+  .hasAcoount{
+    text-align: left;
+    font-family: 'IRANSansMedium';
+    color:var(--black);
+    font-size: 12px;
+  }
+  .hasAcoount a{
+    color:var(--dark-green);
+    margin-right: 5px;
+    text-decoration: none;
+  }
+  .loginTitle{
+    color: var(--dark-green);
+    font-family: 'IRANSansBold';
+    font-size: 25px;
+    text-align: right;
+    margin-top: 8%;
+  }
+  .customHeight1{
+    height:40px;
+  }
+  .customHeight2{
+    height: 20px;
+  }
+  .inputTitle{
+    font-family: 'IRANSansMedium';
+    font-size: 15px;
+  }
+  .inputCLass{
+    background-color: var(--c-gray-2);
+    border-radius: 5px;
+    height: 40px;
+    width: 100%;
+    padding: 5px 15px;
+    text-align: right;
+    font-size: 12px;
+    font-family: 'IRANSans';
+    color: #000;
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .passwordBox{
+    display: flex;
+    background-color: var(--c-gray-2);
+    border-radius: 5px;
+    height: 40px;
+    width: 100%;
+   
+    border: none;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .passwordInput{
+    width: 93%;
+    background-color: transparent;
+    border: none;
+    height: 40px;
+    padding: 5px 15px;
+    text-align: right;
+    font-size: 12px;
+    font-family: 'IRANSans';
+    color: #000;
+    border: none;
+  }
+  .passwordInput:focus{
+    box-shadow: none !important;
+  }
+  .passwordShow{
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0px;
+  }
+  .checkBoxLable{
+    font-family: 'IRANSansLight';
+    font-size: 12px;
+  }
+  .siteSlogan p{
+    font-family: 'IRANSansBold';
+    font-size: 35px;
+    color: rgba(81, 81, 81, 0.5);
+  }
+  .siteSlogan{
+    width: 40%;
+position: absolute;
+left: 10%;
+top: 15%;
+  }
+  .checkBoxLable a{
+    color: #009959 !important;
+    text-decoration: none !important;
+  }
+  /*************Header***********************/
+  .topBar{
+    background-color: var(--dark-green);
+    height: 34px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .topBarText{
+    font-family: 'IRANSans';
+    margin-right: 15px;
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 0px;
+  }
+  .topBarLeft{
+    display: flex;
+    justify-content: end;
+  }
+  .topBarIcon{
+    margin-right: 10px;
+    margin-left:10px;
+  }
+  .grayBar{
+    background-color: var(--c-gray-1);
+    height: 110px;
+    display: flex;
+  }
+  .logo{
+    width:100px;
+  }
+  .grayBarContainer{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  .searchDiv{
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    height: 40px;
+    border-radius: 25px;
+    width: 450px;
+    padding: 10px;
+  }
+  .searchInput{
+    border: none;
+    width: 95%;
+    font-family: 'IRANSans';
+    font-size: 12px;
+    color: #7B808C;
+
+  }

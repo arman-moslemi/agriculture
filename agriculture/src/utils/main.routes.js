@@ -5,10 +5,20 @@ import Verify from 'src/components/Pages/Login/Verify';
 import SetPassword from 'src/components/Pages/Login/SetPassword';
 import SignUp from 'src/components/Pages/Login/SignUp';
 import Home from 'src/components/Pages/Home/Home';
+import SingleProduct from 'src/components/Pages/SingleProduct/SingleProduct';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
+		<Routes>
+				
+				<Route
+					exact
+					path='/SingleProduct'
+					name='محصول'
+					element={<SingleProduct/>}
+				/></Routes> 
 			<Routes>
+				
 				<Route
 					exact
 					path='/Login'

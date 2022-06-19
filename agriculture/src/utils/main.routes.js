@@ -6,6 +6,7 @@ import SetPassword from 'src/components/Pages/Login/SetPassword';
 import SignUp from 'src/components/Pages/Login/SignUp';
 import Home from 'src/components/Pages/Home/Home';
 import SingleProduct from 'src/components/Pages/SingleProduct/SingleProduct';
+import Consultation from 'src/components/Pages/Consultation/Consultation';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -52,6 +53,13 @@ const MainRoutes = (props) => {
 					path='/'
 					name='صفحه اصلی'
 					element={<Home/>}
+				/></Routes> 
+				<Routes>
+				<Route
+					exact
+					path='/Consultation'
+					name='لیست مشاوران'
+					element={<Consultation/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

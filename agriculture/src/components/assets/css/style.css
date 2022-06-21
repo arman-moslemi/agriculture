@@ -283,7 +283,7 @@ border-radius: 5px;
   }  
 
 
-.SingleProductContainer{
+.singleProductContainer{
 
   background-color: var(--c-gray-1);
 
@@ -310,19 +310,19 @@ border-radius: 5px;
 
 }
 
-.SingleTitle{
+.singleTitle{
   color: var(--dark-green);
   font-family: 'IRANSansBold';
   font-size: 18px;
   text-align: right;
 }
-.SingleModelP{
+.singleModelP{
   color: #7B808C;
   font-family: 'IRANSans';
   font-size: 15px;
   text-align: right;
 }
-.SingleRateP{
+.singleRateP{
   color: var(--dark-green);
   font-family: 'IRANSans';
   font-size: 15px;
@@ -331,7 +331,7 @@ border-radius: 5px;
 
   /* margin-top: 8%; */
 }
-.SingleTitleCatP{
+.singleTitleCatP{
   color: var(--dark-green);
   font-family: 'IRANSansMedium';
   font-size: 12px;
@@ -339,7 +339,7 @@ border-radius: 5px;
   margin-right:26px;
   /* margin-top: 8%; */
 }
-.SingleCatP{
+.singleCatP{
   color: var(--orange);
   font-family: 'IRANSans';
   font-size: 12px;
@@ -348,11 +348,212 @@ border-radius: 5px;
   border-bottom-style: dotted;
   /* margin-top: 8%; */
 }
-.SingleTitleBox{
+.singleTitleBox{
 
-  border-bottom-width: 1px;
-  border-color: #7B808C;
+  /* border-width: 1px;
+  border-color:#000 ; */
+  border-bottom: 1px solid #E4E4E4;
+
   padding-left: 26px;
-  padding-right: 15px;
+  padding-right: 0px;
   /* margin-top: 8%; */
+}
+.singleTitleProperty{
+  color: var(--dark-green);
+  font-family: 'IRANSansMedium';
+  font-size: 18px;
+  text-align: right;
+  margin-top:20px;
+}
+.singlePropertyDis{
+  color: var(--black);
+  font-family: 'IRANSans';
+  font-size: 15px;
+  text-align: right;
+}
+.greyLightBox{
+  /* border: solid 0.3px #aaa; */
+  background-color: var(--c-gray-1);
+  border-radius: 5px;
+  margin-top: 20px;
+  width: 263px;
+}
+.titleGrayBox{
+  color: var(--black);
+  font-family: 'IRANSansMedium';
+  font-size: 15px;
+  text-align: center;
+  margin-right: 14.5px;
+  margin-top: 14px;
+}
+.boxGreyBox{
+  border-bottom: 1px solid  rgba(186, 186, 186, 0.25);
+align-items: center;
+padding-right: 10px;
+}
+.boxGreyBox2{
+  border-bottom: 1px solid  rgba(186, 186, 186, 0.25);
+align-items: center;
+padding-right: 18px;
+}
+.costTitleGrayBox{
+  color: var(--black);
+  font-family: 'IRANSansMedium';
+  font-size: 15px;
+  text-align: right;
+  margin-right: 15px;
+  margin-top: 15px;}
+.costGrayBox{
+  color: var(--black);
+  font-family: 'IRANSansMedium';
+  font-size: 15px;
+  text-align: left;
+  margin-left: 15px;
+}
+.costNumber{
+  color: var(--black);
+  font-family: 'IRANSansMedium';
+  font-size: 18px;
+  text-align: left;
+  margin-right: 0px;
+}
+.counterDiv{
+  border: 1px solid #a7a7a7;
+  width: 58px;
+  height: 29px;
+  border-radius: 50px;
+  /* padding: 5px; */
+  font-family: 'IRANSans' ;
+  color: var(--black);
+  margin-left: 17px;
+  /* margin-right: 20px; */
+}
+.decBTN{
+  margin-right: 8px;
+  background-color: transparent;
+  border: none;
+  color: var(--dark-green);
+  font-size: 18px;
+  font-family: 'IRANSansMedium';
+
+}
+.inBTN{
+  margin-left: 8px;
+  background-color: transparent;
+  border: none;
+  color: var(--dark-green);
+  font-size: 18px;
+  font-family: 'IRANSansMedium';
+
+}
+.addToCart{
+  color: #fff;
+  font-family: 'IRANSansMedium';
+  text-align: center;
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+    border: none !important;
+  background-color: var(--yellow) !important;
+  display: flex!important;
+  justify-content: center;
+  height: auto;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.addToCartTitle{
+  margin-bottom: 0px !important;
+  margin-right: 16px;
+}
+
+/* .cTabList{
+  width: 100%;
+  white-space: nowrap;
+  overflow-x: scroll;
+} */
+.cTabList{
+  text-align: right;
+  border-bottom: 2px solid #ececec;
+  padding-right:5px;
+  display: flex;
+  list-style: none;
+}
+.cTabList li:hover{
+  cursor: pointer;
+}
+.react-tabs__tab-panel{
+  text-align: right;
+  padding: 15px;
+}
+/* .cTabList{
+  white-space: nowrap !important;
+overflow-x: scroll !important;
+overflow-y: none !important;
+height: 50px !important;
+} */
+.cTabList .react-tabs__tab{
+  font-family: 'IRANSansMedium';
+  color:#111;
+  font-size: 15px;
+  padding:10px 25px;
+
+}
+.cTabList .react-tabs__tab--selected {
+  background: #fff;
+  /* border-color: #aaa; */
+  /* color: black; */
+  /* border-radius: 5px 5px 0 0; */
+  border-right: none !important;
+  border-left: none !important;
+  border-top: none !important;
+  border-bottom: 3px solid var(--orange);
+  font-family: 'IRANSansBold';
+  color:var(--orange);
+}
+
+.propertyBox{
+  margin-left: 7px;
+  background-color: #FAFAFA;
+  border: none;
+  color: var(--dark-green);
+  width: 166px;
+height: 42px;
+display: flex!important;
+justify-content: center;
+/* height: auto; */
+/* padding-top: 10px; */
+align-items: center;
+/* margin-top: 10px;
+margin-bottom: 10px; */
+}
+.propertyBoxDes{
+  margin-left: 7px;
+  background-color: #FAFAFA;
+  border: none;
+  color: var(--dark-green);
+  width: 450px;
+height: 42px;
+display: flex!important;
+/* justify-content: center; */
+/* height: auto; */
+align-items: center;
+
+padding-right: 10px;
+/* margin-top: 10px;
+margin-bottom: 10px; */
+}
+.propertyBoxTitle{
+  font-family: 'IRANSansMedium';
+  color:#111;
+  font-size: 15px;
+  margin-bottom: 0px !important;
+
+
+}
+.propertyDesTitle{
+  font-family: 'IRANSans';
+  color:#111;
+  font-size: 15px;
+  margin-bottom: 0px !important;
+
 }

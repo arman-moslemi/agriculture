@@ -433,6 +433,7 @@ top: 15%;
   /*****************consultationList*********/
   .bodyPadding{
     padding-top: 5%;
+    padding-bottom: 5%;
   }
   .searchBtn{
     height: 60px !important;
@@ -443,6 +444,7 @@ top: 15%;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
     border-radius: 5px;
     padding: 30px;
+    background-color: #fff;
   }
   .whiteBoxTitle{
     font-family: 'IRANSansDnBold';
@@ -450,6 +452,150 @@ top: 15%;
     text-align: right;
     color: #000;
   }
+  .consultationDescription{
+    font-family: 'IRANSansMedium';
+    color: #000;
+    font-size: 15px;
+    margin-top: 30px;
+    line-height: 30px;
+  }
+  .consultBox{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
+    
+
+  }
+  .consultBox1{
+    padding: 15px;
+    border-bottom: 1px solid rgba(186, 186, 186, 0.25);
+    display: flex;
+    justify-content: space-between;
+  }
+  .consultBox2{
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0px !important;
+  }
+  .avatar{
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+  }
+  .consultName{
+    font-size: 15px;
+    font-family: 'IRANSansMedium';
+    text-align: right;
+    color: #000;
+    margin-bottom: 3px !important;
+  }
+  .consultDegree{
+    font-family: 'IRANSans';
+    font-size: 13px;
+    color: #000;
+    margin-bottom: 3px !important;
+  }
+  .marginLeft5{
+    margin-left: 5px;
+  }
+  .callBtn{
+    background-color: transparent !important;
+    color: var(--dark-green) !important;
+    font-family: 'IRANSansMedium';
+    font-size: 13px;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: none !important;
+    border-radius: 0px !important;
+    height: 25px;
+    padding: 0px !important;
+    width: 60px;
+    text-align: center;
+    text-decoration: none !important;
+  }
+  .borderLeftGreen{
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    border-left: 1px solid #7B808C !important;
+    margin-left: 5px;
+  }
+  .favorite{
+    background-color: transparent !important;
+    border: none !important;
+    display: flex;
+    margin-bottom: 15px;
+  }
+  .favorite p{
+    color: #FF2525 !important;
+    font-family: 'IRANSans' !important;
+    font-size: 12px !important;
+    margin-bottom: 0px !important;
+    display: inline-block !important;
+    margin-right: 5px;
+  }
+  .accardionBox{
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
+    margin-top: 15px;
+  }
+  .accordion__button{
+    font-family: 'IRANSansBold';
+    border-bottom: 1px solid #e5e5e5 !important;
+    text-align: right !important;
+    background-color: #fff !important;
+    border-radius: 5px !important;
+  }
+  .accordion__button::before {
+    float: left;
+    background-size: cover;
+    height: 7px !important;
+    width: 12px !important;
+    background-image: url("../img/down.png");
+    transform: rotate(0deg) !important;
+    margin-top: 10px;
+    border-bottom:none !important;
+border-right: none !important;
+  }
+  .accordion__panel{
+    background-color: #fff !important;
+  }
+  .accordion__button[aria-expanded="true"]::before, .accordion__button[aria-selected="true"]::before {
+    transform: rotate(180deg) !important;
+  }
+    .categoryLable{
+        font-family: 'IRANSansMedium';
+        color: #000;
+        font-size: 15px;
+    }
+    .accordion__panel{
+      padding: 10px !important;
+    }
+
+
+  .sliderCardBox{
+    background-color: #fff;
+    height: 400px;
+    width: 260px;
+
+  } 
+  .slick-initialized .slick-slide{
+    width: 258px !important;
+    margin-right: 15px;
+    margin-left: 15px;
+  } 
+  .containerWhite{
+    background-color: #fff;
+  }
+  .sliderTitle{
+    font-family: 'IRANSansDNBold';
+    font-size: 30px;
+    text-align: center;
+    color: #000;
+  }
+  @import "~slick-carousel/slick/slick.css"; 
+@import "~slick-carousel/slick/slick-theme.css";
   /*********Single Product************/
 
   @import "~react-image-gallery/styles/css/image-gallery.css";
@@ -740,4 +886,16 @@ margin-bottom: 10px; */
   font-size: 15px;
   margin-bottom: 0px !important;
 
+}
+
+
+/**********PaginationStyle**********/
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root{
+  border-radius: 50% !important;
+  font-family: 'IRANSans' !important;
+  color: var(--dark-green) !important;
+}
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+  background-color:var(--dark-green) !important ;
+  color: #fff !important;
 }

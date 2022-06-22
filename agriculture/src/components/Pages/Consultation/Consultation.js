@@ -1,5 +1,5 @@
 import {React ,useState } from "react";
-import { Container, Row ,Col ,Button} from "react-bootstrap";
+import { Container, Row ,Col ,Button ,Modal ,Form} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
 import Avatar from "src/components/assets/img/avatar.png";
@@ -18,13 +18,23 @@ import Slider from "react-slick";
 
 const Consultation = () =>{
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
         rtl:true,
+    
       };
+      const [show, setShow] = useState(false);
+
+      const handleClose = () => setShow(false);
+      const handleShow = () => setShow(true);
+      const [show2, setShow2] = useState(false);
+
+      const handleClose2 = () => {setShow2(false)};
+      const handleShow2 = () => {setShow2(true);setShow(false)};
+    
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -452,9 +462,124 @@ const Consultation = () =>{
                                         </p>
                                         </div>
                                         <div className="d-flex">
-                                            <a href="#" className="callBtn borderLeftGreen">
+                                            <a href="#" className="callBtn borderLeftGreen" onClick={handleShow}>
                                                 متنی
                                             </a>
+                                            <Modal
+                                                show={show} onHide={handleClose}
+                                                className="consultModal"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                                >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                    زمان مورد نیاز برای انجام مشاوره
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                <p className="modalText">
+                                                    <span>
+                                                        نام مشاور : 
+                                                    </span>
+                                                     یاسمن طاهری صراف
+                                                </p>
+                                                <p className="modalText">
+                                                    <span>
+                                                       تحصیلات : 
+                                                    </span>
+                                                     کارشناس ارشد کشاورزی
+                                                </p>
+                                                <p className="modalText">
+                                                    <span>
+                                                        نوع مشاوره : 
+                                                    </span>
+                                                     متنی
+                                                </p>
+                                           
+                                                <Form>
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                        موضوع مشاوره : 
+                                                    </span>
+                                                    
+                                                </p>
+                                                <input className="inputCLass" type="text"/>
+                                                <div className="d-flex align-items-center">
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                        مدت زمان مشاوره : 
+                                                    </span>
+                                                    
+                                                </p>
+                                                <Form.Select className="bSelect">
+                                            
+                                                    <option>15 دقیقه</option>
+                                                    <option>30 دقیقه</option>
+                                                    <option>45 دقیقه</option>
+                                                    <option>60 دقیقه</option>
+                                                </Form.Select>
+                                                </div>
+                                                </Form>
+                                               
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button  onClick={handleShow2}className="modalSaveBtn">ثبت درخواست</Button>
+                                                </Modal.Footer>
+                                             </Modal>
+                                             <Modal
+                                                show={show2} onHide={handleClose2}
+                                                className="consultModal"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                                >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                    تایید درخواست
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                <p className="modalText">
+                                                    <span>
+                                                        نام مشاور : 
+                                                    </span>
+                                                     یاسمن طاهری صراف
+                                                </p>
+                                                <p className="modalText">
+                                                    <span>
+                                                       تحصیلات : 
+                                                    </span>
+                                                     کارشناس ارشد کشاورزی
+                                                </p>
+                                                <p className="modalText">
+                                                    <span>
+                                                        نوع مشاوره : 
+                                                    </span>
+                                                     متنی
+                                                </p>
+                                           
+                                             
+                                                <p className="modalText">
+                                                    <span>
+                                                        موضوع مشاوره : 
+                                                    </span>
+                                                    آفت زدگی مراتع
+                                                </p>
+                                                <p className="modalText colorOrange">
+                                                    <span>
+                                                        هزینه مشاوره : 
+                                                    </span>
+                                                    125.000 تومان
+                                                </p>
+                                            
+                                            
+                                               
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                <Button  onClick={handleClose2}className="modalSaveBtn2">پرداخت از کیف پول</Button>
+                                                    <Button  onClick={handleClose2}className="modalSaveBtn">پرداخت آنلاین</Button>
+                                                   
+                                                </Modal.Footer>
+                                             </Modal>
                                             <a href="#" className="callBtn borderLeftGreen">
                                                صوتی
                                             </a>
@@ -868,33 +993,87 @@ const Consultation = () =>{
    <Container>
    <div>
         <h2 className="sliderTitle"> جدیدترین مشاوران ما</h2>
-        <Slider {...settings}>
+        <Slider {...settings} className="consultationSlider">
           <div className="sliderCardBox">
-            <h3>1</h3>
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
           </div>
           <div className="sliderCardBox">
-            <h3>2</h3>
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
           </div>
           <div className="sliderCardBox">
-            <h3>3</h3>
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
           </div>
           <div className="sliderCardBox">
-            <h3>4</h3>
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
           </div>
           <div className="sliderCardBox">
-            <h3>5</h3>
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
           </div>
           <div className="sliderCardBox">
-            <h3>6</h3>
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
           </div>
           <div className="sliderCardBox">
-            <h3>7</h3>
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
           </div>
           <div className="sliderCardBox">
-            <h3>8</h3>
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
           </div>
           <div className="sliderCardBox">
-            <h3>9</h3>
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
           </div>
         </Slider>
       </div>

@@ -7,6 +7,8 @@ import SignUp from 'src/components/Pages/Login/SignUp';
 import Home from 'src/components/Pages/Home/Home';
 import SingleProduct from 'src/components/Pages/SingleProduct/SingleProduct';
 import Consultation from 'src/components/Pages/Consultation/Consultation';
+import EditProfile from 'src/components/Pages/Panel/EditProfile';
+import Wallet from 'src/components/Pages/Panel/Wallet';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -60,6 +62,20 @@ const MainRoutes = (props) => {
 					path='/Consultation'
 					name='لیست مشاوران'
 					element={<Consultation/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/EditProfile'
+					name='ویرایش حساب کاربری'
+					element={<EditProfile/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/Wallet'
+					name='کیف پول'
+					element={<Wallet/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

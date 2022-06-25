@@ -675,6 +675,7 @@ border-right: none !important;
   .modalText span{
     font-family: 'IRANSansBold' !important;
     margin-left: 10px;
+    font-size: 15px;
   }
   .bSelect{
     width: 120px !important;
@@ -1170,4 +1171,56 @@ margin-bottom: 10px; */
 .css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
   background-color:var(--dark-green) !important ;
   color: #fff !important;
+}
+
+/************Wallet***********/
+.variz{
+  font-family: 'IRANSansBold';
+  color: var(--dark-green);
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+.bardasht{
+  font-family: 'IRANSansBold';
+  color: #FF2525;
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+.tarikh{
+  font-family: 'IRANSansMedium';
+  color: #000;
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+.pd15{
+  padding:15px !important;
+}
+.IotImg{
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  margin-top: 30px;
+}
+.addSection{
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--orange) !important;
+  font-family: 'IRANSansMedium';
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+}
+.addDeviceText{
+  color: var(--dark-green);
+  font-family: 'IRANSansMedium';
+  margin-bottom: 0px;
+  margin-right: 15px;
+}
+.accardionBox2{
+  border: 1px solid #DCDCDC;
+  border-radius: 5px
+}
+.accardionBox2 .accordion__button{
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
 }

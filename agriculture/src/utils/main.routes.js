@@ -10,6 +10,7 @@ import Consultation from 'src/components/Pages/Consultation/Consultation';
 import EditProfile from 'src/components/Pages/Panel/EditProfile';
 import Wallet from 'src/components/Pages/Panel/Wallet';
 import IoTManagement from 'src/components/Pages/Panel/IoTManagement';
+import IoTDashboard from 'src/components/Pages/Panel/IoTDashboard';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -84,6 +85,13 @@ const MainRoutes = (props) => {
 					path='/IoTManagement'
 					name='مدیریت دستگاه های IoT'
 					element={<IoTManagement/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/IoTDashboard'
+					name='داشبورد IoT'
+					element={<IoTDashboard/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

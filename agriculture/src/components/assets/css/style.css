@@ -640,6 +640,9 @@ border-right: none !important;
   .consultModal .modal-dialog{
     width: 400px !important;
   }
+  .consultModal2 .modal-dialog{
+    width: 460px !important;
+  }
   .marginRight1rem{
     margin-right: 1rem;
   }
@@ -671,6 +674,7 @@ border-right: none !important;
   .modalText{
     font-family: 'IRANSans' !important;
     color: #000 !important;
+
   }
   .modalText span{
     font-family: 'IRANSansBold' !important;
@@ -1205,13 +1209,13 @@ margin-bottom: 10px; */
 .addSection{
   background-color: transparent !important;
   border: none !important;
-  color: var(--orange) !important;
+  color: var(--dark-green) !important;
   font-family: 'IRANSansMedium';
   padding-top: 0px !important;
   padding-bottom: 0px !important;
 }
 .addDeviceText{
-  color: var(--dark-green);
+  color: var(--orange);
   font-family: 'IRANSansMedium';
   margin-bottom: 0px;
   margin-right: 15px;
@@ -1223,4 +1227,142 @@ margin-bottom: 10px; */
 .accardionBox2 .accordion__button{
   border-bottom-right-radius: 0px !important;
   border-bottom-left-radius: 0px !important;
+}
+.accBox{
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  
+}
+.borderBottomGray{
+  border-bottom: 1px solid rgba(186, 186, 186, 0.5);
+  padding: 10px 15px;
+}
+.caretDownBtn{
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0px !important;
+  margin-right: 10px;
+}
+.accBox2{
+  width: 95%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.groundBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(186, 186, 186, 0.5);
+}
+.groundName{
+  font-family: 'IRANSans';
+  margin-bottom: 0px;
+  margin-left: 10px;
+}
+.MuiTooltip-popper{
+  font-family: 'IRANSans' !important;
+}
+.deviceManage{
+  font-family: 'IRANSansBold';
+  color: var(--orange) !important;
+  border: 1px solid var(--orange) !important;
+  background-color: transparent !important;
+  font-size: 12px !important;
+}
+.deviceManage:hover{
+  background-color: var(--orange) !important;
+  color: #fff !important;
+}
+.condition{
+  font-family: 'IRANSansBold';
+  color: #000;
+  margin-bottom: 0px !important;
+  margin-left: 15px;
+}
+.conditionBox{
+  margin-top: 20px;
+  padding: 15px;
+
+}
+.bSelect2{
+  width: 120px !important;
+  border: 2px solid #000 !important;
+  box-shadow: none !important;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-family: 'IRANSans' !important;
+}
+.bSelect3{
+  width: 70px !important;
+  border: 2px solid #000 !important;
+  box-shadow: none !important;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-family: 'IRANSans' !important;
+}
+.conditionInput{
+  border: 2px solid #000;
+  width: 80px;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-family: 'IRANSans' !important;
+  padding: 10px;
+  height: 40px;
+  border-radius:5px;
+}
+.addBtn{
+  background-color: var(--orange) !important;
+  border: none !important;
+  filter: drop-shadow(0px 4px 4px #FECBB8) !important;
+  height: 36px;
+  width: 35px;
+  padding: 0px !important;
+  margin-right: 10px;
+}
+.deviceStatus{
+  width: 80px;
+  height: 29px;
+  
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.deviceStatus p{
+  font-family: 'IRANSansMedium';
+  color: #fff;
+  margin-bottom: 0px;
+}
+#kharab{
+  background-color: #FF2525;
+}
+#salem{
+  background-color: var(--dark-green);
+}
+.portTable {
+
+}
+.portTh{
+  font-family: 'IRANSansBold';
+  font-size: 14px;
+  color: #000;
+  text-align: center;
+}
+.portTd{
+  font-family: 'IRANSans';
+  font-size: 12px;
+  color: #000;
+  text-align: center;
+}
+.modalSaveBtn2{
+  background-color: transparent !important;
+  color: var(--orange) !important;
+  border: none !important;
+  font-family: 'IRANSansMedium' !important;
 }

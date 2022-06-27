@@ -643,6 +643,9 @@ border-right: none !important;
   .consultModal2 .modal-dialog{
     width: 460px !important;
   }
+  .historyModal .modal-dialog{
+    width: 600px !important;
+  }
   .marginRight1rem{
     margin-right: 1rem;
   }
@@ -1259,6 +1262,12 @@ margin-bottom: 10px; */
   padding: 10px 15px;
   border-bottom: 1px solid rgba(186, 186, 186, 0.5);
 }
+.groundBox2{
+  
+
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(186, 186, 186, 0.5);
+}
 .groundName{
   font-family: 'IRANSans';
   margin-bottom: 0px;
@@ -1365,4 +1374,128 @@ margin-bottom: 10px; */
   color: var(--orange) !important;
   border: none !important;
   font-family: 'IRANSansMedium' !important;
+}
+.whiteMiniBox{
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
+  width: 120px;
+  height: 140px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-bottom: 18px;
+  text-decoration: none !important;
+}
+.whiteMiniBoxTitle{
+  font-family: 'IRANSansBold';
+  font-size: 14px;
+  color: #000;
+  margin-bottom: 0px !important;
+}
+.whiteMiniBoxStatus{
+  font-size: 13px;
+  font-family: 'IRANSans';
+  color: var(--dark-green);
+  margin-bottom: 0px !important;
+}
+.whiteMiniBox img{
+  width: 45px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.boxRow{
+  flex-wrap: wrap;
+  width: 80%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.nav-tabs{
+  text-align: center;
+  justify-content: center;
+}
+.nav-item{
+  font-size: 15px;
+  font-family: 'IRANSans' !important;
+  color: #000;
+}
+.nav-link{
+  color: #000 !important;
+}
+.nav-tabs .nav-link.active{
+  color: var(--orange) !important;
+  font-family: 'IRANSansBold' !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-left: none !important;
+  border-bottom: 2px solid var(--orange) !important;
+}
+.nav-tabs .nav-link{
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+}
+.productCard{
+  width: 290px;
+  height: 350px;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
+  border-radius: 5px;
+  background-color: #fff;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.productImg{
+  width: 190px;
+  height: 190px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  margin-bottom: 10px;
+}
+.productName{
+  font-family: 'IRANSansBold';
+  color: #000;
+  margin-bottom: 5px !important;
+  font-size: 15px;
+}
+.productVolume{
+  font-family: 'IRANSans';
+  color: #000;
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+.productPrice{
+  font-family: 'IRANSansMedium';
+  color: #000;
+  font-size:15px ;
+  margin-bottom: 0px !important;
+}
+.marginLeft5{
+  margin-left: 5px;
+}
+.box2Div{
+  border-top: 1px solid #E5E5E5;
+  padding: 10px 20px;
+
+}
+.consultBoxF{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 5px;
+  height: 80px;
+  width: 95%;
+  padding: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 18px;
+}
+.consultAvatar{
+  height: 55px;
+  width: 55px;
+  border-radius: 50%;
+  margin-left: 20px;
 }

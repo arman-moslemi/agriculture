@@ -19,6 +19,12 @@ import IotImg from "src/components/assets/img/IotImg.png";
 import Filter from "src/components/assets/img/Filter.png";
 import Category from "src/components/assets/img/Category.png";
 import Tooltip from '@mui/material/Tooltip';
+import WeatherDeg from "src/components/assets/img/c1.png";
+import SoulDeg from "src/components/assets/img/c2.png";
+import WaterDeg from "src/components/assets/img/c3.png";
+import Humidity from "src/components/assets/img/c4.png";
+import SoulHumidity from "src/components/assets/img/c5.png";
+import Faucet from "src/components/assets/img/c6.png";
 const IoTDashboard = () =>{
     const [showSearch, setshowSearch] = useState(false);
     const onClick = () =>{
@@ -28,6 +34,9 @@ const IoTDashboard = () =>{
       const onClick2 = () =>{
           setshowSearch2(!showSearch2);
         };
+        const [show, setShow] = useState(false);
+        const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -88,7 +97,7 @@ const IoTDashboard = () =>{
            </div>
        {showSearch2? 
        <div>
-         <div className="groundBox">
+         <div className="groundBox2">
              <div className="d-flex align-items-center">
                  <p className="groundName" style={{color:'#FF6900',fontFamily:'IRANSansBold'}}>
                      دستگاه شماره یک
@@ -97,7 +106,64 @@ const IoTDashboard = () =>{
                      <ExclamationCircleFill color="#AAADB3"/>
            </Tooltip>
              </div>
-           
+             
+           <div className="d-flex justify-content-center mt-4 boxRow">
+            <a className="whiteMiniBox" href="#" onClick={handleShow}>
+                <p className="whiteMiniBoxTitle">دمای هوا</p>
+                <img src={WeatherDeg} />
+                <p className="whiteMiniBoxTitle">37 درجه</p>
+                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+            </a>
+            <Modal
+                                                show={show} onHide={handleClose}
+                                                className="historyModal"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                                >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                    سوابق دستگاه
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                              
+                                                
+                                           
+                                               
+                                                </Modal.Body>
+                                             
+                                             </Modal>
+            <a className="whiteMiniBox" href="#">
+                <p className="whiteMiniBoxTitle">دمای خاک</p>
+                <img src={SoulDeg} />
+                <p className="whiteMiniBoxTitle">28 درجه</p>
+                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+            </a>
+            <a className="whiteMiniBox" href="#">
+                <p className="whiteMiniBoxTitle">دمای آب</p>
+                <img src={WaterDeg} />
+                <p className="whiteMiniBoxTitle">17 درجه</p>
+                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+            </a>
+            <a className="whiteMiniBox" href="#">
+                <p className="whiteMiniBoxTitle">رطوبت هوا</p>
+                <img src={Humidity} />
+                <p className="whiteMiniBoxTitle">68 %</p>
+                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+            </a>
+            <a className="whiteMiniBox" href="#">
+                <p className="whiteMiniBoxTitle">رطوبت خاک</p>
+                <img src={SoulHumidity} />
+                <p className="whiteMiniBoxTitle">53 %</p>
+                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+            </a>
+            <a className="whiteMiniBox" href="#">
+                <p className="whiteMiniBoxTitle">شیرآب کنترلی</p>
+                <img src={Faucet} />
+                <p className="whiteMiniBoxTitle">بسته</p>
+                <p className="whiteMiniBoxStatus">وضعیت : خراب</p>
+            </a>
+            </div>
          </div>    
        
        </div>

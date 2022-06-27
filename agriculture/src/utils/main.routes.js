@@ -11,6 +11,8 @@ import EditProfile from 'src/components/Pages/Panel/EditProfile';
 import Wallet from 'src/components/Pages/Panel/Wallet';
 import IoTManagement from 'src/components/Pages/Panel/IoTManagement';
 import IoTDashboard from 'src/components/Pages/Panel/IoTDashboard';
+import Favorite from 'src/components/Pages/Panel/Favorite';
+import TicketList from 'src/components/Pages/Panel/TicketList';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -92,6 +94,20 @@ const MainRoutes = (props) => {
 					path='/IoTDashboard'
 					name='داشبورد IoT'
 					element={<IoTDashboard/>}
+				/></Routes> 
+						<Routes>
+				<Route
+					exact
+					path='/Favorite'
+					name='مورد علاقه'
+					element={<Favorite/>}
+				/></Routes> 
+						<Routes>
+				<Route
+					exact
+					path='/TicketList'
+					name='لیست تیکت ها'
+					element={<TicketList/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

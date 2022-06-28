@@ -34,7 +34,7 @@ const Verify = () =>{
              
                 </div>
               
-                <Button className="greenBtn mt-5">تایید</Button>
+                <Button className="greenBtn mt-5" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>تایید</Button>
                
                
             </div>

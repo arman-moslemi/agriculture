@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter,Routes , Route } from 'react-router-dom';
 import Login from 'src/components/Pages/Login/Login';
 import Verify from 'src/components/Pages/Login/Verify';
-import SetPassword from 'src/components/Pages/Login/SetPassword';
+import SignUp2 from 'src/components/Pages/Login/SignUp2';
 import SignUp from 'src/components/Pages/Login/SignUp';
 import Home from 'src/components/Pages/Home/Home';
 import SingleProduct from 'src/components/Pages/SingleProduct/SingleProduct';
@@ -13,6 +13,9 @@ import IoTManagement from 'src/components/Pages/Panel/IoTManagement';
 import IoTDashboard from 'src/components/Pages/Panel/IoTDashboard';
 import Favorite from 'src/components/Pages/Panel/Favorite';
 import TicketList from 'src/components/Pages/Panel/TicketList';
+import History from 'src/components/Pages/Panel/History';
+import Store from 'src/components/Pages/Store/Store';
+import Cart from 'src/components/Pages/Cart/Cart';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -42,9 +45,9 @@ const MainRoutes = (props) => {
 				<Routes>
 				<Route
 					exact
-					path='/SetPassword'
+					path='/SignUp2'
 					name='رمز عبور'
-					element={<SetPassword/>}
+					element={<SignUp2/>}
 				/></Routes> 
 				<Routes>
 				<Route
@@ -108,6 +111,27 @@ const MainRoutes = (props) => {
 					path='/TicketList'
 					name='لیست تیکت ها'
 					element={<TicketList/>}
+				/></Routes> 
+				<Routes>
+				<Route
+					exact
+					path='/History'
+					name='تاریخچه'
+					element={<History/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/Store'
+					name='فروشگاه'
+					element={<Store/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/Cart'
+					name='سبد خرید'
+					element={<Cart/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

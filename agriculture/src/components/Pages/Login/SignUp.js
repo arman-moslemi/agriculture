@@ -31,15 +31,13 @@ const SignUp = () =>{
                 </p>
                 <div className="ta-right">
                 <div className="customHeight2"></div>
-                <span className="inputTitle">نام و نام خانوادگی</span>
-                <br/>
-                <input className="inputCLass" type="text"/>
-                <br/>
+                
+               
                 <span className="inputTitle">شماره تلفن همراه</span>
                 <br/>
                 <input className="inputCLass" type="number"/>
                 <br/>
-                <span className="inputTitle" type="password">کلمه عبور</span>
+                {/* <span className="inputTitle" type="password">کلمه عبور</span>
                 <br/>
                 <div className="passwordBox">
                 <input className="passwordInput"type={passwordShown ? "text" : "password"}/>
@@ -48,7 +46,7 @@ const SignUp = () =>{
                     passwordShown ? <EyeSlashFill color="#AAB7CA" size="20"/> : <EyeFill color="#AAB7CA" size="20"/>
                    }
                 </button>
-                </div>
+                </div> */}
                
                 <div className="d-flex align-items-center">
                 <Checkbox
@@ -68,7 +66,7 @@ const SignUp = () =>{
                 </div>
                 </div>
               
-                <Button className="greenBtn mt-3">ایجاد حساب کاربری</Button>
+                <Button className="greenBtn mt-3" style={{marginRight:'auto',marginLeft:'auto',display:'block'}} >ایجاد حساب کاربری</Button>
                 
                
             </div>

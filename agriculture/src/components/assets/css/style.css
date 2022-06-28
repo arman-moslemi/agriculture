@@ -1499,3 +1499,213 @@ margin-bottom: 10px; */
   border-radius: 50%;
   margin-left: 20px;
 }
+/***********TicketList***********/
+.ticketListBox{
+  border: 1px solid #dcdcdc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+.viewBtn{
+  background-color: transparent !important;
+  border: none !important;
+
+}
+.ticketStatus{
+  border-width: 2px;
+  border-radius: 5px;
+  border-style: solid;
+  width: 130px;
+  height: 33px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ticketStatus span{
+  font-family: 'IRANSansMedium';
+  font-size: 14px;
+
+}
+#answered{
+  border-color: #009959;
+}
+#answered span{
+  color: #009959;
+}
+#waiting{
+  border-color: #FFD200;
+}
+#waiting span{
+  color:#FFD200;
+}
+#closed{
+  border-color: #FF2525;
+}
+#closed span{
+  color:#FF2525 ;
+}
+.ticketModal .modal-dialog{
+  width: 600px;
+}
+.consultBoxF2{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 5px;
+  height: 80px;
+  width: 100%;
+  padding: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 18px;
+}
+.repeatConsult{
+  background-color: transparent !important;
+  border: none !important;
+  color: var(--orange) !important;
+  font-family: 'IRANSansMedium';
+}
+.historyBox{
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.historyTitle{
+  font-family: 'IRANSansBold';
+  color: #000;
+}
+.historyProductBox{
+  border: 1px solid #dcdcdc;
+  border-radius: 5px;
+  width: 95% !important;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.historyImg{
+  border: 0px solid #000;
+  height: 70px;
+  width: 70px;
+  margin-left: 15px;
+}
+.HistoryProductTitle{
+  font-family: 'IRANSansBold';
+  color: var(--dark-green);
+  margin-bottom: 7px !important;
+  font-size: 14px;
+}
+.HistoryProductModel{
+  font-family: 'IRANSans';
+  color: #7B808C;
+  margin-bottom: 0px;
+  font-size: 13px;
+}
+.historyPrice{
+  font-family: 'IRANSansMedium';
+  font-size: 15px;
+  text-align: left;
+  font-size: 14px;
+}
+.toggleText{
+  font-family: 'IRANSansBold';
+ color: #000;
+}
+.accardionBox5{
+  border-bottom: 1px solid #e5e5e5 !important;
+  text-align: right !important;
+  background-color: #fff !important;
+  border-radius: 5px !important;
+  padding: 18px;
+  box-shadow:  0px 4px 10px rgba(0, 0, 0, 0.16);
+  margin-top: 15px;
+  height: 60px;
+}
+.sortText{
+  font-family: 'IRANSansBold';
+  color: #000;
+  margin-right: 15px;
+}
+.sortBtn{
+  background-color: transparent !important;
+  border: none !important;
+  font-family: 'IRANSans';
+  color: #000 !important;
+  border-radius: 50px !important;
+  margin-right: 10px;
+  margin-left: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+.sortBtn:active{
+ 
+}
+.sortBtn:active, .sortBtn:focus{
+  background-color: #009959 !important;
+  color: #fff !important;
+}
+.boxText{
+  font-family: 'IRANSansMedium'; 
+  color: #000;
+}
+.whiteBoxGrayborder{
+  border-bottom: 1px solid  rgba(186, 186, 186, 0.25);
+  padding: 15px;
+}
+.boxText2{
+  font-family: 'IRANSans' !important;
+  margin-top: 10px;
+  font-size: 14px;
+}
+.yellowColor{
+  background-color: #FFD200 !important;
+  color: #fff !important;
+  border: none !important;
+  font-family: 'IRANSansBold';
+  width: 90% !important;
+  height: 40px;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  display: block !important;
+  margin-bottom: 15px;
+}
+.yellowColor:hover{
+  background-color: var(--orange) !important;
+}
+.customPad{
+  padding-right:20px !important ;
+  padding-left:20px !important ;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+.zirNevis{
+  font-family: 'IRANSans';
+  color: #7B808C;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.cartPBox{
+  border: 1px solid #DCDCDC;
+border-radius: 5px;
+padding: 15px;
+margin-top: 15px;
+margin-bottom: 15px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.cartImg{
+  width: 130px;
+  height: 130px;
+  margin-left: 30px;
+}

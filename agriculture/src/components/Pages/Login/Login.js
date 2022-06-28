@@ -47,9 +47,7 @@ const Login = () =>{
                 </div>
                
                 <div className="d-flex align-items-center">
-                    <span className="checkBoxLable">
-                        مرا به خاطر بسپار
-                    </span>
+                 
                     <Checkbox
 
                         defaultChecked
@@ -59,11 +57,13 @@ const Login = () =>{
                         color: '#009959',
                         },
                     }}
-                />
+                />    <span className="checkBoxLable">
+                مرا به خاطر بسپار
+            </span>
                 </div>
                 </div>
               
-                <Button className="greenBtn mt-5">ورود به حساب کاربری</Button>
+                <Button className="greenBtn mt-5" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>ورود به حساب کاربری</Button>
                 <p className="hasAcoount text-center mt-3" style={{fontSize:10}}>
                     رمز عبور خود را فراموش کردید؟<a href="#">ایجاد رمز جدید</a>
                 </p>

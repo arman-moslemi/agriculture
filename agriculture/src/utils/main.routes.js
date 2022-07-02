@@ -16,6 +16,9 @@ import TicketList from 'src/components/Pages/Panel/TicketList';
 import History from 'src/components/Pages/Panel/History';
 import Store from 'src/components/Pages/Store/Store';
 import Cart from 'src/components/Pages/Cart/Cart';
+import UserHistory from 'src/components/Pages/Panel/UserHistory';
+import News from 'src/components/Pages/News/News';
+import SingleNews from 'src/components/Pages/News/SingleNews';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -132,6 +135,27 @@ const MainRoutes = (props) => {
 					path='/Cart'
 					name='سبد خرید'
 					element={<Cart/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/UserHistory'
+					name='تاریخچه کاربر'
+					element={<UserHistory/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/News'
+					name='اخبار و مقالات'
+					element={<News/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/SingleNews'
+					name='خبر'
+					element={<SingleNews/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

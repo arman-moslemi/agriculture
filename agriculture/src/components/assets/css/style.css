@@ -1029,7 +1029,7 @@ padding-right: 18px;
 }
 .counterDiv{
   border: 1px solid #a7a7a7;
-  width: 58px;
+  width: 70px;
   height: 29px;
   border-radius: 50px;
   /* padding: 5px; */
@@ -1696,16 +1696,210 @@ margin-bottom: 10px; */
 }
 .cartPBox{
   border: 1px solid #DCDCDC;
-border-radius: 5px;
-padding: 15px;
-margin-top: 15px;
-margin-bottom: 15px;
-display: flex;
-align-items: center;
-justify-content: space-between;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .cartImg{
   width: 130px;
   height: 130px;
-  margin-left: 3i0px;
+  margin-left: 30px;
+}
+.deleteBtn{
+  background-color: transparent !important;
+  border: none !important;
+}
+.alertText{
+  color: var(--orange) !important;
+  margin-bottom: 0px;
+  font-family: 'IRANSansMedium';
+  font-size: 14px;
+  margin-top: 15px;
+}
+.addressSelect{
+  width: 100% !important;
+  background-color: #F7F6F9 !important;
+  border: none !important;
+  font-family: 'IRANSans' !important;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.vaziyat{
+  font-family: 'IRANSans';
+  color: var(--orange);
+}
+.sortNews{
+  border-bottom: 1px solid  rgba(186, 186, 186, 0.5);
+  padding: 15px 20px;
+}
+.newsCategory{
+  list-style: none !important;
+  padding-bottom: 25px;
+}
+.newsCategory li a{
+  color: #000;
+  font-family: 'IRANSans';
+  text-decoration: none !important;
+}
+.newsCategory li{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.newsCategory li a:hover{
+  color: #009959 !important;
+  font-family: 'IRANSansBold';
+}
+.bigNewsBox{
+  display: flex;
+
+}
+.bigNewsImg{
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.bigNewsCol{
+
+  width: 50%;
+}
+.bigNewsBox{
+  border: 2px solid #ededed;
+  border-radius: 5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.newsDate{
+  font-family: 'IRANSans';
+  font-size: 14px;
+}
+.newsTitle{
+  font-family: 'IRANSansBold';
+  font-size: 18px;
+}
+.newsDesc{
+  font-family: 'IRANSans';
+  width: 80%;
+}
+.bigPad{
+  padding: 30px;
+}
+.textDetail{
+  font-family: 'IRANSansMedium';
+  color: var(--orange) !important;
+  text-decoration: none !important;
+}
+.newsBtn{
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0px !important;
+  margin-left: 10px;
+}
+.newsBtn2{
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0px !important;
+  margin-left: 10px;
+}
+.textDetail2{
+  font-family: 'IRANSansMedium';
+  color: #000;
+  text-decoration: none !important;
+}
+.newsBtnIcon{
+  color: var(--orange);
+}
+.newsBtnIcon2{
+  color: #000;
+}
+.miniNewsBox{
+  width: 270px;
+  border:1px solid #c6c6c6;
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.miniNewsBox img{
+  width: 270px;
+  height: 200px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.newsB{
+  padding: 20px;
+  
+}
+.mediumNewsBox{
+  display: flex;
+  align-items: stretch;
+  border:1px solid #c6c6c6;
+  border-radius: 5px;
+}
+.headBox{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+  border-bottom: 1px solid rgba(186, 186, 186, 0.5)
+}
+.headerNews{
+  font-family: 'IRANSansBold';
+  color: #000;
+}
+.headerDate{
+  font-family: 'IRANSansMedium';
+  color: var(--dark-green);
+}
+.addFavorite{
+  color:#FF2525 !important;
+  font-family: 'IRANSansMedium';
+  background-color: transparent !important;
+  border: none !important;
+}
+.customM{
+  margin-left: 10px;
+}
+.newsTextBox{
+  padding: 15px 25px;
+}
+.newsTextBox p{
+  font-family: 'IRANSans';
+  line-height: 28px;
+  margin-right: 15px;
+  margin-left: 15px;
+  margin-top:15px;
+}
+.newsImgSingle{
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+.userNameCommnet{
+  font-family: 'IRANSansBold';
+  color: #009959;
+  margin-bottom: 0px;
+}
+.commentBox{
+  padding: 15px 25px;
+  margin-top: 15px;
+  border-bottom: 1px solid #e4e4e4;
+}
+.writerScore{
+  margin-bottom: 0px;
+  font-family: 'IRANSans';
+  margin-left: 15px;
+}
+.cInput{
+  width: 50% !important;
+  margin-right: 25px;
+}
+/***********Home*********/
+.homeSlider .slick-slide{
+  width: 100% !important;
+}
+.slick-track{
+  width: 100% !important;
 }

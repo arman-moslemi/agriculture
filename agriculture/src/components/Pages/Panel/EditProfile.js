@@ -29,6 +29,16 @@ const EditProfile = () =>{
     const [textType,setTextType]=useState("")
     const [voiceType,setVoiceType]=useState("")
     const [videoType,setVideoType]=useState("")
+    const [dataAddress,setDataAddress]=useState([])
+    const [dataProvince,setDataProvince]=useState([])
+    const [dataCity,setDataCity]=useState([])
+    const [newCity,setNewCity]=useState(1)
+    const [newProvince,setNewProvince]=useState(1)
+    const [editCity,setEditCity]=useState()
+    const [newAddress,setNewAddress]=useState("")
+    const [editAddressID,setEditAddressID]=useState("")
+
+    const [newPostalCode,setNewPostalCode]=useState("")
     const [title,setTitle]=useState("")
     const [open,setOpen]=useState(false)
     let navigate = useNavigate();
@@ -45,10 +55,16 @@ const EditProfile = () =>{
            setPasswordShown3(!passwordShown3);
           };
         const [show, setShow] = useState(false);
+        const [showAddress, setShowAddress] = useState(false);
+        const [showEditAddress, setShowEditAddress] = useState(false);
         const [data, setData] = useState([]);
 
-        const handleClose = () => {setShow(false);
+        const handleClose = () => {setShowAddress(false);
              
+        };
+        const handleEditClose = () => {setShowEditAddress(false);
+            setEditAddressID(0); setNewCity(1);setNewProvince(1);setNewPostalCode("");setNewAddress("");
+            alert(true)
         };
         const saveDatas =()=>{
             setShow(false);
@@ -88,7 +104,10 @@ const EditProfile = () =>{
             });
         }
         }
-        const handleShow = () => setShow(true);
+        const handleShow = () => setShowAddress(true);
+        const handleEditShow = (id,city,province,postal,address) => {setShowEditAddress(true);setEditAddressID(id);
+        setNewCity(city);setNewProvince(province);setNewPostalCode(postal);setNewAddress(address);alert(province)
+        }
         const {state} = useLocation();
 
         const GetData=()=>{
@@ -121,9 +140,135 @@ const EditProfile = () =>{
     
               console.log(error);
             });
+            axios.post(apiUrl + "ReadAddress",{CustomerID:state.CustomerID})
+            .then(function (response) {
+                
+                console.log(999)
+                console.log(response)
+              if (response.data.result == "True") {
+                console.log(response.data.Data)
+                setDataAddress(response.data.Data)
+
+            }})
+            .catch(function (error) {
+              console.log(999)
+              alert(error)
+    
+              console.log(error);
+            });
+            axios.get(apiUrl + "GetProvince")
+            .then(function (response) {
+                
+                console.log(999)
+                console.log(response)
+              if (response.data.result == "True") {
+                console.log(response.data.Data)
+                setDataProvince(response.data.Data)
+
+            }})
+            .catch(function (error) {
+              console.log(999)
+              alert(error)
+    
+              console.log(error);
+            });
+          }
+          const GetCity=(id)=>{
+            const axios = require("axios");
+          
+        
+            axios.post(apiUrl + "GetCity",{ProvinceID:id})
+            .then(function (response) {
+              if (response.data.result == "True") {
+                console.log(777)
+                console.log(response.data.Data)
+                setDataCity(response.data.Data)
+         
+
+            
+    
+            }})
+            .catch(function (error) {
+              console.log(777)
+              alert(error)
+    
+              console.log(error);
+            });
+          
+          }
+          const AddAddress=()=>{
+            const axios = require("axios");
+          
+        
+            axios.post(apiUrl + "InsertAddress",{CustomerID:state.CustomerID,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
+            .then(function (response) {
+              if (response.data.result == "True") {
+                console.log(111)
+                console.log(response.data.Data)
+                setNewPostalCode("")
+                setNewAddress("")
+                GetData(response.data.Data)
+                handleClose();
+
+            
+    
+            }})
+            .catch(function (error) {
+              console.log(777)
+              alert(error)
+    
+              console.log(error);
+            });
+          
+          }
+          const EditAddress=()=>{
+            const axios = require("axios");
+          
+        
+            axios.post(apiUrl + "EditAddress",{AddressID:editAddressID,CustomerID:state.CustomerID,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
+            .then(function (response) {
+              if (response.data.result == "True") {
+                console.log(111)
+                console.log(response.data.Data)
+                GetData(response.data.Data)
+                handleEditClose();
+
+            
+    
+            }})
+            .catch(function (error) {
+              console.log(777)
+              alert(error)
+    
+              console.log(error);
+            });
+          
+          }
+          const DeleteAddress=(id)=>{
+            const axios = require("axios");
+          
+        
+            axios.post(apiUrl + "DeleteAddress",{AddressID:id})
+            .then(function (response) {
+              if (response.data.result == "True") {
+                console.log(111)
+                console.log(response.data.Data)
+                GetData(response.data.Data)
+
+            
+    
+            }})
+            .catch(function (error) {
+              console.log(777)
+              alert(error)
+    
+              console.log(error);
+            });
+          
           }
           useEffect(() => {
             GetData();
+            GetCity(1);
 
           }, []);
         
@@ -153,7 +298,7 @@ const EditProfile = () =>{
                     ویرایش اطلاعات
                    </Button>
                    <Modal
-                                                show={show} onHide={handleClose}
+                                                show={show} onHide={AddAddress}
                                                 size="lg"
                                                 
                                                 aria-labelledby="contained-modal-title-vcenter"
@@ -423,10 +568,155 @@ const EditProfile = () =>{
                     آدرس های ذخیره شده
                    </p>
                    </div>
-                   <Button className="editProfileBtn">
+                   <Button className="editProfileBtn" onClick={handleShow}>
                     + افزودن آدرس جدید
                    </Button>
+                   <Modal
+                                                show={showAddress} onHide={handleClose}
+                                                className="historyModal"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                                >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                   افزودن آدرس
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                              <Row>
+                                                <Col md={6}>
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                       استان
+                                                    </span>
+                                                    
+                                                </p>
+                                                
+                                                <Form.Select  onChange={(ss)=>GetCity(ss.target.value)} className="addressSelect">
+                                            {
+                                                dataProvince?.map((item)=>{
+                                                    return(
+
+                                                        <option value={item.ProvinceID}>{item.ProvinceName}</option>
+                                                    )
+                                                })
+                                            }
+                                                 
+                                                </Form.Select>
+                                                </Col>
+                                                <Col md={6}>
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                      شهر
+                                                    </span>
+                                                    
+                                                </p>
+                                                
+                                                <Form.Select  className="addressSelect">
+                                            
+                                                {
+                                                dataCity?.map((item)=>{
+                                                    return(
+
+                                                        <option value={item.CityID}>{item.CityName}</option>
+                                                    )
+                                                })
+                                            }
+                                                </Form.Select>
+                                                </Col>
+                                              </Row>
+                                              <span className="inputTitle">کدپستی</span>
+                        <br/>
+                        <input onChange={(e)=>setNewPostalCode(e.target.value)} className="inputCLass" type="text"/>
+                        <br/>
+                        <span className="inputTitle">آدرس</span>
+                        <br/>
+                        <textarea onChange={(e)=>setNewAddress(e.target.value)} className="inputCLass" type="text" style={{height:160,resize:'none'}}/>
+                                                
+                                           
+                                               
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button  onClick={()=>AddAddress()}className="modalSaveBtn">ذخیره</Button>
+                                                </Modal.Footer>
+                                             </Modal>
+
+
+
+
+                                             <Modal
+                                                show={showEditAddress} onHide={handleEditClose}
+                                                className="historyModal"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                                >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                   افزودن آدرس
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                              <Row>
+                                                <Col md={6}>
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                       استان
+                                                    </span>
+                                                    
+                                                </p>
+                                                
+                                                <Form.Select  defaultValue={newProvince} onChange={(ss)=>GetCity(ss.target.value)} className="addressSelect">
+                                            {
+                                                dataProvince?.map((item)=>{
+                                                    return(
+
+                                                        <option value={item.ProvinceID}>{item.ProvinceName}</option>
+                                                    )
+                                                })
+                                            }
+                                                 
+                                                </Form.Select>
+                                                </Col>
+                                                <Col md={6}>
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                      شهر
+                                                    </span>
+                                                    
+                                                </p>
+                                                
+                                                <Form.Select defaultValue={newCity}  className="addressSelect">
+                                            
+                                                {
+                                                dataCity?.map((item)=>{
+                                                    return(
+
+                                                        <option value={item.CityID}>{item.CityName}</option>
+                                                    )
+                                                })
+                                            }
+                                                </Form.Select>
+                                                </Col>
+                                              </Row>
+                                              <span className="inputTitle">کدپستی</span>
+                        <br/>
+                        <input value={newPostalCode} onChange={(e)=>setNewPostalCode(e.target.value)} className="inputCLass" type="text"/>
+                        <br/>
+                        <span className="inputTitle">آدرس</span>
+                        <br/>
+                        <textarea value={newAddress} onChange={(e)=>setNewAddress(e.target.value)} className="inputCLass" type="text" style={{height:160,resize:'none'}}/>
+                                                
+                                           
+                                               
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button  onClick={()=>EditAddress()}className="modalSaveBtn">ذخیره</Button>
+                                                </Modal.Footer>
+                                             </Modal>
                 </div>
+                {
+                    dataAddress.map((item)=>{
+                        return(
                 <div className="addressBox">
                 <div className="d-flex align-items-center">
                 <Radio
@@ -439,54 +729,35 @@ const EditProfile = () =>{
                 }}
             />
                 <p>
-                    تهران - تهران - پاسداران - گلستان دوم - نبش داوود ابراهیمی - پلاک 2 -واحد 7
-                </p>
+{item.Address}                </p>
                 </div>
                 <div className="d-flex justify-content-between mt-4">
                 <p style={{marginRight:42}}>
-                   کد پستی : 1669145869
+                   کد پستی : {item.PostalCode}
                 </p>
                 <div className="d-flex">
-                    <Button className="gTransparentBtn">
+                    <Button onClick={()=>handleEditShow(item.AddressID,item.CityID,item.ProvinceID,item.PostalCode,item.Address)} className="gTransparentBtn">
                         ویرایش
                     </Button>
                     |
-                    <Button className="oTransparentBtn">
+                    <Button onClick={()=>DeleteAddress(item.AddressID)} className="oTransparentBtn">
                         حذف
                     </Button>
                 </div>
                 </div>
                 </div>
-                <div className="addressBox">
-                <div className="d-flex align-items-center">
-                <Radio
-        
-                    sx={{
-                    color: '#FF6900',
-                    '&.Mui-checked': {
-                        color: '#FF6900',
-                    },
-                    }}
-                />
-                <p>
-                    تهران - تهران - پاسداران - گلستان دوم - نبش داوود ابراهیمی - پلاک 2 -واحد 7
-                </p>
-                </div>
-                <div className="d-flex justify-content-between mt-4">
-                <p style={{marginRight:42}}>
-                   کد پستی : 1669145869
-                </p>
-                <div className="d-flex">
-                    <Button className="gTransparentBtn">
-                        ویرایش
-                    </Button>
-                    |
-                    <Button className="oTransparentBtn">
-                        حذف
-                    </Button>
-                </div>
-                </div>
-                </div>
+
+                        )
+                    })
+                }
+
+
+
+
+
+
+
+             
             </div>
         </Col>
     </Row>

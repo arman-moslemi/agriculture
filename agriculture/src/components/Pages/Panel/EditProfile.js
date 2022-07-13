@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button ,Modal ,Form} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
@@ -9,8 +9,30 @@ import Location from "src/components/assets/icon/Location";
 import { EyeFill,EyeSlashFill } from 'react-bootstrap-icons';
 import Checkbox from '@mui/material/Checkbox';
 import Radio from '@mui/material/Radio';
+import CustomizedDialogs from '../Layouts/AlertModal';
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation } from "react-router-dom";
 const EditProfile = () =>{
     const [passwordShown, setPasswordShown] = useState(false);
+    const [name,setName]=useState("")
+    const [mobile,setMobile]=useState("")
+    const [family,setFamily]=useState("")    
+    const [email,setEmail]=useState("")    
+    const [pass,setPass]=useState("")
+    const [again,setAgain]=useState("")
+    const [degre,setDegre]=useState("")
+    const [specialty,setSpecialty]=useState("")
+    const [nationalCode,setNationalCode]=useState("")
+    const [cardNumber,setCardNumber]=useState("")
+    const [sheba,setSheba]=useState("")
+    const [textType,setTextType]=useState("")
+    const [voiceType,setVoiceType]=useState("")
+    const [videoType,setVideoType]=useState("")
+    const [title,setTitle]=useState("")
+    const [open,setOpen]=useState(false)
+    let navigate = useNavigate();
+
     const togglePassword = () => {
         setPasswordShown(!passwordShown);
       };
@@ -23,16 +45,99 @@ const EditProfile = () =>{
            setPasswordShown3(!passwordShown3);
           };
         const [show, setShow] = useState(false);
+        const [data, setData] = useState([]);
 
-        const handleClose = () => setShow(false);
+        const handleClose = () => {setShow(false);
+             
+        };
+        const saveDatas =()=>{
+            setShow(false);
+            const axios = require("axios");
+            if(!name || !family || !pass || !again) 
+            {
+                
+                setTitle("همه موارد را وارد نمائید")
+                setOpen(true)
+                
+            }
+            else if(pass != again){
+                setTitle("پسورد و تکرار با هم منطبق نیستند")
+                setOpen(true)
+            }
+            else{
+        
+        
+            axios.post(apiUrl + "EditCustomer",{CustomerID:state.CustomerID,Mobile:mobile,Name:name,Family:family,Password:pass,Email:email,
+                Degree:degre,CardNumber:cardNumber,Sheba:sheba,Specialty:specialty
+            })
+            .then(function (response) {
+              if (response.data.result == "True") {
+                console.log(777)
+                console.log(response.data.Data)
+                setTitle("تغییرات بت موفیت ذخیره شد")
+                setOpen(true)
+
+            
+    
+            }})
+            .catch(function (error) {
+              console.log(777)
+              alert(error)
+    
+              console.log(error);
+            });
+        }
+        }
         const handleShow = () => setShow(true);
+        const {state} = useLocation();
+
+        const GetData=()=>{
+            const axios = require("axios");
+          
+        
+            axios.post(apiUrl + "ReadCustomer",{CustomerID:state.CustomerID})
+            .then(function (response) {
+              if (response.data.result == "True") {
+                console.log(777)
+                console.log(response.data.Data)
+                console.log(response.data.Data[0]?.Name)
+                setData(response.data.Data)
+             setMobile(response.data.Data[0]?.Mobile)
+             setName(response.data.Data[0]?.Name)
+             setFamily(response.data.Data[0]?.Family)
+             setEmail(response.data.Data[0]?.Email)
+             setNationalCode(response.data.Data[0]?.NationalCode)
+             setDegre(response.data.Data[0]?.Degree)
+             setSpecialty(response.data.Data[0]?.Specialty)
+             setCardNumber(response.data.Data[0]?.CardNumber)
+             setSheba(response.data.Data[0]?.Sheba)
+
+            
+    
+            }})
+            .catch(function (error) {
+              console.log(777)
+              alert(error)
+    
+              console.log(error);
+            });
+          }
+          useEffect(() => {
+            GetData();
+
+          }, []);
+        
+        
+          
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
    <Container className="bodyPadding">
+   <CustomizedDialogs Title={title} open={open} setOpen={setOpen}/>
+
     <Row>
         <Col md={3}>
-       <RightPanelMenu/>
+       <RightPanelMenu data={data}/>
         </Col>
         <Col md={9}>
             <div className="whiteBox">
@@ -43,7 +148,8 @@ const EditProfile = () =>{
                     ویرایش اطلاعات کاربری
                    </p>
                    </div>
-                   <Button className="editProfileBtn" onClick={handleShow}>
+                   {/* <Button className="editProfileBtn" onClick={handleShow}> */}
+                   <Button className="editProfileBtn" onClick={saveDatas}>
                     ویرایش اطلاعات
                    </Button>
                    <Modal
@@ -63,14 +169,14 @@ const EditProfile = () =>{
                         <Col md={6}>
                         <span className="inputTitle">نام <span style={{color:"red"}}>*</span></span>
                         <br/>
-                        <input className="inputCLass" type="text"/>
+                        <input className="inputCLass" value={name}  onChange={(e)=>setName(e.target.value)} type="text"/>
                         <span className="inputTitle">شماره تلفن همراه <span style={{color:"red"}}>*</span></span>
                         <br/>
-                        <input className="inputCLass" type="number"/>
+                        <input className="inputCLass" value={mobile}  onChange={(e)=>setMobile(e.target.value)}type="number"/>
                         <span className="inputTitle">کلمه عبور</span>
                 <br/>
                 <div className="passwordBox">
-                <input className="passwordInput"type={passwordShown ? "text" : "password"}/>
+                <input  onChange={(e)=>setPass(e.target.value)} className="passwordInput"type={passwordShown ? "text" : "password"}/>
                 <button onClick={togglePassword} className="passwordShow">
                    {
                     passwordShown ? <EyeSlashFill color="#AAB7CA" size="20"/> : <EyeFill color="#AAB7CA" size="20"/>
@@ -81,14 +187,14 @@ const EditProfile = () =>{
                         <Col md={6}>
                         <span className="inputTitle">نام خانوادگی <span style={{color:"red"}}>*</span></span>
                         <br/>
-                        <input className="inputCLass" type="text"/>
+                        <input value={family}  onChange={(e)=>setFamily(e.target.value)} className="inputCLass" type="text"/>
                         <span className="inputTitle">ایمیل <span style={{color:"red"}}>*</span></span>
                         <br/>
-                        <input className="inputCLass" type="email"/>
+                        <input value={email}  onChange={(e)=>setEmail(e.target.value)} className="inputCLass" type="email"/>
                         <span className="inputTitle">تکرار کلمه عبور </span>
                 <br/>
                 <div className="passwordBox">
-                <input className="passwordInput"type={passwordShown3 ? "text" : "password"}/>
+                <input  onChange={(e)=>setAgain(e.target.value)} className="passwordInput"type={passwordShown3 ? "text" : "password"}/>
                 <button onClick={togglePassword3} className="passwordShow">
                    {
                     passwordShown3 ? <EyeSlashFill color="#AAB7CA" size="20"/> : <EyeFill color="#AAB7CA" size="20"/>
@@ -102,7 +208,7 @@ const EditProfile = () =>{
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={handleClose}className="modalSaveBtn">ذخیره اطلاعات</Button>
+                                                    <Button  onClick={saveDatas}className="modalSaveBtn">ذخیره اطلاعات</Button>
                                                 </Modal.Footer>
                                              </Modal>
                 </div>
@@ -111,14 +217,14 @@ const EditProfile = () =>{
                         <Col md={6}>
                         <span className="inputTitle">نام <span style={{color:"red"}}>*</span></span>
                         <br/>
-                        <input className="inputCLass" type="text"/>
+                        <input value={name} onChange={(e)=>setName(e.target.value)}  className="inputCLass" type="text"/>
                         <span className="inputTitle">شماره تلفن همراه <span style={{color:"red"}}>*</span></span>
                         <br/>
-                        <input className="inputCLass" type="number"/>
+                        <input value={mobile} onChange={(e)=>setMobile(e.target.value)}  className="inputCLass" type="number"/>
                         <span className="inputTitle">کلمه عبور</span>
                 <br/>
                 <div className="passwordBox">
-                <input className="passwordInput"type={passwordShown ? "text" : "password"}/>
+                <input className="passwordInput" onChange={(e)=>setPass(e.target.value)} type={passwordShown ? "text" : "password"}/>
                 <button onClick={togglePassword} className="passwordShow">
                    {
                     passwordShown ? <EyeSlashFill color="#AAB7CA" size="20"/> : <EyeFill color="#AAB7CA" size="20"/>
@@ -129,14 +235,14 @@ const EditProfile = () =>{
                         <Col md={6}>
                         <span className="inputTitle">نام خانوادگی <span style={{color:"red"}}>*</span></span>
                         <br/>
-                        <input className="inputCLass" type="text"/>
+                        <input value={family} onChange={(e)=>setFamily(e.target.value)}  className="inputCLass" type="text"/>
                         <span className="inputTitle">ایمیل <span style={{color:"red"}}>*</span></span>
                         <br/>
-                        <input className="inputCLass" type="email"/>
+                        <input value={email} onChange={(e)=>setEmail(e.target.value)}  className="inputCLass" type="email"/>
                         <span className="inputTitle">تکرار کلمه عبور </span>
                 <br/>
                 <div className="passwordBox">
-                <input className="passwordInput"type={passwordShown2 ? "text" : "password"}/>
+                <input className="passwordInput" onChange={(e)=>setAgain(e.target.value)} type={passwordShown2 ? "text" : "password"}/>
                 <button onClick={togglePassword2} className="passwordShow">
                    {
                     passwordShown2 ? <EyeSlashFill color="#AAB7CA" size="20"/> : <EyeFill color="#AAB7CA" size="20"/>
@@ -162,17 +268,19 @@ const EditProfile = () =>{
                         <Col md={6}>
                         <span className="inputTitle">مدرک تحصیلی</span>
                         <br/>
-                        <div className="inputCLass d-flex align-items-center">
-                            <p style={{marginBottom:0,color:'#c1c1c1'}}>کارشناسی ارشد</p>
-                        </div>
+                        {/* <div className="inputCLass d-flex align-items-center"> */}
+                            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کارشناسی ارشد</p> */}
+                            <input value={degre} onChange={(e)=>setDegre(e.target.value)}  className="inputCLass" type="text"/>
+
+                        {/* </div> */}
                         
                         </Col>
                         <Col md={6}>
                         <span className="inputTitle">تخصص</span>
                         <br/>
-                        <div className="inputCLass d-flex align-items-center">
-                            <p style={{marginBottom:0,color:'#c1c1c1'}}>کشاورزی</p>
-                        </div>
+                            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کشاورزی</p> */}
+                            <input value={specialty} onChange={(e)=>setSpecialty(e.target.value)}  className="inputCLass" type="text"/>
+
                         </Col>
                     </Row>
                     <span className="inputTitle">نوع مشاوره </span>
@@ -202,7 +310,7 @@ const EditProfile = () =>{
                             <div className="priceShow">
                                 100.000 تومان
                             </div>
-                            <Form.Select className="priceSelect" disabled>
+                            <Form.Select className="priceSelect" >
                                             
                                                     <option>تومان</option>
                                                     <option>پوند</option>
@@ -288,17 +396,20 @@ const EditProfile = () =>{
                         <Col md={6}>
                         <span className="inputTitle">شماره کارت</span>
                         <br/>
-                        <div className="inputCLass d-flex align-items-center">
-                            <p style={{marginBottom:0,color:'#c1c1c1'}}>5022221022102250</p>
-                        </div>
+                        {/* <div className="inputCLass d-flex align-items-center"> */}
+                            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>5022221022102250</p> */}
+                            <input value={cardNumber} onChange={(e)=>setCardNumber(e.target.value)}  className="inputCLass" type="text"/>
+
+                        {/* </div> */}
                         
                         </Col>
                         <Col md={6}>
                         <span className="inputTitle">شماره شبا</span>
                         <br/>
-                        <div className="inputCLass d-flex align-items-center">
+                        {/* <div className="inputCLass d-flex align-items-center">
                             <p style={{marginBottom:0,color:'#c1c1c1'}}>IR2255000000000000005556</p>
-                        </div>
+                        </div> */}
+                            <input value={sheba} onChange={(e)=>setSheba(e.target.value)}  className="inputCLass" type="text"/>
                 
                         </Col>
                     </Row>

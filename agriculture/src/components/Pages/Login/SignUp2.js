@@ -3,9 +3,28 @@ import { Container, Row ,Col ,Button} from "react-bootstrap";
 import LoginImg from "../../assets/img/login.png";
 import { EyeFill,EyeSlashFill } from 'react-bootstrap-icons';
 import Checkbox from '@mui/material/Checkbox';
+import CustomizedDialogs from '../Layouts/AlertModal';
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation } from "react-router-dom";
+
 const SignUp2 = () =>{
     const [passwordShown, setPasswordShown] = useState(false);
     const [passwordShown2, setPasswordShown2] = useState(false);
+    const [name,setName]=useState("")
+    const [family,setFamily]=useState("")
+    const [mobile,setMobile]=useState("")
+    const [email,setEmail]=useState("")
+    const [nationalCode,setNationalCode]=useState("")
+    const [pass,setPass]=useState("")
+    const [again,setAgain]=useState("")
+    const [title,setTitle]=useState("")
+    const [open,setOpen]=useState(false)
+    const [moshaver,setMoshaver]=useState(false)
+    const {state} = useLocation();
+
+    let navigate = useNavigate();
+
     const togglePassword = () => {
         // When the handler is invoked
         // inverse the boolean state of passwordShown
@@ -16,8 +35,68 @@ const SignUp2 = () =>{
         // inverse the boolean state of passwordShown
         setPasswordShown2(!passwordShown2);
       };
+      const handleChange = (event) => {
+        setMoshaver(event.target.checked);
+      };
+      const Signups=()=>{
+        console.log(moshaver)
+        const axios = require("axios");
+        if(!name || !family || !pass || !again) 
+        {
+            
+            setTitle("همه موارد را وارد نمائید")
+            setOpen(true)
+            
+        }
+        else if(pass != again){
+            setTitle("پسورد و تکرار با هم منطبق نیستند")
+            setOpen(true)
+        }
+        else{
+    
+        axios.post(apiUrl + "InsertCustomer",{Mobile:state.Mobile,Name:name,Family:family,Password:pass,IsConsultant:moshaver})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+            console.log(response.data.Data)
+            // auth.login(response.data.Data.CustomerID);
+            console.log(88)
+            if(moshaver){
+                setTitle("برای تاپید اطلاع داده میشود.ثبت نام با موفقیت انجام شد")
+                setOpen(true)
+            }
+            else{
+
+                setTitle("ثبت نام با موفقیت انجام شد")
+                setOpen(true)
+            }
+    navigate("/login");
+
+            // console.log("auth", auth.isLoggedIn);
+            // localStorage.setItem("guest","");
+            // history.push("/EditInformation/"+response.data.Data.CustomerID)
+    
+        }
+        else{
+          setTitle("نام کاربری یا رمز عبور نادرست می باشد")
+          setOpen(true)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+      }
+    
+    
+    
+      }
     return(
     <Container className="loginBody" fluid>
+                       <CustomizedDialogs Title={title} open={open} setOpen={setOpen}/>
+
     <div  className="loginBox">
     <Row style={{height:'100%'}}>
      
@@ -41,18 +120,18 @@ const SignUp2 = () =>{
                     <Col md={6}>
                     <span className="inputTitle">نام</span>
                 <br/>
-                <input className="inputCLass" type="text"/>
+                <input onChange={(e)=>setName(e.target.value)} className="inputCLass" type="text"/>
                     </Col>
                     <Col md={6}>
                     <span className="inputTitle">نام خانوادگی</span>
                 <br/>
-                <input className="inputCLass" type="text"/>
+                <input onChange={(e)=>setFamily(e.target.value)} className="inputCLass" type="text"/>
                     </Col>
                 </Row>
                 <span className="inputTitle">رمز عبور</span>
                 <br/>
                 <div className="passwordBox">
-                <input className="passwordInput"type={passwordShown ? "text" : "password"}/>
+                <input onChange={(e)=>setPass(e.target.value)}  className="passwordInput"type={passwordShown ? "text" : "password"}/>
                 <button onClick={togglePassword} className="passwordShow">
                    {
                     passwordShown ? <EyeSlashFill color="#AAB7CA" size="20"/> : <EyeFill color="#AAB7CA" size="20"/>
@@ -63,7 +142,7 @@ const SignUp2 = () =>{
                 <span className="inputTitle">تکرار رمز عبور</span>
                 <br/>
                 <div className="passwordBox">
-                <input className="passwordInput"type={passwordShown2 ? "text" : "password"}/>
+                <input onChange={(e)=>setAgain(e.target.value)} className="passwordInput"type={passwordShown2 ? "text" : "password"}/>
                 <button onClick={togglePassword2} className="passwordShow">
                    {
                     passwordShown2 ? <EyeSlashFill color="#AAB7CA" size="20"/> : <EyeFill color="#AAB7CA" size="20"/>
@@ -75,8 +154,9 @@ const SignUp2 = () =>{
                 <div className="d-flex align-items-center">
                  
                     <Checkbox
-
-                        defaultChecked
+onChange={handleChange}
+checked={moshaver}
+                        // defaultChecked
                         sx={{
                         color: '#009959',
                         '&.Mui-checked': {
@@ -89,7 +169,7 @@ const SignUp2 = () =>{
                 </div>
                 </div>
               
-                <Button className="greenBtn mt-2"  style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>ایجاد حساب کاربری</Button>
+                <Button onClick={()=>Signups()} className="greenBtn mt-2"  style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>ایجاد حساب کاربری</Button>
               
                
             </div>

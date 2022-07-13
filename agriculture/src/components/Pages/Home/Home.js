@@ -16,7 +16,7 @@ const Home = () =>{
     return(
    <div style={{backgroundColor:'#f4f4f4',height:'100vh'}}>
    <Header/>
-  {/* <div style={{width:'100%'}}>
+  <div style={{width:'100%'}}>
   <Slider {...settings} className="homeSlider" style={{width:'100%'}}>
           <div>
           <img src={Slide1} style={{width:'100%'}}/>
@@ -32,7 +32,7 @@ const Home = () =>{
           </div>
        
         </Slider>
-  </div> */}
+  </div>
 
     <Footer/>
    </div>

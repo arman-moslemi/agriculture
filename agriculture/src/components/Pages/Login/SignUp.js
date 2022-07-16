@@ -3,15 +3,70 @@ import { Container, Row ,Col ,Button} from "react-bootstrap";
 import LoginImg from "../../assets/img/login.png";
 import { EyeFill,EyeSlashFill } from 'react-bootstrap-icons';
 import Checkbox from '@mui/material/Checkbox';
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import CustomizedDialogs from '../Layouts/AlertModal';
 const SignUp = () =>{
     const [passwordShown, setPasswordShown] = useState(false);
+    const [open,setOpen]=useState(false)
+    const [title,setTitle]=useState("")
+    const [mobile,setMobile]=useState()
+    
+    let navigate = useNavigate();
+
     const togglePassword = () => {
         // When the handler is invoked
         // inverse the boolean state of passwordShown
         setPasswordShown(!passwordShown);
       };
+      const login=()=>{
+        const axios = require("axios");
+        if(!mobile)
+        {
+            
+            setTitle("موبایل را وارد نمائید")
+            setOpen(true)
+            
+        }
+        else{
+    
+        axios.post(apiUrl + "Register",{Mobile:mobile})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+            console.log(response.data.Data)
+            // auth.login(response.data.Data.CustomerID);
+            console.log(88)
+    navigate("/Verify",{state:{
+        Mobile:mobile,
+        VerifyCode:response.data.Data}
+    });
+
+            // console.log("auth", auth.isLoggedIn);
+            // localStorage.setItem("guest","");
+            // history.push("/EditInformation/"+response.data.Data.CustomerID)
+    
+        }
+        else{
+          setTitle("موبایل با این شماره وجود دارد")
+          setOpen(true)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+      }
+    
+    
+    
+      }
     return(
     <Container className="loginBody" fluid>
+                       <CustomizedDialogs Title={title} open={open} setOpen={setOpen}/>
+
     <div  className="loginBox">
     <Row style={{height:'100%'}}>
      
@@ -35,7 +90,7 @@ const SignUp = () =>{
                
                 <span className="inputTitle">شماره تلفن همراه</span>
                 <br/>
-                <input className="inputCLass" type="number"/>
+                <input  onChange={(e)=>setMobile(e.target.value)} className="inputCLass" type="number"/>
                 <br/>
                 {/* <span className="inputTitle" type="password">کلمه عبور</span>
                 <br/>
@@ -66,7 +121,7 @@ const SignUp = () =>{
                 </div>
                 </div>
               
-                <Button className="greenBtn mt-3" style={{marginRight:'auto',marginLeft:'auto',display:'block'}} >ایجاد حساب کاربری</Button>
+                <Button onClick={()=>login()} className="greenBtn mt-3" style={{marginRight:'auto',marginLeft:'auto',display:'block'}} >ایجاد حساب کاربری</Button>
                 
                
             </div>

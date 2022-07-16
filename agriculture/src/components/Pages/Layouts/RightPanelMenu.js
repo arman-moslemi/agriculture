@@ -18,7 +18,7 @@ import R5G from "src/components/assets/img/r5G.png";
 import R6G from "src/components/assets/img/r6G.png";
 import R7G from "src/components/assets/img/r7G.png";
 import R8G from "src/components/assets/img/r8G.png";
-const RightPanelMenu = () =>{
+const RightPanelMenu = ({data}) =>{
     
     return(
         <div className="whiteBoxRight">
@@ -26,10 +26,10 @@ const RightPanelMenu = () =>{
             <img src={Avatar}/>
             <div>
                 <p className="userName">
-                    یاسمن طاهری
+                   {data[0]?.Name} {data[0]?.Family}
                 </p>
                 <p className="userNumber">
-                    09120767676
+                    {data[0]?.Mobile}
                 </p>
             </div>
         </div>

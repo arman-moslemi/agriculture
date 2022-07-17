@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button ,Modal ,Form} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
@@ -16,17 +16,39 @@ import 'react-accessible-accordion/dist/fancy-example.css';
 import Checkbox from '@mui/material/Checkbox';
 import Switch from '@mui/material/Switch';
 import Product from "src/components/assets/img/product.png";
-
-const Store = () =>{
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation } from "react-router-dom";
+const SubGroup = () =>{
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
-      const [show, setShow] = useState(false);
+    const [data,setData]=useState([])
 
-      const handleClose = () => setShow(false);
-      const handleShow = () => setShow(true);
-      const [show2, setShow2] = useState(false);
+    const GetData=()=>{
+        const axios = require("axios");
+      
+    
+        axios.post(apiUrl + "SubGroupProduct",{SubGroupID:1})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
 
-      const handleClose2 = () => {setShow2(false)};
-      const handleShow2 = () => {setShow2(true);setShow(false)};
+            setData(response.data.Data)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+        
+        
+  
+      }
+      useEffect(() => {
+        GetData();
+
+      }, []);
     
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
@@ -451,7 +473,49 @@ const Store = () =>{
             </div>
                 <div className="whiteBox">
                 <div className="d-flex mt-1 flex-wrap justify-content-start">
-                        <div className="productCard">
+                    {
+data?.map((item)=>{
+    return(
+
+                        <Link to={"/SingleProduct"} className="productCard">
+                           <div style={{padding:20,paddingBottom:5}}>
+                           <img 
+                        //    src={Product}
+                        src={apiAsset+item.Pic1}
+                           className="productImg"/>
+                            <p className="productName">
+{item.Name}                            </p>
+                            <p className="productVolume">
+                                موجودی : {item.Number} {item.Unit}
+                            </p>
+                            <div className="d-flex align-items-center justify-content-between mt-3">
+                                <div className="d-flex align-items-center">
+                                    <Star color="#000" className="marginLeft5"/>
+                                    <Star color="#000" className="marginLeft5"/>
+                                    <StarFill color="#ffb921" className="marginLeft5"/>
+                                    <StarFill color="#ffb921" className="marginLeft5"/>
+                                    <StarFill color="#ffb921"/>
+                                </div>
+                                <div>
+                                    <p className="productPriceStroke">
+                                        {item.Cost} تومان
+                                    </p>
+                                    <p className="productPrice">
+                                        {item.SpecialCost} تومان
+                                    </p>
+                                </div>
+                            </div>
+                           </div>
+                           <div className="box2Div">
+                           <p className="productVolume">
+                               نام تامین کننده کالا : {item.WarrantyName}
+                            </p>
+                           </div>
+                        </Link>
+    )
+})
+                    }
+                        {/* <div className="productCard">
                            <div style={{padding:20,paddingBottom:5}}>
                            <img src={Product} className="productImg"/>
                             <p className="productName">
@@ -480,277 +544,8 @@ const Store = () =>{
                                نام تامین کننده کالا : شرکت فلان
                             </p>
                            </div>
-                        </div>
-                        <div className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
-                           <img src={Product} className="productImg"/>
-                            <p className="productName">
-                                دستگاه میوه خشک کن
-                            </p>
-                            <p className="productVolume">
-                                موجودی : 10 تن
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                                <div>
-                                    <p className="productPrice">
-                                        125.000 تومان
-                                    </p>
-                                </div>
-                            </div>
-                           </div>
-                           <div className="box2Div">
-                           <p className="productVolume">
-                               نام تامین کننده کالا : شرکت فلان
-                            </p>
-                           </div>
-                        </div>
-                        <div className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
-                           <img src={Product} className="productImg"/>
-                            <p className="productName">
-                                دستگاه میوه خشک کن
-                            </p>
-                            <p className="productVolume">
-                                موجودی : 10 تن
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                                <div>
-                                    <p className="productPrice">
-                                        125.000 تومان
-                                    </p>
-                                </div>
-                            </div>
-                           </div>
-                           <div className="box2Div">
-                           <p className="productVolume">
-                               نام تامین کننده کالا : شرکت فلان
-                            </p>
-                           </div>
-                        </div>
-                        <div className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
-                           <img src={Product} className="productImg"/>
-                            <p className="productName">
-                                دستگاه میوه خشک کن
-                            </p>
-                            <p className="productVolume">
-                                موجودی : 10 تن
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                                <div>
-                                    <p className="productPrice">
-                                        125.000 تومان
-                                    </p>
-                                </div>
-                            </div>
-                           </div>
-                           <div className="box2Div">
-                           <p className="productVolume">
-                               نام تامین کننده کالا : شرکت فلان
-                            </p>
-                           </div>
-                        </div>
-                        <div className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
-                           <img src={Product} className="productImg"/>
-                            <p className="productName">
-                                دستگاه میوه خشک کن
-                            </p>
-                            <p className="productVolume">
-                                موجودی : 10 تن
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                                <div>
-                                    <p className="productPrice">
-                                        125.000 تومان
-                                    </p>
-                                </div>
-                            </div>
-                           </div>
-                           <div className="box2Div">
-                           <p className="productVolume">
-                               نام تامین کننده کالا : شرکت فلان
-                            </p>
-                           </div>
-                        </div>
-                        <div className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
-                           <img src={Product} className="productImg"/>
-                            <p className="productName">
-                                دستگاه میوه خشک کن
-                            </p>
-                            <p className="productVolume">
-                                موجودی : 10 تن
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                                <div>
-                                    <p className="productPrice">
-                                        125.000 تومان
-                                    </p>
-                                </div>
-                            </div>
-                           </div>
-                           <div className="box2Div">
-                           <p className="productVolume">
-                               نام تامین کننده کالا : شرکت فلان
-                            </p>
-                           </div>
-                        </div>
-                        <div className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
-                           <img src={Product} className="productImg"/>
-                            <p className="productName">
-                                دستگاه میوه خشک کن
-                            </p>
-                            <p className="productVolume">
-                                موجودی : 10 تن
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                                <div>
-                                    <p className="productPrice">
-                                        125.000 تومان
-                                    </p>
-                                </div>
-                            </div>
-                           </div>
-                           <div className="box2Div">
-                           <p className="productVolume">
-                               نام تامین کننده کالا : شرکت فلان
-                            </p>
-                           </div>
-                        </div>
-                        <div className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
-                           <img src={Product} className="productImg"/>
-                            <p className="productName">
-                                دستگاه میوه خشک کن
-                            </p>
-                            <p className="productVolume">
-                                موجودی : 10 تن
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                                <div>
-                                    <p className="productPrice">
-                                        125.000 تومان
-                                    </p>
-                                </div>
-                            </div>
-                           </div>
-                           <div className="box2Div">
-                           <p className="productVolume">
-                               نام تامین کننده کالا : شرکت فلان
-                            </p>
-                           </div>
-                        </div>
-                        <div className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
-                           <img src={Product} className="productImg"/>
-                            <p className="productName">
-                                دستگاه میوه خشک کن
-                            </p>
-                            <p className="productVolume">
-                                موجودی : 10 تن
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                                <div>
-                                    <p className="productPrice">
-                                        125.000 تومان
-                                    </p>
-                                </div>
-                            </div>
-                           </div>
-                           <div className="box2Div">
-                           <p className="productVolume">
-                               نام تامین کننده کالا : شرکت فلان
-                            </p>
-                           </div>
-                        </div>
-                        <div className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
-                           <img src={Product} className="productImg"/>
-                            <p className="productName">
-                                دستگاه میوه خشک کن
-                            </p>
-                            <p className="productVolume">
-                                موجودی : 10 تن
-                            </p>
-                            <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                                <div>
-                                    <p className="productPrice">
-                                        125.000 تومان
-                                    </p>
-                                </div>
-                            </div>
-                           </div>
-                           <div className="box2Div">
-                           <p className="productVolume">
-                               نام تامین کننده کالا : شرکت فلان
-                            </p>
-                           </div>
-                        </div>
+                        </div> */}
+                    
                     </div>
                     
                         <div className="d-flex justify-content-center mt-5">
@@ -765,4 +560,4 @@ const Store = () =>{
    </div>
     );
 };
-export default Store;
+export default SubGroup;

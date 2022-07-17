@@ -14,7 +14,7 @@ import IoTDashboard from 'src/components/Pages/Panel/IoTDashboard';
 import Favorite from 'src/components/Pages/Panel/Favorite';
 import TicketList from 'src/components/Pages/Panel/TicketList';
 import History from 'src/components/Pages/Panel/History';
-import Store from 'src/components/Pages/Store/Store';
+import SubGroup from 'src/components/Pages/Gruop/SubGroup';
 import Cart from 'src/components/Pages/Cart/Cart';
 import UserHistory from 'src/components/Pages/Panel/UserHistory';
 import News from 'src/components/Pages/News/News';
@@ -125,9 +125,9 @@ const MainRoutes = (props) => {
 					<Routes>
 				<Route
 					exact
-					path='/Store'
+					path='/SubGroup/:id'
 					name='فروشگاه'
-					element={<Store/>}
+					element={<SubGroup/>}
 				/></Routes> 
 					<Routes>
 				<Route

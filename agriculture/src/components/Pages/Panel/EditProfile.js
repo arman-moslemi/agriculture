@@ -64,7 +64,6 @@ const EditProfile = () =>{
         };
         const handleEditClose = () => {setShowEditAddress(false);
             setEditAddressID(0); setNewCity(1);setNewProvince(1);setNewPostalCode("");setNewAddress("");
-            alert(true)
         };
         const saveDatas =()=>{
             setShow(false);
@@ -106,7 +105,8 @@ const EditProfile = () =>{
         }
         const handleShow = () => setShowAddress(true);
         const handleEditShow = (id,city,province,postal,address) => {setShowEditAddress(true);setEditAddressID(id);
-        setNewCity(city);setNewProvince(province);setNewPostalCode(postal);setNewAddress(address);alert(province)
+            GetCity(province);
+        setNewCity(city);setNewProvince(province);setNewPostalCode(postal);setNewAddress(address);alert(city)
         }
         const {state} = useLocation();
 
@@ -198,7 +198,6 @@ const EditProfile = () =>{
           }
           const AddAddress=()=>{
             const axios = require("axios");
-          
         
             axios.post(apiUrl + "InsertAddress",{CustomerID:state.CustomerID,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
             .then(function (response) {
@@ -224,7 +223,6 @@ const EditProfile = () =>{
           const EditAddress=()=>{
             const axios = require("axios");
           
-        
             axios.post(apiUrl + "EditAddress",{AddressID:editAddressID,CustomerID:state.CustomerID,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
             .then(function (response) {
               if (response.data.result == "True") {
@@ -612,8 +610,9 @@ const EditProfile = () =>{
                                                     
                                                 </p>
                                                 
-                                                <Form.Select  className="addressSelect">
-                                            
+                                                <Form.Select onChange={(ss)=>setNewCity(ss.target.value)} className="addressSelect">
+                                                <option value={""}>انتخاب کنید</option>
+
                                                 {
                                                 dataCity?.map((item)=>{
                                                     return(
@@ -685,10 +684,12 @@ const EditProfile = () =>{
                                                     
                                                 </p>
                                                 
-                                                <Form.Select defaultValue={newCity}  className="addressSelect">
-                                            
+                                                <Form.Select onChange={(ss)=>setNewCity(ss.target.value)} defaultValue={newCity}  className="addressSelect">
+                                                <option value={""}>انتخاب کنید</option>
+
                                                 {
                                                 dataCity?.map((item)=>{
+                                                    
                                                     return(
 
                                                         <option value={item.CityID}>{item.CityName}</option>
@@ -739,7 +740,7 @@ const EditProfile = () =>{
                     <Button onClick={()=>handleEditShow(item.AddressID,item.CityID,item.ProvinceID,item.PostalCode,item.Address)} className="gTransparentBtn">
                         ویرایش
                     </Button>
-                    |
+                    
                     <Button onClick={()=>DeleteAddress(item.AddressID)} className="oTransparentBtn">
                         حذف
                     </Button>

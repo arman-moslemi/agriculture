@@ -1436,7 +1436,7 @@ margin-bottom: 10px; */
 }
 .productCard{
   width: 290px;
-  height: 350px;
+  height: 360px;
   filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
   border-radius: 5px;
   background-color: #fff;
@@ -1444,6 +1444,8 @@ margin-bottom: 10px; */
   margin-left: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
+  text-decoration: none !important;
+
 }
 .productImg{
   width: 190px;
@@ -1470,6 +1472,13 @@ margin-bottom: 10px; */
   color: #000;
   font-size:15px ;
   margin-bottom: 0px !important;
+}
+.productPriceStroke{
+  font-family: 'IRANSansMedium';
+  color: #000;
+  font-size:10px ;
+  margin-bottom: 0px !important;
+  text-decoration-line: line-through;
 }
 .marginLeft5{
   margin-left: 5px;
@@ -1983,4 +1992,47 @@ margin-bottom: 10px; */
   background-color: #E2E3E4;
   margin-right: 2%;
   border-radius: 15px;
+}
+.sendText{
+  width: 50%;
+  height: 200px;
+  float: right;
+  background-color: var(--c-gray-2);
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.answerText{
+  width: 50%;
+  height: 200px;
+  float: left;
+  background-color: var(--c-gray-2);
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.ticketShowModal .modal-dialog{
+  width: 70% !important;
+  max-width: 70% !important;
+
+}
+.senderData{
+  height: 40px;
+  background-color: #7B808C;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+.senderData p{
+  font-family: 'IRANSans';
+  color: #fff;
+  margin-bottom: 0px !important;
+}
+.modalScroll{
+  height: 300px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }

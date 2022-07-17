@@ -11,12 +11,15 @@ import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
 const TicketList = () =>{
     const [show, setShow] = useState(false);
+    const [showSub, setShowSub] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [data, setData] = useState([]);
     const {state} = useLocation();
     const [support,setSupport]=useState([])
+    const [subSupport,setSubSupport]=useState([])
     const [text,setText]=useState("")
+    const [textSub,setTextSub]=useState("")
     const [titleSup,setTitleSup]=useState("")
 
     const GetData=()=>{
@@ -66,6 +69,47 @@ const TicketList = () =>{
   
             handleClose()
             GetData()
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+        
+     
+  
+      }
+      const AddSubSupport=(id)=>{
+        const axios = require("axios");
+      
+    
+        axios.post(apiUrl + "InsertSubSupport",{SupportID:id,Text:textSub})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+  
+            GetSubSupport(id)
+        }})
+        .catch(function (error) {
+
+          console.log(error);
+        });
+        
+     
+  
+      }
+      const GetSubSupport=(id)=>{
+        const axios = require("axios");
+      
+    
+        axios.post(apiUrl + "CustomerSubSupport",{SupportID:id})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+            console.log(response.data.Data)
+            setSubSupport(response.data.Data)
+       
         }})
         .catch(function (error) {
           console.log(777)
@@ -146,6 +190,79 @@ const TicketList = () =>{
                
                    </div>
                    </div>
+                   <Modal
+                                                show={showSub} onHide={setShowSub}
+                                                className="ticketShowModal"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                                >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                   مشاهده تیکت
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                              
+                                                
+                                           
+                                                <Form>
+                                                {/* <p className="modalText mb-0">
+                                                    <span>
+                                                     موضوع تیکت : {subSupport[0]?.Title}
+                                                    </span>
+                                                    
+                                                </p>
+                                            <br/> */}
+                                           <Row className="modalScroll">
+                                            {
+                                                subSupport?.map((item)=>{
+                                                    return(
+                                                        item.isAdmin==1?
+
+                                     <Col md={12}>
+                                              
+
+                                     <div className="answerText" >
+                                                    <div className="senderData">
+                                                        <p>ادمین</p>
+                                                        <p>تاریخ : {item.Date}</p>
+                                                    </div>
+                                                <textarea value={item.Text} className="inputCLass" type="text" style={{height:150,resize:"none"}}/>
+                                            
+                                                </div>
+                                     </Col>
+                                                        :
+
+                                            <Col md={12}>
+                                            <div className="sendText" >
+                                                    <div className="senderData">
+                                                        <p> کاربر</p>
+                                                        <p>تاریخ : {item.Date}</p>
+                                                    </div>
+                                                <textarea value={item.Text} className="inputCLass" type="text" style={{height:150,resize:"none"}}/>
+                                            
+                                                </div>
+                                            </Col>
+                                                    )
+                                                })
+                                            }
+                                                </Row>
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                    ارسال پیام 
+                                                    </span>
+                                                    
+                                                </p>
+                                                <textarea onChange={(e)=>setTextSub(e.target.value)} className="inputCLass" type="text" style={{height:150,resize:"none"}}/>
+                                            
+                                              
+                                                </Form>
+                                               
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button  onClick={()=>AddSubSupport(subSupport[0]?.SupportID)} className="modalSaveBtn" >ارسال پیام</Button>
+                                                </Modal.Footer>
+                                             </Modal>
        {/* <div className="ticketListBox">
        <div>
        <p className="productName">
@@ -209,7 +326,7 @@ const TicketList = () =>{
     }
        </div>
         <div>
-            <Button className="viewBtn">
+            <Button onClick={()=>{GetSubSupport(item.SupportID);setShowSub(true)}} className="viewBtn">
                 <EyeFill color="#AAB7CA" size={25}/>
             </Button>
         </div>

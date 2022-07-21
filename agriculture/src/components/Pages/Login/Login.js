@@ -38,12 +38,12 @@ const Login = () =>{
           if (response.data.result == "True") {
             console.log(777)
             // auth.login(response.data.Data.CustomerID);
+            localStorage.setItem("CustomerID",response.data.Data[0].CustomerID);
     navigate("/EditProfile"
     , { replace: true,state:{CustomerID:response.data.Data[0].CustomerID} }
     );
 
             // console.log("auth", auth.isLoggedIn);
-            // localStorage.setItem("guest","");
             // history.push("/EditInformation/"+response.data.Data.CustomerID)
     
         }

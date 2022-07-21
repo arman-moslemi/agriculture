@@ -884,7 +884,8 @@ border-right: none !important;
     /* padding: 2rem 1rem;
     margin-right: 1rem;
     margin-left: 1rem; */
-    margin-top:36px;
+    margin-top:16px;
+    margin-bottom: 5px;
     margin-left:101px;
     margin-right:101px;
 padding:22px 33px 43px 33px;
@@ -903,6 +904,7 @@ border-radius: 5px;
   color: #7B808C;
   font-size: 15px;
   font-family: 'IRANSans';
+  margin-top: 5px;
 }
 .breadCrumbs ul li a{
   color: #7B808C;
@@ -1019,6 +1021,15 @@ padding-right: 18px;
   font-size: 15px;
   text-align: left;
   margin-left: 15px;
+}
+.costGrayBoxStroke{
+  color: var(--black);
+  font-family: 'IRANSansMedium';
+  font-size: 10px;
+  text-align: left;
+  margin-left: 15px;
+  text-decoration-line: line-through;
+  
 }
 .costNumber{
   color: var(--black);

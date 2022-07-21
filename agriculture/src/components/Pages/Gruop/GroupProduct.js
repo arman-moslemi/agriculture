@@ -19,7 +19,7 @@ import Product from "src/components/assets/img/product.png";
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
-const SubGroup = () =>{
+const GroupProduct = () =>{
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
     const [data,setData]=useState([])
     const [property,setProperty]=useState([])
@@ -55,7 +55,7 @@ const SubGroup = () =>{
         const axios = require("axios");
       
     
-        axios.post(apiUrl + "SubGroupProduct",{Title:"کشاورزی11"})
+        axios.post(apiUrl + "GroupProduct",{GroupTitle:"کشاورزی1"})
         .then(function (response) {
           if (response.data.result == "True") {
 
@@ -68,7 +68,7 @@ const SubGroup = () =>{
 
           console.log(error);
         });
-        axios.post(apiUrl + "GetPropertySubGroup",{Title:"کشاورزی11"})
+        axios.post(apiUrl + "GetPropertyGroup",{GroupTitle:"کشاورزی1"})
         .then(function (response) {
           if (response.data.result == "True") {
 
@@ -368,4 +368,4 @@ Object.values(data)?.map((item,index)=>{
    </div>
     );
 };
-export default SubGroup;
+export default GroupProduct;

@@ -19,6 +19,8 @@ import Cart from 'src/components/Pages/Cart/Cart';
 import UserHistory from 'src/components/Pages/Panel/UserHistory';
 import News from 'src/components/Pages/News/News';
 import SingleNews from 'src/components/Pages/News/SingleNews';
+import GroupProduct from 'src/components/Pages/Gruop/GroupProduct';
+import MainGroupProduct from 'src/components/Pages/Gruop/MainGroupProduct';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -26,7 +28,7 @@ const MainRoutes = (props) => {
 				
 				<Route
 					exact
-					path='/SingleProduct'
+					path='/SingleProduct/:id'
 					name='محصول'
 					element={<SingleProduct/>}
 				/></Routes> 
@@ -128,6 +130,20 @@ const MainRoutes = (props) => {
 					path='/SubGroup/:id'
 					name='فروشگاه'
 					element={<SubGroup/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/GroupProduct/:id'
+					name='فروشگاه'
+					element={<GroupProduct/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/MainGroupProduct/:id'
+					name='فروشگاه'
+					element={<MainGroupProduct/>}
 				/></Routes> 
 					<Routes>
 				<Route

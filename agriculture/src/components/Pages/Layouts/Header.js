@@ -23,8 +23,12 @@ import M3B from 'src/components/assets/img/m3B.png';
 import M3G from 'src/components/assets/img/m3G.png';
 import M4B from 'src/components/assets/img/m4B.png';
 import M4G from 'src/components/assets/img/m4G.png';
+import { Link, useNavigate } from "react-router-dom";
+
 const Header = () =>{
     const [green, setGreen] = useState(false);
+    let navigate = useNavigate();
+
     return(
    <Container fluid className="pd0" style={{padding:0}}>
     <div className="topBar">
@@ -55,7 +59,7 @@ const Header = () =>{
             <Search color="#009959"/>
         </div>
         <div className="btnBox">
-            <Button className="cartBtn">
+            <Button onClick={()=>navigate("/Cart")} className="cartBtn">
                 <Cart className="ml-1"/>
                 سبد خرید
             </Button>

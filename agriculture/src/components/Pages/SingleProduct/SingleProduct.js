@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState ,useEffect} from "react";
 import { Container, Row ,Col ,Button} from "react-bootstrap";
 import Header from "../Layouts/Header";
 import Footer from "../Layouts/Footer";
@@ -8,39 +8,119 @@ import Garranty from "src/components/assets/icon/Garranty";
 import File from "src/components/assets/icon/File";
 import CartSingle from "src/components/assets/icon/CartSingle";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation,useSearchParams,useParams } from "react-router-dom";
+import CustomizedDialogs from '../Layouts/AlertModal';
 
 const SingleProduct = () =>{
+  const [data, setData] = useState([]);
+  const [number, setNumber] = useState(1);
+  const [property, setProperty] = useState([]);
+  const [open,setOpen]=useState(false)
+  const [title,setTitle]=useState("")
+  const params = useParams().id;
+
     const images = [
-        // {
-        //   original: apiAsset+product.Pic1,
-        //   thumbnail: apiAsset+product.Pic1,
-        // },
-        // {
-        //   original: apiAsset+product.Pic2,
-        //   thumbnail: apiAsset+product.Pic2,
-        // },
-        // {
-        //   original: apiAsset+product.Pic3,
-        //   thumbnail: apiAsset+product.Pic3,
-        // },
-        // {
-        //     original: apiAsset+product.Pic4,
-        //     thumbnail: apiAsset+product.Pic4,
-        //   }
-            {
-            original: "https://picsum.photos/id/1019/1000/600/",
-            thumbnail:"https://picsum.photos/id/1019/1000/600/",
-          },
-            {
-            original: "https://picsum.photos/id/1019/1000/600/",
-            thumbnail:"https://picsum.photos/id/1019/1000/600/",
-          },
-            {
-            original: "https://picsum.photos/id/1019/1000/600/",
-            thumbnail:"https://picsum.photos/id/1019/1000/600/",
+        {
+          original: apiAsset+data?.Pic1,
+          thumbnail: apiAsset+data?.Pic1,
+        },
+        {
+          original: apiAsset+data?.Pic2,
+          thumbnail: apiAsset+data?.Pic2,
+        },
+        {
+          original: apiAsset+data?.Pic3,
+          thumbnail: apiAsset+data?.Pic3,
+        },
+        {
+            original: apiAsset+data?.Pic4,
+            thumbnail: apiAsset+data?.Pic4,
           }
+          //   {
+          //   original: "https://picsum.photos/id/1019/1000/600/",
+          //   thumbnail:"https://picsum.photos/id/1019/1000/600/",
+          // },
+    
       ];
+      const GetData=()=>{
+        const axios = require("axios");
       
+    
+        axios.post(apiUrl + "SingleProduct",{ProductName:params})
+        .then(function (response) {
+          console.log(response)
+
+          if (response.data.result == "True") {
+            console.log(777)
+            console.log(response.data.Data)
+            setData(response.data.Data[0])
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+        axios.post(apiUrl + "ProductProperty",{ProductName:params})
+        .then(function (response) {
+          console.log(response)
+
+          if (response.data.result == "True") {
+            console.log(88)
+            console.log(response.data.Data)
+            setProperty(response.data.Data)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+   
+  
+      }
+      const AddCart=()=>{
+        const axios = require("axios");
+
+      
+    var customer=localStorage.getItem("CustomerID")?localStorage.getItem("CustomerID"):0;
+    var guest=localStorage.getItem("Guest")?localStorage.getItem("Guest"):0;
+        axios.post(apiUrl + "ShoppingBasketAdd",{ProductID:data?.ProductID, 
+            // CustomerID:customer,
+            CustomerID:1,
+          // GuestID:guest,
+          Number:number,
+          Cost:data?.SpecialCost?data.SpecialCost:data.Cost
+        })
+        .then(function (response) {
+          console.log(response)
+
+          if (response.data.result == "True") {
+            console.log(777)
+            console.log(response.data.Data)
+            setTitle("محصول با موفقیت به سبدخرید اضافه شد")
+            setOpen(true)
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+    
+      
+     
+  
+      }
+      useEffect(() => {
+        GetData();
+console.log(999)
+console.log(property)
+      }, []);
     return(
    <>
    <Header/>
@@ -76,19 +156,19 @@ const SingleProduct = () =>{
         <div className="singleTitleBox">
         <div className="d-flex">
         <p className="singleTitle">
-                    تراکتور دو چرخ دیزلی 7اسب کاما BCS740
+                    {data?.Name}
                 </p>
             </div>
                 <div className="d-flex">
 
-                <p className="singleModelP">مدل:Bcs740 WalkingTractor</p>
+                <p className="singleModelP">مدل:{data.BrandName}</p>
                 </div>
             <div className="d-flex flex-row">
             <StarFill color="#FF6900" size="16"/> 
 <p className="singleRateP">3.2</p>
 
 <p className="singleTitleCatP">دسته بندی:</p>
-<p className="singleCatP">تراکتور دو چرخ</p>
+<p className="singleCatP">{data.GroupTile}</p>
             </div>
             </div>
             <div className="d-flex justify-content-between">
@@ -96,29 +176,44 @@ const SingleProduct = () =>{
             <p className="singleTitleProperty">
                    ویژگی های محصول:
                 </p>
-                <p className="singlePropertyDis">
-                امکانات : قفل دیفرانسیل و نصب ادوات جلو و پشت سوار شونده
-                </p>
-                <p className="singlePropertyDis">
+                {
+                  Object.values(property)?.map((item,index)=>{
+                  
+return(
+  index<5?
+  <>
+  
+                    <p className="singlePropertyDis">
+                    {item[0].MainGroupPropertyTitle} :
+                    </p>
 
-                موتور : دیزلی 7 اسب ( هندلی / استارتی )
-                </p>
-
-                <p className="singlePropertyDis">
-فرمان : متحرک ( چرخش 180 درجه )
-                </p>
-
+{  item.map((item2)=>{
+    return(
 <p className="singlePropertyDis">
 
-گیربکس : 8 دنده ( 4 دنده جلو ، 4 دنده عقب )
-</p>
+{item2.SubGroupPropertyTitle}     
+           </p>
+    )
+  })}
+</>
+:
+null
+)
 
+                    
+                  })
+                }
+       
+      
+                 
             </div>
             <div className="greyLightBox">
               <div className="d-flex boxGreyBox">
+              <CustomizedDialogs Title={title} open={open} setOpen={setOpen}/>
+
 <Garranty/>
 <p className="titleGrayBox">
-گارانتی 12 ماهه برگ سبز
+گارانتی 12 ماهه {data?.WarrantyName}
 </p>
               </div>
               <div className="d-flex boxGreyBox2">
@@ -130,21 +225,32 @@ const SingleProduct = () =>{
               <div className="boxGreyBox">
 <p className="costTitleGrayBox">
 قیمت کالا:</p>
+{
+  data.SpecialCost?
+  <>
+<p className="costGrayBoxStroke">
+{data?.Cost?.toLocaleString("en-de")} تومان</p>
 <p className="costGrayBox">
-{"125.000.000".toLocaleString("en-de")} تومان</p>
+{data.SpecialCost?.toLocaleString("en-de")} تومان</p>
+  </>
+  :
+
+<p className="costGrayBox">
+{data.Cost?.toLocaleString("en-de")} تومان</p>
+}
               </div>
               <div className="d-flex boxGreyBox2 justify-content-between">
               <p className="costTitleGrayBox">
 تعداد:</p>
 <div className="counterDiv d-flex justify-content-center">
-              <button  className="decBTN">-</button>
-              <span className="costNumber">1</span>
-              <button  className="inBTN">+</button>
+              <button onClick={()=>number>1?setNumber(number-1):null}  className="decBTN">-</button>
+              <span className="costNumber">{number}</span>
+              <button onClick={()=>setNumber(number+1)}  className="inBTN">+</button>
             </div>
               </div>
 
               <div className="boxGreyBox">
-              <Button  className="d-flex addToCart">
+              <Button onClick={()=>AddCart()}  className="d-flex addToCart">
                 <CartSingle color="#fff"/>
                 <p className="addToCartTitle">
 
@@ -177,24 +283,35 @@ const SingleProduct = () =>{
     </TabList>
     <TabPanel>
       <div className="d-flex">
-
+      {
+                  Object.values(property)?.map((item,index)=>{
+                  
+return(
+  index<5?
+  <>
       <div className="propertyBox">
-        <p className="propertyBoxTitle" >برند</p>
+        <p className="propertyBoxTitle" >                    {item[0].MainGroupPropertyTitle} :
+</p>
       </div>
       <div className="propertyBoxDes">
-        <p className="propertyDesTitle">BCS</p>
+        
+{  item.map((item2)=>{
+    return(
+        <p className="propertyDesTitle">{item2.SubGroupPropertyTitle}     </p>
+        )
+      })}
       </div>
-      </div>
+     
+    </>
+    :
+    null
+    )})}
+    </div>
 </TabPanel>
 <TabPanel>
 
       <div>
-        <p>تیغه روتیواتور bcs بی سی اس ، پک ۲۰ تایی : یکی از لوازم مصرفی تراکتورهای دو چرخ تیغه روتیواتور است. از این تیغه ها در عملیات مختلف خاک ورزی، خرد کردن کلوخه ها، آماده سازی زمین برای کاشت بذور و… استفاده می شود. به وسیله تیغه تراکتور دو چرخ بی سی اس خاک سطحی با خاک زیرین به طور یکنواخت و تا عمق مشخصی مخلوط می شود.  با تیغه روتیواتور بی سی اس امور کشاورزی و خاک ورزی با کیفیت بیشتری انجام می شود. حذف علف های هرز و از بین بردن بقایای گیاهان یکی دیگر از کاربردهای تیغه روتیواتور بی سی اس می باشد. همچنین زیر و رو کردن اصولی خاک و کود، در زمین هایی که از قبل شخم خورده اند؛ از دیگر کاربردهای تیغه تراکتور دوچرخ بی سی اس می باشد. این تیغه به راحتی روی دستگاه نصب می شود.
-
-خرید تیغه روتیواتور bcs
-
-شرکت راشا ماشین علاوه بر عرضه انبوه ماشین آلات کشاورزی و تراکتورهای دو چرخ کمپانی بی سی اس، لوازم جانبی این محصولات را نیز با قیمت هایی مقرون به صرفه ارائه می دهد. هدف راشا ماشین رضایت مشتریان و استفاده بهینه آنها از تراکتورهای دوچرخ بی سی اس به عنوان یک ماشین ایده آل و همه کاره است. این شرکت همیشه محصولات خود را با بهترین کیفیت و مناسب ترین قیمت به مشتریان خود عرضه می کند.
-</p>
+        <p>{data.Description}</p>
     
       </div>
 </TabPanel>
@@ -209,8 +326,9 @@ const SingleProduct = () =>{
     </Tabs>
     </div>
 </div>
+<div></div>
    </Container>
-   {/* <Footer/> */}
+   <Footer/>
    </>
     );
 };

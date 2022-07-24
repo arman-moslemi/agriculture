@@ -5,8 +5,20 @@ import Footer from "src/components/Pages/Layouts/Footer";
 import Slide1 from "src/components/assets/img/slider1.png";
 import Slide2 from "src/components/assets/img/slide2.png";
 import Back from "src/components/assets/img/back.png";
+import Slider from "react-slick";
+import Avatar from "src/components/assets/img/avatar.png";
+import { StarFill ,Star ,Heart ,TextLeft } from "react-bootstrap-icons";
+import Product from "src/components/assets/img/product.png";
 const Home = () =>{
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    rtl:true,
 
+  };
     
     return(
    <div style={{backgroundColor:'#f4f4f4',height:'100vh'}}>
@@ -44,8 +56,33 @@ const Home = () =>{
           <Button className="yellowBtn">مشاهده محصولات</Button>
         </div>
         <div className="productSlider">
+          <div className="d-flex mt-3">
+          <p className="productSliderTitle">پر فروش ترین محصولات ما</p>
+          <hr className="hrgray"/>
+          </div>
+          <div>
+          <Slider {...settings} className="consultationSlider">
+         
+         
+          <div className="sliderCardBox2">
           
+          </div>
+          <div className="sliderCardBox2">
+       
+          </div>
+          <div className="sliderCardBox2">
+           
+          </div>
+          <div className="sliderCardBox2">
+        
+          </div>
+          <div className="sliderCardBox2">
+           
+          </div>
+        </Slider>
+          </div>
         </div>
+        
     
 
       </div>  

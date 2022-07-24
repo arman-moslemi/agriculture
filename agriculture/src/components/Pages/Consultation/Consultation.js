@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button ,Modal ,Form} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
@@ -15,7 +15,10 @@ import {
 import 'react-accessible-accordion/dist/fancy-example.css';
 import Checkbox from '@mui/material/Checkbox';
 import Slider from "react-slick";
-
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation,useSearchParams,useParams } from "react-router-dom";
+import CustomizedDialogs from '../Layouts/AlertModal';
 const Consultation = () =>{
     const settings = {
         dots: false,
@@ -34,7 +37,45 @@ const Consultation = () =>{
 
       const handleClose2 = () => {setShow2(false)};
       const handleShow2 = () => {setShow2(true);setShow(false)};
+      const [data, setData] = useState([]);
+      const [recent, setRecent] = useState([]);
+
+  
+      const GetData=()=>{
+          const axios = require("axios");
+          axios.get(apiUrl + "AllConsultant")
+          .then(function (response) {
+            if (response.data.result == "True") {
+                setData(response.data.Data)
+                
+              }})
+              .catch(function (error) {
+                  console.log(777)
+                  alert(error)
+                  
+                  console.log(error);
+              });
+          axios.get(apiUrl + "GetConsultant")
+          .then(function (response) {
+            if (response.data.result == "True") {
+                setData(response.data.Data)
+                
+              }})
+              .catch(function (error) {
+                  console.log(777)
+                  alert(error)
+                  
+                  console.log(error);
+              });
+       
+          
     
+        }
+  
+        useEffect(() => {
+          GetData();
+  
+        }, []);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -427,6 +468,10 @@ const Consultation = () =>{
                     </p>
                     <Row>
                         <Col md={6} className="mb-3">
+                            {
+                                data?.map((item)=>{
+                                    return(
+
                             <div className="consultBox">
                                 <div className="consultBox1">
                                     <div>
@@ -434,16 +479,14 @@ const Consultation = () =>{
                                     </div>
                                     <div>
                                         <p className="consultName">
-                                            یاسمن طاهری صراف
-                                        </p>
+{item.Name} {item.Family}                                       </p>
                                         
                                         <p className="consultDegree">
-                                            کارشناسی ارشد کشاورزی
-                                        </p>
+{item.Degree}                                        </p>
                                         
-                                        <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
+                                        {/* <p className="consultDegree">
+                                            زمان انتظار جهت پاسخگویی : {item.WaitTime} دقیقه
+                                        </p> */}
                                     </div>
                                     <div className="d-flex justify-space-between">
                                     <Star color={'#000'} className="marginLeft5"/>
@@ -458,7 +501,7 @@ const Consultation = () =>{
                                 <div className="consultBox2">
                                     <div>
                                     <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
+                                            زمان انتظار جهت پاسخگویی :  {item.WaitTime} دقیقه
                                         </p>
                                         </div>
                                         <div className="d-flex">
@@ -595,392 +638,11 @@ const Consultation = () =>{
                                    </p>
                                 </Button>
                             </div>
+                                    )
+                                })
+                            }
                             </Col>
-                            <Col md={6} className="mb-3">
-                            <div className="consultBox">
-                                <div className="consultBox1">
-                                    <div>
-                                    <img src={Avatar} className="avatar"/>
-                                    </div>
-                                    <div>
-                                        <p className="consultName">
-                                            یاسمن طاهری صراف
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            کارشناسی ارشد کشاورزی
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                    </div>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'}/>
-                                    
-                                    </div>
-
-                                </div>
-                                <div className="consultBox2">
-                                    <div>
-                                    <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                        </div>
-                                        <div className="d-flex">
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                                متنی
-                                            </a>
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                               صوتی
-                                            </a>
-                                            <a href="#" className="callBtn">
-                                                تصویری
-                                            </a>
-                                        </div>
-                                </div>
-                                <Button className="favorite">
-                                    <Heart color={'#FF2525'}/>
-                                   <p>
-                                   افزودن به برگزیده ها
-                                   </p>
-                                </Button>
-                            </div>
-                            </Col>
-                            <Col md={6} className="mb-3">
-                            <div className="consultBox">
-                                <div className="consultBox1">
-                                    <div>
-                                    <img src={Avatar} className="avatar"/>
-                                    </div>
-                                    <div>
-                                        <p className="consultName">
-                                            یاسمن طاهری صراف
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            کارشناسی ارشد کشاورزی
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                    </div>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'}/>
-                                    
-                                    </div>
-
-                                </div>
-                                <div className="consultBox2">
-                                    <div>
-                                    <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                        </div>
-                                        <div className="d-flex">
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                                متنی
-                                            </a>
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                               صوتی
-                                            </a>
-                                            <a href="#" className="callBtn">
-                                                تصویری
-                                            </a>
-                                        </div>
-                                </div>
-                                <Button className="favorite">
-                                    <Heart color={'#FF2525'}/>
-                                   <p>
-                                   افزودن به برگزیده ها
-                                   </p>
-                                </Button>
-                            </div>
-                            </Col>
-                            <Col md={6} className="mb-3">
-                            <div className="consultBox">
-                                <div className="consultBox1">
-                                    <div>
-                                    <img src={Avatar} className="avatar"/>
-                                    </div>
-                                    <div>
-                                        <p className="consultName">
-                                            یاسمن طاهری صراف
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            کارشناسی ارشد کشاورزی
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                    </div>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'}/>
-                                    
-                                    </div>
-
-                                </div>
-                                <div className="consultBox2">
-                                    <div>
-                                    <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                        </div>
-                                        <div className="d-flex">
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                                متنی
-                                            </a>
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                               صوتی
-                                            </a>
-                                            <a href="#" className="callBtn">
-                                                تصویری
-                                            </a>
-                                        </div>
-                                </div>
-                                <Button className="favorite">
-                                    <Heart color={'#FF2525'}/>
-                                   <p>
-                                   افزودن به برگزیده ها
-                                   </p>
-                                </Button>
-                            </div>
-                            </Col>
-                            <Col md={6} className="mb-3">
-                            <div className="consultBox">
-                                <div className="consultBox1">
-                                    <div>
-                                    <img src={Avatar} className="avatar"/>
-                                    </div>
-                                    <div>
-                                        <p className="consultName">
-                                            یاسمن طاهری صراف
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            کارشناسی ارشد کشاورزی
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                    </div>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'}/>
-                                    
-                                    </div>
-
-                                </div>
-                                <div className="consultBox2">
-                                    <div>
-                                    <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                        </div>
-                                        <div className="d-flex">
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                                متنی
-                                            </a>
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                               صوتی
-                                            </a>
-                                            <a href="#" className="callBtn">
-                                                تصویری
-                                            </a>
-                                        </div>
-                                </div>
-                                <Button className="favorite">
-                                    <Heart color={'#FF2525'}/>
-                                   <p>
-                                   افزودن به برگزیده ها
-                                   </p>
-                                </Button>
-                            </div>
-                            </Col>
-                            <Col md={6} className="mb-3">
-                            <div className="consultBox">
-                                <div className="consultBox1">
-                                    <div>
-                                    <img src={Avatar} className="avatar"/>
-                                    </div>
-                                    <div>
-                                        <p className="consultName">
-                                            یاسمن طاهری صراف
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            کارشناسی ارشد کشاورزی
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                    </div>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'}/>
-                                    
-                                    </div>
-
-                                </div>
-                                <div className="consultBox2">
-                                    <div>
-                                    <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                        </div>
-                                        <div className="d-flex">
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                                متنی
-                                            </a>
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                               صوتی
-                                            </a>
-                                            <a href="#" className="callBtn">
-                                                تصویری
-                                            </a>
-                                        </div>
-                                </div>
-                                <Button className="favorite">
-                                    <Heart color={'#FF2525'}/>
-                                   <p>
-                                   افزودن به برگزیده ها
-                                   </p>
-                                </Button>
-                            </div>
-                            </Col>
-                            <Col md={6} className="mb-3">
-                            <div className="consultBox">
-                                <div className="consultBox1">
-                                    <div>
-                                    <img src={Avatar} className="avatar"/>
-                                    </div>
-                                    <div>
-                                        <p className="consultName">
-                                            یاسمن طاهری صراف
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            کارشناسی ارشد کشاورزی
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                    </div>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'}/>
-                                    
-                                    </div>
-
-                                </div>
-                                <div className="consultBox2">
-                                    <div>
-                                    <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                        </div>
-                                        <div className="d-flex">
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                                متنی
-                                            </a>
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                               صوتی
-                                            </a>
-                                            <a href="#" className="callBtn">
-                                                تصویری
-                                            </a>
-                                        </div>
-                                </div>
-                                <Button className="favorite">
-                                    <Heart color={'#FF2525'}/>
-                                   <p>
-                                   افزودن به برگزیده ها
-                                   </p>
-                                </Button>
-                            </div>
-                            </Col>
-                            <Col md={6} className="mb-3">
-                            <div className="consultBox">
-                                <div className="consultBox1">
-                                    <div>
-                                    <img src={Avatar} className="avatar"/>
-                                    </div>
-                                    <div>
-                                        <p className="consultName">
-                                            یاسمن طاهری صراف
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            کارشناسی ارشد کشاورزی
-                                        </p>
-                                        
-                                        <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                    </div>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <Star color={'#000'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5"/>
-                                    <StarFill color={'#ffb921'}/>
-                                    
-                                    </div>
-
-                                </div>
-                                <div className="consultBox2">
-                                    <div>
-                                    <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : 20 دقیقه
-                                        </p>
-                                        </div>
-                                        <div className="d-flex">
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                                متنی
-                                            </a>
-                                            <a href="#" className="callBtn borderLeftGreen">
-                                               صوتی
-                                            </a>
-                                            <a href="#" className="callBtn">
-                                                تصویری
-                                            </a>
-                                        </div>
-                                </div>
-                                <Button className="favorite">
-                                    <Heart color={'#FF2525'}/>
-                                   <p>
-                                   افزودن به برگزیده ها
-                                   </p>
-                                </Button>
-                            </div>
-                            </Col>
+                        
                         </Row>
                         <div className="d-flex justify-content-center mt-5">
                         <PaginationCustom/>

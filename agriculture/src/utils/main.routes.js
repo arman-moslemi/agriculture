@@ -169,7 +169,7 @@ const MainRoutes = (props) => {
 					<Routes>
 				<Route
 					exact
-					path='/SingleNews'
+					path='/SingleNews/:id'
 					name='خبر'
 					element={<SingleNews/>}
 				/></Routes> 

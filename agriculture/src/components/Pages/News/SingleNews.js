@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button ,Modal ,Form} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
@@ -6,10 +6,68 @@ import Footer from "src/components/Pages/Layouts/Footer";
 import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft ,Share ,ChatDots} from "react-bootstrap-icons";
 import PaginationCustom from "src/components/Pages/Layouts/Pagination";
 import News1 from "src/components/assets/img/news1.jpg";
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation,useSearchParams,useParams } from "react-router-dom";
+import CustomizedDialogs from '../Layouts/AlertModal';
+import parse  from 'html-react-parser';
+import StartRate from 'src/components/Pages/Layouts/StarRate';
 
 const SingleNews = () =>{
-    
-    
+    const [rate,setRate]=useState(5)
+
+    const params = useParams().id;
+    const [data, setData] = useState([]);
+    const [type, setType] = useState([]);
+    const [com, setCom] = useState([]);
+
+    const GetData=()=>{
+        const axios = require("axios");
+        axios.post(apiUrl + "SingleBlog",{Title:params})
+        .then(function (response) {
+          if (response.data.result == "True") {
+              setData(response.data.Data)
+              
+            }})
+            .catch(function (error) {
+                console.log(777)
+                alert(error)
+                
+                console.log(error);
+            });
+            axios.post(apiUrl + "SingleBlogComment",{Title:params})
+            .then(function (response) {
+                if (response.data.result == "True") {
+              console.log(response.data.Data)
+
+            setCom(response.data.Data)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+        axios.get(apiUrl + "AllBlogType")
+        .then(function (response) {
+          if (response.data.result == "True") {
+            setType(response.data.Data)
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+          console.log(error);
+        });
+        
+        
+  
+      }
+
+      useEffect(() => {
+        GetData();
+
+      }, []);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -24,36 +82,17 @@ const SingleNews = () =>{
             </span>
             </div>
             <ul className="newsCategory">
+            {
+                    type.map((item)=>{
+                        return(
+
                 <li>
                     <a href="#">
-                        دسته بندی یک
-                    </a>
+{item?.Name}                    </a>
                 </li>
-                <li>
-                    <a href="#">
-                        دسته بندی دو
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        دسته بندی سه
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        دسته بندی چهار
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        دسته بندی پنج
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        دسته بندی شش
-                    </a>
-                </li>
+                        )
+                    })
+                }
             </ul>
                 </div>
             </Col>
@@ -62,10 +101,9 @@ const SingleNews = () =>{
                 <div className="headBox">
                     <div>
                         <p className="headerNews">
-                            عنوان مقاله
-                        </p>
+{data[0]?.Title}                        </p>
                         <p className="headerDate">
-                            تاریخ انتشار : 01/04/08
+                            تاریخ انتشار : {data[0]?.Date}
                         </p>
                     </div>
                     <div>
@@ -77,15 +115,13 @@ const SingleNews = () =>{
                 </div>
                 <div className="newsTextBox">
                     <p>
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون 
+                    {   data[0]?.Text?
+                          parse (data[0]?.Text)
+                          :
+                          null}
                     </p>
                 </div>
-                <img src={News1} className="newsImgSingle"/>
-                <div className="newsTextBox">
-                    <p>
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون 
-                    </p>
-                </div>
+             
             </div>
             <div className="whiteBox  mb-2" style={{padding:0}}>
                 <div className="headBox">
@@ -97,75 +133,43 @@ const SingleNews = () =>{
                     </div>
                    
                 </div>
+                {
+                    com?.map((item)=>{
+                        return(
+
                 <div className="commentBox">
                     <div className="d-flex justify-content-between">
                         <p className="userNameCommnet">
-                            کاربر شماره یک
-                        </p>
+{item.Name} {item.Family}                        </p>
                         <div className="d-flex align-items-center" >
                             <p className="writerScore">
                                 امتیاز ثبت شده : 
                             </p>
                             <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
+                            {
+                      [...new Array(5)].map((item2,index)=>{
+                        return(
+index+1>item.Rate?
+<StarFill color="#ffb921" className="marginLeft5"/>
+
+:
+                          <Star color="#000" className="marginLeft5"/>
+
+
+                        )
+                      })
+                    }
                                 </div>
                         </div>
                        
                     </div>
                     <p className="writerScore mt-4">
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز 
-                            </p>
+{item.TextComment}                            </p>
                 </div>
-                <div className="commentBox">
-                    <div className="d-flex justify-content-between">
-                        <p className="userNameCommnet">
-                            کاربر شماره یک
-                        </p>
-                        <div className="d-flex align-items-center" >
-                            <p className="writerScore">
-                                امتیاز ثبت شده : 
-                            </p>
-                            <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                        </div>
-                       
-                    </div>
-                    <p className="writerScore mt-4">
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز 
-                            </p>
-                </div>
-                <div className="commentBox">
-                    <div className="d-flex justify-content-between">
-                        <p className="userNameCommnet">
-                            کاربر شماره یک
-                        </p>
-                        <div className="d-flex align-items-center" >
-                            <p className="writerScore">
-                                امتیاز ثبت شده : 
-                            </p>
-                            <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
-                        </div>
-                       
-                    </div>
-                    <p className="writerScore mt-4">
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز 
-                            </p>
-                </div>
+                        )
+                    })
+                }
+           
             </div>
             <div className="whiteBox  mb-2" style={{padding:0}}>
                 <div className="headBox" style={{border:0}}>
@@ -173,9 +177,15 @@ const SingleNews = () =>{
                         <p className="headerNews">
                            دیدگاه های ثبت شده
                         </p>
+                        {
+                            com?
+null
+                            :
+
                        <p style={{fontFamily:'IRANSansBold'}}>
                         هیچ دیدگاهی برای این موضوع ثبت نشده است شما اولین نفر باشید !
                        </p>
+                        }
                        <p style={{fontFamily:'IRANSans'}}>
                        نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند *
                        </p>
@@ -184,11 +194,8 @@ const SingleNews = () =>{
                         امتیاز شما : 
                        </p>
                        <div className="d-flex align-items-center" style={{marginRight:25}}>
-                                    <Star color="#000" className="marginLeft5" size={25}/>
-                                    <Star color="#000" className="marginLeft5" size={25}/>
-                                    <StarFill color="#ffb921" className="marginLeft5" size={25}/>
-                                    <StarFill color="#ffb921" className="marginLeft5" size={25}/>
-                                    <StarFill color="#ffb921" size={25}/>
+                       <StartRate  setRate={setRate} />
+
                         </div>
                         
                        </div>

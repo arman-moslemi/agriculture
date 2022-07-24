@@ -63,7 +63,7 @@ const Header = () =>{
                 <Cart className="ml-1"/>
                 سبد خرید
             </Button>
-            <Button className="profileBtn">
+            <Button onClick={()=>navigate("/Login")} className="profileBtn">
                 <Profile/>
                 ورود / عضویت
             </Button>

@@ -112,9 +112,10 @@ const EditProfile = () =>{
 
         const GetData=()=>{
             const axios = require("axios");
-          
+            var ss=localStorage.getItem("CustomerID")
+
         
-            axios.post(apiUrl + "ReadCustomer",{CustomerID:state.CustomerID})
+            axios.post(apiUrl + "ReadCustomer",{CustomerID:ss})
             .then(function (response) {
               if (response.data.result == "True") {
                 console.log(777)
@@ -140,7 +141,7 @@ const EditProfile = () =>{
     
               console.log(error);
             });
-            axios.post(apiUrl + "ReadAddress",{CustomerID:state.CustomerID})
+            axios.post(apiUrl + "ReadAddress",{CustomerID:ss})
             .then(function (response) {
                 
                 console.log(999)
@@ -198,8 +199,9 @@ const EditProfile = () =>{
           }
           const AddAddress=()=>{
             const axios = require("axios");
-        
-            axios.post(apiUrl + "InsertAddress",{CustomerID:state.CustomerID,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
+            var ss=localStorage.getItem("CustomerID")
+
+            axios.post(apiUrl + "InsertAddress",{CustomerID:ss,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
             .then(function (response) {
               if (response.data.result == "True") {
                 console.log(111)
@@ -222,8 +224,9 @@ const EditProfile = () =>{
           }
           const EditAddress=()=>{
             const axios = require("axios");
-          
-            axios.post(apiUrl + "EditAddress",{AddressID:editAddressID,CustomerID:state.CustomerID,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
+            var ss=localStorage.getItem("CustomerID")
+
+            axios.post(apiUrl + "EditAddress",{AddressID:editAddressID,CustomerID:ss,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
             .then(function (response) {
               if (response.data.result == "True") {
                 console.log(111)

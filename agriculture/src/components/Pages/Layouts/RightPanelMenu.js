@@ -18,8 +18,12 @@ import R5G from "src/components/assets/img/r5G.png";
 import R6G from "src/components/assets/img/r6G.png";
 import R7G from "src/components/assets/img/r7G.png";
 import R8G from "src/components/assets/img/r8G.png";
+import { Link } from "react-router-dom";
+import { Explicit } from "react-bootstrap-icons";
 const RightPanelMenu = ({data}) =>{
-    
+    const Exit= async()=>{
+        localStorage.setItem("CustomerID","")
+    }
     return(
         <div className="whiteBoxRight">
         <div className="rightBox1 d-flex align-items-center">
@@ -36,10 +40,10 @@ const RightPanelMenu = ({data}) =>{
         <div className="rightBox2">
             <ul>
                 <li>
-                    <a href="#">
+                    <Link to={"/EditProfile"}>
                         <img src={R1B}/>
                         اطلاعات کاربری
-                    </a>
+                    </Link>
                 </li>
                 <li>
                     <a href="#">
@@ -54,34 +58,34 @@ const RightPanelMenu = ({data}) =>{
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                <Link to={"/Wallet"}>
                         <img src={R4B}/>
                         کیف پول
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#">
+                <Link to={"/UserHistory"}>
                         <img src={R5B}/>
                         تاریخچه
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#">
+                <Link to={"/Favorite"}>
                         <img src={R6B}/>
                         برگزیده ها
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#">
+                <Link to={"/TicketList"}>
                         <img src={R7B}/>
                         تیکت ها
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#">
+                <Link to={"/Login"} onClick={()=>Exit()}>
                         <img src={R8B}/>
                         خروج از حساب کاربری
-                    </a>
+                    </Link>
                 </li>
             </ul>
         </div>

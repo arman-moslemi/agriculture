@@ -165,10 +165,10 @@ console.log(property)
                 </div>
             <div className="d-flex flex-row">
             <StarFill color="#FF6900" size="16"/> 
-<p className="singleRateP">3.2</p>
+<p className="singleRateP">{data.RateAVG}</p>
 
 <p className="singleTitleCatP">دسته بندی:</p>
-<p className="singleCatP">{data.GroupTile}</p>
+<p className="singleCatP">{data.Title}</p>
             </div>
             </div>
             <div className="d-flex justify-content-between">

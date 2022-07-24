@@ -296,13 +296,21 @@ Object.values(data)?.map((item,index)=>{
                                 موجودی : {item[0].Number} {item[0].Unit}
                             </p>
                             <div className="d-flex align-items-center justify-content-between mt-3">
-                                <div className="d-flex align-items-center">
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <Star color="#000" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921" className="marginLeft5"/>
-                                    <StarFill color="#ffb921"/>
-                                </div>
+                                {/* <div className="d-flex align-items-center">
+                                {
+                      [...new Array(5)].map((item2,index)=>{
+                        return(
+index+1>item.Rate?
+<StarFill color="#ffb921" className="marginLeft5"/>
+
+:
+                          <Star color="#000" className="marginLeft5"/>
+
+
+                        )
+                      })
+                    }
+                                </div> */}
                                 <div>
                                     <p className="productPriceStroke">
                                         {item[0].Cost} تومان

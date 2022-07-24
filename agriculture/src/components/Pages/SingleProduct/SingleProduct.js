@@ -3,7 +3,7 @@ import { Container, Row ,Col ,Button} from "react-bootstrap";
 import Header from "../Layouts/Header";
 import Footer from "../Layouts/Footer";
 import ImageGallery from 'react-image-gallery';
-import { StarFill } from 'react-bootstrap-icons';
+import { StarFill ,Heart} from 'react-bootstrap-icons';
 import Garranty from "src/components/assets/icon/Garranty";
 import File from "src/components/assets/icon/File";
 import CartSingle from "src/components/assets/icon/CartSingle";
@@ -144,13 +144,17 @@ const SingleProduct = () =>{
               </div>
 
               <div className="boxGreyBox">
-              <Button  className="d-flex addToCart">
+              <Button  className="d-flex addToCart mb-1">
                 <CartSingle color="#fff"/>
                 <p className="addToCartTitle">
 
               افزودن به سبد خرید
                 </p>
               </Button>
+              <Button className="addFavorite mt-1" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>
+                            <Heart className="customM"size={20}/>
+                            افزودن به برگزیده ها
+                        </Button>
 </div>
 </div>
             </div>

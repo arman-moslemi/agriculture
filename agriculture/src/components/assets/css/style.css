@@ -1917,12 +1917,12 @@ margin-bottom: 10px; */
   margin-right: 25px;
 }
 /***********Home*********/
-.homeSlider .slick-slide{
+/* .homeSlider .slick-slide{
   width: 100% !important;
 }
 .slick-track{
   width: 100% !important;
-}
+} */
 .carousel-control-next, .carousel-control-prev{
   width: 3% !important;
 }
@@ -1968,7 +1968,7 @@ margin-bottom: 10px; */
   background-color:  rgba(168, 181, 125, 0.56);
   position: relative;
   
-  height: 340px;
+  height: 39 0px;
   border-radius: 15px;
   width: 20%;
 }
@@ -1999,7 +1999,7 @@ margin-bottom: 10px; */
 }
 .productSlider{
   width: 78%;
-  height: 25px;
+  height:390px;
   background-color: #E2E3E4;
   margin-right: 2%;
   border-radius: 15px;
@@ -2046,4 +2046,80 @@ margin-bottom: 10px; */
   height: 300px;
   overflow-x: hidden;
   overflow-y: scroll;
+  padding: 15px 20px;
+}
+.productSliderTitle{
+  font-family: 'IRANSansBold';
+  color: #000;
+}
+.hrgray{
+   border-top-color: #EAF1FB63;
+   width: 80%;
+    margin-right: 15px;
+}
+.sliderCardBox2{
+  background-color: #fff;
+  height: auto;
+  width: 260px;
+  height: 260px;
+  text-align: center;
+  padding: 25px !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.miniSliderImg{
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.pName{
+  font-family: 'IRANSans';
+  color: #000;
+  margin-bottom: 10px;
+  text-align: right;
+  font-size: 14px;
+}
+.priceSlider{
+  margin-bottom: 0px;
+  color: #000;
+  font-size: 12px;
+  font-family: 'IRANSans';
+  text-align: left;
+}
+.tamin{
+  font-family: 'IRANSans';
+  color: #000;
+  text-align: right;
+  font-size: 12px;
+}
+.consultationSlider2 {
+  margin-top: 1%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.home2{
+  width: 100%;
+}
+.home2Title{
+  font-family: 'IRANSansDNBold';
+  color: #000;
+  font-size: 30px;
+  margin: 30px;
+}
+.home2Des{
+  font-family: 'IRANSans';
+  color: #000;
+  width: 60%;
+  margin: 30px;
+}
+.home2View{
+  background-color: var(--orange) !important;
+  font-family: 'IRANSans';
+  color: #fff;
+  border: none !important;
+  border-radius: 50px !important;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  width: 150px;
+  margin: 30px;
 }

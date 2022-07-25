@@ -7,9 +7,14 @@ import Slide2 from "src/components/assets/img/slide2.png";
 import Back from "src/components/assets/img/back.png";
 import Slider from "react-slick";
 import Avatar from "src/components/assets/img/avatar.png";
-import { StarFill ,Star ,Heart ,TextLeft } from "react-bootstrap-icons";
+import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft} from "react-bootstrap-icons";
 import Product from "src/components/assets/img/product.png";
 import Home2 from "src/components/assets/img/home2.png";
+import Voice from "src/components/assets/img/voice.png";
+import Chat from "src/components/assets/img/chat.png";
+import Consult from "src/components/assets/img/consult2.png";
+import Video from "src/components/assets/img/videocall.png";
+import News1 from "src/components/assets/img/news1.jpg";
 const Home = () =>{
   const settings = {
     dots: false,
@@ -66,7 +71,12 @@ const Home = () =>{
          
          
           <div className="sliderCardBox2">
+          <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -84,7 +94,12 @@ const Home = () =>{
           <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
           </div>
           <div className="sliderCardBox2">
+          <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -102,7 +117,12 @@ const Home = () =>{
           <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
           </div>
           <div className="sliderCardBox2">
+          <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -120,7 +140,12 @@ const Home = () =>{
           <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
           </div>
           <div className="sliderCardBox2">
+          <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -138,7 +163,12 @@ const Home = () =>{
           <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
           </div>
           <div className="sliderCardBox2">
+          <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -199,7 +229,13 @@ const Home = () =>{
          
          
           <div className="sliderCardBox2">
+           <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
+
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -217,7 +253,12 @@ const Home = () =>{
           <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
           </div>
           <div className="sliderCardBox2">
+          <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -235,7 +276,12 @@ const Home = () =>{
           <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
           </div>
           <div className="sliderCardBox2">
+          <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -253,7 +299,12 @@ const Home = () =>{
           <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
           </div>
           <div className="sliderCardBox2">
+          <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -271,7 +322,12 @@ const Home = () =>{
           <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
           </div>
           <div className="sliderCardBox2">
+          <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
           <img src={Product} className="miniSliderImg"/>
+           </div>
           <p className="pName">دستگاه میوه خشک کن</p>
           <div className="d-flex justify-content-between align-items-center">
          
@@ -302,6 +358,265 @@ const Home = () =>{
       </div>  
     
   </Container>
+  <Container fluid style={{backgroundColor: '#A8B57D4A',padding:30}}>
+      <Container>
+        <Row className="align-items-center">
+        <Col md={6}>
+        <p className="home2Title">
+              ارائه ی انواع مشاوره در حوزه کشاورزی
+            </p>
+            <p className="home2Des">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+            </p>
+            <div className="d-flex align-items-center mb-3">
+              <img src={Video} className="videoIcon"/>
+              <p className="home3Des">
+                مشاوره تصویری
+              </p>
+            </div>
+            <div className="d-flex align-items-center mb-3">
+              <img src={Voice} className="videoIcon"/>
+              <p className="home3Des">
+               مشاوره صوتی
+              </p>
+            </div>
+            <div className="d-flex align-items-center mb-3">
+              <img src={Chat} className="videoIcon"/>
+              <p className="home3Des">
+                مشاوره متنی
+              </p>
+            </div>
+            <Button className="home2View">
+            دریافت مشاوره
+            </Button>
+          </Col>
+          <Col md={6}>
+          <img src={Consult} className="home3"/>
+          </Col>
+         
+        </Row>
+      </Container>
+    </Container>
+    <Container fluid className="containerWhite">
+   <Container>
+   <div>
+        <h2 className="sliderTitle">برترین مشاوران ما</h2>
+        <Slider {...settings} className="consultationSlider">
+          <div className="sliderCardBox">
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
+          </div>
+          <div className="sliderCardBox">
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
+          </div>
+          <div className="sliderCardBox">
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
+          </div>
+          <div className="sliderCardBox">
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
+          </div>
+          <div className="sliderCardBox">
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
+          </div>
+          <div className="sliderCardBox">
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
+          </div>
+          <div className="sliderCardBox">
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
+          </div>
+          <div className="sliderCardBox">
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
+          </div>
+          <div className="sliderCardBox">
+            <img src={Avatar} className="sliderImg"/>
+            <p className="sliderName">یاسمن طاهری صراف</p>
+            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderDescription">
+            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+                   
+            </p>
+          </div>
+        </Slider>
+      </div>
+   </Container>
+   </Container>
+   <Container fluid style={{backgroundColor:'#FEF5EC',padding:30}}>
+   <Container>
+   <div className="d-flex justify-content-between mb-2">
+     <p className="boxTitle">
+      اخبار و مقالات
+     </p>
+     <a className="seeALL" href="#">
+      مشاهده همه
+     </a>
+    </div>
+    <Row>
+      <Col md={4}>
+      <div className="miniNewsBox w100">
+                    <img src={News1}/>
+                 <div className="newsB">
+                 <p className="newsDate">
+                    01/04/08
+                </p>
+                <p className="newsTitle">
+                    عنوان خبر
+                </p> 
+                <p className="newsDes">
+                   توضیح کوتاه خبر اینجا قرار میگیرد ... 
+                 </p>
+                <div className="d-flex align-items-center justify-content-between mt-4">
+                  
+                    <div>
+                        <a href="#" className="textDetail2">
+                           ادامه مطلب <ChevronLeft/>
+                        </a>
+                    </div>
+                </div>
+                 </div>
+                </div>
+      </Col>
+      <Col md={4}>
+      <div className="miniNewsBox w100 mb-1">
+                  
+                 <div className="newsB">
+                 <p className="newsDate">
+                    01/04/08
+                </p>
+                <p className="newsTitle">
+                    عنوان خبر
+                </p> 
+                <p className="newsDes">
+                  توضیح کوتاه خبر اینجا قرار میگیرد ... 
+                </p>
+                <div className="d-flex align-items-center justify-content-between mt-4">
+                  
+                    <div>
+                        <a href="#" className="textDetail2">
+                           ادامه مطلب <ChevronLeft/>
+                        </a>
+                    </div>
+                </div>
+                 </div>
+                </div>
+                <div className="miniNewsBox w100">
+                  
+                  <div className="newsB">
+                  <p className="newsDate">
+                     01/04/08
+                 </p>
+                 <p className="newsTitle">
+                     عنوان خبر
+                 </p> 
+                 <p className="newsDes">
+                   توضیح کوتاه خبر اینجا قرار میگیرد ... 
+                 </p>
+                 <div className="d-flex align-items-center justify-content-between mt-4">
+                   
+                     <div>
+                         <a href="#" className="textDetail2">
+                            ادامه مطلب <ChevronLeft/>
+                         </a>
+                     </div>
+                 </div>
+                  </div>
+                 </div>
+      </Col>
+      <Col md={4}>
+      <div className="miniNewsBox w100 mb-1">
+                  
+                 <div className="newsB">
+                 <p className="newsDate">
+                    01/04/08
+                </p>
+                <p className="newsTitle">
+                    عنوان خبر
+                </p> 
+                <p className="newsDes">
+                  توضیح کوتاه خبر اینجا قرار میگیرد ... 
+                </p>
+                <div className="d-flex align-items-center justify-content-between mt-4">
+                  
+                    <div>
+                        <a href="#" className="textDetail2">
+                           ادامه مطلب <ChevronLeft/>
+                        </a>
+                    </div>
+                </div>
+                 </div>
+                </div>
+                <div className="miniNewsBox w100">
+                  
+                  <div className="newsB">
+                  <p className="newsDate">
+                     01/04/08
+                 </p>
+                 <p className="newsTitle">
+                     عنوان خبر
+                 </p> 
+                 <p className="newsDes">
+                   توضیح کوتاه خبر اینجا قرار میگیرد ... 
+                 </p>
+                 <div className="d-flex align-items-center justify-content-between mt-4">
+                   
+                     <div>
+                         <a href="#" className="textDetail2">
+                            ادامه مطلب <ChevronLeft/>
+                         </a>
+                     </div>
+                 </div>
+                  </div>
+                 </div>
+      </Col>
+    </Row>
+   </Container>
+   </Container>
     <Footer/>
    </div>
     );

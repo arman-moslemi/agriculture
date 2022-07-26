@@ -11,12 +11,15 @@ import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft} from "react-bootstrap-ico
 import Product from "src/components/assets/img/product.png";
 import Home2 from "src/components/assets/img/home2.png";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation,useSearchParams,useParams, Link } from "react-router-dom";
 
 import Voice from "src/components/assets/img/voice.png";
 import Chat from "src/components/assets/img/chat.png";
 import Consult from "src/components/assets/img/consult2.png";
 import Video from "src/components/assets/img/videocall.png";
 import News1 from "src/components/assets/img/news1.jpg";
+import { renderIntoDocument } from "react-dom/test-utils";
+import { truncate } from "src/utils/helper";
 const Home = () =>{
   const settings = {
     dots: false,
@@ -30,6 +33,8 @@ const Home = () =>{
   const [data,setData]=useState([])
   const [best,setBest]=useState([])
   const [newest,setNew]=useState([])
+  const [blog,setBlog]=useState([])
+  const [cons,setCons]=useState([])
 
   const GetData=()=>{
     const axios = require("axios");
@@ -72,6 +77,36 @@ const Home = () =>{
         console.log(response.data.Data);
 
         setNew(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
+    axios.get(apiUrl + "RecentlyBlog")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+        console.log(response.data.Data);
+
+        setBlog(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
+    axios.get(apiUrl + "GetConsultant")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+        console.log(response.data.Data);
+
+        setCons(response.data.Data)
 
     }})
     .catch(function (error) {
@@ -218,7 +253,7 @@ const Home = () =>{
           newest.map((item)=>{
             return(
 
-              <div className="sliderCardBox2">
+              <Link to={"/SingleProduct/"+item.Name2} className="sliderCardBox2">
               <img src={Product} className="miniSliderImg"/>
               <p className="pName">{item.Name}</p>
               <div className="d-flex justify-content-between align-items-center">
@@ -242,7 +277,7 @@ const Home = () =>{
               <p className="tamin">
               نام تامین کننده کالا : {item.WarrantyName}
                 </p>
-              </div>
+              </Link>
                 )          })
          }
        
@@ -305,87 +340,25 @@ const Home = () =>{
    <div>
         <h2 className="sliderTitle">برترین مشاوران ما</h2>
         <Slider {...settings} className="consultationSlider">
+          {
+            cons?.map((item)=>{
+              return(
           <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <img 
+            src={Avatar} 
+            className="sliderImg"/>
+            <p className="sliderName">{item.Name}{item.Family}</p>
+            <p className="sliderDegree">{item.Speciality}</p>
             <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
+{item.Description}                   
             </p>
           </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
+
+              )
+            })
+          }
+       
+     
         </Slider>
       </div>
    </Container>
@@ -401,120 +374,138 @@ const Home = () =>{
      </a>
     </div>
     <Row>
+     
       <Col md={4}>
       <div className="miniNewsBox w100">
-                    <img src={News1}/>
+                    <img 
+                        src={apiAsset+blog[0]?.Pic}
+                        />
                  <div className="newsB">
                  <p className="newsDate">
-                    01/04/08
+                 {blog[0]?.Date}   
                 </p>
                 <p className="newsTitle">
-                    عنوان خبر
-                </p> 
+                {blog[0]?.Title}                
+                                </p> 
                 <p className="newsDes">
-                   توضیح کوتاه خبر اینجا قرار میگیرد ... 
-                 </p>
+                {truncate( blog[0]?.Text,30)}
+                                 </p>
                 <div className="d-flex align-items-center justify-content-between mt-4">
                   
                     <div>
-                        <a href="#" className="textDetail2">
+                    <Link to={"/SingleNews/"+blog[0]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                  </div>
                 </div>
       </Col>
+        
       <Col md={4}>
       <div className="miniNewsBox w100 mb-1">
-                  
+      {
+            blog[1]?      
                  <div className="newsB">
                  <p className="newsDate">
-                    01/04/08
+                 {blog[1]?.Date}   
                 </p>
                 <p className="newsTitle">
-                    عنوان خبر
+                {blog[1]?.Title}                
                 </p> 
                 <p className="newsDes">
-                  توضیح کوتاه خبر اینجا قرار میگیرد ... 
+                {truncate( blog[1]?.Text,30)}
                 </p>
                 <div className="d-flex align-items-center justify-content-between mt-4">
                   
                     <div>
-                        <a href="#" className="textDetail2">
+                    <Link to={"/SingleNews/"+blog[1]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                  </div>
+                 :
+                 null}
                 </div>
                 <div className="miniNewsBox w100">
+                {
+            blog[2]?
+                <div className="newsB">
+                 <p className="newsDate">
+                 {blog[2]?.Date}   
+                </p>
+                <p className="newsTitle">
+                {blog[2]?.Title}                
+                </p> 
+                <p className="newsDes">
+                {truncate( blog[2]?.Text,30)}
+                </p>
+                <div className="d-flex align-items-center justify-content-between mt-4">
                   
-                  <div className="newsB">
-                  <p className="newsDate">
-                     01/04/08
-                 </p>
-                 <p className="newsTitle">
-                     عنوان خبر
-                 </p> 
-                 <p className="newsDes">
-                   توضیح کوتاه خبر اینجا قرار میگیرد ... 
-                 </p>
-                 <div className="d-flex align-items-center justify-content-between mt-4">
-                   
-                     <div>
-                         <a href="#" className="textDetail2">
-                            ادامه مطلب <ChevronLeft/>
-                         </a>
-                     </div>
+                    <div>
+                    <Link to={"/SingleNews/"+blog[2]?.Title} className="textDetail">
+                           ادامه مطلب <ChevronLeft/>
+                        </Link>
+                    </div>
+                </div>
                  </div>
-                  </div>
+                 :null
+                }
                  </div>
       </Col>
       <Col md={4}>
       <div className="miniNewsBox w100 mb-1">
-                  
-                 <div className="newsB">
+          {
+            blog[3]?
+
+      <div className="newsB">
                  <p className="newsDate">
-                    01/04/08
+                 {blog[3]?.Date}   
                 </p>
                 <p className="newsTitle">
-                    عنوان خبر
+                {blog[3]?.Title}                
                 </p> 
                 <p className="newsDes">
-                  توضیح کوتاه خبر اینجا قرار میگیرد ... 
+                {truncate( blog[3]?.Text,30)}
                 </p>
                 <div className="d-flex align-items-center justify-content-between mt-4">
                   
                     <div>
-                        <a href="#" className="textDetail2">
+                    <Link to={"/SingleNews/"+blog[3]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                  </div>
+            :
+null
+          }        
                 </div>
                 <div className="miniNewsBox w100">
+                {
+            blog[4]?
+                <div className="newsB">
+                 <p className="newsDate">
+                 {data[4]?.Date}   
+                </p>
+                <p className="newsTitle">
+                {blog[4]?.Title}                
+                </p> 
+                <p className="newsDes">
+                {truncate( blog[4]?.Text,30)}
+                </p>
+                <div className="d-flex align-items-center justify-content-between mt-4">
                   
-                  <div className="newsB">
-                  <p className="newsDate">
-                     01/04/08
-                 </p>
-                 <p className="newsTitle">
-                     عنوان خبر
-                 </p> 
-                 <p className="newsDes">
-                   توضیح کوتاه خبر اینجا قرار میگیرد ... 
-                 </p>
-                 <div className="d-flex align-items-center justify-content-between mt-4">
-                   
-                     <div>
-                         <a href="#" className="textDetail2">
-                            ادامه مطلب <ChevronLeft/>
-                         </a>
-                     </div>
+                    <div>
+                    <Link to={"/SingleNews/"+blog[4]?.Title} className="textDetail">
+                           ادامه مطلب <ChevronLeft/>
+                        </Link>
+                    </div>
+                </div>
                  </div>
-                  </div>
+                 :
+                 null}
                  </div>
       </Col>
     </Row>

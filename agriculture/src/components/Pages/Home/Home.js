@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button,Carousel,CarouselItem} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
@@ -10,6 +10,8 @@ import Avatar from "src/components/assets/img/avatar.png";
 import { StarFill ,Star ,Heart ,TextLeft } from "react-bootstrap-icons";
 import Product from "src/components/assets/img/product.png";
 import Home2 from "src/components/assets/img/home2.png";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+
 const Home = () =>{
   const settings = {
     dots: false,
@@ -20,30 +22,94 @@ const Home = () =>{
     rtl:true,
 
   };
+  const [data,setData]=useState([])
+  const [best,setBest]=useState([])
+  const [newest,setNew]=useState([])
+
+  const GetData=()=>{
+    const axios = require("axios");
+  
+
+    axios.get(apiUrl + "Info")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+
+        setData(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
+    axios.get(apiUrl + "BestSellersProduct")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+        console.log(response.data.Data);
+
+        setBest(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
+ 
+    axios.get(apiUrl + "LastProduct")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+        console.log(response.data.Data);
+
+        setNew(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
     
+
+  }
+
+  useEffect(() => {
+    GetData();
+
+  }, []);
     return(
    <div style={{backgroundColor:'#f4f4f4',height:'100vh'}}>
    <Header/>
   <div style={{width:'100%'}}>
   <Carousel>
+  
+
   <Carousel.Item>
     <img style={{width:'100%',position:'relative'}}
-    src={Slide1}
-    />
+                        src={apiAsset+data[0]?.Slider1}
+                        />
    <Button className="slideGreenBtn">مشاهده محصولات</Button>
   </Carousel.Item>
   <Carousel.Item>
     <img style={{width:'100%',position:'relative'}}
-    src={Slide1}
-    />
+                        src={apiAsset+data[0]?.Slider2}
+                        />
    <Button className="slideGreenBtn">مشاهده محصولات</Button>
   </Carousel.Item>
   <Carousel.Item>
     <img style={{width:'100%',position:'relative'}}
-    src={Slide1}
-    />
+                        src={apiAsset+data[0]?.Slider3}
+                        />
    <Button className="slideGreenBtn">مشاهده محصولات</Button>
   </Carousel.Item>
+    
+
  
 </Carousel>
   </div>
@@ -63,98 +129,40 @@ const Home = () =>{
           </div>
           <div>
           <Slider {...settings} className="consultationSlider2">
-         
-         
+         {
+          best.map((item)=>{
+            return(
+
           <div className="sliderCardBox2">
           <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
+          <p className="pName">{item.Name}</p>
           <div className="d-flex justify-content-between align-items-center">
          
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
+          <p className="productPriceStroke">
+                                        {item.Cost} تومان
+                                    </p>
+                                    <p className="productPrice">
+                                        {item.SpecialCost} تومان
+                                    </p>
+                                                                        {/* <div className="d-flex justify-space-between">
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} size={10}/>
                                     
-                                    </div>
+                                    </div> */}
           </div>
           <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
+          <p className="tamin">
+          نام تامین کننده کالا : {item.WarrantyName}
+            </p>
           </div>
-          <div className="sliderCardBox2">
-          <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
+            )
+          })
+         }
          
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
          
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
         </Slider>
           </div>
         </div>
@@ -197,97 +205,39 @@ const Home = () =>{
           <div>
           <Slider {...settings} className="consultationSlider2">
          
-         
-          <div className="sliderCardBox2">
-          <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <img src={Product} className="miniSliderImg"/>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
+         {
+          newest.map((item)=>{
+            return(
+
+              <div className="sliderCardBox2">
+              <img src={Product} className="miniSliderImg"/>
+              <p className="pName">{item.Name}</p>
+              <div className="d-flex justify-content-between align-items-center">
+             
+              <p className="productPriceStroke">
+                                            {item.Cost} تومان
+                                        </p>
+                                        <p className="productPrice">
+                                            {item.SpecialCost} تومان
+                                        </p>
+                                                                            {/* <div className="d-flex justify-space-between">
+                                        <Star color={'#000'} className="marginLeft5" size={10}/>
+                                        <Star color={'#000'} className="marginLeft5" size={10}/>
+                                        <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                        <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                        <StarFill color={'#ffb921'} size={10}/>
+                                        
+                                        </div> */}
+              </div>
+              <hr/>
+              <p className="tamin">
+              نام تامین کننده کالا : {item.WarrantyName}
+                </p>
+              </div>
+                )          })
+         }
+       
+
         </Slider>
           </div>
         </div>

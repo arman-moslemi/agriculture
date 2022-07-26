@@ -46,16 +46,16 @@ const RightPanelMenu = ({data}) =>{
                     </Link>
                 </li>
                 <li>
-                    <a href="#">
+                <Link to={"/IoTManagement"}>
                         <img src={R2B}/>
                        مدیریت دستگاه های IoT
-                    </a>
+                    </Link>
                 </li>
                 <li>
-                    <a href="#">
+                <Link to={"/IoTDashboard"}>
                         <img src={R3B}/>
                        داشبورد IoT
-                    </a>
+                    </Link>
                 </li>
                 <li>
                 <Link to={"/Wallet"}>

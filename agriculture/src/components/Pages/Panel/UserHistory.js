@@ -149,7 +149,7 @@ cons.map((item,index)=>{
                 <div className="consultBoxF2">
        <div className="d-flex">
        <p className="productName" style={{marginLeft:10}}>
-            {index}
+            {index+1}
         </p>
         <p className="productName">
 {item.Title}        </p>

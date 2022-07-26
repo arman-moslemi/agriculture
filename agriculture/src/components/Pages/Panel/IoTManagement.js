@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button ,Modal ,Form,Table} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
@@ -19,6 +19,10 @@ import IotImg from "src/components/assets/img/IotImg.png";
 import Filter from "src/components/assets/img/Filter.png";
 import Setting from "src/components/assets/img/setting.png";
 import Tooltip from '@mui/material/Tooltip';
+import CustomizedDialogs from '../Layouts/AlertModal';
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation } from "react-router-dom";
 const IoTManagement = () =>{
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
@@ -48,13 +52,55 @@ const IoTManagement = () =>{
       const onClick3 = () =>{
         setshowCondition(!showCondition);
       };
+      const [data, setData] = useState([]);
+      const [fav, setFav] = useState([]);
+  
+      const GetData=()=>{
+          const axios = require("axios");
+        var ss=localStorage.getItem("CustomerID")
+      
+          axios.post(apiUrl + "CustomerFavorite",{CustomerID:ss})
+          .then(function (response) {
+            if (response.data.result == "True") {
+              console.log(777)
+  
+              setFav(response.data.Data)
+              console.log(response.data.Data);
+  
+          }})
+          .catch(function (error) {
+            console.log(777)
+            alert(error)
+  
+            console.log(error);
+          });
+          axios.post(apiUrl + "ReadCustomer",{CustomerID:ss})
+          .then(function (response) {
+            if (response.data.result == "True") {
+              console.log(777)
+  
+              setData(response.data.Data)
+  
+          }})
+          .catch(function (error) {
+            console.log(777)
+            alert(error)
+  
+            console.log(error);
+          });
+       
+        }
+        useEffect(() => {
+          GetData();
+  
+        }, []);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
    <Container className="bodyPadding">
     <Row>
         <Col md={3}>
-       <RightPanelMenu/>
+       <RightPanelMenu data={data}/>
         </Col>
         <Col md={9}>
         

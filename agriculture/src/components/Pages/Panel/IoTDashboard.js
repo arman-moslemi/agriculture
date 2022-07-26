@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button ,Modal ,Form,Table} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
@@ -25,6 +25,10 @@ import WaterDeg from "src/components/assets/img/c3.png";
 import Humidity from "src/components/assets/img/c4.png";
 import SoulHumidity from "src/components/assets/img/c5.png";
 import Faucet from "src/components/assets/img/c6.png";
+import CustomizedDialogs from '../Layouts/AlertModal';
+import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation } from "react-router-dom";
 const IoTDashboard = () =>{
     const [showSearch, setshowSearch] = useState(false);
     const onClick = () =>{
@@ -37,13 +41,70 @@ const IoTDashboard = () =>{
         const [show, setShow] = useState(false);
         const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [data, setData] = useState([]);
+    const [dev, setDev] = useState([]);
+    const [part, setPart] = useState([]);
+    const GetData=()=>{
+        const axios = require("axios");
+      var ss=localStorage.getItem("CustomerID")
+    
+        axios.post(apiUrl + "CustomerPart",{CustomerID:ss})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+
+            setPart(response.data.Data)
+            console.log(response.data.Data);
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+        axios.post(apiUrl + "CustomerDevice",{CustomerID:ss})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+
+            setDev(response.data.Data)
+            console.log(response.data.Data);
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+        axios.post(apiUrl + "ReadCustomer",{CustomerID:ss})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+
+            setData(response.data.Data)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+     
+      }
+      useEffect(() => {
+        GetData();
+
+      }, []);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
    <Container className="bodyPadding">
     <Row>
         <Col md={3}>
-       <RightPanelMenu/>
+       <RightPanelMenu data={data}/>
         </Col>
         <Col md={9}>
         
@@ -59,12 +120,15 @@ const IoTDashboard = () =>{
                 
                    </div>
                    </div>
+                   {
+             Object.values(part).map((item)=>{
+                return(
+
                    <div className="accBox mt-3">
          <div className="d-flex align-items-center justify-content-between borderBottomGray">
             <div>
                 <p style={{marginBottom:0,fontFamily:'IRANSansBold'}}>
-                نام پروژه اینجا قرار میگیرد
-                </p>
+{item[0].ProjectName}                </p>
             </div>
             <div className="d-flex">
               
@@ -76,11 +140,16 @@ const IoTDashboard = () =>{
             
            </div>
        {showSearch?
+       <>
+       {item.map((item2)=>{
+        return(
+
          <div className="accBox2">
+          
          <div className="d-flex align-items-center justify-content-between borderBottomGray">
             <div>
                 <p style={{marginBottom:0,fontFamily:'IRANSansMedium'}}>
-                زمین 1
+               {item2.PartName}
                 </p>
             </div>
             <div className="d-flex">
@@ -96,12 +165,14 @@ const IoTDashboard = () =>{
             
            </div>
        {showSearch2? 
+         
+            dev.filter(x=>x.PartID==item2.PartID).map((item3)=>{
+                return(
        <div>
          <div className="groundBox2">
              <div className="d-flex align-items-center">
                  <p className="groundName" style={{color:'#FF6900',fontFamily:'IRANSansBold'}}>
-                     دستگاه شماره یک
-                 </p>
+{item3.Serial}                 </p>
                  <Tooltip title="سالم" placement="top">
                      <ExclamationCircleFill color="#AAADB3"/>
            </Tooltip>
@@ -167,10 +238,19 @@ const IoTDashboard = () =>{
          </div>    
        
        </div>
+
+                )
+            })
+        
        : null}
          </div>
+        )
+       })
+    }
+         </>
        :null}
        </div>
+                )})                   }
               
        
                   </div> 

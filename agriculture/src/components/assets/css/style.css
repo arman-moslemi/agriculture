@@ -2176,3 +2176,17 @@ margin-bottom: 10px; */
 .newsDes{
   font-family: 'IRANSans';
 }
+.storeMenu{
+  background-color: #f4f4f4;
+  width:100%;
+  
+  padding: 10px 50px 10px 50px;
+  border-top: 1px solid var(--c-gray-2);
+}
+.storeMenu button{
+  font-family: 'IRANSansBold';
+  background-color: transparent !important;
+  color: #000 !important;
+  border: none !important;
+ 
+}

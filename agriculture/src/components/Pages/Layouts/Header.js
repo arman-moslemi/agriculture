@@ -1,5 +1,5 @@
 import {React ,useState } from "react";
-import { Container, Row ,Col ,Button} from "react-bootstrap";
+import { Container, Row ,Col ,Button, Nav, Navbar, NavDropdown, NavItem,Offcanvas} from "react-bootstrap";
 import Instagram from 'src/components/assets/icon/Instagram';
 import Phone from 'src/components/assets/icon/Phone';
 import Telegram from 'src/components/assets/icon/Telegram';
@@ -27,8 +27,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Header = () =>{
     const [green, setGreen] = useState(false);
+    const [showMega, setShowMega] = useState(false);
     let navigate = useNavigate();
-
+    const onClick = () =>{
+        setShowMega(!showMega);
+     };
     return(
    <Container fluid className="pd0" style={{padding:0}}>
     <div className="topBar">
@@ -108,7 +111,7 @@ const Header = () =>{
         </Container>
     </div>
     <div className="whiteBar">
-        <Button className="topBarBtn">
+        <Button className="topBarBtn" onClick={onClick}>
             <img className="btnImg" 
             src={M1B}
             
@@ -116,6 +119,7 @@ const Header = () =>{
             <br/>
             <span>محصولات</span>
         </Button>
+        
         <Button className="topBarBtn">
             <img src={M2B} className="btnImg"/>
             <br/>
@@ -132,6 +136,32 @@ const Header = () =>{
             <span>اخبار و اعلانات</span>
         </Button>
     </div>
+    {showMega ?
+        <div className="storeMenu">
+               <div className="d-flex justify-content-between">
+                <Button>
+                    دسته بندی یک
+                </Button>
+                <Button>
+                    دسته بندی دو
+                </Button>
+                <Button>
+                    دسته بندی سه
+                </Button>
+                <Button>
+                    دسته بندی چهار
+                </Button>
+                <Button>
+                    دسته بندی پنج
+                </Button>
+                <Button>
+                    دسته بندی شش
+                </Button>
+                <Button>
+                    دسته بندی هفت
+                </Button>
+               </div>
+            </div> :null}
    </Container>
     );
 };

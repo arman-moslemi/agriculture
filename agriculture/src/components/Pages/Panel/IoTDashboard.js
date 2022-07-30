@@ -128,7 +128,8 @@ const IoTDashboard = () =>{
          <div className="d-flex align-items-center justify-content-between borderBottomGray">
             <div>
                 <p style={{marginBottom:0,fontFamily:'IRANSansBold'}}>
-{item[0].ProjectName}                </p>
+{item[0].ProjectName}       
+         </p>
             </div>
             <div className="d-flex">
               

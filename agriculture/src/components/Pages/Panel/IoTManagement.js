@@ -27,8 +27,14 @@ const IoTManagement = () =>{
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
     const [showSearch, setshowSearch] = useState(false);
+    const [shows1, setshows1] = useState(0);
+    const [shows2, setshows2] = useState(0);
+    const [shows3, setshows3] = useState(0);
     const [showSearch2, setshowSearch2] = useState(false);
     const [showCondition, setshowCondition] = useState(false);
+    const [projectName, setProjectName] = useState("");
+    const [partName, setPartName] = useState("");
+    const [deviceName, setDeviceName] = useState("");
    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [show2, setShow2] = useState(false);
@@ -43,30 +49,82 @@ const IoTManagement = () =>{
    
       const handleClose4 = () => setShow4(false);
        const handleShow4 = () => setShow4(true);
-     const onClick = () =>{
+     const onClick = (id) =>{
         setshowSearch(!showSearch);
+        setshows1(id)
       };
-      const onClick2 = () =>{
+      const onClick2 = (id) =>{
         setshowSearch2(!showSearch2);
+        setshows2(id)
+
       };
-      const onClick3 = () =>{
+      const onClick3 = (id) =>{
         setshowCondition(!showCondition);
+        setshows3(id)
+
       };
       const [data, setData] = useState([]);
-      const [fav, setFav] = useState([]);
-  
-      const GetData=()=>{
-          const axios = require("axios");
+      const [dev, setDev] = useState([]);
+    const [part, setPart] = useState([]);
+    const GetData=()=>{
+        const axios = require("axios");
+      var ss=localStorage.getItem("CustomerID")
+    
+        axios.post(apiUrl + "CustomerPart",{CustomerID:ss})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(456789)
+
+            setPart(response.data.Data)
+            console.log(response.data.Data);
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+
+          console.log(error);
+        });
+        axios.post(apiUrl + "CustomerDevice",{CustomerID:ss})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+
+            setDev(response.data.Data)
+            console.log(response.data.Data);
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+        axios.post(apiUrl + "ReadCustomer",{CustomerID:ss})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+
+            setData(response.data.Data)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+     
+      }
+      const InsertProject=()=>{
+        const axios = require("axios");
         var ss=localStorage.getItem("CustomerID")
       
-          axios.post(apiUrl + "CustomerFavorite",{CustomerID:ss})
+          axios.post(apiUrl + "InsertProject",{CustomerID:ss,ProjectName:projectName,PartName:partName})
           .then(function (response) {
             if (response.data.result == "True") {
               console.log(777)
-  
-              setFav(response.data.Data)
-              console.log(response.data.Data);
-  
+  handleClose()
+GetData()  
           }})
           .catch(function (error) {
             console.log(777)
@@ -74,13 +132,17 @@ const IoTManagement = () =>{
   
             console.log(error);
           });
-          axios.post(apiUrl + "ReadCustomer",{CustomerID:ss})
+      }
+      const InsertPart=(id)=>{
+        const axios = require("axios");
+        var ss=localStorage.getItem("CustomerID")
+      
+          axios.post(apiUrl + "InsertPart",{CustomerID:ss,ProjectID:id,PartName:partName})
           .then(function (response) {
             if (response.data.result == "True") {
               console.log(777)
-  
-              setData(response.data.Data)
-  
+              handleClose2()
+GetData()  
           }})
           .catch(function (error) {
             console.log(777)
@@ -88,8 +150,25 @@ const IoTManagement = () =>{
   
             console.log(error);
           });
-       
-        }
+      }
+      const InsertDevice=(id)=>{
+        const axios = require("axios");
+        var ss=localStorage.getItem("CustomerID")
+      
+          axios.post(apiUrl + "InsertDevice",{PartID:id,Serial:deviceName})
+          .then(function (response) {
+            if (response.data.result == "True") {
+              console.log(777)
+              handleClose3()
+GetData()  
+          }})
+          .catch(function (error) {
+            console.log(777)
+            alert(error)
+  
+            console.log(error);
+          });
+      }
         useEffect(() => {
           GetData();
   
@@ -139,37 +218,51 @@ const IoTManagement = () =>{
                                                     </span>
                                                     
                                                 </p>
-                                                <input className="inputCLass" type="text"/>
+                                                <input onChange={(e)=>setProjectName(e.target.value)} className="inputCLass" type="text"/>
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                       نام بخش اول را وارد کنید : 
+                                                    </span>
+                                                    
+                                                </p>
+                                                <input onChange={(e)=>setPartName(e.target.value)} className="inputCLass" type="text"/>
                                             
                                                 </Form>
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={handleClose} className="modalSaveBtn" >افزودن</Button>
+                                                    <Button  onClick={()=>InsertProject()} className="modalSaveBtn" >افزودن</Button>
                                                 </Modal.Footer>
                                              </Modal>
                    </div>
                    </div>
-                  
-                <img src={IotImg} className="IotImg"/>
-                <p className="tarikh" style={{fontSize:20,margin:30,textAlign:"center",fontWeight:"bold"}}>تاکنون پروژه ای تعریف نکرده اید !</p>
-                 
-               
+                {
+                    part.length==0
+                    ?
+                    <>
+                    
+                    <img src={IotImg} className="IotImg"/>
+                    <p className="tarikh" style={{fontSize:20,margin:30,textAlign:"center",fontWeight:"bold"}}>تاکنون پروژه ای تعریف نکرده اید !</p>
+                     
+                    </>
+                    :
+                   Object.values(part).map((item)=>{
+                return(
          <div className="accBox">
          <div className="d-flex align-items-center justify-content-between borderBottomGray">
             <div>
                 <p style={{marginBottom:0,fontFamily:'IRANSansBold'}}>
-                نام پروژه اینجا قرار میگیرد
+                {item[0].ProjectName}       
                 </p>
             </div>
             <div className="d-flex">
-                <Button className="addSection" >
+                <Button onClick={handleShow2} className="addSection" >
                     + افزودن بخش
                 </Button> |
                 <p className="addDeviceText">
                     مشاهده بخش ها
                 </p>
-                <Button onClick={()=>onClick()} className="caretDownBtn">
+                <Button onClick={()=>onClick(item[0].ProjectID)} className="caretDownBtn">
                     <CaretDownFill color="#FF6900" size={20}/>
                 </Button>
              
@@ -196,7 +289,7 @@ const IoTManagement = () =>{
                                                     </span>
                                                     
                                                 </p>
-                                                <input className="inputCLass" type="text"/>
+                                                <input onChange={(e)=>setPartName(e.target.value)} className="inputCLass" type="text"/>
                                                 <div className="d-flex align-items-center">
                                                 <p className="modalText mb-0">
                                                     <span>
@@ -218,16 +311,18 @@ const IoTManagement = () =>{
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={handleClose2} className="modalSaveBtn" >افزودن</Button>
+                                                    <Button  onClick={()=>InsertPart(item[0].ProjectID)} className="modalSaveBtn" >افزودن</Button>
                                                 </Modal.Footer>
                                              </Modal>
            </div>
-       {showSearch? 
+       {showSearch && item[0].ProjectID==shows1? 
+        item.map((item2)=>{
+            return(
         <div className="accBox2">
         <div className="d-flex align-items-center justify-content-between borderBottomGray">
            <div>
                <p style={{marginBottom:0,fontFamily:'IRANSansMedium'}}>
-               زمین 1
+               {item2.PartName}
                </p>
            </div>
            <div className="d-flex">
@@ -262,26 +357,27 @@ const IoTManagement = () =>{
                                                     </span>
                                                     
                                                 </p>
-                                                <input className="inputCLass" type="text"/>
+                                                <input onChange={(e)=>setDeviceName(e.target.value)}  className="inputCLass" type="text"/>
                                                 
                                                 </Form>
                                                
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={handleClose3} className="modalSaveBtn" >ثبت دستگاه</Button>
+                                                    <Button  onClick={()=>InsertDevice(item2.PartID)} className="modalSaveBtn" >ثبت دستگاه</Button>
                                                 </Modal.Footer>
                                              </Modal>
            </div>
            
           </div>
       {showSearch2? 
+         dev.filter(x=>x.PartID==item2.PartID).map((item3)=>{
+            return(
       <div>
         <div className="groundBox">
             <div className="d-flex align-items-center">
                 <p className="groundName">
-                    دستگاه شماره یک
-                </p>
+                {item3.Serial}                 </p>
                 <Tooltip title="سالم" placement="top">
                     <ExclamationCircleFill color="#AAADB3"/>
           </Tooltip>
@@ -373,26 +469,19 @@ const IoTManagement = () =>{
                                              </Modal>
                 </div>
         </div>    
-        <div className="groundBox">
-            <div className="d-flex align-items-center">
-                <p className="groundName">
-                    دستگاه شماره یک
-                </p>
-                <Tooltip title="سالم" placement="top">
-                    <ExclamationCircleFill color="#AAADB3"/>
-          </Tooltip>
-            </div>
-            <div>
-                <Button className="deviceManage">
-                    مدیریت دستگاه ها
-                    </Button>
-                </div>
-        </div>  
+       
       </div>
+            )})
       : null}
         </div>
+            )})
        : null}
          </div>
+                )
+                                                
+                } 
+                   ) 
+            }
                   </div> 
                   <div className="whiteBox mt-3">
                 <div className="d-flex align-items-center justify-content-between topBox">

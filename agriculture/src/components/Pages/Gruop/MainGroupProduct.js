@@ -19,6 +19,7 @@ import Product from "src/components/assets/img/product.png";
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
+
 const MainGroupProduct = () =>{
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
     const [data,setData]=useState([])

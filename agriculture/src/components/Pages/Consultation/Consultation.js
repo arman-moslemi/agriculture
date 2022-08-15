@@ -19,6 +19,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams } from "react-router-dom";
 import CustomizedDialogs from '../Layouts/AlertModal';
+import CarouselMulti from 'react-multi-carousel';
+const responsive = {
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+    slidesToSlide: 4 // optional, default to 1.
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 1,
+    slidesToSlide: 1 // optional, default to 1.
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1 // optional, default to 1.
+  }
+};
 const Consultation = () =>{
     const settings = {
         dots: false,
@@ -725,8 +743,8 @@ index+1>item.Rate?
    <Container fluid className="containerWhite">
    <Container>
    <div>
-        <h2 className="sliderTitle"> جدیدترین مشاوران ما</h2>
-        <Slider {...settings} className="consultationSlider">
+        <h2 className="sliderTitle mb-4"> جدیدترین مشاوران ما</h2>
+        <CarouselMulti responsive={responsive} rtl={true}>
           <div className="sliderCardBox">
             <img src={Avatar} className="sliderImg"/>
             <p className="sliderName">یاسمن طاهری صراف</p>
@@ -808,7 +826,7 @@ index+1>item.Rate?
                    
             </p>
           </div>
-        </Slider>
+         </CarouselMulti>
       </div>
    </Container>
    </Container>

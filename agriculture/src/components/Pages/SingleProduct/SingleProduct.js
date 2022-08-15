@@ -3,7 +3,6 @@ import { Container, Row ,Col ,Button} from "react-bootstrap";
 import Header from "../Layouts/Header";
 import Footer from "../Layouts/Footer";
 import ImageGallery from 'react-image-gallery';
-import { StarFill ,Heart} from 'react-bootstrap-icons';
 import Garranty from "src/components/assets/icon/Garranty";
 import File from "src/components/assets/icon/File";
 import CartSingle from "src/components/assets/icon/CartSingle";
@@ -12,7 +11,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams } from "react-router-dom";
 import CustomizedDialogs from '../Layouts/AlertModal';
-
+import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft ,Share ,ChatDots} from "react-bootstrap-icons";
+import StartRate from 'src/components/Pages/Layouts/StarRate';
 const SingleProduct = () =>{
   const [data, setData] = useState([]);
   const [number, setNumber] = useState(1);
@@ -20,7 +20,9 @@ const SingleProduct = () =>{
   const [open,setOpen]=useState(false)
   const [title,setTitle]=useState("")
   const params = useParams().id;
-
+  const [rate,setRate]=useState(5)
+  const [com, setCom] = useState([]);
+  const [text, setText] = useState([]);
     const images = [
         {
           original: apiAsset+data?.Pic1,
@@ -80,6 +82,20 @@ const SingleProduct = () =>{
 
           console.log(error);
         });
+        axios.post(apiUrl + "ProductComment",{Title:params})
+        .then(function (response) {
+            if (response.data.result == "True") {
+          console.log(response.data.Data)
+
+        setCom(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
    
   
       }
@@ -116,10 +132,55 @@ const SingleProduct = () =>{
      
   
       }
+      const InsertComment=()=>{
+        var ss=localStorage.getItem("CustomerID")
+        if(ss==null){
+          setTitle("لطفاابتدا وارد شوید")
+          setOpen(true)
+        }
+        else{
+
+        
+        const axios = require("axios");
+        axios.post(apiUrl + "InsertProductComment",{CustomerID:ss,ProductID:data.ProductID,Text:text,Rate:rate})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            setTitle("پیام با موفقیت ثبت شد")
+            setOpen(true)
+GetData()              
+            }})
+            .catch(function (error) {
+                console.log(777)
+                alert(error)
+                
+                console.log(error);
+            });
+          ;
+    }
+    }
+    const InsertFavorite=()=>{
+      const axios = require("axios");
+      var ss= localStorage.getItem("CustomerID")
+      axios.post(apiUrl + "InsertFavorite",{CustomerID:ss,ProductID:data.ProductID})
+      .then(function (response) {
+        if (response.data.result == "True") {
+            setTitle("با موفقیت ثبت شد")
+            setOpen(true)
+          }})
+          .catch(function (error) {
+              console.log(777)
+              alert(error)
+              
+              console.log(error);
+          });
+ 
+   
+      
+
+    }
       useEffect(() => {
         GetData();
-console.log(999)
-console.log(property)
+
       }, []);
     return(
    <>
@@ -257,7 +318,7 @@ null
               افزودن به سبد خرید
                 </p>
               </Button>
-              <Button className="addFavorite mt-1" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>
+              <Button onClick={()=>InsertFavorite()} className="addFavorite mt-1" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>
                             <Heart className="customM"size={20}/>
                             افزودن به برگزیده ها
                         </Button>
@@ -320,11 +381,119 @@ return(
       </div>
 </TabPanel>
 <TabPanel>
-
+{/* 
       <div>
         <p>دیدگاه ها</p>
-        </div>
+        </div> */}
+            <Col md={12}>
+            <div className="whiteBox  mb-2" style={{padding:0}}>
+                <div className="headBox">
+                    <div>
+                        <p className="headerNews">
+                           دیدگاه های ثبت شده
+                        </p>
+                       
+                    </div>
+                   
+                </div>
+                {
+                    com?.map((item)=>{
+                        return(
 
+                <div className="commentBox">
+                    <div className="d-flex justify-content-between">
+                        <p className="userNameCommnet">
+{item.Name} {item.Family}                        </p>
+                        <div className="d-flex align-items-center" >
+                            <p className="writerScore">
+                                امتیاز ثبت شده : 
+                            </p>
+                            <div className="d-flex align-items-center">
+                            {
+                      [...new Array(5)].map((item2,index)=>{
+                        return(
+index+1>item.Rate?
+
+<Star color="#000" className="marginLeft5"/>
+:
+<StarFill color="#ffb921" className="marginLeft5"/>
+
+
+                        )
+                      })
+                    }
+                                </div>
+                        </div>
+                       
+                    </div>
+                    <p className="writerScore mt-4">
+{item.TextComment}                            </p>
+                </div>
+                        )
+                    })
+                }
+           
+            </div>
+            <div className="whiteBox  mb-2" style={{padding:0}}>
+                <div className="headBox" style={{border:0}}>
+                    <div style={{width:'100%'}}>
+                        <p className="headerNews">
+ثبت دیدگاه                        </p>
+                        {
+                            com?
+null
+                            :
+
+                       <p style={{fontFamily:'IRANSansBold'}}>
+                        هیچ دیدگاهی برای این موضوع ثبت نشده است شما اولین نفر باشید !
+                       </p>
+                        }
+                       <p style={{fontFamily:'IRANSans'}}>
+                       نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند *
+                       </p>
+                       <div className="d-flex align-items-center mt-3">
+                       <p style={{fontFamily:'IRANSans',marginBottom:0}}>
+                        امتیاز شما : 
+                       </p>
+                       <div className="d-flex align-items-center" style={{marginRight:25}}>
+                       <StartRate  setRate={setRate} />
+
+                        </div>
+                        
+                       </div>
+                       <Row className="mt-3">
+                        {/* <Col md={6} className="d-flex align-items-center">
+                        <p style={{fontFamily:'IRANSans',marginBottom:0}}>
+                        نام و نام خانوادگی شما : 
+                       </p>
+                       <input className="inputCLass cInput" type="text"/>
+                        </Col>
+                        <Col md={6} className="d-flex align-items-center">
+                        <p style={{fontFamily:'IRANSans',marginBottom:0}}>
+                        ایمیل شما : 
+                       </p>
+                       <input className="inputCLass cInput" type="text"/>
+                        </Col> */}
+                       </Row>
+                       <div className="d-flex mt-3 align-items-start">
+                       <p style={{fontFamily:'IRANSans',marginBottom:0}}>
+                        متن پیام شما :
+                       </p>
+                       <textarea onChange={(e)=>setText(e.target.value)} className="inputCLass cInput" type="text"/>
+                       </div>
+                        <Row>
+                            <Col md={12}>
+                                <Button onClick={()=>InsertComment()} className="sendComment">ارسال پیام</Button>
+                            </Col>
+                        </Row>
+                    </div>
+                   
+                </div>
+                
+               
+              
+            </div>
+</Col>
         </TabPanel>
 
     </Tabs>

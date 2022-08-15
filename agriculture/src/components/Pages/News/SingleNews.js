@@ -3,7 +3,6 @@ import { Container, Row ,Col ,Button ,Modal ,Form} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
 
-import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft ,Share ,ChatDots} from "react-bootstrap-icons";
 import PaginationCustom from "src/components/Pages/Layouts/Pagination";
 import News1 from "src/components/assets/img/news1.jpg";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,15 +10,17 @@ import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams } from "react-router-dom";
 import CustomizedDialogs from '../Layouts/AlertModal';
 import parse  from 'html-react-parser';
+import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft ,Share ,ChatDots} from "react-bootstrap-icons";
 import StartRate from 'src/components/Pages/Layouts/StarRate';
 
 const SingleNews = () =>{
-    const [rate,setRate]=useState(5)
-
+    
     const params = useParams().id;
     const [data, setData] = useState([]);
     const [type, setType] = useState([]);
+    const [rate,setRate]=useState(5)
     const [com, setCom] = useState([]);
+    const [text, setText] = useState([]);
 
     const GetData=()=>{
         const axios = require("axios");
@@ -63,7 +64,30 @@ const SingleNews = () =>{
         
   
       }
+      const InsertComment=()=>{
+        var ss=localStorage.getItem("CustomerID")
+        if(ss==null){
+alert("لطفاابتدا وارد شوید")
+        }
+        else{
 
+        
+        const axios = require("axios");
+        axios.post(apiUrl + "InsertBlogComment",{CustomerID:ss,BlogID:data[0].BlogID,Text:text,Rate:rate})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            alert("پیام با موفقیت ثبت شد")
+GetData()              
+            }})
+            .catch(function (error) {
+                console.log(777)
+                alert(error)
+                
+                console.log(error);
+            });
+          ;
+    }
+    }
       useEffect(() => {
         GetData();
 
@@ -150,10 +174,10 @@ const SingleNews = () =>{
                       [...new Array(5)].map((item2,index)=>{
                         return(
 index+1>item.Rate?
-<StarFill color="#ffb921" className="marginLeft5"/>
 
+<Star color="#000" className="marginLeft5"/>
 :
-                          <Star color="#000" className="marginLeft5"/>
+<StarFill color="#ffb921" className="marginLeft5"/>
 
 
                         )
@@ -175,8 +199,7 @@ index+1>item.Rate?
                 <div className="headBox" style={{border:0}}>
                     <div style={{width:'100%'}}>
                         <p className="headerNews">
-                           دیدگاه های ثبت شده
-                        </p>
+ثبت دیدگاه                        </p>
                         {
                             com?
 null
@@ -200,7 +223,7 @@ null
                         
                        </div>
                        <Row className="mt-3">
-                        <Col md={6} className="d-flex align-items-center">
+                        {/* <Col md={6} className="d-flex align-items-center">
                         <p style={{fontFamily:'IRANSans',marginBottom:0}}>
                         نام و نام خانوادگی شما : 
                        </p>
@@ -211,14 +234,19 @@ null
                         ایمیل شما : 
                        </p>
                        <input className="inputCLass cInput" type="text"/>
-                        </Col>
+                        </Col> */}
                        </Row>
                        <div className="d-flex mt-3 align-items-start">
                        <p style={{fontFamily:'IRANSans',marginBottom:0}}>
-                        ایمیل شما : 
+                        متن پیام شما :
                        </p>
-                       <textarea className="inputCLass cInput" type="text"/>
+                       <textarea onChange={(e)=>setText(e.target.value)} className="inputCLass cInput" type="text"/>
                        </div>
+                        <Row>
+                            <Col md={12}>
+                                <Button onClick={()=>InsertComment()} className="sendComment">ارسال پیام</Button>
+                            </Col>
+                        </Row>
                     </div>
                    
                 </div>

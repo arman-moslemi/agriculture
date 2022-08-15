@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button,Carousel,CarouselItem} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
@@ -10,51 +10,173 @@ import Avatar from "src/components/assets/img/avatar.png";
 import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft} from "react-bootstrap-icons";
 import Product from "src/components/assets/img/product.png";
 import Home2 from "src/components/assets/img/home2.png";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useLocation,useSearchParams,useParams, Link } from "react-router-dom";
+
 import Voice from "src/components/assets/img/voice.png";
 import Chat from "src/components/assets/img/chat.png";
 import Consult from "src/components/assets/img/consult2.png";
 import Video from "src/components/assets/img/videocall.png";
 import News1 from "src/components/assets/img/news1.jpg";
+import { renderIntoDocument } from "react-dom/test-utils";
+import CarouselMulti from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { truncate } from "src/utils/helper";
 const Home = () =>{
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 4,
     slidesToScroll: 1,
     rtl:true,
-
-  };
     
+  };
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+      slidesToSlide: 4 // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+      slidesToSlide: 1 // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1 // optional, default to 1.
+    }
+  };
+  const [data,setData]=useState([])
+  const [best,setBest]=useState([])
+  const [newest,setNew]=useState([])
+  const [blog,setBlog]=useState([])
+  const [cons,setCons]=useState([])
+
+  const GetData=()=>{
+    const axios = require("axios");
+  
+
+    axios.get(apiUrl + "Info")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+
+        setData(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
+    axios.get(apiUrl + "BestSellersProduct")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+        console.log(response.data.Data);
+
+        setBest(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
+ 
+    axios.get(apiUrl + "LastProduct")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+        console.log(response.data.Data);
+
+        setNew(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
+    axios.get(apiUrl + "RecentlyBlog")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+        console.log(response.data.Data);
+
+        setBlog(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
+    axios.get(apiUrl + "GetConsultant")
+    .then(function (response) {
+      console.log(response)
+      if (response.data.result == "True") {
+        console.log(response.data.Data);
+
+        setCons(response.data.Data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      alert(error)
+
+      console.log(error);
+    });
+    
+
+  }
+
+  useEffect(() => {
+    GetData();
+
+  }, []);
     return(
-   <div style={{backgroundColor:'#f4f4f4',height:'100vh'}}>
+   <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
   <div style={{width:'100%'}}>
+ 
   <Carousel>
+  
+
   <Carousel.Item>
     <img style={{width:'100%',position:'relative'}}
-    src={Slide1}
-    />
+                        src={apiAsset+data[0]?.Slider1}
+                        />
    <Button className="slideGreenBtn">مشاهده محصولات</Button>
   </Carousel.Item>
   <Carousel.Item>
     <img style={{width:'100%',position:'relative'}}
-    src={Slide1}
-    />
+                        src={apiAsset+data[0]?.Slider2}
+                        />
    <Button className="slideGreenBtn">مشاهده محصولات</Button>
   </Carousel.Item>
   <Carousel.Item>
     <img style={{width:'100%',position:'relative'}}
-    src={Slide1}
-    />
+                        src={apiAsset+data[0]?.Slider3}
+                        />
    <Button className="slideGreenBtn">مشاهده محصولات</Button>
   </Carousel.Item>
+    
+
  
 </Carousel>
   </div>
-  <Container className="mt-5 mb-5">
+  <Container className="mt-5 mb-5 resContainer">
     
-    <div className="d-flex">
+    <div className="desktopBlock">
     <div className="cardBack">
           <img src={Slide2} className="cardImg"/>
           <img src={Back} className="gBack"/>
@@ -67,132 +189,215 @@ const Home = () =>{
           <hr className="hrgray"/>
           </div>
           <div>
-          <Slider {...settings} className="consultationSlider2">
+          {/* <Slider {...settings} className="consultationSlider2">
          
-         
-          <div className="sliderCardBox2">
-          <div style={{position:'relative'}}>
+          {
+          best.map((item)=>{
+            return(
+
+              <Link to={"/SingleProduct/"+item.Name2} className="sliderCardBox2">
+              <div style={{position:'relative'}}>
            <Button className="heartmini">
               <Heart/>
             </Button>
           <img src={Product} className="miniSliderImg"/>
-           </div>
-          <p className="pName">دستگاه میوه خشک کن</p>
+          <p className="pName">{item.Name}</p>
           <div className="d-flex justify-content-between align-items-center">
          
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
+          <p className="productPriceStroke">
+                                        {item.Cost} تومان
+                                    </p>
+                                    <p className="productPrice">
+                                        {item.SpecialCost} تومان
+                                    </p>
+                                                                        {/* <div className="d-flex justify-space-between">
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} size={10}/>
                                     
-                                    </div>
-          </div>
+                                    </div> */}
+          {/* </div>
           <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
+          <p className="tamin">
+          نام تامین کننده کالا : {item.WarrantyName}
+            </p>
           </div>
-          <div className="sliderCardBox2">
-          <div style={{position:'relative'}}>
+          </Link>
+         )
+          })
+         }
+         
+         
+         
+        
+        </Slider> */} 
+      
+          </div>
+          <CarouselMulti responsive={responsive} rtl={true}>
+  
+  {
+          best.map((item)=>{
+            return(
+
+              <div className="sliderCardBox2">
+              <div style={{position:'relative',padding:15}}>
            <Button className="heartmini">
               <Heart/>
             </Button>
           <img src={Product} className="miniSliderImg"/>
-           </div>
-          <p className="pName">دستگاه میوه خشک کن</p>
+          <br/>
+          <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
           <div className="d-flex justify-content-between align-items-center">
          
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
+          <p className="productPriceStroke">
+                                        {item.Cost} تومان
+                                    </p>
+                                    <p className="productPrice">
+                                        {item.SpecialCost} تومان
+                                    </p>
+                                                                        {/* <div className="d-flex justify-space-between">
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} size={10}/>
                                     
-                                    </div>
+                                    </div> */}
           </div>
           <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
+          <p className="tamin">
+          نام تامین کننده کالا : {item.WarrantyName}
+            </p>
           </div>
-          <div className="sliderCardBox2">
-          <div style={{position:'relative'}}>
-           <Button className="heartmini">
-              <Heart/>
-            </Button>
-          <img src={Product} className="miniSliderImg"/>
-           </div>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
+          </div>
+         )
+          })
+         }
          
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <div style={{position:'relative'}}>
-           <Button className="heartmini">
-              <Heart/>
-            </Button>
-          <img src={Product} className="miniSliderImg"/>
-           </div>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <div style={{position:'relative'}}>
-           <Button className="heartmini">
-              <Heart/>
-            </Button>
-          <img src={Product} className="miniSliderImg"/>
-           </div>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-        </Slider>
-          </div>
+  
+  
+</CarouselMulti>
         </div>
         
     
 
       </div>  
+      <div className="responsiveBlock">
+        <div className="cardBackResponsive">
+        <img src={Slide2} className="cardImg"/>
+        <div style={{display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'}}>
+        <p className="cardText">انواع دستگاه های IoT</p>
+        <br/>
+          <Button className="yellowBtn">مشاهده محصولات</Button>
+        </div>
+        </div>
     
+        <div className="productSlider">
+          <div className="d-flex mt-3">
+          <p className="productSliderTitle">پر فروش ترین محصولات ما</p>
+          <hr className="hrgray"/>
+          </div>
+          <div>
+          {/* <Slider {...settings} className="consultationSlider2">
+         
+          {
+          best.map((item)=>{
+            return(
+
+              <Link to={"/SingleProduct/"+item.Name2} className="sliderCardBox2">
+              <div style={{position:'relative'}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
+          <img src={Product} className="miniSliderImg"/>
+          <p className="pName">{item.Name}</p>
+          <div className="d-flex justify-content-between align-items-center">
+         
+          <p className="productPriceStroke">
+                                        {item.Cost} تومان
+                                    </p>
+                                    <p className="productPrice">
+                                        {item.SpecialCost} تومان
+                                    </p>
+                                                                        {/* <div className="d-flex justify-space-between">
+                                    <Star color={'#000'} className="marginLeft5" size={10}/>
+                                    <Star color={'#000'} className="marginLeft5" size={10}/>
+                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                    <StarFill color={'#ffb921'} size={10}/>
+                                    
+                                    </div> */}
+          {/* </div>
+          <hr/>
+          <p className="tamin">
+          نام تامین کننده کالا : {item.WarrantyName}
+            </p>
+          </div>
+          </Link>
+         )
+          })
+         }
+         
+         
+         
+        
+        </Slider> */} 
+      
+          </div>
+          <CarouselMulti responsive={responsive} rtl={true}>
+  
+  {
+          best.map((item)=>{
+            return(
+
+              <div className="sliderCardBox2">
+              <div style={{position:'relative',padding:15}}>
+           <Button className="heartmini">
+              <Heart/>
+            </Button>
+          <img src={Product} className="miniSliderImg"/>
+          <br/>
+          <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
+          <div className="d-flex justify-content-between align-items-center">
+         
+          <p className="productPriceStroke">
+                                        {item.Cost} تومان
+                                    </p>
+                                    <p className="productPrice">
+                                        {item.SpecialCost} تومان
+                                    </p>
+                                                                        {/* <div className="d-flex justify-space-between">
+                                    <Star color={'#000'} className="marginLeft5" size={10}/>
+                                    <Star color={'#000'} className="marginLeft5" size={10}/>
+                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                    <StarFill color={'#ffb921'} size={10}/>
+                                    
+                                    </div> */}
+          </div>
+          <hr/>
+          <p className="tamin">
+          نام تامین کننده کالا : {item.WarrantyName}
+            </p>
+          </div>
+          </div>
+         )
+          })
+         }
+         
+  
+  
+</CarouselMulti>
+        </div>
+        
+    
+
+      </div>
   </Container>
     <Container fluid style={{backgroundColor:'#FEF5EC',padding:30}}>
       <Container>
@@ -215,9 +420,9 @@ const Home = () =>{
         </Row>
       </Container>
     </Container>
-    <Container className="mt-5 mb-5">
+    <Container className="mt-5 mb-5 resContainer">
     
-    <div className="d-flex">
+    <div className="desktopBlock">
     
         <div className="productSlider" style={{marginRight:0,marginLeft:"2%"}}>
           <div className="d-flex mt-3">
@@ -225,126 +430,92 @@ const Home = () =>{
           <hr className="hrgray"/>
           </div>
           <div>
-          <Slider {...settings} className="consultationSlider2">
+          {/* <Slider {...settings} className="consultationSlider2">
          
-         
-          <div className="sliderCardBox2">
-           <div style={{position:'relative'}}>
-           <Button className="heartmini">
-              <Heart/>
-            </Button>
-          <img src={Product} className="miniSliderImg"/>
-           </div>
+          {
+          newest.map((item)=>{
+            return(
 
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
+          <Link to={"/SingleProduct/"+item.Name2} className="sliderCardBox2">
           <div style={{position:'relative'}}>
            <Button className="heartmini">
               <Heart/>
             </Button>
           <img src={Product} className="miniSliderImg"/>
-           </div>
-          <p className="pName">دستگاه میوه خشک کن</p>
+          <p className="pName">{item.Name}</p>
           <div className="d-flex justify-content-between align-items-center">
          
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
+          <p className="productPriceStroke">
+                                        {item.Cost} تومان
+                                    </p>
+                                    <p className="productPrice">
+                                        {item.SpecialCost} تومان
+                                    </p>
+                                                                        {/* <div className="d-flex justify-space-between">
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} size={10}/>
                                     
-                                    </div>
-          </div>
+                                    </div> */}
+          {/* </div>
           <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
+          <p className="tamin">
+          نام تامین کننده کالا : {item.WarrantyName}
+            </p>
           </div>
-          <div className="sliderCardBox2">
-          <div style={{position:'relative'}}>
+          </Link>
+         )
+          })
+         }
+         
+         
+        </Slider> */} 
+            <CarouselMulti responsive={responsive} rtl={true}>
+  
+  {
+          newest.map((item)=>{
+            return(
+
+              <div className="sliderCardBox2">
+              <div style={{position:'relative',padding:15}}>
            <Button className="heartmini">
               <Heart/>
             </Button>
           <img src={Product} className="miniSliderImg"/>
-           </div>
-          <p className="pName">دستگاه میوه خشک کن</p>
+          <br/>
+          <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
           <div className="d-flex justify-content-between align-items-center">
          
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
+          <p className="productPriceStroke">
+                                        {item.Cost} تومان
+                                    </p>
+                                    <p className="productPrice">
+                                        {item.SpecialCost} تومان
+                                    </p>
+                                                                        {/* <div className="d-flex justify-space-between">
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
                                     <StarFill color={'#ffb921'} size={10}/>
                                     
-                                    </div>
+                                    </div> */}
           </div>
           <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
+          <p className="tamin">
+          نام تامین کننده کالا : {item.WarrantyName}
+            </p>
           </div>
-          <div className="sliderCardBox2">
-          <div style={{position:'relative'}}>
-           <Button className="heartmini">
-              <Heart/>
-            </Button>
-          <img src={Product} className="miniSliderImg"/>
-           </div>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
+          </div>
+         )
+          })
+         }
          
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-          <div className="sliderCardBox2">
-          <div style={{position:'relative'}}>
-           <Button className="heartmini">
-              <Heart/>
-            </Button>
-          <img src={Product} className="miniSliderImg"/>
-           </div>
-          <p className="pName">دستگاه میوه خشک کن</p>
-          <div className="d-flex justify-content-between align-items-center">
-         
-                                    <p className="priceSlider">12.500.000 تومان</p>
-                                    <div className="d-flex justify-space-between">
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <Star color={'#000'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
-                                    <StarFill color={'#ffb921'} size={10}/>
-                                    
-                                    </div>
-          </div>
-          <hr/>
-          <p className="tamin">نام شرکت تامین کننده کالا : شرکت فلان</p>
-          </div>
-        </Slider>
+  
+  
+</CarouselMulti>
           </div>
         </div>
         <div className="cardBack">
@@ -356,12 +527,121 @@ const Home = () =>{
     
 
       </div>  
+      <div className="responsiveBlock">
     
+    <div className="productSlider" style={{marginRight:0,marginLeft:"2%"}}>
+      <div className="d-flex mt-3">
+      <p className="productSliderTitle">پر فروش ترین محصولات ما</p>
+      <hr className="hrgray"/>
+      </div>
+      <div>
+      {/* <Slider {...settings} className="consultationSlider2">
+     
+      {
+      newest.map((item)=>{
+        return(
+
+      <Link to={"/SingleProduct/"+item.Name2} className="sliderCardBox2">
+      <div style={{position:'relative'}}>
+       <Button className="heartmini">
+          <Heart/>
+        </Button>
+      <img src={Product} className="miniSliderImg"/>
+      <p className="pName">{item.Name}</p>
+      <div className="d-flex justify-content-between align-items-center">
+     
+      <p className="productPriceStroke">
+                                    {item.Cost} تومان
+                                </p>
+                                <p className="productPrice">
+                                    {item.SpecialCost} تومان
+                                </p>
+                                                                    {/* <div className="d-flex justify-space-between">
+                                <Star color={'#000'} className="marginLeft5" size={10}/>
+                                <Star color={'#000'} className="marginLeft5" size={10}/>
+                                <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                <StarFill color={'#ffb921'} size={10}/>
+                                
+                                </div> */}
+      {/* </div>
+      <hr/>
+      <p className="tamin">
+      نام تامین کننده کالا : {item.WarrantyName}
+        </p>
+      </div>
+      </Link>
+     )
+      })
+     }
+     
+     
+    </Slider> */} 
+        <CarouselMulti responsive={responsive} rtl={true}>
+
+{
+      newest.map((item)=>{
+        return(
+
+          <div className="sliderCardBox2">
+          <div style={{position:'relative',padding:15}}>
+       <Button className="heartmini">
+          <Heart/>
+        </Button>
+      <img src={Product} className="miniSliderImg"/>
+      <br/>
+      <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
+      <div className="d-flex justify-content-between align-items-center">
+     
+      <p className="productPriceStroke">
+                                    {item.Cost} تومان
+                                </p>
+                                <p className="productPrice">
+                                    {item.SpecialCost} تومان
+                                </p>
+                                                                    {/* <div className="d-flex justify-space-between">
+                                <Star color={'#000'} className="marginLeft5" size={10}/>
+                                <Star color={'#000'} className="marginLeft5" size={10}/>
+                                <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                <StarFill color={'#ffb921'} className="marginLeft5" size={10}/>
+                                <StarFill color={'#ffb921'} size={10}/>
+                                
+                                </div> */}
+      </div>
+      <hr/>
+      <p className="tamin">
+      نام تامین کننده کالا : {item.WarrantyName}
+        </p>
+      </div>
+      </div>
+     )
+      })
+     }
+     
+
+
+</CarouselMulti>
+      </div>
+    </div>
+    <div className="cardBackResponsive">
+        <img src={Slide2} className="cardImg"/>
+        <div style={{display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'}}>
+        <p className="cardText">انواع دستگاه های IoT</p>
+        <br/>
+          <Button className="yellowBtn">مشاهده محصولات</Button>
+        </div>
+        </div>
+
+
+  </div>  
   </Container>
   <Container fluid style={{backgroundColor: '#A8B57D4A',padding:30}}>
       <Container>
         <Row className="align-items-center">
-        <Col md={6}>
+        <Col md={6} className="col1" xs={{order:2}}>
         <p className="home2Title">
               ارائه ی انواع مشاوره در حوزه کشاورزی
             </p>
@@ -390,7 +670,7 @@ const Home = () =>{
             دریافت مشاوره
             </Button>
           </Col>
-          <Col md={6}>
+          <Col md={6} className="col2" xs={{order:1}}>
           <img src={Consult} className="home3"/>
           </Col>
          
@@ -401,89 +681,26 @@ const Home = () =>{
    <Container>
    <div>
         <h2 className="sliderTitle">برترین مشاوران ما</h2>
-        <Slider {...settings} className="consultationSlider">
+        <CarouselMulti responsive={responsive} rtl={true}>
+        {
+            cons?.map((item)=>{
+              return(
           <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <img 
+            src={Avatar} 
+            className="sliderImg"/>
+            <p className="sliderName">{item.Name}{item.Family}</p>
+            <p className="sliderDegree">{item.Speciality}</p>
             <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
+{item.Description}                   
             </p>
           </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-        </Slider>
+
+              )
+            })
+          }
+     
+     </CarouselMulti>
       </div>
    </Container>
    </Container>
@@ -493,125 +710,142 @@ const Home = () =>{
      <p className="boxTitle">
       اخبار و مقالات
      </p>
-     <a className="seeALL" href="#">
+     <Link className="seeALL" to={"/News"}>
       مشاهده همه
-     </a>
+     </Link>
     </div>
     <Row>
-      <Col md={4}>
+    <Col md={4}>
       <div className="miniNewsBox w100">
-                    <img src={News1}/>
+                    <img 
+                        src={apiAsset+blog[0]?.Pic}
+                        />
                  <div className="newsB">
                  <p className="newsDate">
-                    01/04/08
+                 {blog[0]?.Date}   
                 </p>
                 <p className="newsTitle">
-                    عنوان خبر
-                </p> 
+                {blog[0]?.Title}                
+                                </p> 
                 <p className="newsDes">
-                   توضیح کوتاه خبر اینجا قرار میگیرد ... 
-                 </p>
+                {truncate( blog[0]?.Text,30)}
+                                 </p>
                 <div className="d-flex align-items-center justify-content-between mt-4">
                   
                     <div>
-                        <a href="#" className="textDetail2">
+                    <Link to={"/SingleNews/"+blog[0]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                  </div>
                 </div>
       </Col>
+        
       <Col md={4}>
       <div className="miniNewsBox w100 mb-1">
-                  
+      {
+            blog[1]?      
                  <div className="newsB">
                  <p className="newsDate">
-                    01/04/08
+                 {blog[1]?.Date}   
                 </p>
                 <p className="newsTitle">
-                    عنوان خبر
+                {blog[1]?.Title}                
                 </p> 
                 <p className="newsDes">
-                  توضیح کوتاه خبر اینجا قرار میگیرد ... 
+                {truncate( blog[1]?.Text,30)}
                 </p>
                 <div className="d-flex align-items-center justify-content-between mt-4">
                   
                     <div>
-                        <a href="#" className="textDetail2">
+                    <Link to={"/SingleNews/"+blog[1]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                  </div>
+                 :
+                 null}
                 </div>
                 <div className="miniNewsBox w100">
+                {
+            blog[2]?
+                <div className="newsB">
+                 <p className="newsDate">
+                 {blog[2]?.Date}   
+                </p>
+                <p className="newsTitle">
+                {blog[2]?.Title}                
+                </p> 
+                <p className="newsDes">
+                {truncate( blog[2]?.Text,30)}
+                </p>
+                <div className="d-flex align-items-center justify-content-between mt-4">
                   
-                  <div className="newsB">
-                  <p className="newsDate">
-                     01/04/08
-                 </p>
-                 <p className="newsTitle">
-                     عنوان خبر
-                 </p> 
-                 <p className="newsDes">
-                   توضیح کوتاه خبر اینجا قرار میگیرد ... 
-                 </p>
-                 <div className="d-flex align-items-center justify-content-between mt-4">
-                   
-                     <div>
-                         <a href="#" className="textDetail2">
-                            ادامه مطلب <ChevronLeft/>
-                         </a>
-                     </div>
+                    <div>
+                    <Link to={"/SingleNews/"+blog[2]?.Title} className="textDetail">
+                           ادامه مطلب <ChevronLeft/>
+                        </Link>
+                    </div>
+                </div>
                  </div>
-                  </div>
+                 :null
+                }
                  </div>
       </Col>
       <Col md={4}>
       <div className="miniNewsBox w100 mb-1">
-                  
-                 <div className="newsB">
+          {
+            blog[3]?
+
+      <div className="newsB">
                  <p className="newsDate">
-                    01/04/08
+                 {blog[3]?.Date}   
                 </p>
                 <p className="newsTitle">
-                    عنوان خبر
+                {blog[3]?.Title}                
                 </p> 
                 <p className="newsDes">
-                  توضیح کوتاه خبر اینجا قرار میگیرد ... 
+                {truncate( blog[3]?.Text,30)}
                 </p>
                 <div className="d-flex align-items-center justify-content-between mt-4">
                   
                     <div>
-                        <a href="#" className="textDetail2">
+                    <Link to={"/SingleNews/"+blog[3]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
-                        </a>
+                        </Link>
                     </div>
                 </div>
                  </div>
+            :
+null
+          }        
                 </div>
                 <div className="miniNewsBox w100">
+                {
+            blog[4]?
+                <div className="newsB">
+                 <p className="newsDate">
+                 {data[4]?.Date}   
+                </p>
+                <p className="newsTitle">
+                {blog[4]?.Title}                
+                </p> 
+                <p className="newsDes">
+                {truncate( blog[4]?.Text,30)}
+                </p>
+                <div className="d-flex align-items-center justify-content-between mt-4">
                   
-                  <div className="newsB">
-                  <p className="newsDate">
-                     01/04/08
-                 </p>
-                 <p className="newsTitle">
-                     عنوان خبر
-                 </p> 
-                 <p className="newsDes">
-                   توضیح کوتاه خبر اینجا قرار میگیرد ... 
-                 </p>
-                 <div className="d-flex align-items-center justify-content-between mt-4">
-                   
-                     <div>
-                         <a href="#" className="textDetail2">
-                            ادامه مطلب <ChevronLeft/>
-                         </a>
-                     </div>
+                    <div>
+                    <Link to={"/SingleNews/"+blog[4]?.Title} className="textDetail">
+                           ادامه مطلب <ChevronLeft/>
+                        </Link>
+                    </div>
+                </div>
                  </div>
-                  </div>
+                 :
+                 null}
                  </div>
       </Col>
     </Row>

@@ -24,20 +24,45 @@ import M3G from 'src/components/assets/img/m3G.png';
 import M4B from 'src/components/assets/img/m4B.png';
 import M4G from 'src/components/assets/img/m4G.png';
 import { Link, useNavigate } from "react-router-dom";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+
 
 const Header = () =>{
     const [green, setGreen] = useState(false);
     const [showMega, setShowMega] = useState(false);
     let navigate = useNavigate();
+    const [search, setSearch] = useState("");
+    const [auto, setAuto] = useState("");
     const onClick = () =>{
         setShowMega(!showMega);
      };
+     const  _handleKeyDownAuto = async(e) => {
+        const axios = require("axios");
+ 
+            axios
+                .post(apiUrl + "SearchProduct",{
+                    ProductName:search
+                })
+            .then(function (response) {
+              if (response.data.result == "True") {
+      
+                setAuto(response.data.Data)
+                console.log(response.data.Data)
+      
+            }
+            else{
+              console.log(response.data.result)
+      
+            }})
+            .catch(function (error) {
+              console.log(error);
+            });}
     return(
    <Container fluid className="pd0" style={{padding:0}}>
     <div className="topBar">
         <Container>
-            <Row>
-                <Col md={6} className="text-right">
+            <Row className="responsiveFlex">
+                <Col md={6} className="text-right responsiveFlexCol">
                 <div className="d-flex align-items-center">
                     <Phone/>
                     <p className="topBarText">
@@ -45,7 +70,7 @@ const Header = () =>{
                     </p>
                 </div>
                 </Col>
-                <Col md={6} className="topBarLeft">
+                <Col md={6} className="topBarLeft responsiveFlexCol">
                     
                     <Telegram className="topBarIcon"/>
                     <Whatsapp className="topBarIcon"/>
@@ -56,23 +81,39 @@ const Header = () =>{
     </div>
     <div className="grayBar">
         <Container className="grayBarContainer">
+            <Link to={"/"}>
         <img src={Logo} className="logo"/>
+            
+            </Link>
         <div className="searchDiv">
-            <input className="searchInput" placeholder="نام محصول یا برند مورد نظر را جستجو کنید ..."/>
+
+            <input onChange={(e)=>{setSearch(e.target.value);_handleKeyDownAuto()}} className="searchInput" placeholder="نام محصول یا برند مورد نظر را جستجو کنید ..."/>
             <Search color="#009959"/>
+        
         </div>
+      
         <div className="btnBox">
             <Button onClick={()=>navigate("/Cart")} className="cartBtn">
                 <Cart className="ml-1"/>
                 سبد خرید
             </Button>
-            <Button onClick={()=>navigate("/Login")} className="profileBtn">
+                {
+                    localStorage.getItem("CustomerID")?
+            <Button onClick={()=>navigate("/EditProfile")} className="profileBtn">
                 <Profile/>
-                ورود / عضویت
+
+                    داشبورد
             </Button>
+                    :
+                    <Button onClick={()=>navigate("/Login")} className="profileBtn">
+                    <Profile/>
+                     ورود / عضویت
+                    </Button>
+
+                }
             <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">انتخاب زبان</InputLabel>
+        <InputLabel id="demo-simple-select-label">زبان</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -109,7 +150,104 @@ const Header = () =>{
     </Box>
         </div>
         </Container>
+        <Container className="grayBarContainerResponsive">
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center' ,marginTop:15}}>
+            <Link to={"/"}>
+        <img src={Logo} className="logo"/>
+            
+            </Link>
+            <div className="btnBox justify-content-end">
+            <Button onClick={()=>navigate("/Cart")} className="cartBtnResponsive">
+                <Cart className="ml-1"/>
+                
+            </Button>
+                {
+                    localStorage.getItem("CustomerID")?
+            <Button onClick={()=>navigate("/EditProfile")} className="profileBtnResponsive">
+                <Profile/>
+
+                    
+            </Button>
+                    :
+                    <Button onClick={()=>navigate("/Login")} className="profileBtnResponsive">
+                    <Profile/>
+                    
+                    </Button>
+
+                }
+            <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">زبان</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+         className="languageSelect"
+          label="Age"
+          
+        >
+          <MenuItem value={10}>
+            <img src={Iran} className="flag"/>
+            <span className="flagName">
+                فارسی
+            </span>
+          </MenuItem>
+          <MenuItem value={20}>
+          <img src={England} className="flag"/>
+            <span className="flagName">
+                انگلیسی
+            </span>
+          </MenuItem>
+          <MenuItem value={30}>
+            <img src={Iran} className="flag"/>
+            <span className="flagName">
+                عربی
+            </span>
+          </MenuItem>
+          <MenuItem value={40}>
+          <img src={England} className="flag"/>
+            <span className="flagName">
+                فرانسوی
+            </span>
+          </MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+        </div>
+        
+            </div>
+      <br/>
+      <div className="searchDiv">
+
+<input onChange={(e)=>{setSearch(e.target.value);_handleKeyDownAuto()}} className="searchInput" placeholder="نام محصول یا برند مورد نظر را جستجو کنید ..."/>
+<Search color="#009959"/>
+
+</div>
+        </Container>
     </div>
+    <div>
+            <ul class="suggestions">
+             {
+               auto && search?
+auto.map((item)=>{
+  return(
+            <li className="suggestions li" 
+            onClick={()=>navigate("/SingleProduct/"+item.Name2)}
+
+            >
+                  <p>
+                    {item?.Name}
+                  </p>
+                </li>
+
+  )
+})
+               :
+               null
+             }
+           
+                
+</ul>
+  </div>
     <div className="whiteBar">
         <Button className="topBarBtn" onClick={onClick}>
             <img className="btnImg" 

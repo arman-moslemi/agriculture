@@ -208,8 +208,8 @@ GetData()
           </ul>
         </div>
 
-        <div className="singleBox1">
-        <div className="row">
+        <div className="container singleBox1">
+        <div className="row responsiveR1">
         <Col md={4} id="singleOrder1" className="gallery">
         <ImageGallery items={images} showNav={false} showFullscreenButton={true} showPlayButton={false}/>
         </Col>
@@ -232,7 +232,7 @@ GetData()
 <p className="singleCatP">{data.Title}</p>
             </div>
             </div>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between flex-wrap">
 <div>
             <p className="singleTitleProperty">
                    ویژگی های محصول:
@@ -347,7 +347,7 @@ null
       <Tab>نظرات کاربران</Tab>
     </TabList>
     <TabPanel>
-      <div className="d-flex">
+      <div className="d-flex" style={{width:'100%'}}>
       {
                   Object.values(property)?.map((item,index)=>{
                   

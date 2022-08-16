@@ -258,7 +258,7 @@ return(
           
             </Col>
             <Col md={9}>
-            <div className="whiteBox d-flex align-items-center justify-content-start mb-2" style={{padding:10}}>
+            <div className="scrollResponsive whiteBox d-flex align-items-center justify-content-start mb-2" style={{padding:10}}>
             <div className="d-flex">
             <TextLeft color="#ffb921" size={30}/>
             <span className="sortText">

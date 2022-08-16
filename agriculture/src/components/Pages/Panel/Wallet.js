@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button ,Modal ,Form} from "react-bootstrap";
 import Header from "src/components/Pages/Layouts/Header";
 import Footer from "src/components/Pages/Layouts/Footer";
@@ -7,6 +7,7 @@ import RightPanelMenu from "src/components/Pages/Layouts/RightPanelMenu";
 import Updown from "src/components/assets/img/Updown.png";
 import Purse from "src/components/assets/img/purse.png";
 import FlashUp from "src/components/assets/img/flashUp.png";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 
 import { ArrowUpSquare ,ArrowDownSquare } from 'react-bootstrap-icons';
 const Wallet = () =>{
@@ -14,17 +15,46 @@ const Wallet = () =>{
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const GetData=()=>{
+        const axios = require("axios");
+      
+    
+        axios.post(apiUrl + "ReadCustomer",{CustomerID:1})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log(777)
+            console.log(response.data.Data)
+            console.log(response.data.Data[0]?.Name)
+            setData(response.data.Data)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          alert(error)
+
+          console.log(error);
+        });
+        
+  
+  
+      }
+      const [data, setData] = useState([]);
+
+    useEffect(() => {
+        GetData();
+
+      }, []);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
    <Container className="bodyPadding">
     <Row>
         <Col md={3}>
-       <RightPanelMenu/>
+        <RightPanelMenu data={data}/>
         </Col>
         <Col md={9}>
         <div className="whiteBox">
-                <div className="d-flex align-items-center justify-content-between topBox">
+                <div className="r1 d-flex align-items-center justify-content-between topBox">
                    <div className="d-flex align-items-center">
                    <WalletIcon/>
                    <p className="panelTitle">
@@ -86,7 +116,7 @@ const Wallet = () =>{
                                              </Modal>
                    </div>
                    </div>
-                   <div className="whiteBox customWidthBox d-flex align-items-center">
+                   <div className="wBoxRes whiteBox customWidthBox d-flex align-items-center">
                    <div>
                     <img src={Purse}/>
                    </div>
@@ -108,7 +138,7 @@ const Wallet = () =>{
                    </div>
                    <Row className="mt-4">
                     <Col md={6}>
-                        <div className="whiteBox d-flex align-items-center justify-content-between pd15">
+                        <div className="whiteBox d-flex align-items-center justify-content-between pd15 r2">
                              <ArrowUpSquare size={35} color="#009959"/>
                              <p className="variz">واریز وجه</p>
                              <p className="tarikh">120.000 تومان</p>

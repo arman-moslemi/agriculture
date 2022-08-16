@@ -13,7 +13,7 @@ const UserHistory = () =>{
   const [data, setData] = useState([]);
   const [his, setHis] = useState([]);
   const [cons, setCons] = useState([]);
-
+  const [key, setKey] = useState('news');
   const GetData=()=>{
       const axios = require("axios");
     var ss=localStorage.getItem("CustomerID")
@@ -81,7 +81,7 @@ const UserHistory = () =>{
         <div className="whiteBox">
                
               <div>
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+            <Tabs defaultActiveKey="profile" onSelect={(k) => setKey(k)} id="uncontrolled-tab-example" className="mb-3" activeKey={key}>
             <Tab eventKey="news" title="سفارشات">
               {
                 Object.values(his).map((item)=>{

@@ -13,7 +13,7 @@ import { useLocation } from "react-router-dom";
 const Favorite = () =>{
     const [data, setData] = useState([]);
     const [fav, setFav] = useState([]);
-
+    const [key, setKey] = useState('product');
     const GetData=()=>{
         const axios = require("axios");
       var ss=localStorage.getItem("CustomerID")
@@ -66,7 +66,7 @@ const Favorite = () =>{
         <div className="whiteBox">
                
               <div>
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3"  activeKey={key} onSelect={(k) => setKey(k)}>
                 <Tab eventKey="product" title="محصولات برگزیده">
                     <div className="d-flex mt-3 flex-wrap justify-content-center">
                         {

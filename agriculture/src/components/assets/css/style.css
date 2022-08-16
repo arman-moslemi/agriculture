@@ -94,7 +94,8 @@ input[type=number] {
   /**********login*************/
   .loginBody{
     background-color: var(--c-gray-1);
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     padding: 5%;
   }
   .loginBox{
@@ -896,8 +897,7 @@ border-right: none !important;
     margin-left: 1rem; */
     margin-top:16px;
     margin-bottom: 5px;
-    margin-left:101px;
-    margin-right:101px;
+  
 padding:22px 33px 43px 33px;
 box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
 border-radius: 5px;
@@ -1787,8 +1787,22 @@ margin-bottom: 10px; */
   display: flex;
 
 }
+.r5 img{
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+}
+.breadCrumbs{
+
+  margin-bottom: 10px;
+  padding-top: 10px;
+}
 .bigNewsImg{
-  width: 100%;
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 }
@@ -1853,10 +1867,12 @@ margin-bottom: 10px; */
   margin-left: 10px;
 }
 .miniNewsBox img{
-  width: 270px;
-  height: 200px;
+  width: 100%;
+  min-height: 200px;
+  max-height: 200px;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+  object-fit: contain;
 }
 .newsB{
   padding: 20px;
@@ -2064,7 +2080,7 @@ margin-bottom: 10px; */
 }
 .hrgray{
    border-top-color: #EAF1FB63;
-   width: 80%;
+   width: 78%;
     margin-right: 15px;
 }
 .sliderCardBox2{
@@ -2200,7 +2216,7 @@ margin-bottom: 10px; */
 .storeMenu{
   background-color: #f4f4f4;
   width:100%;
-  
+  border-bottom: 1px solid #cecece;
   padding: 10px 50px 10px 50px;
   border-top: 1px solid var(--c-gray-2);
 }
@@ -2271,13 +2287,26 @@ margin-bottom: 10px; */
 .cardBackResponsive .yellowBtn{
   display: unset !important;
 }
+.productSliderTitle{
+  margin-right: 15px;
+}
 /********************responsive************/
 @media screen and (max-width: 630px){
   .home3{
     width: 100% !important;
     height: auto !important;
   }
-  
+  .historyModal .modal-dialog{
+    width: 100% !important;
+    margin-bottom: 5%;
+  }
+  .modal-body textarea{
+    height: 100px !important;
+  }
+  .modal-content{
+    height: 450px;
+    overflow: scroll;
+  }
 }
 @media screen and (max-width:800px){
   .responsiveFlex{
@@ -2307,6 +2336,14 @@ margin-bottom: 10px; */
   }
 }
 @media screen and (max-width:840px){
+  .loginBox .grayBack{
+    display: none !important;
+  }
+  .loginBody .whiteBack {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 15px !important;
+  }
   .grayBarContainer{
     display: none;
     }
@@ -2319,6 +2356,12 @@ margin-bottom: 10px; */
     .searchDiv{
       width: 100% !important;
     }
+    .addressBox p{
+      margin-right: 0px !important;
+    }
+    .addressBox .d-flex{
+      flex-wrap: wrap;
+    }
 }
 @media screen and (max-width:440px){
   .topBarText{
@@ -2327,10 +2370,164 @@ margin-bottom: 10px; */
   .logo{
     width: 80px !important;
   }
- 
+  .panelTitle{
+    font-size: 10px !important;
+  }
+  .editProfileBtn{
+    font-size: 12px !important;
+  }
 
 }
+.miniNewsBox{
+  margin-top:10px;
+  margin-bottom: 10px;
+}
 @media screen and (max-width:1000px){
+  .cTabList .react-tabs__tab{
+    padding:10px 15px !important
+  }
+  .singleBox1{
+   padding: 15px !important;
+  }
+  .cTabList{
+    padding: 0px !important;
+    overflow: scroll;
+    white-space: nowrap;
+  }
+  
+  .responsiveR1{
+    display: block !important;
+  }
+  .responsiveR1 .gallery{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  #singleOrder3{
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .singleTitleBox{
+    padding-top: 20px;
+  }
+  .greyLightBox{
+    width: 100% !important;
+  }
+  .breadCrumbs{
+    margin-right: 0px !important;
+  }
+  .userNameCommnet{
+    margin-left: 50px;
+  }
+  .commentBox {
+    overflow: scroll;
+    white-space: nowrap;
+  }
+  .mediumNewsBox{
+    margin-bottom: 15px;
+  }
+  .siteSlogan p{
+    font-size: 20px;
+  }
+  .consultBoxF{
+    overflow-x: scroll;
+    white-space: nowrap;
+    overflow-y: hidden;
+  }
+  .consultBoxF div{
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  .consultBoxF2{
+    overflow: scroll;
+    white-space: nowrap;
+  }
+  .consultBoxF2 div{
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  .historyModal .modal-dialog{
+    width: 100% !important;
+  }
+  .conditionBox {
+    overflow: scroll;
+    white-space: nowrap;
+  }
+  .nav-tabs{
+    padding-right: 0px !important;
+  }
+  .nav-link{
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+  .accBox{
+    overflow: scroll;
+    white-space: nowrap;
+  }
+  .consultModal2 .modal-dialog{
+    width: 100% !important;
+  }
+  .r3{
+    flex-wrap: wrap;
+  }
+ .r3 .addSection{
+  padding-right: 0px !important;
+ }
+ .r3 p{
+  margin-bottom: 20px;
+ }
+ .addDeviceText{
+  margin-bottom: 0px !important;
+ }
+  .accBox .d-flex div{
+    margin-left: 50px;
+  }
+  .answerText{
+    width: 100% !important;
+  }
+  .sendText{
+    width: 100% !important;
+  }
+  .consultModal .modal-dialog{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-right: 0px !important;
+  }
+  .ticketShowModal .modal-dialog{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-right: 0px !important;
+  }
+  .ticketModal .modal-dialog{
+    width: 100% !important;
+    margin-right: 0px !important;
+  }
+  .ticketListBox div{
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .ticketListBox{
+    overflow: scroll;
+    white-space: nowrap;
+  }
+  .r1{
+    flex-wrap: wrap;
+  }
+  .r2{
+    flex-wrap: wrap;
+  }
+  .r1 .editProfileBtn{
+    margin-top: 10px;
+  }
+  .wBoxRes{
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 10px !important;
+  }
+  .scrollResponsive{
+    width: 100%;
+    overflow: scroll;
+    white-space: nowrap;
+  }
   .miniNewsBox img{
     height: auto !important;
   }
@@ -2408,8 +2605,28 @@ margin-bottom: 10px; */
   .responsiveBlock{
     display: block !important;
   }
+
 }
 @media screen and (max-width:670px){
+  .cTabList .react-tabs__tab{
+    font-size: 12px !important;
+  }
+  .headBox{
+    flex-wrap: wrap;
+  }
+
+  .mediumNewsBox{
+    flex-direction: column-reverse !important;
+  }
+  .r5{
+    width: 100% !important;
+  }
+  .bigNewsCol{
+    width: 100% !important;
+  }
+  .bigNewsBox{
+    flex-direction: column-reverse !important;
+  }
   .topBarBtn{
     width: 120px;
   }
@@ -2422,8 +2639,40 @@ margin-bottom: 10px; */
   .hrgray{
     width: 50%;
   }
+  .whiteBar{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 10000;
+  }
 }
 @media screen and (max-width:550px){
+  .whiteBox{
+    padding: 10px !important;
+  }
+  .nav-link{
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    font-size: 12px !important;
+  }
+  .historyTitle {
+    font-size: 12px !important;
+  }
+  .vaziyat{
+    font-size: 12px !important;
+  }
+  .historyBox .borderBottomGray{
+    flex-wrap: wrap;
+  }
+  .historyPrice {
+    font-size: 10px !important;
+  }
+  .HistoryProductTitle{
+    font-size: 12px !important;
+  }
+  .HistoryProductModel{
+    font-size: 10px !important;
+  }
   .sliderTitle{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -2435,7 +2684,11 @@ margin-bottom: 10px; */
     width: 35px;
   }
   .topBarBtn span{
-  display: none;
+  font-size: 9px !important;
+
+  }
+  .topBarBtn{
+    margin: 0px !important;
   }
   .slideGreenBtn{
     display: none !important;
@@ -2461,4 +2714,17 @@ margin-bottom: 10px; */
   .col2{
     order:1,
   }
+}
+.topBox .d-flex{
+  align-items: center;
+}
+.form-select{
+  background-position: right 0.75rem center !important;
+}
+.accBox{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.productPriceStroke{
+  color: red;
 }

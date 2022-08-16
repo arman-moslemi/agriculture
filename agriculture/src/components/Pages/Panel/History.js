@@ -8,7 +8,7 @@ import Product from "src/components/assets/img/product.png";
 import { StarFill ,Star ,EyeFill} from 'react-bootstrap-icons';
 import Product2 from "src/components/assets/img/p2.png";
 const History = () =>{
- 
+  const [key, setKey] = useState('product');
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -22,7 +22,7 @@ const History = () =>{
         <div className="whiteBox">
                
               <div>
-            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+            <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3" activeKey={key} onSelect={(k) => setKey(k)}>
                 <Tab eventKey="product" title="مشاوره های دریافت شده">
                 <div className="consultBoxF2">
        <div className="d-flex">

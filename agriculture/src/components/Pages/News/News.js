@@ -117,7 +117,7 @@ const News = () =>{
                 </div>
 
             </div>
-            <div className="d-flex align-items-center mt-3 justify-content-center">
+            <div className="d-flex align-items-center mt-3 justify-content-center flex-wrap">
                 <div className="miniNewsBox">
                     <img 
                         src={apiAsset+data[1]?.Pic}
@@ -212,7 +212,7 @@ const News = () =>{
                  </div>
                 </div>
             </div>
-            <div className="d-flex align-items-stretch mt-3 justify-content-center">
+            <div className="d-flex align-items-stretch mt-3 justify-content-center flex-wrap">
                 <div className="mediumNewsBox">
                 <div className="bigNewsCol bigPad">
                 <p className="newsDate">
@@ -243,10 +243,10 @@ const News = () =>{
                     </div>
                 </div>
                 </div>
-                 <div style={{width:'50%'}}>
+                 <div style={{width:'50%'}} className="r5">
                  <img 
                         src={apiAsset+data[4]?.Pic}
-                        style={{width:'100%',height:'100%',borderTopLeftRadius:5,borderBottomLeftRadius:5}}/>
+                        style={{borderTopLeftRadius:5,borderBottomLeftRadius:5}}/>
                  </div>
                 </div>
                 <div className="miniNewsBox">

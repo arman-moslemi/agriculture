@@ -319,7 +319,7 @@ GetData()
         item.map((item2)=>{
             return(
         <div className="accBox2">
-        <div className="d-flex align-items-center justify-content-between borderBottomGray">
+        <div className="r3 d-flex align-items-center justify-content-between borderBottomGray">
            <div>
                <p style={{marginBottom:0,fontFamily:'IRANSansMedium'}}>
                {item2.PartName}

@@ -1,4 +1,4 @@
-import {React ,useState } from "react";
+import {React ,useState,useEffect } from "react";
 import { Container, Row ,Col ,Button, Nav, Navbar, NavDropdown, NavItem,Offcanvas} from "react-bootstrap";
 import Instagram from 'src/components/assets/icon/Instagram';
 import Phone from 'src/components/assets/icon/Phone';
@@ -30,6 +30,9 @@ import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 const Header = () =>{
     const [green, setGreen] = useState(false);
     const [showMega, setShowMega] = useState(false);
+    const [groupShow, setGroupShow] = useState(false);
+    const [data, setData] = useState(false);
+    const [group, setGroup] = useState(false);
     let navigate = useNavigate();
     const [search, setSearch] = useState("");
     const [auto, setAuto] = useState("");
@@ -57,6 +60,50 @@ const Header = () =>{
             .catch(function (error) {
               console.log(error);
             });}
+     const  GetData = async(e) => {
+        const axios = require("axios");
+ 
+            axios
+                .get(apiUrl + "MainMenu",{
+                    ProductName:search
+                })
+            .then(function (response) {
+              if (response.data.result == "True") {
+      
+                setData(response.data.Data)
+                console.log(response.data.Data)
+      
+            }
+            else{
+              console.log(response.data.result)
+      
+            }})
+            .catch(function (error) {
+              console.log(error);
+            });}
+     const  GetGroup = async(aa) => {
+        const axios = require("axios");
+ 
+            axios.post(apiUrl + "MenuAll",{
+                    GroupID:aa
+                })
+            .then(function (response) {
+              if (response.data.result == "True") {
+      
+                setGroup(response.data.Data)
+                console.log(Object.values(response.data.Data))
+      
+            }
+            else{
+              console.log(response.data.result)
+      
+            }})
+            .catch(function (error) {
+              console.log(error);
+            });}
+            useEffect(() => {
+              GetData();
+            }, []);
     return(
    <Container fluid className="pd0" style={{padding:0}}>
     <div className="topBar">
@@ -263,7 +310,7 @@ auto.map((item)=>{
             <br/>
             <span>کشاورزی هوشمند</span>
         </Button>
-        <Button className="topBarBtn">
+        <Button onClick={()=>navigate("/Consultation")} className="topBarBtn">
             <img src={M3B} className="btnImg"/>
             <br/>
             <span>مشاوره کشاورزی</span>
@@ -276,30 +323,47 @@ auto.map((item)=>{
     </div>
     {showMega ?
         <div className="storeMenu">
-               <div className="d-flex justify-content-between">
-                <Button>
-                    دسته بندی یک
+               <div className="d-flex ">
+                {
+                  data?.map((item)=>{
+                    return(
+
+                <Button onClick={()=>{GetGroup(item?.MainGroupID);setGroupShow(!groupShow)}}>
+                {item.MainTitle}
                 </Button>
-                <Button>
-                    دسته بندی دو
-                </Button>
-                <Button>
-                    دسته بندی سه
-                </Button>
-                <Button>
-                    دسته بندی چهار
-                </Button>
-                <Button>
-                    دسته بندی پنج
-                </Button>
-                <Button>
-                    دسته بندی شش
-                </Button>
-                <Button>
-                    دسته بندی هفت
-                </Button>
+                    )
+                  })
+                }
+              
                </div>
             </div> :null}
+            {
+              groupShow?
+              <div className="storeMenu" style={{display:'flex',flexWrap:'wrap'}}>
+               <ul className="menuList">
+              <Link className="a2 link" to={Object.values(group).length>0?  "/GroupProduct/"+Object?.values(group)[0][0]?.GroupTitle2:"/GroupProduct/2"} >  {Object?.values(group)[0]?  Object?.values(group)[0][0]?.GroupTitle:null}</Link>
+                {
+                 Object.values(group)?.map((item)=>{
+                    return(
+                 
+              <li                           >
+                <Link className="a1 link" to={"/SubGroup/"+item[0].Title2}>
+
+{item[0]?.Title}         
+                </Link>
+     </li>
+             
+             
+             )
+            })
+          }
+          </ul>
+             
+
+</div>
+              :
+              null
+            }
    </Container>
     );
 };

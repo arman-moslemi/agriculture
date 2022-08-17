@@ -32,13 +32,15 @@ const Login = () =>{
 
     }
     else{
-    
-        axios.post(apiUrl + "Login",{Mobile:mobile,Password:pass})
+        var guest=localStorage.getItem("Guest")?localStorage.getItem("Guest"):0;
+
+        axios.post(apiUrl + "Login",{Mobile:mobile,Password:pass,GuestID:guest})
         .then(function (response) {
           if (response.data.result == "True") {
             console.log(777)
             // auth.login(response.data.Data.CustomerID);
             localStorage.setItem("CustomerID",response.data.Data[0].CustomerID);
+            localStorage.setItem("CustomerID","");
     navigate("/EditProfile"
     , { replace: true,state:{CustomerID:response.data.Data[0].CustomerID} }
     );

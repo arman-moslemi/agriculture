@@ -5,7 +5,7 @@ import { Link, useNavigate,useLocation } from "react-router-dom";
 
 const Verify = () =>{
     const {state} = useLocation();
-console.log(state)
+// console.log(state)
 let navigate = useNavigate();
 
 const [open,setOpen]=useState(false)

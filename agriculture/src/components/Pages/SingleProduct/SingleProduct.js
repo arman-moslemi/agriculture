@@ -107,9 +107,9 @@ const SingleProduct = () =>{
     var guest=localStorage.getItem("Guest")?localStorage.getItem("Guest"):0;
         axios.post(apiUrl + "ShoppingBasketAdd",{ProductID:data?.ProductID, 
             // CustomerID:customer,
-            CustomerID:1,
-          // GuestID:guest,
-          Number:number,
+            CustomerID:customer,
+           GuestID:guest,
+          ShoppingBasketNumber:number,
           Cost:data?.SpecialCost?data.SpecialCost:data.Cost
         })
         .then(function (response) {
@@ -338,7 +338,7 @@ null
         </div>
   
         </div>
-        <div className="singleBox1">
+        <div className="container singleBox1">
         <div dir="rtl">
         <Tabs dir={'rtl'}>
     <TabList className="cTabList">
@@ -479,7 +479,7 @@ null
                        <p style={{fontFamily:'IRANSans',marginBottom:0}}>
                         متن پیام شما :
                        </p>
-                       <textarea onChange={(e)=>setText(e.target.value)} className="inputCLass cInput" type="text"/>
+                       <textarea onChange={(e)=>setText(e.target.value)} className="inputCLass cInput" type="text" style={{minHeight:200}}/>
                        </div>
                         <Row>
                             <Col md={12}>

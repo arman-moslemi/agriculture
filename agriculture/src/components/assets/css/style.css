@@ -1468,6 +1468,21 @@ margin-bottom: 10px; */
   text-decoration: none !important;
 
 }
+.link{
+  text-decoration: none !important;
+
+}
+.a1{
+  text-decoration: none !important;
+  font-family: 'IRANSans';
+  color:#000 !important;
+}
+
+.a2{
+  text-decoration: none !important;
+  font-family: 'IRANSansBold';
+  color:#000 !important;
+}
 .productImg{
   width: 190px;
   height: 190px;
@@ -2727,4 +2742,25 @@ margin-bottom: 10px; */
 }
 .productPriceStroke{
   color: red;
+}
+.menuList{
+  list-style: none;
+  padding-right: 0px !important;
+  width: 15%;
+}
+.menuList p{
+  font-family: "IRANSansBold";
+  font-size: 18px;
+}
+.menuList li{
+  font-family: "IRANSansMedium";
+  margin-top:10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.MuiTypography-root {
+  font-family: "IRANSans" !important;
+}
+.MuiDialog-paper{
+  min-width: 250px !important;
 }

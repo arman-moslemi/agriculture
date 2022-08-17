@@ -18,7 +18,7 @@ import Switch from '@mui/material/Switch';
 import Product from "src/components/assets/img/product.png";
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
-import { useLocation } from "react-router-dom";
+import { useLocation,useSearchParams,useParams } from "react-router-dom";
 
 const MainGroupProduct = () =>{
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -27,6 +27,8 @@ const MainGroupProduct = () =>{
     const {state} = useLocation();
     const [filter,setFilter]=useState([])
     const [data2,setData2]=useState([])
+    const params = useParams().id;
+
     const viewset=()=>{
 
 
@@ -56,7 +58,7 @@ const MainGroupProduct = () =>{
         const axios = require("axios");
       
     
-        axios.post(apiUrl + "MainGroupProduct",{MainTitle:"کشاورزی"})
+        axios.post(apiUrl + "MainGroupProduct",{MainTitle:params})
         .then(function (response) {
           if (response.data.result == "True") {
 
@@ -69,7 +71,7 @@ const MainGroupProduct = () =>{
 
           console.log(error);
         });
-        axios.post(apiUrl + "GetPropertyMainGroup",{MainTitle:"کشاورزی"})
+        axios.post(apiUrl + "GetPropertyMainGroup",{MainTitle:params})
         .then(function (response) {
           if (response.data.result == "True") {
 

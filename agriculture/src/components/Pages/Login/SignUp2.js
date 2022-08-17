@@ -53,8 +53,9 @@ const SignUp2 = () =>{
             setOpen(true)
         }
         else{
-    
-        axios.post(apiUrl + "InsertCustomer",{Mobile:state.Mobile,Name:name,Family:family,Password:pass,IsConsultant:moshaver})
+            var guest=localStorage.getItem("Guest")?localStorage.getItem("Guest"):0;
+
+        axios.post(apiUrl + "InsertCustomer",{Mobile:state.Mobile,Name:name,Family:family,Password:pass,IsConsultant:moshaver,GuestID:guest})
         .then(function (response) {
           if (response.data.result == "True") {
             console.log(777)

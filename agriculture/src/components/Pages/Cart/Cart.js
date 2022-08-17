@@ -70,6 +70,7 @@ const Cart = () =>{
                       if (response.data.result == "True") {
                         console.log(777)
                         console.log(response.data.Data)
+                        GetData()
 GetData()                    }})
                     .catch(function (error) {
                       console.log(777)
@@ -87,9 +88,11 @@ GetData()                    }})
                 const axios = require("axios");
               
                 var customer=localStorage.getItem("CustomerID")
+                var guest=localStorage.getItem("Guest")?localStorage.getItem("Guest"):0;
+
                 console.log(123456)
                 console.log(customer)
-                axios.post(apiUrl + "ShoppingBasketView",{CustomerID:customer})
+                axios.post(apiUrl + "ShoppingBasketView",{CustomerID:customer,GuestID:guest})
                 .then(function (response) {
                   console.log(response)
         
@@ -98,7 +101,7 @@ GetData()                    }})
                     console.log(response.data.Data)
                     setData(response.data.Data)
                     response.data.Data.map((item)=>{
-                      setCostTotal(item.SpecialCost?costTotal+parseInt(item.SpecialCost*item.ShoppingBasketNumber):costTotal+parseInt(item.Cost*item.ShoppingBasketNumber))
+                      setCostTotal(item.SpecialCost?parseInt(item.SpecialCost*item.ShoppingBasketNumber):parseInt(item.Cost*item.ShoppingBasketNumber))
                     })
                 }})
                 .catch(function (error) {
@@ -280,9 +283,14 @@ GetData()                    }})
                                <p className="HistoryProductModel mb-2">
                                مدل : {item.BrandName}
                                </p>
-                               <p className="historyPrice" style={{textAlign:'right'}}>
+                              <div className="d-flex align-items-center">
+                              <p className="historyPrice" style={{textAlign:'right'}}>
                               قیمت کالا : {item.SpecialCost}تومان
                             </p>
+                            <p className="costGrayBoxStroke ml-2" style={{marginRight:15}}>
+                            {item.Cost}تومان
+                            </p>
+                                </div>
                             <div className="d-flex align-items-center">
                             <p className="historyPrice" style={{textAlign:'right',marginBottom:0}}>
                              تعداد :

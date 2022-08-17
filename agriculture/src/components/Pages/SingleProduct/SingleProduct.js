@@ -14,6 +14,8 @@ import CustomizedDialogs from '../Layouts/AlertModal';
 import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft ,Share ,ChatDots} from "react-bootstrap-icons";
 import StartRate from 'src/components/Pages/Layouts/StarRate';
 const SingleProduct = () =>{
+  let navigate = useNavigate();
+
   const [data, setData] = useState([]);
   const [number, setNumber] = useState(1);
   const [property, setProperty] = useState([]);
@@ -55,7 +57,7 @@ const SingleProduct = () =>{
           console.log(response)
 
           if (response.data.result == "True") {
-            console.log(777)
+            console.log(12548)
             console.log(response.data.Data)
             setData(response.data.Data[0])
 
@@ -116,8 +118,9 @@ const SingleProduct = () =>{
           console.log(response)
 
           if (response.data.result == "True") {
-            console.log(777)
+            console.log(222)
             console.log(response.data.Data)
+            localStorage.setItem("Guest",response.data.Data)
             setTitle("محصول با موفقیت به سبدخرید اضافه شد")
             setOpen(true)
         }})
@@ -188,22 +191,20 @@ GetData()
    <Container className="singleProductContainer" fluid>
    <div className="breadCrumbs">
           <ul>
-            <li>
+            <li onClick={()=>navigate("/")}>
 خانه
             </li>
             /
             <li>
-              {/* <Link onClick={()=>history.push("/EachCategory/"+product.MainGroupID)}> */}
-{/* {product.MainTitle}        */}
-تجهیزات و ماشین آلات صنعتی
-       {/* </Link> */}
+              <Link to={"/GroupProduct/"+data?.GroupTitle2}> 
+ {data?.GroupTitle}       
+        </Link> 
             </li>
             /
             <li>
-              {/* <Link onClick={()=>history.push("/products/"+product.GroupID)}> */}
-{/* {product.GroupName}      */}
-تراکتور دو چرخ
-         {/* </Link> */}
+              <Link to={"/SubGroup/"+data?.Title2}>
+{data?.Title}     
+         </Link>
             </li>
           </ul>
         </div>

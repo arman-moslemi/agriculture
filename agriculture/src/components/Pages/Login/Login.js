@@ -40,7 +40,7 @@ const Login = () =>{
             console.log(777)
             // auth.login(response.data.Data.CustomerID);
             localStorage.setItem("CustomerID",response.data.Data[0].CustomerID);
-            localStorage.setItem("CustomerID","");
+            localStorage.setItem("Guest","");
     navigate("/EditProfile"
     , { replace: true,state:{CustomerID:response.data.Data[0].CustomerID} }
     );

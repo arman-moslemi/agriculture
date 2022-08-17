@@ -11,7 +11,7 @@ import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft} from "react-bootstrap-ico
 import Product from "src/components/assets/img/product.png";
 import Home2 from "src/components/assets/img/home2.png";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
-import { useLocation,useSearchParams,useParams, Link } from "react-router-dom";
+import { useLocation,useNavigate,useParams, Link } from "react-router-dom";
 
 import Voice from "src/components/assets/img/voice.png";
 import Chat from "src/components/assets/img/chat.png";
@@ -32,6 +32,7 @@ const Home = () =>{
     rtl:true,
     
   };
+  let navigate = useNavigate();
 
   const responsive = {
     desktop: {
@@ -246,7 +247,7 @@ const Home = () =>{
            <Button className="heartmini">
               <Heart/>
             </Button>
-          <img src={Product} className="miniSliderImg"/>
+          <img src={apiAsset+item.Pic1} className="miniSliderImg"/>
           <br/>
           <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
           <div className="d-flex justify-content-between align-items-center">
@@ -360,7 +361,7 @@ const Home = () =>{
            <Button className="heartmini">
               <Heart/>
             </Button>
-          <img src={Product} className="miniSliderImg"/>
+          <img src={apiAsset+item.Pic1} className="miniSliderImg"/>
           <br/>
           <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
           <div className="d-flex justify-content-between align-items-center">
@@ -666,7 +667,7 @@ const Home = () =>{
                 مشاوره متنی
               </p>
             </div>
-            <Button className="home2View">
+            <Button onClick={()=>navigate("/Consultation")} className="home2View">
             دریافت مشاوره
             </Button>
           </Col>

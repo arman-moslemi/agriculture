@@ -71,7 +71,7 @@ const Cart = () =>{
                         console.log(777)
                         console.log(response.data.Data)
                         GetData()
-GetData()                    }})
+                 }})
                     .catch(function (error) {
                       console.log(777)
                       alert(error)
@@ -99,11 +99,14 @@ GetData()                    }})
                   if (response.data.result == "True") {
                     console.log(777)
                     console.log(response.data.Data)
+                    setCostTotal(0)
                     setData(response.data.Data)
+                    var dd=0;
                     response.data.Data.map((item)=>{
-                      setCostTotal(item.SpecialCost?parseInt(item.SpecialCost*item.ShoppingBasketNumber):parseInt(item.Cost*item.ShoppingBasketNumber))
-                    })
-                }})
+dd=item.SpecialCost?dd+parseInt(item.SpecialCost*item.ShoppingBasketNumber):dd+parseInt(item.Cost*item.ShoppingBasketNumber)
+})
+setCostTotal(dd)
+}})
                 .catch(function (error) {
                   console.log(777)
                   alert(error)

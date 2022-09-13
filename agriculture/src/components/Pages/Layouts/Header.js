@@ -315,7 +315,7 @@ auto.map((item)=>{
             <br/>
             <span>مشاوره کشاورزی</span>
         </Button>
-        <Button className="topBarBtn">
+        <Button onClick={()=>navigate("/News")} className="topBarBtn">
             <img src={M4B} className="btnImg"/>
             <br/>
             <span>اخبار و اعلانات</span>

@@ -64,6 +64,25 @@ const SingleNews = () =>{
         
   
       }
+      const InsertFavorite=async ()=>{
+        const axios = require("axios");
+        var ss=await localStorage.getItem("CustomerID")
+        axios.post(apiUrl + "InsertFavorite",{CustomerID:ss,BlogID:data[0].BlogID})
+        .then(function (response) {
+          if (response.data.result == "True") {
+              alert("با موفقیت ثبت شد")
+            }})
+            .catch(function (error) {
+                console.log(777)
+                alert(error)
+                
+                console.log(error);
+            });
+      
+      
+        
+      
+      }
       const InsertComment=()=>{
         var ss=localStorage.getItem("CustomerID")
         if(ss==null){
@@ -131,8 +150,8 @@ GetData()
                         </p>
                     </div>
                     <div>
-                        <Button className="addFavorite">
-                            <Heart className="customM"size={20}/>
+                        <Button onClick={()=>InsertFavorite()} className="addFavorite">
+                            <Heart  className="customM"size={20}/>
                             افزودن به برگزیده ها
                         </Button>
                     </div>

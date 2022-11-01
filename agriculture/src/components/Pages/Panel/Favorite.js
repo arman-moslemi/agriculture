@@ -10,6 +10,10 @@ import CustomizedDialogs from '../Layouts/AlertModal';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
+import { truncate } from "src/utils/helper";
+import { ChevronLeft,Heart} from "react-bootstrap-icons";
+
+
 const Favorite = () =>{
     const [data, setData] = useState([]);
     const [fav, setFav] = useState([]);
@@ -21,7 +25,7 @@ const Favorite = () =>{
         axios.post(apiUrl + "CustomerFavorite",{CustomerID:ss})
         .then(function (response) {
           if (response.data.result == "True") {
-            console.log(777)
+            console.log(999)
 
             setFav(response.data.Data)
             console.log(response.data.Data);
@@ -49,6 +53,26 @@ const Favorite = () =>{
         });
      
       }
+      const DeleteFavorite=async(mm)=>{
+        var ss=await localStorage.getItem("CustomerID")
+      
+  
+        
+        const axios = require("axios");
+        axios.post(apiUrl + "DeleteFavorite",{FavoriteID:mm})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            alert("با موفقیت حذف شد")
+  GetData()              
+            }})
+            .catch(function (error) {
+                console.log(777)
+                alert(error)
+                
+                console.log(error);
+            });
+          ;
+    }
       useEffect(() => {
         GetData();
 
@@ -73,8 +97,12 @@ const Favorite = () =>{
                             fav.filter(x=>x.ProductID!=null).map((item)=>{
                                 return(
 
-                        <Link to={"/SingleProduct/"+item.ProductName2} className="productCard">
-                           <div style={{padding:20,paddingBottom:5}}>
+                        <div to={"/SingleProduct/"+item.ProductName2} className="productCard">
+                             <Button onClick={()=>DeleteFavorite(item.FavoriteID)} className="heartmini">
+              <Heart/>
+              حذف از برگزیده ها
+            </Button>
+                           <Link  to={"/SingleProduct/"+item.ProductName2} style={{padding:20,paddingBottom:5}}>
                            <img 
                            src={Product}
                             className="productImg"/>
@@ -109,13 +137,13 @@ index+1>item.Rate?
                                     </p>
                                 </div>
                             </div>
-                           </div>
+                           </Link>
                            <div className="box2Div">
                            <p className="productVolume">
                            نام تامین کننده کالا : {item.WarrantyName}
                             </p>
                            </div>
-                        </Link>
+                        </div>
                                 )
                             })
                         }
@@ -151,8 +179,48 @@ index+1>item.Rate?
                                 )})}
                 </Tab>
                 <Tab eventKey="news" title="اخبار برگزیده">
-                    <p>hello</p>
-                </Tab>
+                <div className="d-flex mt-3 flex-wrap justify-content-between">
+
+                  {
+                        
+                          fav.filter(x=>x.BlogID!=null).map((item)=>{
+                              return(
+                                <Col md={4}>
+                                <div 
+                                
+                                className="miniNewsBox w90"
+                                
+                                >
+                                              <img 
+                                                  src={apiAsset+item?.Pic}
+                                                  />
+                                           <div className="newsB">
+                                           <p className="newsDate">
+                                           {item?.Date}   
+                                          </p>
+                                          <p className="newsTitle">
+                                          {item?.Title}                
+                                                          </p> 
+                                          <p className="newsDes">
+                                          {truncate( item?.Text,30)}
+                                                           </p>
+                                          <div className="d-flex align-items-center justify-content-between mt-4">
+                                            
+                                              <div>
+                                              <Link to={"/SingleNews/"+item?.Title} className="textDetail">
+                                                     ادامه مطلب <ChevronLeft/>
+                                                  </Link>
+                                              </div>
+                                          </div>
+                                           </div>
+                                          </div>
+                                </Col>
+                              )})
+                  }
+                  </div>
+         
+      
+                      </Tab>
             </Tabs>
               </div>
        

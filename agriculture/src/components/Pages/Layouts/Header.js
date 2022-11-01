@@ -104,6 +104,44 @@ const Header = () =>{
             useEffect(() => {
               GetData();
             }, []);
+
+            const GetCart=()=>{
+              const axios = require("axios");
+            
+              var customer=localStorage.getItem("CustomerID")
+              var guest=localStorage.getItem("Guest")?localStorage.getItem("Guest"):0;
+
+              console.log(123456)
+              console.log(customer)
+              axios.post(apiUrl + "ShoppingBasketView",{CustomerID:customer,GuestID:guest})
+              .then(function (response) {
+                console.log(response)
+      
+                if (response.data.result == "True") {
+                  console.log(777)
+                  console.log(response.data.Data)
+          if(response.data.Data.length>0)
+          {
+            navigate("/Cart")
+          }
+          else{
+            alert("سبد شما خالی می یاشد")
+          }
+                }
+                else{
+                  alert("سبد شما خالی می یاشد")
+                  console.log(response.data.result)
+          
+                }})
+              .catch(function (error) {
+                console.log(777)
+                alert(error)
+      
+                console.log(error);
+              });
+        
+        
+            }
     return(
    <Container fluid className="pd0" style={{padding:0}}>
     <div className="topBar">
@@ -140,7 +178,7 @@ const Header = () =>{
         </div>
       
         <div className="btnBox">
-            <Button onClick={()=>navigate("/Cart")} className="cartBtn">
+            <Button onClick={()=>GetCart()} className="cartBtn">
                 <Cart className="ml-1"/>
                 سبد خرید
             </Button>
@@ -160,12 +198,13 @@ const Header = () =>{
                 }
             <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">زبان</InputLabel>
+        <InputLabel defaultValue={10} id="demo-simple-select-label">زبان</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
          className="languageSelect"
           label="Age"
+          value={10}
           
         >
           <MenuItem value={10}>
@@ -204,7 +243,7 @@ const Header = () =>{
             
             </Link>
             <div className="btnBox justify-content-end">
-            <Button onClick={()=>navigate("/Cart")} className="cartBtnResponsive">
+            <Button onClick={()=>GetCart()} className="cartBtnResponsive">
                 <Cart className="ml-1"/>
                 
             </Button>

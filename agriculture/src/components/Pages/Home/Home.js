@@ -244,9 +244,9 @@ const Home = () =>{
 
               <div className="sliderCardBox2">
               <div style={{position:'relative',padding:15}}>
-           <Button className="heartmini">
+           {/* <Button className="heartmini">
               <Heart/>
-            </Button>
+            </Button> */}
           <img src={apiAsset+item.Pic1} className="miniSliderImg"/>
           <br/>
           <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
@@ -358,9 +358,9 @@ const Home = () =>{
 
               <div className="sliderCardBox2">
               <div style={{position:'relative',padding:15}}>
-           <Button className="heartmini">
+           {/* <Button className="heartmini">
               <Heart/>
-            </Button>
+            </Button> */}
           <img src={apiAsset+item.Pic1} className="miniSliderImg"/>
           <br/>
           <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
@@ -481,9 +481,9 @@ const Home = () =>{
 
               <div className="sliderCardBox2">
               <div style={{position:'relative',padding:15}}>
-           <Button className="heartmini">
+           {/* <Button className="heartmini">
               <Heart/>
-            </Button>
+            </Button> */}
           <img src={Product} className="miniSliderImg"/>
           <br/>
           <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
@@ -586,9 +586,9 @@ const Home = () =>{
 
           <div className="sliderCardBox2">
           <div style={{position:'relative',padding:15}}>
-       <Button className="heartmini">
+       {/* <Button className="heartmini">
           <Heart/>
-        </Button>
+        </Button> */}
       <img src={Product} className="miniSliderImg"/>
       <br/>
       <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
@@ -690,7 +690,7 @@ const Home = () =>{
             <img 
             src={Avatar} 
             className="sliderImg"/>
-            <p className="sliderName">{item.Name}{item.Family}</p>
+            <p className="sliderName">{item.Name} {item.Family}</p>
             <p className="sliderDegree">{item.Speciality}</p>
             <p className="sliderDescription">
 {item.Description}                   

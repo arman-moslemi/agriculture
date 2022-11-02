@@ -16,7 +16,9 @@ import { ChevronLeft,Heart} from "react-bootstrap-icons";
 
 const Favorite = () =>{
     const [data, setData] = useState([]);
-    const [fav, setFav] = useState([]);
+    const [favPro, setFavPro] = useState([]);
+    const [favCustomer, setFavCustomer] = useState([]);
+    const [favBlog, setFavBlog] = useState([]);
     const [key, setKey] = useState('product');
     const GetData=()=>{
         const axios = require("axios");
@@ -27,7 +29,9 @@ const Favorite = () =>{
           if (response.data.result == "True") {
             console.log(999)
 
-            setFav(response.data.Data)
+            setFavPro(response.data.ProductData)
+            setFavCustomer(response.data.CusromerData)
+            setFavBlog(response.data.BlogData)
             console.log(response.data.Data);
 
         }})
@@ -94,7 +98,7 @@ const Favorite = () =>{
                 <Tab eventKey="product" title="محصولات برگزیده">
                     <div className="d-flex mt-3 flex-wrap justify-content-center">
                         {
-                            fav.filter(x=>x.ProductID!=null).map((item)=>{
+                            favProduct.filter(x=>x.ProductID!=null).map((item)=>{
                                 return(
 
                         <div to={"/SingleProduct/"+item.ProductName2} className="productCard">
@@ -152,7 +156,7 @@ index+1>item.Rate?
                 </Tab>
                 <Tab eventKey="consult" title="مشاوران برگزیده">
                 {
-                            fav.filter(x=>x.CustomerID2!=null).map((item)=>{
+                            favCustomer.filter(x=>x.CustomerID2!=null).map((item)=>{
                                 return(
                    <div className="consultBoxF">
                     <div className="d-flex align-items-center">
@@ -183,7 +187,7 @@ index+1>item.Rate?
 
                   {
                         
-                          fav.filter(x=>x.BlogID!=null).map((item)=>{
+                          favBlog.filter(x=>x.BlogID!=null).map((item)=>{
                               return(
                                 <Col md={4}>
                                 <div 

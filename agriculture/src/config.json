@@ -1,0 +1,5 @@
+{
+    "WEBRTC_api": "https://chatbackend.gsmartnet.com",
+    "base": "api/v1",
+    "login_api":"auth/login"
+ }

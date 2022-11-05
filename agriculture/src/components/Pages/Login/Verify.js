@@ -1,6 +1,6 @@
 import {React ,useState } from "react";
 import { Container, Row ,Col ,Button} from "react-bootstrap";
-import LoginImg from "../../assets/img/login.png";
+import LoginImg from "src/components/assets/img/login.png";
 import { Link, useNavigate,useLocation } from "react-router-dom";
 
 const Verify = () =>{

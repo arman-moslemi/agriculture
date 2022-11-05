@@ -1,6 +1,6 @@
 import {React ,useState } from "react";
 import { Container, Row ,Col ,Button} from "react-bootstrap";
-import LoginImg from "../../assets/img/login.png";
+import LoginImg from "src/components/assets/img/login.png";
 import { EyeFill,EyeSlashFill } from 'react-bootstrap-icons';
 import Checkbox from '@mui/material/Checkbox';
 import { Link, useNavigate } from "react-router-dom";

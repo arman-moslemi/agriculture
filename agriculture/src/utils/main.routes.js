@@ -21,6 +21,8 @@ import News from 'src/components/Pages/News/News';
 import SingleNews from 'src/components/Pages/News/SingleNews';
 import GroupProduct from 'src/components/Pages/Gruop/GroupProduct';
 import MainGroupProduct from 'src/components/Pages/Gruop/MainGroupProduct';
+import MainLayout from 'src/components/Pages/ChatVideo/layout/MainLayout';
+import LoginChat from 'src/components/Pages/ChatVideo/LoginChat';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -172,6 +174,20 @@ const MainRoutes = (props) => {
 					path='/SingleNews/:id'
 					name='خبر'
 					element={<SingleNews/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/LoginChat'
+					name='خبر'
+					element={<LoginChat/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/VideoChat'
+					name='خبر'
+					element={<MainLayout/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

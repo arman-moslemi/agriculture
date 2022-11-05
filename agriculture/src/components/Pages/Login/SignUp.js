@@ -55,7 +55,7 @@ const SignUp = () =>{
         }})
         .catch(function (error) {
           console.log(777)
-          alert(error)
+          console.log(error);
 
           console.log(error);
         });

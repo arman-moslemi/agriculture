@@ -95,7 +95,7 @@ const IoTManagement = () =>{
         }})
         .catch(function (error) {
           console.log(777)
-          alert(error)
+          console.log(error);
 
           console.log(error);
         });
@@ -109,7 +109,7 @@ const IoTManagement = () =>{
         }})
         .catch(function (error) {
           console.log(777)
-          alert(error)
+          console.log(error);
 
           console.log(error);
         });
@@ -128,7 +128,7 @@ GetData()
           }})
           .catch(function (error) {
             console.log(777)
-            alert(error)
+            console.log(error);
   
             console.log(error);
           });
@@ -146,7 +146,7 @@ GetData()
           }})
           .catch(function (error) {
             console.log(777)
-            alert(error)
+            console.log(error);
   
             console.log(error);
           });
@@ -164,7 +164,7 @@ GetData()
           }})
           .catch(function (error) {
             console.log(777)
-            alert(error)
+            console.log(error);
   
             console.log(error);
           });

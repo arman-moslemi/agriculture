@@ -37,7 +37,7 @@ const Favorite = () =>{
         }})
         .catch(function (error) {
           console.log(777)
-          alert(error)
+          console.log(error);
 
           console.log(error);
         });
@@ -51,7 +51,7 @@ const Favorite = () =>{
         }})
         .catch(function (error) {
           console.log(777)
-          alert(error)
+          console.log(error);
 
           console.log(error);
         });
@@ -71,7 +71,7 @@ const Favorite = () =>{
             }})
             .catch(function (error) {
                 console.log(777)
-                alert(error)
+                console.log(error);
                 
                 console.log(error);
             });

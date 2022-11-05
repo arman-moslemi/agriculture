@@ -32,7 +32,7 @@ const SingleNews = () =>{
             }})
             .catch(function (error) {
                 console.log(777)
-                alert(error)
+                console.log(error);
                 
                 console.log(error);
             });
@@ -46,7 +46,7 @@ const SingleNews = () =>{
         }})
         .catch(function (error) {
           console.log(777)
-          alert(error)
+          console.log(error);
 
           console.log(error);
         });
@@ -57,7 +57,7 @@ const SingleNews = () =>{
         }})
         .catch(function (error) {
           console.log(777)
-          alert(error)
+          console.log(error);
           console.log(error);
         });
         
@@ -74,7 +74,7 @@ const SingleNews = () =>{
             }})
             .catch(function (error) {
                 console.log(777)
-                alert(error)
+                console.log(error);
                 
                 console.log(error);
             });
@@ -100,7 +100,7 @@ GetData()
             }})
             .catch(function (error) {
                 console.log(777)
-                alert(error)
+                console.log(error);
                 
                 console.log(error);
             });

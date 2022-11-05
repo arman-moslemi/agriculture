@@ -21,6 +21,8 @@ import News from 'src/components/Pages/News/News';
 import SingleNews from 'src/components/Pages/News/SingleNews';
 import GroupProduct from 'src/components/Pages/Gruop/GroupProduct';
 import MainGroupProduct from 'src/components/Pages/Gruop/MainGroupProduct';
+import SmartFarming from 'src/components/Pages/SmartFarming/SmartFarming';
+import Rules from 'src/components/Pages/Rules/Rules';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -172,6 +174,20 @@ const MainRoutes = (props) => {
 					path='/SingleNews/:id'
 					name='خبر'
 					element={<SingleNews/>}
+				/></Routes> 
+					<Routes>
+				<Route
+					exact
+					path='/SmartFarming'
+					name='کشاورزی هوشمند'
+					element={<SmartFarming/>}
+				/></Routes> 
+				<Routes>
+				<Route
+					exact
+					path='/Rules'
+					name='قوانین و مقررات'
+					element={<Rules/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

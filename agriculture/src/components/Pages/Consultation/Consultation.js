@@ -550,12 +550,12 @@ const Consultation = () =>{
                     لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
                     </p>
                     <Row>
-                        <Col md={6} className="mb-3">
+                        <Col md={12} className="mb-3" style={{display:'flex',flexWrap:'wrap'}}>
                             {
                                 data?.map((item)=>{
                                     return(
 
-                            <div className="consultBox">
+                            <div className="consultBox" style={{margin:10}}>
                                 <div className="consultBox1">
                                     <div>
                                     <img src={Avatar} className="avatar"/>

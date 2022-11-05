@@ -91,7 +91,7 @@ const News = () =>{
                 <p className="newsDesc">
 {data[0]?.Text}                </p>
                 <div className="d-flex align-items-center justify-content-between mt-5">
-                    <div className="d-flex">
+                    {/* <div className="d-flex">
                         <Button className="newsBtn">
                             <Share className="newsBtnIcon" size={20}/>
                         </Button>
@@ -101,7 +101,7 @@ const News = () =>{
                         <Button className="newsBtn">
                             <ChatDots className="newsBtnIcon" size={20}/>
                         </Button>
-                    </div>
+                    </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[0]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
@@ -130,7 +130,7 @@ const News = () =>{
                 {data[1]?.Title}   
                 </p> 
                 <div className="d-flex align-items-center justify-content-between mt-4">
-                    <div className="d-flex">
+                    {/* <div className="d-flex">
                         <Button className="newsBtn2">
                             <Share className="newsBtnIcon2" size={20}/>
                         </Button>
@@ -140,7 +140,7 @@ const News = () =>{
                         <Button className="newsBtn2">
                             <ChatDots className="newsBtnIcon2" size={20}/>
                         </Button>
-                    </div>
+                    </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[1]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
@@ -161,7 +161,7 @@ const News = () =>{
                 {data[2]?.Title}   
                 </p> 
                 <div className="d-flex align-items-center justify-content-between mt-4">
-                    <div className="d-flex">
+                    {/* <div className="d-flex">
                         <Button className="newsBtn2">
                             <Share className="newsBtnIcon2" size={20}/>
                         </Button>
@@ -171,7 +171,7 @@ const News = () =>{
                         <Button className="newsBtn2">
                             <ChatDots className="newsBtnIcon2" size={20}/>
                         </Button>
-                    </div>
+                    </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[2]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
@@ -192,7 +192,7 @@ const News = () =>{
                 {data[3]?.Title}   
                 </p> 
                 <div className="d-flex align-items-center justify-content-between mt-4">
-                    <div className="d-flex">
+                    {/* <div className="d-flex">
                         <Button className="newsBtn2">
                             <Share className="newsBtnIcon2" size={20}/>
                         </Button>
@@ -202,7 +202,7 @@ const News = () =>{
                         <Button className="newsBtn2">
                             <ChatDots className="newsBtnIcon2" size={20}/>
                         </Button>
-                    </div>
+                    </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[3]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
@@ -225,7 +225,7 @@ const News = () =>{
                 {data[4]?.Text}   
                 </p>
                 <div className="d-flex align-items-center justify-content-between mt-5">
-                    <div className="d-flex">
+                    {/* <div className="d-flex">
                         <Button className="newsBtn">
                             <Share className="newsBtnIcon" size={20}/>
                         </Button>
@@ -235,7 +235,7 @@ const News = () =>{
                         <Button className="newsBtn">
                             <ChatDots className="newsBtnIcon" size={20}/>
                         </Button>
-                    </div>
+                    </div> */}
                     <div>
                         <Link to={"/SingleNews/"+data[4]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
@@ -261,7 +261,7 @@ const News = () =>{
                 {data[5]?.Title}   
                 </p> 
                 <div className="d-flex align-items-center justify-content-between mt-4">
-                    <div className="d-flex">
+                    {/* <div className="d-flex">
                         <Button className="newsBtn2">
                             <Share className="newsBtnIcon2" size={20}/>
                         </Button>
@@ -271,7 +271,7 @@ const News = () =>{
                         <Button className="newsBtn2">
                             <ChatDots className="newsBtnIcon2" size={20}/>
                         </Button>
-                    </div>
+                    </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[5]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>
@@ -296,7 +296,7 @@ const News = () =>{
                 {data[6]?.Text}   
                 </p>
                 <div className="d-flex align-items-center justify-content-between mt-5">
-                    <div className="d-flex">
+                    {/* <div className="d-flex">
                         <Button className="newsBtn">
                             <Share className="newsBtnIcon" size={20}/>
                         </Button>
@@ -306,7 +306,7 @@ const News = () =>{
                         <Button className="newsBtn">
                             <ChatDots className="newsBtnIcon" size={20}/>
                         </Button>
-                    </div>
+                    </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[6]?.Title} className="textDetail">
                            ادامه مطلب <ChevronLeft/>

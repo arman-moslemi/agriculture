@@ -28,7 +28,7 @@ const SingleNews = () =>{
         .then(function (response) {
           if (response.data.result == "True") {
               setData(response.data.Data)
-              
+              console.log(response.data.Data)
             }})
             .catch(function (error) {
                 console.log(777)
@@ -150,10 +150,24 @@ GetData()
                         </p>
                     </div>
                     <div>
-                        <Button onClick={()=>InsertFavorite()} className="addFavorite">
-                            <Heart  className="customM"size={20}/>
-                            افزودن به برگزیده ها
+                 
+                        <Button onClick={() =>      {
+                    navigator.clipboard
+                    .writeText( 'https://gsmartnet.com//SingleNews/'+data[0]?.Title?.replace(/%20/g, " "))
+                    .then(() => {
+                      alert("successfully copied");
+                    })
+                    .catch(() => {
+                      alert("something went wrong");
+                    });
+                }} className="newsBtn">
+                            <Share className="newsBtnIcon" size={20}/>
                         </Button>
+                        <Button onClick={()=>InsertFavorite()} className="newsBtn">
+                            <Heart className="newsBtnIcon" size={20}/>
+                        </Button>
+                    
+                   
                     </div>
                 </div>
                 <div className="newsTextBox">

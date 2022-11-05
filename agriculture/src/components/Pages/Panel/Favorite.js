@@ -30,9 +30,9 @@ const Favorite = () =>{
             console.log(999)
 
             setFavPro(response.data.ProductData)
-            setFavCustomer(response.data.CusromerData)
+            setFavCustomer(response.data.CustomerData)
             setFavBlog(response.data.BlogData)
-            console.log(response.data.Data);
+            console.log(response.data);
 
         }})
         .catch(function (error) {
@@ -98,7 +98,7 @@ const Favorite = () =>{
                 <Tab eventKey="product" title="محصولات برگزیده">
                     <div className="d-flex mt-3 flex-wrap justify-content-center">
                         {
-                            favProduct.filter(x=>x.ProductID!=null).map((item)=>{
+                            favPro.filter(x=>x.ProductID!=null).map((item)=>{
                                 return(
 
                         <div to={"/SingleProduct/"+item.ProductName2} className="productCard">
@@ -106,7 +106,8 @@ const Favorite = () =>{
               <Heart/>
               حذف از برگزیده ها
             </Button>
-                           <Link  to={"/SingleProduct/"+item.ProductName2} style={{padding:20,paddingBottom:5}}>
+            <div style={{marginRight:20,padding:5,}}>
+                           <Link  to={"/SingleProduct/"+item.ProductName2} style={{  textDecoration: "none" }}>
                            <img 
                            src={Product}
                             className="productImg"/>
@@ -142,6 +143,7 @@ index+1>item.Rate?
                                 </div>
                             </div>
                            </Link>
+                           </div>
                            <div className="box2Div">
                            <p className="productVolume">
                            نام تامین کننده کالا : {item.WarrantyName}
@@ -183,7 +185,7 @@ index+1>item.Rate?
                                 )})}
                 </Tab>
                 <Tab eventKey="news" title="اخبار برگزیده">
-                <div className="d-flex mt-3 flex-wrap justify-content-between">
+                <div className="d-flex mt-3 flex-wrap justify-content-start">
 
                   {
                         
@@ -205,9 +207,9 @@ index+1>item.Rate?
                                           <p className="newsTitle">
                                           {item?.Title}                
                                                           </p> 
-                                          <p className="newsDes">
+                                          {/* <p className="newsDes">
                                           {truncate( item?.Text,30)}
-                                                           </p>
+                                                           </p> */}
                                           <div className="d-flex align-items-center justify-content-between mt-4">
                                             
                                               <div>

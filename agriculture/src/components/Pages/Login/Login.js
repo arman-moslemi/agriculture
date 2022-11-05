@@ -32,7 +32,7 @@ const Login = () =>{
 
     }
     else{
-        var guest=localStorage.getItem("Guest")?localStorage.getItem("Guest"):0;
+        var guest=localStorage.getItem("Guest").length<7?localStorage.getItem("Guest"):0;
 
         axios.post(apiUrl + "Login",{Mobile:mobile,Password:pass,GuestID:guest})
         .then(function (response) {

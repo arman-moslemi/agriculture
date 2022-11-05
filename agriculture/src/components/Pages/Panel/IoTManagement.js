@@ -34,6 +34,7 @@ const IoTManagement = () =>{
     const [showCondition, setshowCondition] = useState(false);
     const [projectName, setProjectName] = useState("");
     const [partName, setPartName] = useState("");
+    const [serial, setSerial] = useState();
     const [deviceName, setDeviceName] = useState("");
    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -383,6 +384,9 @@ GetData()
           </Tooltip>
             </div>
             <div>
+                <Button className="deviceManage" style={{marginLeft:10}} onClick={()=>setSerial(item3.Serial)}>
+                    قواعد دستگاه
+                    </Button>
                 <Button className="deviceManage" onClick={handleShow4}>
                     مدیریت دستگاه
                     </Button>
@@ -483,12 +487,15 @@ GetData()
                    ) 
             }
                   </div> 
+                  {
+                    serial?
+
                   <div className="whiteBox mt-3">
                 <div className="d-flex align-items-center justify-content-between topBox">
                    <div className="d-flex align-items-center">
                    <img src={Setting} width="30px"/>
                    <p className="panelTitle">
-                   قواعد دستگاه های IoT
+                   قواعد دستگاه  {serial}
                    </p>
                    </div>
                    </div>
@@ -547,6 +554,9 @@ GetData()
                     :null}                  
                   
                    </div>
+                    :
+                    null
+                  }
         </Col>
         
         

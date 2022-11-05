@@ -80,7 +80,7 @@ const SignUp = () =>{
         <Col md={6} className="whiteBack">
             <div className="loginDetailBox">
                 <p className="hasAcoount">
-                    حساب کاربری دارید ؟<a href="#">وارد شوید</a>
+                    حساب کاربری دارید ؟<Link to={"/Login"}>وارد شوید</Link>
                 </p>
                 <p className="loginTitle">
                     ثبت نام

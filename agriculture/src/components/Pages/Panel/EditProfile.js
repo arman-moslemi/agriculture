@@ -37,6 +37,7 @@ const EditProfile = () =>{
     const [editCity,setEditCity]=useState()
     const [newAddress,setNewAddress]=useState("")
     const [editAddressID,setEditAddressID]=useState("")
+    const [isConsultant,setIsConsultant]=useState()
 
     const [newPostalCode,setNewPostalCode]=useState("")
     const [title,setTitle]=useState("")
@@ -80,16 +81,16 @@ const EditProfile = () =>{
                 setOpen(true)
             }
             else{
+                var ss=localStorage.getItem("CustomerID")
         
-        
-            axios.post(apiUrl + "EditCustomer",{CustomerID:state.CustomerID,Mobile:mobile,Name:name,Family:family,Password:pass,Email:email,
+            axios.post(apiUrl + "EditCustomer",{CustomerID:ss,Mobile:mobile,Name:name,Family:family,Password:pass,Email:email,
                 Degree:degre,CardNumber:cardNumber,Sheba:sheba,Specialty:specialty
             })
             .then(function (response) {
               if (response.data.result == "True") {
                 console.log(777)
                 console.log(response.data.Data)
-                setTitle("تغییرات بت موفیت ذخیره شد")
+                setTitle("تغییرات با موفیت ذخیره شد")
                 setOpen(true)
 
             
@@ -131,6 +132,7 @@ const EditProfile = () =>{
              setSpecialty(response.data.Data[0]?.Specialty)
              setCardNumber(response.data.Data[0]?.CardNumber)
              setSheba(response.data.Data[0]?.Sheba)
+             setIsConsultant(response.data.Data[0]?.IsConsultant)
 
             
     
@@ -208,7 +210,7 @@ const EditProfile = () =>{
                 console.log(response.data.Data)
                 setNewPostalCode("")
                 setNewAddress("")
-                GetData(response.data.Data)
+                GetData()
                 handleClose();
 
             
@@ -231,7 +233,7 @@ const EditProfile = () =>{
               if (response.data.result == "True") {
                 console.log(111)
                 console.log(response.data.Data)
-                GetData(response.data.Data)
+                GetData()
                 handleEditClose();
 
             
@@ -253,7 +255,6 @@ const EditProfile = () =>{
             .then(function (response) {
               if (response.data.result == "True") {
                 console.log(111)
-                console.log(response.data.Data)
                 GetData(response.data.Data)
 
             
@@ -296,7 +297,7 @@ const EditProfile = () =>{
                    </div>
                    {/* <Button className="editProfileBtn" onClick={handleShow}> */}
                    <Button className="editProfileBtn" onClick={saveDatas}>
-                    ویرایش اطلاعات
+                    ذخیره اطلاعات
                    </Button>
                    <Modal
                                                 show={show} onHide={AddAddress}
@@ -399,168 +400,174 @@ const EditProfile = () =>{
                     </Row>
                 </Form>
             </div>
-            <div className="whiteBox mt-4">
-                <div className="d-flex align-items-center justify-content-between topBox">
-                   <div className="d-flex">
-                   <Pen/>
-                   <p className="panelTitle">
-                    اطلاعات تخصصی
-                   </p>
-                   </div>
-                   
-                </div>
-                <Form className="mt-3">
-                    <Row>
-                        <Col md={6}>
-                        <span className="inputTitle">مدرک تحصیلی</span>
-                        <br/>
-                        {/* <div className="inputCLass d-flex align-items-center"> */}
-                            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کارشناسی ارشد</p> */}
-                            <input value={degre} onChange={(e)=>setDegre(e.target.value)}  className="inputCLass" type="text"/>
+            {
+isConsultant?
+<div className="whiteBox mt-4">
+<div className="d-flex align-items-center justify-content-between topBox">
+   <div className="d-flex">
+   <Pen/>
+   <p className="panelTitle">
+    اطلاعات تخصصی
+   </p>
+   </div>
+   
+</div>
+<Form className="mt-3">
+    <Row>
+        <Col md={6}>
+        <span className="inputTitle">مدرک تحصیلی</span>
+        <br/>
+        {/* <div className="inputCLass d-flex align-items-center"> */}
+            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کارشناسی ارشد</p> */}
+            <input value={degre} onChange={(e)=>setDegre(e.target.value)}  className="inputCLass" type="text"/>
 
-                        {/* </div> */}
-                        
-                        </Col>
-                        <Col md={6}>
-                        <span className="inputTitle">تخصص</span>
-                        <br/>
-                            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کشاورزی</p> */}
-                            <input value={specialty} onChange={(e)=>setSpecialty(e.target.value)}  className="inputCLass" type="text"/>
+        {/* </div> */}
+        
+        </Col>
+        <Col md={6}>
+        <span className="inputTitle">تخصص</span>
+        <br/>
+            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کشاورزی</p> */}
+            <input value={specialty} onChange={(e)=>setSpecialty(e.target.value)}  className="inputCLass" type="text"/>
 
-                        </Col>
-                    </Row>
-                    <span className="inputTitle">نوع مشاوره </span>
-                        <br/>
-                    <Row>
-                        <Col md={4}>
-                        <div className="grayBox">
-                        <div className="d-flex align-items-center">
-                   
-                   <Checkbox
+        </Col>
+    </Row>
+    <span className="inputTitle">نوع مشاوره </span>
+        <br/>
+    <Row>
+        <Col md={4}>
+        <div className="grayBox">
+        <div className="d-flex align-items-center">
+   
+   <Checkbox
 
-                       
-                       sx={{
-                       color: '#009959',
-                       '&.Mui-checked': {
-                       color: '#009959',
-                       },
-                   }}
-               />
-                <span className="categoryLable">
-                       متنی
-                   </span>
-               </div>
-               <span className="inputTitle">تعرفه هر دقیقه مشاوره متنی : </span>
-                        <br/>
-                        <div className="d-flex justify-content-between">
-                            <div className="priceShow">
-                                100.000 تومان
-                            </div>
-                            <Form.Select className="priceSelect" >
-                                            
-                                                    <option>تومان</option>
-                                                    <option>پوند</option>
-                                                    <option>درهم</option>
-                                                   
-                                                </Form.Select>
-                        </div>
-                        </div>
-
-                        </Col>
-                        <Col md={4}>
-                        <div className="grayBox">
-                        <div className="d-flex align-items-center">
-                   
-                   <Checkbox
-
-                       
-                       sx={{
-                       color: '#009959',
-                       '&.Mui-checked': {
-                       color: '#009959',
-                       },
-                   }}
-               />
-                <span className="categoryLable">
-                      صوتی 
-                   </span>
-               </div>
-               <span className="inputTitle">تعرفه هر دقیقه مشاوره صوتی : </span>
-                        <br/>
-                        <div className="d-flex justify-content-between">
-                            <div className="priceShow">
-                                150.000 تومان
-                            </div>
-                            <Form.Select className="priceSelect" disabled>
-                                            
-                                                    <option>تومان</option>
-                                                    <option>پوند</option>
-                                                    <option>درهم</option>
-                                                   
-                                                </Form.Select>
-                        </div>
-                        </div>
-
-                        </Col>
-                        <Col md={4}>
-                        <div className="grayBox">
-                        <div className="d-flex align-items-center">
-                   
-                   <Checkbox
-
-                       
-                       sx={{
-                       color: '#009959',
-                       '&.Mui-checked': {
-                       color: '#009959',
-                       },
-                   }}
-               />
-                <span className="categoryLable">
-                       تصویری
-                   </span>
-               </div>
-               <span className="inputTitle">تعرفه هر دقیقه مشاوره تصویری :</span>
-                        <br/>
-                        <div className="d-flex justify-content-between">
-                            <div className="priceShow">
-                                200.000 تومان
-                            </div>
-                            <Form.Select className="priceSelect" disabled>
-                                            
-                                                    <option>تومان</option>
-                                                    <option>پوند</option>
-                                                    <option>درهم</option>
-                                                   
-                                                </Form.Select>
-                        </div>
-                        </div>
-
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col md={6}>
-                        <span className="inputTitle">شماره کارت</span>
-                        <br/>
-                        {/* <div className="inputCLass d-flex align-items-center"> */}
-                            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>5022221022102250</p> */}
-                            <input value={cardNumber} onChange={(e)=>setCardNumber(e.target.value)}  className="inputCLass" type="text"/>
-
-                        {/* </div> */}
-                        
-                        </Col>
-                        <Col md={6}>
-                        <span className="inputTitle">شماره شبا</span>
-                        <br/>
-                        {/* <div className="inputCLass d-flex align-items-center">
-                            <p style={{marginBottom:0,color:'#c1c1c1'}}>IR2255000000000000005556</p>
-                        </div> */}
-                            <input value={sheba} onChange={(e)=>setSheba(e.target.value)}  className="inputCLass" type="text"/>
-                
-                        </Col>
-                    </Row>
-                </Form>
+       
+       sx={{
+       color: '#009959',
+       '&.Mui-checked': {
+       color: '#009959',
+       },
+   }}
+/>
+<span className="categoryLable">
+       متنی
+   </span>
+</div>
+<span className="inputTitle">تعرفه هر دقیقه مشاوره متنی : </span>
+        <br/>
+        <div className="d-flex justify-content-between">
+            <div className="priceShow">
+                100.000 تومان
             </div>
+            <Form.Select className="priceSelect" >
+                            
+                                    <option>تومان</option>
+                                    <option>پوند</option>
+                                    <option>درهم</option>
+                                   
+                                </Form.Select>
+        </div>
+        </div>
+
+        </Col>
+        <Col md={4}>
+        <div className="grayBox">
+        <div className="d-flex align-items-center">
+   
+   <Checkbox
+
+       
+       sx={{
+       color: '#009959',
+       '&.Mui-checked': {
+       color: '#009959',
+       },
+   }}
+/>
+<span className="categoryLable">
+      صوتی 
+   </span>
+</div>
+<span className="inputTitle">تعرفه هر دقیقه مشاوره صوتی : </span>
+        <br/>
+        <div className="d-flex justify-content-between">
+            <div className="priceShow">
+                150.000 تومان
+            </div>
+            <Form.Select className="priceSelect" disabled>
+                            
+                                    <option>تومان</option>
+                                    <option>پوند</option>
+                                    <option>درهم</option>
+                                   
+                                </Form.Select>
+        </div>
+        </div>
+
+        </Col>
+        <Col md={4}>
+        <div className="grayBox">
+        <div className="d-flex align-items-center">
+   
+   <Checkbox
+
+       
+       sx={{
+       color: '#009959',
+       '&.Mui-checked': {
+       color: '#009959',
+       },
+   }}
+/>
+<span className="categoryLable">
+       تصویری
+   </span>
+</div>
+<span className="inputTitle">تعرفه هر دقیقه مشاوره تصویری :</span>
+        <br/>
+        <div className="d-flex justify-content-between">
+            <div className="priceShow">
+                200.000 تومان
+            </div>
+            <Form.Select className="priceSelect" disabled>
+                            
+                                    <option>تومان</option>
+                                    <option>پوند</option>
+                                    <option>درهم</option>
+                                   
+                                </Form.Select>
+        </div>
+        </div>
+
+        </Col>
+    </Row>
+    <Row>
+        <Col md={6}>
+        <span className="inputTitle">شماره کارت</span>
+        <br/>
+        {/* <div className="inputCLass d-flex align-items-center"> */}
+            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>5022221022102250</p> */}
+            <input value={cardNumber} onChange={(e)=>setCardNumber(e.target.value)}  className="inputCLass" type="text"/>
+
+        {/* </div> */}
+        
+        </Col>
+        <Col md={6}>
+        <span className="inputTitle">شماره شبا</span>
+        <br/>
+        {/* <div className="inputCLass d-flex align-items-center">
+            <p style={{marginBottom:0,color:'#c1c1c1'}}>IR2255000000000000005556</p>
+        </div> */}
+            <input value={sheba} onChange={(e)=>setSheba(e.target.value)}  className="inputCLass" type="text"/>
+
+        </Col>
+    </Row>
+</Form>
+</div>
+:
+null
+            }
+          
             <div className="whiteBox mt-4">
                 <div className="d-flex align-items-center justify-content-between topBox">
                    <div className="d-flex">

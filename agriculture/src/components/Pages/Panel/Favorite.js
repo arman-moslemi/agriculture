@@ -20,6 +20,21 @@ const Favorite = () =>{
     const [favCustomer, setFavCustomer] = useState([]);
     const [favBlog, setFavBlog] = useState([]);
     const [key, setKey] = useState('product');
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => {setShow(false);};
+      const handleShow = (types,names,specialtys,wait) => {setShow(true);setName(names);setType(types);setSpecialty(specialtys)};
+      const [show2, setShow2] = useState(false);
+      const [name, setName] = useState();
+      const [subject, setubject] = useState();
+      const [Specialty, setSpecialty] = useState();
+      const [type, setType] = useState();
+      const [time, setTime] = useState();
+      const [cost, setCost] = useState();
+      const handleClose2 = () => {setShow2(false);setName("");setType("");setSpecialty("");setTime("")};
+      const handleShow2 = () => {setShow2(true);setShow(false)};
+      const [consultant, setConsultant] = useState();
+
     const GetData=()=>{
         const axios = require("axios");
       var ss=localStorage.getItem("CustomerID")
@@ -56,6 +71,46 @@ const Favorite = () =>{
           console.log(error);
         });
      
+      }
+      const GetCost=(id)=>{
+        const axios = require("axios");
+        setConsultant(id)
+        axios.post(apiUrl + "SetCostConsultant",{CustomerID:id,Time:time,Type:type})
+        .then(function (response) {
+          if (response.data.result == "True") {
+              setCost(response.data.Data)
+              handleShow2()
+            }})
+            .catch(function (error) {
+                console.log(777)
+                console.log(error);
+                
+                console.log(error);
+            });
+   
+     
+        
+  
+      }
+    const InsertConsultant=()=>{
+        const axios = require("axios");
+        var ss= localStorage.getItem("CustomerID")
+        axios.post(apiUrl + "SetConsultant",{Customer:ss,Consultant:consultant,Cost:cost,Time:time,Type:type,Subject:subject})
+        .then(function (response) {
+          if (response.data.result == "True") {
+              handleClose2()
+              alert("با موفقیت ثبت شد")
+            }})
+            .catch(function (error) {
+                console.log(777)
+                console.log(error);
+                
+                console.log(error);
+            });
+   
+     
+        
+  
       }
       const DeleteFavorite=async(mm)=>{
         var ss=await localStorage.getItem("CustomerID")
@@ -167,19 +222,147 @@ index+1>item.Rate?
 {item.Name}{item.Family}                            </p>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
-                    <div style={{marginLeft:20}}>
+                    {/* <div style={{marginLeft:20}}>
                                     <p className="productPrice">
                                       امتیاز مشاور
                                     </p>
-                                </div>
-                                <div className="d-flex align-items-center">
+                                </div> */}
+                                {/* <div className="d-flex align-items-center">
                                     <Star color="#000" className="marginLeft5"/>
                                     <Star color="#000" className="marginLeft5"/>
                                     <StarFill color="#ffb921" className="marginLeft5"/>
                                     <StarFill color="#ffb921" className="marginLeft5"/>
                                     <StarFill color="#ffb921"/>
-                                </div>
-                             
+                                </div> */}
+                                        <div className="d-flex">
+                                            <Link to="" className="callBtn borderLeftGreen" onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime )}>
+                                                متنی
+                                            </Link>
+                                            <Link to=""  className="callBtn borderLeftGreen" onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime )}>
+                                               صوتی
+                                            </Link>
+                                            <Link to=""  className="callBtn" onClick={()=>handleShow("3",item.Name+" "+item.Family,item.Specialty,item.WaitTime )}>
+                                                تصویری
+                                            </Link>
+                                            <Modal
+                                                show={show} onHide={handleClose}
+                                                className="consultModal"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                                >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                    زمان مورد نیاز برای انجام مشاوره
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                <p className="modalText">
+                                                    <span>
+                                                        نام مشاور : 
+                                                    </span>
+{name}                                                </p>
+                                                <p className="modalText">
+                                                    <span>
+                                                       تحصیلات : 
+                                                    </span>
+                                                     {Specialty}
+                                                </p>
+                                                <p className="modalText">
+                                                    <span>
+                                                        نوع مشاوره : 
+                                                    </span>
+                                                    {type==1?"متنی":type==2?"صوتی":"تصویری"}
+                                                </p>
+                                           
+                                                <Form>
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                        موضوع مشاوره : 
+                                                    </span>
+                                                    
+                                                </p>
+                                                <input onChange={(e)=>setubject(e.target.value)} className="inputCLass" type="text"/>
+                                                <div className="d-flex align-items-center">
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                        مدت زمان مشاوره : 
+                                                    </span>
+                                                </p>
+                                                <Form.Select onChange={(ss)=>setTime(ss.target.value)} className="bSelect">
+                                            
+                                                    <option value={""}>انتخاب</option>
+                                                    <option value={15}>15 دقیقه</option>
+                                                    <option value={30}>30 دقیقه</option>
+                                                    <option value={45}>45 دقیقه</option>
+                                                    <option value={60}>60 دقیقه</option>
+                                                </Form.Select>
+                                                </div>
+                                                </Form>
+                                               
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                    <Button  onClick={()=>GetCost(item.CustomerID)}className="modalSaveBtn">ثبت درخواست</Button>
+                                                </Modal.Footer>
+                                             </Modal>
+                                             <Modal
+                                                show={show2} onHide={handleClose2}
+                                                className="consultModal"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                                >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                    تایید درخواست
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                                <p className="modalText">
+                                                    <span>
+                                                        نام مشاور : 
+                                                    </span>
+{name}                                                </p>
+                                                <p className="modalText">
+                                                    <span>
+                                                       تحصیلات : 
+                                                    </span>
+{Specialty}                                                </p>
+                                                <p className="modalText">
+                                                    <span>
+                                                        نوع مشاوره : 
+                                                    </span>
+                                                     {type==1?"متنی":type==2?"صوتی":"تصویری"}
+                                                </p>
+                                           
+                                             
+                                                <p className="modalText">
+                                                    <span>
+                                                        موضوع مشاوره : 
+                                                    </span>
+{subject}                                                </p>
+                                                <p className="modalText colorOrange">
+                                                    <span>
+                                                        هزینه مشاوره : 
+                                                    </span>
+                                                   {cost} تومان
+                                                </p>
+                                            
+                                            
+                                               
+                                                </Modal.Body>
+                                                <Modal.Footer>
+                                                <Button  onClick={InsertConsultant}className="modalSaveBtn2">پرداخت از کیف پول</Button>
+                                                    <Button  onClick={InsertConsultant}className="modalSaveBtn">پرداخت آنلاین</Button>
+                                                   
+                                                </Modal.Footer>
+                                             </Modal>
+                                          
+                                        </div>
+                                <div className="d-flex align-items-center">
+                                     <Button onClick={()=>DeleteFavorite(item.FavoriteID)} className="heartCons">
+              <Heart/>
+              حذف از برگزیده ها
+            </Button>
+            </div>
                             </div>
                    </div>
                                 )})}
@@ -192,11 +375,16 @@ index+1>item.Rate?
                           favBlog.filter(x=>x.BlogID!=null).map((item)=>{
                               return(
                                 <Col md={4}>
+                    
                                 <div 
                                 
                                 className="miniNewsBox w90"
                                 
                                 >
+                                           <Button onClick={()=>DeleteFavorite(item.FavoriteID)} className="heartCons">
+              <Heart/>
+              حذف از برگزیده ها
+            </Button>
                                               <img 
                                                   src={apiAsset+item?.Pic}
                                                   />

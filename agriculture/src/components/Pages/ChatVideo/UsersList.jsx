@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState ,useEffect} from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { Grid, IconButton, Paper, Typography } from "@material-ui/core";
 import CallIcon from "@material-ui/icons/Call";
@@ -15,7 +15,10 @@ const UsersListGrid = () => {
     useContext(SocketContext);
   const [otherPartyInfo, setOtherPartyInfo] = useState("");
   const navigate = useNavigate();
+  useEffect(() => {
 
+    callActionStart()
+  }, []);
   const columns = [
     {
       field: "status",
@@ -177,6 +180,14 @@ const UsersListGrid = () => {
     },
   ];
 
+  const callActionStart = () => {
+    const userId = localStorage.getItem("user_id");
+    callUser(65, userId);
+    // setOtherPartyInfo({ fullName: `${fname} ${lname}`, clientId });
+    setOtherPartyInfo({ fullName: `علی بابایی`,clientId: 65 });
+    const callInfo = { ...call, to: `علی بابایی`, otherParty: 65 };
+    setCall(callInfo);
+  };
   const callAction = (info) => {
     const { clientId, fname, lname, userId } = info;
     callUser(clientId, userId);

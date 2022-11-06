@@ -14,10 +14,11 @@ const DialogBox = ({open, handleClose, otherPartyInfo}) => {
   
   const {handleCameraToggle, handleMicToggle} = useContext(SocketContext);
   const {fullName, clientId} = otherPartyInfo;
-
+console.log(888)
+console.log(open)
     return ( 
         <Dialog
-        open={open}
+        open={open==true?open:false}
         onClose={handleClose}
         fullWidth={true}
         maxWidth='xs'

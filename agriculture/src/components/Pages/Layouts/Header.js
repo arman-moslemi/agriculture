@@ -344,7 +344,7 @@ auto.map((item)=>{
             <span>محصولات</span>
         </Button>
         
-        <Button className="topBarBtn">
+        <Button onClick={()=>navigate("/SmartFarming")} className="topBarBtn">
             <img src={M2B} className="btnImg"/>
             <br/>
             <span>کشاورزی هوشمند</span>

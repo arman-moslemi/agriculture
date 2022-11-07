@@ -182,10 +182,13 @@ const UsersListGrid = () => {
 
   const callActionStart = () => {
     const userId = localStorage.getItem("user_id");
-    callUser(65, userId);
+    const consId = localStorage.getItem("cons_id");
+    const consfname = localStorage.getItem("cons_fname");
+    const conslname = localStorage.getItem("cons_lname");
+    callUser(consId, userId);
     // setOtherPartyInfo({ fullName: `${fname} ${lname}`, clientId });
-    setOtherPartyInfo({ fullName: `علی بابایی`,clientId: 65 });
-    const callInfo = { ...call, to: `علی بابایی`, otherParty: 65 };
+    setOtherPartyInfo({ fullName: `${consfname} ${conslname}`,clientId: consId });
+    const callInfo = { ...call, to: `${consfname} ${conslname}`, otherParty: consId };
     setCall(callInfo);
   };
   const callAction = (info) => {
@@ -223,7 +226,7 @@ navigate("/login");
       alignItems="center"
       className="p-0 p-md-5 rtl"
     >
-      <div className="row">
+      {/* <div className="row">
           <input className="form-control" />
         <IconButton color="primary"
           component="span"
@@ -231,13 +234,13 @@ navigate("/login");
           >
               <MessageIcon />
           </IconButton>
-      </div>
-      <div className="users-list-title mt-5 mt-md-0">
+      </div> */}
+      {/* <div className="users-list-title mt-5 mt-md-0">
         <Typography variant="h5" className="text-center mb-5 title">
           لیست کاربران
         </Typography>
-      </div>
-      <Grid item sm={12} md={12} className="w-100">
+      </div> */}
+      {/* <Grid item sm={12} md={12} className="w-100">
         <Paper elevation={3}>
           <div
             className="text-center table-responsive"
@@ -257,7 +260,7 @@ navigate("/login");
             )}
           </div>
         </Paper>
-      </Grid>
+      </Grid> */}
       <DialogBox
         open={openCallDialog}
         handleClose={leaveCall}

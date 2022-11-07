@@ -31,6 +31,30 @@ const SmartFarming = () =>{
     }
   };
   const [newest,setNew]=useState([])
+
+  const GetData=()=>{
+    const axios = require("axios");
+    axios.get(apiUrl + "LastIOTProduct")
+    .then(function (response) {
+      if (response.data.result == "True") {
+          setNew( Object.values(response.data.Data))
+          
+        }})
+        .catch(function (error) {
+            console.log(777)
+            console.log(error);
+            
+            console.log(error);
+        });
+
+ 
+    
+
+  }
+  useEffect(() => {
+    GetData();
+
+  }, []);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -64,7 +88,7 @@ const SmartFarming = () =>{
         <CarouselMulti responsive={responsive} rtl={true}>
 
 {
-      newest.map((item)=>{
+      newest?.map((item)=>{
         return(
 
           <div className="sliderCardBox2">
@@ -72,22 +96,22 @@ const SmartFarming = () =>{
        {/* <Button className="heartmini">
           <Heart/>
         </Button> */}
-      <img src={Product} className="miniSliderImg"/>
+      <img  src={apiAsset+item[0].Pic1} className="miniSliderImg"/>
       <br/>
-      <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
+      <Link to={"/SingleProduct/"+item[0].Name2}  className="pName pLink">{item[0].Name}</Link>
       <div className="d-flex justify-content-between align-items-center">
      
       <p className="productPriceStroke">
-                                    {item.Cost} تومان
+                                    {item[0].Cost} تومان
                                 </p>
                                 <p className="productPrice">
-                                    {item.SpecialCost} تومان
+                                    {item[0].SpecialCost} تومان
                                 </p>
                       
       </div>
       <hr/>
       <p className="tamin">
-      نام تامین کننده کالا : {item.WarrantyName}
+      نام تامین کننده کالا : {item[0].WarrantyName}
         </p>
       </div>
       </div>

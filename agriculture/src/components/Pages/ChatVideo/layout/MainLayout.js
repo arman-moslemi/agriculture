@@ -9,7 +9,7 @@ const MainLayout = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     const userId = localStorage.getItem("user_id");
-    if (token && userId) navigate("/VideoChat");
+    if ( userId) navigate("/VideoChat");
     else navigate("/login");
   }, []);
 

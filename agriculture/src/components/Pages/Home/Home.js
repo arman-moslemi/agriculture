@@ -182,7 +182,7 @@ const Home = () =>{
           <img src={Slide2} className="cardImg"/>
           <img src={Back} className="gBack"/>
           <p className="cardText">انواع دستگاه های IoT</p>
-          <Button className="yellowBtn">مشاهده محصولات</Button>
+          <Button onClick={()=>navigate("/SmartFarming")} className="yellowBtn">مشاهده محصولات</Button>
         </div>
         <div className="productSlider">
           <div className="d-flex mt-3">
@@ -294,13 +294,13 @@ const Home = () =>{
     alignItems: 'center'}}>
         <p className="cardText">انواع دستگاه های IoT</p>
         <br/>
-          <Button className="yellowBtn">مشاهده محصولات</Button>
+          <Button onClick={()=>navigate("/SmartFarming")} className="yellowBtn">مشاهده محصولات</Button>
         </div>
         </div>
     
         <div className="productSlider">
           <div className="d-flex mt-3">
-          <p className="productSliderTitle">پر فروش ترین محصولات ما</p>
+          <p className="productSliderTitle">جدیدترین محصولات ما</p>
           <hr className="hrgray"/>
           </div>
           <div>
@@ -523,7 +523,7 @@ const Home = () =>{
           <img src={Slide2} className="cardImg"/>
           <img src={Back} className="gBack"/>
           <p className="cardText">انواع دستگاه های IoT</p>
-          <Button className="yellowBtn">مشاهده محصولات</Button>
+          <Button onClick={()=>navigate("/SmartFarming")} className="yellowBtn">مشاهده محصولات</Button>
         </div>
     
 
@@ -632,7 +632,7 @@ const Home = () =>{
     alignItems: 'center'}}>
         <p className="cardText">انواع دستگاه های IoT</p>
         <br/>
-          <Button className="yellowBtn">مشاهده محصولات</Button>
+          <Button onClick={()=>navigate("/SmartFarming")} className="yellowBtn">مشاهده محصولات</Button>
         </div>
         </div>
 

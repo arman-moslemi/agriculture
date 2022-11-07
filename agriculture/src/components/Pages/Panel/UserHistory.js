@@ -273,7 +273,9 @@ cons.map((item,index)=>{
             {/* <Button className="repeatConsult">
                 + تکرار مشاوره
             </Button> */}
-            <Button onClick={()=>{item.Type==1 ?GetChat(item.ConsultantReqID):window.open("https://chat.gsmartnet.com")}} className="viewBtn">
+            <Button
+            //  onClick={()=>{item.Type==1 ?GetChat(item.ConsultantReqID):window.open("https://chat.gsmartnet.com")}} 
+             className="viewBtn">
                 <EyeFill color="#AAB7CA" size={25}/>
             </Button>
             {/* <Button className="editProfileBtn"  onClick={handleShow}> 

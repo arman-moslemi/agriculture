@@ -159,7 +159,21 @@ const ContextProvider = ({ children }) => {
     if (connectionRef.current) {
       connectionRef.current.destroy();
     }
-    window.location.reload();
+    // window.location.reload();
+          const axios = require("axios");
+          const userId = localStorage.getItem("user_id");
+
+      axios.post("https://admin.gsmartnet.com/api/VideoEnd",{id:userId})
+      .then(function (response) {
+ console.log(666)
+ console.log(response)
+ navigate("/")
+            }
+     
+     )
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const logout = () => {

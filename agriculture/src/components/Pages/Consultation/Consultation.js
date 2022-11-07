@@ -15,7 +15,7 @@ import {
 import 'react-accessible-accordion/dist/fancy-example.css';
 import Checkbox from '@mui/material/Checkbox';
 import Slider from "react-slick";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams } from "react-router-dom";
 import CustomizedDialogs from '../Layouts/AlertModal';
@@ -58,11 +58,15 @@ const Consultation = () =>{
       const [type, setType] = useState();
       const [time, setTime] = useState();
       const [cost, setCost] = useState();
+      const [property, setProperty] = useState();
       const [consultant, setConsultant] = useState();
+      let navigate = useNavigate();
 
       const handleClose2 = () => {setShow2(false);setName("");setType("");setSpecialty("");setTime("")};
       const handleShow2 = () => {setShow2(true);setShow(false)};
       const [data, setData] = useState([]);
+      const [data2, setData2] = useState([]);
+      const [similar, setSimilar] = useState([]);
       const [recent, setRecent] = useState([]);
 
   
@@ -72,6 +76,7 @@ const Consultation = () =>{
           .then(function (response) {
             if (response.data.result == "True") {
                 setData(response.data.Data)
+                setData2(response.data.Data)
                 
               }})
               .catch(function (error) {
@@ -83,7 +88,19 @@ const Consultation = () =>{
           axios.get(apiUrl + "GetConsultant")
           .then(function (response) {
             if (response.data.result == "True") {
-                setData(response.data.Data)
+                setSimilar(response.data.Data)
+                
+              }})
+              .catch(function (error) {
+                  console.log(777)
+                  console.log(error);
+                  
+                  console.log(error);
+              });
+          axios.get(apiUrl + "Specialty")
+          .then(function (response) {
+            if (response.data.result == "True") {
+                setProperty(response.data.Data)
                 
               }})
               .catch(function (error) {
@@ -116,14 +133,24 @@ const Consultation = () =>{
             
       
           }
-        const InsertConsultant=()=>{
+        const InsertConsultant=async()=>{
             const axios = require("axios");
             var ss= localStorage.getItem("CustomerID")
             axios.post(apiUrl + "SetConsultant",{Customer:ss,Consultant:consultant,Cost:cost,Time:time,Type:type,Subject:subject})
             .then(function (response) {
               if (response.data.result == "True") {
+                console.log(8768)
+                console.log(response.data)
+                console.log(response.data.Data1?.id)
+              localStorage.setItem("user_id",response.data.Data1?.id);
+              localStorage.setItem("cons_id",response.data.Data2?.id);
+              localStorage.setItem("cons_fname",response.data.Data2?.fname);
+              localStorage.setItem("cons_lname",response.data.Data2?.lname);
+
                   handleClose2()
                   alert("با موفقیت ثبت شد")
+                  window.open("/VideoChat")
+                //   navigate("/VideoChat")
                 }})
                 .catch(function (error) {
                     console.log(777)
@@ -159,6 +186,86 @@ const Consultation = () =>{
           GetData();
   
         }, []);
+        const [filter,setFilter]=useState([])
+        var gg=[]
+        const proFilter=(type,val,vv)=>{
+      
+      if(type==1){
+        setFilter([...filter,{id:val,title:vv.SpecialtyID}])
+        gg.push({id:val,title:vv.SpecialtyID})
+        var ff=[]
+      
+          console.log(14563)
+          console.log(val)
+          console.log(gg)
+      //  setProduct([])
+      // var list=[...product].sort((a, b) => (a.Cost > b.Cost) ? 1 : -1);
+      data?.map((item2,index1)=>{
+        var count=0;
+      gg?.map((item,index3)=>{
+      
+       
+      
+          if(item2.SpecialtyID==item.id)
+         {
+           count+=1;
+           if (count==gg.length){
+      
+            ff.push(item2)
+          }
+          
+        
+        }
+        })
+      })
+      console.log(ff)
+      // if(ff.length!=0){
+      
+        setData(ff)
+      }
+      else{
+        setFilter( filter.filter((el)=>el.id!=vv.SpecialtyID));
+        gg=gg.filter((el)=>el.id!=vv.SpecialtyID);
+        var ff=[]
+      
+          console.log(14563)
+          console.log(val)
+          console.log(gg)
+      //  setProduct([])
+      // var list=[...product].sort((a, b) => (a.Cost > b.Cost) ? 1 : -1);
+      data2?.map((item2,index1)=>{
+        var count=0;
+      gg?.map((item,index3)=>{
+      
+       
+      
+          if(item2.SpecialtyID==item.id)
+         {
+           count+=1;
+           if (count==gg.length){
+      
+            ff.push(item2)
+          }
+          
+        
+        }
+        })
+      })
+      console.log(ff)
+      // if(ff.length!=0){
+      
+        setData(ff)
+      
+      }
+      
+      
+      
+      // }
+      if(gg.length==0)
+      {
+      GetData()
+      }
+      }
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -173,10 +280,13 @@ const Consultation = () =>{
             <AccordionItem >
                 <AccordionItemHeading>
                     <AccordionItemButton>
-                      دسته بندی یک
-                    </AccordionItemButton>
+تخصص                    </AccordionItemButton>
                  </AccordionItemHeading>
             <AccordionItemPanel>
+                {
+                    property?.map((item)=>{
+                        return(
+
             <div className="d-flex align-items-center">
                    
                     <Checkbox
@@ -188,86 +298,34 @@ const Consultation = () =>{
                         color: '#009959',
                         },
                     }}
+
+                    value={item.SpecialtyID}
+                    onChange={(e)=>e.target.checked? proFilter(1,e.target.value,item)
+                      :
+                    
+                     proFilter(2,e.target.value,item)
+                    
+                    
+                      
+                     }
                 />
                  <span className="categoryLable">
-                        زیر دسته یک
-                    </span>
+{item.SpecialtyName}                    </span>
                 </div>
-                <div className="d-flex align-items-center">
-                   
-                   <Checkbox
-
-                       
-                       sx={{
-                       color: '#009959',
-                       '&.Mui-checked': {
-                       color: '#009959',
-                       },
-                   }}
-               />
-                <span className="categoryLable">
-                       زیر دسته دو
-                   </span>
-               </div>
-               <div className="d-flex align-items-center">
-                   
-                   <Checkbox
-
-                       
-                       sx={{
-                       color: '#009959',
-                       '&.Mui-checked': {
-                       color: '#009959',
-                       },
-                   }}
-               />
-                <span className="categoryLable">
-                       زیر دسته سه
-                   </span>
-               </div>
-               <div className="d-flex align-items-center">
-                   
-                   <Checkbox
-
-                       defaultChecked
-                       sx={{
-                       color: '#009959',
-                       '&.Mui-checked': {
-                       color: '#009959',
-                       },
-                   }}
-               />
-                <span className="categoryLable">
-                       زیر دسته چهار
-                   </span>
-               </div>
-               <div className="d-flex align-items-center">
-                   
-                   <Checkbox
-
-                    
-                       sx={{
-                       color: '#009959',
-                       '&.Mui-checked': {
-                       color: '#009959',
-                       },
-                   }}
-               />
-                <span className="categoryLable">
-                      زیر دسته پنج
-                   </span>
-               </div>
+                        )
+                    })
+                }
+              
              </AccordionItemPanel>
             </AccordionItem>
 
             </Accordion>
-            <Accordion allowZeroExpanded className="accardionBox">
+            {/* <Accordion allowZeroExpanded className="accardionBox">
     
             <AccordionItem >
                 <AccordionItemHeading>
                     <AccordionItemButton>
-                     دسته بندی دو
-                    </AccordionItemButton>
+مدرک                    </AccordionItemButton>
                  </AccordionItemHeading>
             <AccordionItemPanel>
             <div className="d-flex align-items-center">
@@ -353,193 +411,8 @@ const Consultation = () =>{
              </AccordionItemPanel>
             </AccordionItem>
 
-            </Accordion>
-            <Accordion allowZeroExpanded className="accardionBox">
-    
-    <AccordionItem >
-        <AccordionItemHeading>
-            <AccordionItemButton>
-              دسته بندی سه
-            </AccordionItemButton>
-         </AccordionItemHeading>
-    <AccordionItemPanel>
-    <div className="d-flex align-items-center">
+            </Accordion> */}
            
-            <Checkbox
-
-                
-                sx={{
-                color: '#009959',
-                '&.Mui-checked': {
-                color: '#009959',
-                },
-            }}
-        />
-         <span className="categoryLable">
-                زیر دسته یک
-            </span>
-        </div>
-        <div className="d-flex align-items-center">
-           
-           <Checkbox
-
-               
-               sx={{
-               color: '#009959',
-               '&.Mui-checked': {
-               color: '#009959',
-               },
-           }}
-       />
-        <span className="categoryLable">
-               زیر دسته دو
-           </span>
-       </div>
-       <div className="d-flex align-items-center">
-           
-           <Checkbox
-
-               
-               sx={{
-               color: '#009959',
-               '&.Mui-checked': {
-               color: '#009959',
-               },
-           }}
-       />
-        <span className="categoryLable">
-               زیر دسته سه
-           </span>
-       </div>
-       <div className="d-flex align-items-center">
-           
-           <Checkbox
-
-               defaultChecked
-               sx={{
-               color: '#009959',
-               '&.Mui-checked': {
-               color: '#009959',
-               },
-           }}
-       />
-        <span className="categoryLable">
-               زیر دسته چهار
-           </span>
-       </div>
-       <div className="d-flex align-items-center">
-           
-           <Checkbox
-
-            
-               sx={{
-               color: '#009959',
-               '&.Mui-checked': {
-               color: '#009959',
-               },
-           }}
-       />
-        <span className="categoryLable">
-              زیر دسته پنج
-           </span>
-       </div>
-     </AccordionItemPanel>
-    </AccordionItem>
-
-    </Accordion>
-    <Accordion allowZeroExpanded className="accardionBox">
-
-    <AccordionItem >
-        <AccordionItemHeading>
-            <AccordionItemButton>
-            دسته بندی چهار
-            </AccordionItemButton>
-         </AccordionItemHeading>
-    <AccordionItemPanel>
-    <div className="d-flex align-items-center">
-           
-            <Checkbox
-
-                
-                sx={{
-                color: '#009959',
-                '&.Mui-checked': {
-                color: '#009959',
-                },
-            }}
-        />
-         <span className="categoryLable">
-                زیر دسته یک
-            </span>
-        </div>
-        <div className="d-flex align-items-center">
-           
-           <Checkbox
-
-               
-               sx={{
-               color: '#009959',
-               '&.Mui-checked': {
-               color: '#009959',
-               },
-           }}
-       />
-        <span className="categoryLable">
-               زیر دسته دو
-           </span>
-       </div>
-       <div className="d-flex align-items-center">
-           
-           <Checkbox
-
-               
-               sx={{
-               color: '#009959',
-               '&.Mui-checked': {
-               color: '#009959',
-               },
-           }}
-       />
-        <span className="categoryLable">
-               زیر دسته سه
-           </span>
-       </div>
-       <div className="d-flex align-items-center">
-           
-           <Checkbox
-
-               defaultChecked
-               sx={{
-               color: '#009959',
-               '&.Mui-checked': {
-               color: '#009959',
-               },
-           }}
-       />
-        <span className="categoryLable">
-               زیر دسته چهار
-           </span>
-       </div>
-       <div className="d-flex align-items-center">
-           
-           <Checkbox
-
-            
-               sx={{
-               color: '#009959',
-               '&.Mui-checked': {
-               color: '#009959',
-               },
-           }}
-       />
-        <span className="categoryLable">
-              زیر دسته پنج
-           </span>
-       </div>
-     </AccordionItemPanel>
-    </AccordionItem>
-
-    </Accordion>
             </Col>
             <Col md={9}>
                 <div className="whiteBox">
@@ -555,10 +428,11 @@ const Consultation = () =>{
                                 data?.map((item)=>{
                                     return(
 
-                            <div className="consultBox">
+                            <div className="consultBox" style={{margin:10}}>
                                 <div className="consultBox1">
-                                    <div>
-                                    <img src={Avatar} className="avatar"/>
+                                   <div style={{display:'flex'}}>
+                                   <div>
+                                    <img src={Avatar} className="avatar" style={{marginLeft:10}}/>
                                     </div>
                                     <div>
                                         <p className="consultName">
@@ -571,6 +445,7 @@ const Consultation = () =>{
                                             زمان انتظار جهت پاسخگویی : {item.WaitTime} دقیقه
                                         </p> */}
                                     </div>
+                                   </div>
                                     <div className="d-flex justify-space-between">
                                     {
                       [...new Array(5)].map((item2,index)=>{
@@ -745,87 +620,22 @@ index+1>item.Rate?
    <div>
         <h2 className="sliderTitle mb-4"> جدیدترین مشاوران ما</h2>
         <CarouselMulti responsive={responsive} rtl={true}>
+            {
+                similar?.map((item)=>{
+                    return(
+
           <div className="sliderCardBox">
             <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
+            <p className="sliderName">{item.Name} {item.Family} </p>
+            <p className="sliderDegree">{item.Specialty}</p>
             <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
+{item.Description}                   
             </p>
           </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
-          <div className="sliderCardBox">
-            <img src={Avatar} className="sliderImg"/>
-            <p className="sliderName">یاسمن طاهری صراف</p>
-            <p className="sliderDegree">کارشناس ارشد کشاورزی</p>
-            <p className="sliderDescription">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                   
-            </p>
-          </div>
+                    )
+                })
+            }
+      
          </CarouselMulti>
       </div>
    </Container>

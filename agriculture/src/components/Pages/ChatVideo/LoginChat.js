@@ -108,6 +108,7 @@ const Login = () => {
               gutterBottom
               variant="body2"
               className="mt-4"
+
             >
               سیستم تماس تصویری
             </Typography>
@@ -115,9 +116,10 @@ const Login = () => {
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
               <AccountCircleIcon />
-              <span className="me-1">نام کاربری</span>
+              <span className="me-1" style={{fontFamily:'IRANSans'}}>نام کاربری</span>
             </label>
             <input
+            style={{fontFamily:'IRANSans'}}
               type="text"
               name="username"
               className={
@@ -132,11 +134,12 @@ const Login = () => {
             )}
           </div>
           <div className="mb-3">
-            <label htmlFor="password" className="form-label">
+            <label htmlFor="password" className="form-label"style={{fontFamily:'IRANSans'}}>
               <LockIcon />
-              <span className="me-1">رمز عبور</span>
+              <span className="me-1"style={{fontFamily:'IRANSans'}}>رمز عبور</span>
             </label>
             <input
+            style={{fontFamily:'IRANSans'}}
               type="password"
               name="password"
               className={
@@ -155,6 +158,7 @@ const Login = () => {
               <Loader width="50" />
             ) : (
               <Button
+              style={{fontFamily:'IRANSans'}}
                 color="primary"
                 fullWidth
                 size="large"
@@ -175,7 +179,7 @@ const Login = () => {
       </Grid>
       <Grid item xs={12} md={6}>
         <div className="text-center">
-          <img src={LoginImg} alt="login" className="login-img" />
+          <img src={LoginImg} alt="login" className="login-img" style={{width:'100%'}} />
         </div>
       </Grid>
     </Grid>

@@ -35,13 +35,13 @@ console.log(open)
           </DialogContentText>
         </DialogContent>
         <DialogActions className="justify-content-center mb-3">
-          <button onClick={()=>handleClose(clientId)} className="btn btn-danger rounded-circle rounded-padding" autoFocus>
+          <button onClick={()=>handleClose(clientId)} className="btn btn-danger rounded-circle rounded-padding" autoFocus style={{margin:15}}>
             <PhoneDisabledIcon />
           </button>
-          <button onClick={()=>handleMicToggle()} className="btn btn-primary rounded-circle rounded-padding" autoFocus>
+          <button onClick={()=>handleMicToggle()} className="btn btn-primary rounded-circle rounded-padding" autoFocus  style={{margin:15}}>
             <MicOffIcon />
           </button>
-          <button onClick={()=>handleCameraToggle()} className="btn btn-warning rounded-circle rounded-padding" autoFocus>
+          <button onClick={()=>handleCameraToggle()} className="btn btn-warning rounded-circle rounded-padding" autoFocus style={{margin:15}}>
             <VideocamOffIcon />
           </button>
         </DialogActions>

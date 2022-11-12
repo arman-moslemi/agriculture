@@ -16,8 +16,12 @@ const UsersListGrid = () => {
   const [otherPartyInfo, setOtherPartyInfo] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
+    const interval = setInterval(() => {
+      // setSeconds(seconds => seconds + 1);
 
-    callActionStart()
+        callActionStart()
+      
+          }, 3000);
   }, []);
   const columns = [
     {
@@ -181,6 +185,10 @@ const UsersListGrid = () => {
   ];
 
   const callActionStart = () => {
+  // if(  usersList.length > 0 ){
+
+  //   window.location.reload();
+  // }
     const userId = localStorage.getItem("user_id");
     const consId = localStorage.getItem("cons_id");
     const consfname = localStorage.getItem("cons_fname");
@@ -239,8 +247,8 @@ navigate("/login");
         <Typography variant="h5" className="text-center mb-5 title">
           لیست کاربران
         </Typography>
-      </div> */}
-      {/* <Grid item sm={12} md={12} className="w-100">
+      </div>
+      <Grid item sm={12} md={12} className="w-100">
         <Paper elevation={3}>
           <div
             className="text-center table-responsive"

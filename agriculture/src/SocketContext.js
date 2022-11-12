@@ -167,6 +167,11 @@ const ContextProvider = ({ children }) => {
       .then(function (response) {
  console.log(666)
  console.log(response)
+ localStorage.setItem("user_id", "");
+
+ localStorage.setItem("cons_id","");
+ localStorage.setItem("cons_fname","");
+ localStorage.setItem("cons_lname","");
  navigate("/")
             }
      

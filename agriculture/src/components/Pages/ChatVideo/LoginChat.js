@@ -8,6 +8,7 @@ import config from "../../../config.json";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 import AlertBox from "./AlertBox";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({});
@@ -73,7 +74,37 @@ const Login = () => {
               if (status === 200) {
                 localStorage.setItem("token", data.accessToken);
                 localStorage.setItem("user_id", data.user_id);
-                navigate("/VideoChat");
+
+                const axios = require("axios");
+                var ss= localStorage.getItem("CustomerID")
+                axios.post(apiUrl + "SetLoginChat",{id:data.user_id})
+                .then(function (response) {
+                  if (response.data.result == "True") {
+                    console.log(8768)
+                    console.log(response.data)
+                  localStorage.setItem("cons_id",response.data.Data2?.id);
+                  localStorage.setItem("cons_fname",response.data.Data2?.fname);
+                  localStorage.setItem("cons_lname",response.data.Data2?.lname);
+                  axios.post(apiUrl + "SetSMSChat",{id:data.user_id})
+                  .then(function (response) {
+              
+             
+                      navigate("/VideoChat");
+                 
+                      //   navigate("/VideoChat")
+                      })
+                      .catch(function (error) {                   
+                          console.log(error);
+                      });
+  
+                 
+               
+                    //   navigate("/VideoChat")
+                    }})
+                    .catch(function (error) {                   
+                        console.log(error);
+                    });
+
               } else console.log("error");
               setUserInfo({});
             })

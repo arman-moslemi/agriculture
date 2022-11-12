@@ -50,7 +50,7 @@ const Consultation = () =>{
       const [show, setShow] = useState(false);
 
       const handleClose = () => {setShow(false);};
-      const handleShow = (types,names,specialtys,wait) => {setShow(true);setName(names);setType(types);setSpecialty(specialtys)};
+      const handleShow = (types,names,specialtys,wait,cons) => {setShow(true);setName(names);setType(types);setSpecialty(specialtys);setConsultant(cons)};
       const [show2, setShow2] = useState(false);
       const [name, setName] = useState();
       const [subject, setubject] = useState();
@@ -62,7 +62,7 @@ const Consultation = () =>{
       const [consultant, setConsultant] = useState();
       let navigate = useNavigate();
 
-      const handleClose2 = () => {setShow2(false);setName("");setType("");setSpecialty("");setTime("")};
+      const handleClose2 = () => {setShow2(false);setName("");setType("");setSpecialty("");setTime("");setConsultant()};
       const handleShow2 = () => {setShow2(true);setShow(false)};
       const [data, setData] = useState([]);
       const [data2, setData2] = useState([]);
@@ -77,7 +77,8 @@ const Consultation = () =>{
             if (response.data.result == "True") {
                 setData(response.data.Data)
                 setData2(response.data.Data)
-                
+                console.log(345678)
+                console.log(response.data.Data)
               }})
               .catch(function (error) {
                   console.log(777)
@@ -115,7 +116,7 @@ const Consultation = () =>{
         }
         const GetCost=(id)=>{
             const axios = require("axios");
-            setConsultant(id)
+            // setConsultant(id)
             axios.post(apiUrl + "SetCostConsultant",{CustomerID:id,Time:time,Type:type})
             .then(function (response) {
               if (response.data.result == "True") {
@@ -149,9 +150,29 @@ const Consultation = () =>{
 
                   handleClose2()
                   alert("با موفقیت ثبت شد")
-                  window.open("/VideoChat")
+           
+                    axios.post(apiUrl + "SetSMSChat",{id:response.data.Data1?.id})
+                    .then(function (response) {
+                        console.log(8768)
+                        console.log(response.data)
+               
+                        window.open("/VideoChat")
+                   
+                        //   navigate("/VideoChat")
+                      })
+                        .catch(function (error) {                   
+                            console.log(error);
+                        });
+    
+                   
+                 
+               
                 //   navigate("/VideoChat")
-                }})
+                }
+            
+            else{
+                alert("هم اکنون چت فعال وجود دارد")
+            }})
                 .catch(function (error) {
                     console.log(777)
                     console.log(error);
@@ -472,13 +493,13 @@ index+1>item.Rate?
                                         </p>
                                         </div>
                                         <div className="d-flex">
-                                            <Link to="" className="callBtn borderLeftGreen" onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime )}>
+                                            <Link to="" className="callBtn borderLeftGreen" onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID)}>
                                                 متنی
                                             </Link>
-                                            <Link to=""  className="callBtn borderLeftGreen" onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime )}>
+                                            <Link to=""  className="callBtn borderLeftGreen" onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID)}>
                                                صوتی
                                             </Link>
-                                            <Link to=""  className="callBtn" onClick={()=>handleShow("3",item.Name+" "+item.Family,item.Specialty,item.WaitTime )}>
+                                            <Link to=""  className="callBtn" onClick={()=>handleShow("3",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID)}>
                                                 تصویری
                                             </Link>
                                             <Modal
@@ -538,7 +559,11 @@ index+1>item.Rate?
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={()=>GetCost(item.CustomerID)}className="modalSaveBtn">ثبت درخواست</Button>
+                                                    <Button  
+                                                    onClick={()=>GetCost(item.CustomerID)}
+                                                    // onClick={()=>alert(consultant)}
+                                                    
+                                                    className="modalSaveBtn">ثبت درخواست</Button>
                                                 </Modal.Footer>
                                              </Modal>
                                              <Modal

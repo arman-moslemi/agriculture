@@ -274,7 +274,7 @@ cons.map((item,index)=>{
                 + تکرار مشاوره
             </Button> */}
             <Button
-            //  onClick={()=>{item.Type==1 ?GetChat(item.ConsultantReqID):window.open("https://chat.gsmartnet.com")}} 
+             onClick={()=>item.Type==1 ? GetChat(item.ConsultantReqID) :null} 
              className="viewBtn">
                 <EyeFill color="#AAB7CA" size={25}/>
             </Button>

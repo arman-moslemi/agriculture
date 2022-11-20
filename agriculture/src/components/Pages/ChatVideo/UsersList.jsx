@@ -19,7 +19,7 @@ const UsersListGrid = () => {
     const interval = setInterval(() => {
       // setSeconds(seconds => seconds + 1);
 
-        callActionStart()
+        // callActionStart()
       
           }, 3000);
   }, []);
@@ -84,59 +84,59 @@ const UsersListGrid = () => {
         );
       },
     },
-    {
-      field: "national_code",
-      headerName: "کدملی",
-      editable: false,
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "iran-sans",
-      cellClassName: "iran-sans",
-      renderCell: (cellValues) => {
-        return (
-          <span>
-            {cellValues.row.national_code !== null
-              ? cellValues.row.national_code
-              : "---"}
-          </span>
-        );
-      },
-    },
-    {
-      field: "username",
-      headerName: "نام کاربری",
-      editable: false,
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "iran-sans",
-      cellClassName: "iran-sans",
-      renderCell: (cellValues) => {
-        return (
-          <span>
-            {cellValues.row.username !== null ? cellValues.row.username : "---"}
-          </span>
-        );
-      },
-    },
-    {
-      field: "mobile",
-      headerName: "موبایل",
-      editable: false,
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "iran-sans",
-      cellClassName: "iran-sans",
-      renderCell: (cellValues) => {
-        return (
-          <span>
-            {cellValues.row.mobile !== null ? cellValues.row.mobile : "---"}
-          </span>
-        );
-      },
-    },
+    // {
+    //   field: "national_code",
+    //   headerName: "کدملی",
+    //   editable: false,
+    //   flex: 1,
+    //   headerAlign: "center",
+    //   align: "center",
+    //   headerClassName: "iran-sans",
+    //   cellClassName: "iran-sans",
+    //   renderCell: (cellValues) => {
+    //     return (
+    //       <span>
+    //         {cellValues.row.national_code !== null
+    //           ? cellValues.row.national_code
+    //           : "---"}
+    //       </span>
+    //     );
+    //   },
+    // },
+    // {
+    //   field: "username",
+    //   headerName: "نام کاربری",
+    //   editable: false,
+    //   flex: 1,
+    //   headerAlign: "center",
+    //   align: "center",
+    //   headerClassName: "iran-sans",
+    //   cellClassName: "iran-sans",
+    //   renderCell: (cellValues) => {
+    //     return (
+    //       <span>
+    //         {cellValues.row.username !== null ? cellValues.row.username : "---"}
+    //       </span>
+    //     );
+    //   },
+    // },
+    // {
+    //   field: "mobile",
+    //   headerName: "موبایل",
+    //   editable: false,
+    //   flex: 1,
+    //   headerAlign: "center",
+    //   align: "center",
+    //   headerClassName: "iran-sans",
+    //   cellClassName: "iran-sans",
+    //   renderCell: (cellValues) => {
+    //     return (
+    //       <span>
+    //         {cellValues.row.mobile !== null ? cellValues.row.mobile : "---"}
+    //       </span>
+    //     );
+    //   },
+    // },
     {
       field: "actions",
       headerName: "اقدامات",
@@ -247,7 +247,7 @@ navigate("/login");
         <Typography variant="h5" className="text-center mb-5 title">
           لیست کاربران
         </Typography>
-      </div>
+      </div> */}
       <Grid item sm={12} md={12} className="w-100">
         <Paper elevation={3}>
           <div
@@ -268,7 +268,7 @@ navigate("/login");
             )}
           </div>
         </Paper>
-      </Grid> */}
+      </Grid>
       <DialogBox
         open={openCallDialog}
         handleClose={leaveCall}

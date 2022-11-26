@@ -35,8 +35,9 @@ const IoTDashboard = () =>{
         setshowSearch(!showSearch);
       };
       const [showSearch2, setshowSearch2] = useState(false);
-      const onClick2 = () =>{
+      const onClick2 = (ss) =>{
           setshowSearch2(!showSearch2);
+          setPartid(ss)
         };
         const [show, setShow] = useState(false);
         const handleClose = () => setShow(false);
@@ -44,6 +45,7 @@ const IoTDashboard = () =>{
     const [data, setData] = useState([]);
     const [dev, setDev] = useState([]);
     const [part, setPart] = useState([]);
+    const [partid, setPartid] = useState();
     const GetData=()=>{
         const axios = require("axios");
       var ss=localStorage.getItem("CustomerID")
@@ -66,7 +68,7 @@ const IoTDashboard = () =>{
         axios.post(apiUrl + "CustomerDevice",{CustomerID:ss})
         .then(function (response) {
           if (response.data.result == "True") {
-            console.log(777)
+            console.log(555)
 
             setDev(response.data.Data)
             console.log(response.data.Data);
@@ -158,14 +160,14 @@ const IoTDashboard = () =>{
                 <p className="addDeviceText">
                     مشاهده دستگاه ها
                 </p>
-                <Button onClick={()=>onClick2()} className="caretDownBtn">
+                <Button onClick={()=>onClick2(item2.PartID)} className="caretDownBtn">
                     <CaretDownFill color="#FF6900" size={20}/>
                 </Button>
                 
             </div>
             
            </div>
-       {showSearch2? 
+       {showSearch2 && partid==item2.PartID? 
          
             dev.filter(x=>x.PartID==item2.PartID).map((item3)=>{
                 return(
@@ -183,8 +185,8 @@ const IoTDashboard = () =>{
             <a className="whiteMiniBox" href="#" onClick={handleShow}>
                 <p className="whiteMiniBoxTitle">دمای هوا</p>
                 <img src={WeatherDeg} />
-                <p className="whiteMiniBoxTitle">37 درجه</p>
-                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+                <p className="whiteMiniBoxTitle">{item3?.air_temp} درجه</p>
+                {/* <p className="whiteMiniBoxStatus">وضعیت : سالم</p> */}
             </a>
             <Modal
                                                 show={show} onHide={handleClose}
@@ -208,32 +210,32 @@ const IoTDashboard = () =>{
             <a className="whiteMiniBox" href="#">
                 <p className="whiteMiniBoxTitle">دمای خاک</p>
                 <img src={SoulDeg} />
-                <p className="whiteMiniBoxTitle">28 درجه</p>
-                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+                <p className="whiteMiniBoxTitle">{item3.soil_temp} درجه</p>
+                <p className="whiteMiniBoxStatus">وضعیت : </p>
             </a>
             <a className="whiteMiniBox" href="#">
                 <p className="whiteMiniBoxTitle">دمای آب</p>
                 <img src={WaterDeg} />
-                <p className="whiteMiniBoxTitle">17 درجه</p>
-                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+                <p className="whiteMiniBoxTitle"> درجه</p>
+                <p className="whiteMiniBoxStatus">وضعیت : </p>
             </a>
             <a className="whiteMiniBox" href="#">
                 <p className="whiteMiniBoxTitle">رطوبت هوا</p>
                 <img src={Humidity} />
-                <p className="whiteMiniBoxTitle">68 %</p>
-                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+                <p className="whiteMiniBoxTitle">{item3?.air_hum} %</p>
+                <p className="whiteMiniBoxStatus">وضعیت : </p>
             </a>
             <a className="whiteMiniBox" href="#">
                 <p className="whiteMiniBoxTitle">رطوبت خاک</p>
                 <img src={SoulHumidity} />
-                <p className="whiteMiniBoxTitle">53 %</p>
-                <p className="whiteMiniBoxStatus">وضعیت : سالم</p>
+                <p className="whiteMiniBoxTitle">{item3?.soil_hum} %</p>
+                <p className="whiteMiniBoxStatus">وضعیت : </p>
             </a>
             <a className="whiteMiniBox" href="#">
                 <p className="whiteMiniBoxTitle">شیرآب کنترلی</p>
                 <img src={Faucet} />
-                <p className="whiteMiniBoxTitle">بسته</p>
-                <p className="whiteMiniBoxStatus">وضعیت : خراب</p>
+                <p className="whiteMiniBoxTitle"></p>
+                <p className="whiteMiniBoxStatus">وضعیت : </p>
             </a>
             </div>
          </div>    

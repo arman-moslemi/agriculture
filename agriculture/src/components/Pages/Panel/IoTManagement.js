@@ -34,6 +34,8 @@ const IoTManagement = () =>{
     const [showCondition, setshowCondition] = useState(false);
     const [projectName, setProjectName] = useState("");
     const [partName, setPartName] = useState("");
+    const [partid, setPartid] = useState();
+
     const [serial, setSerial] = useState();
     const [deviceName, setDeviceName] = useState("");
    const handleClose = () => setShow(false);
@@ -56,7 +58,7 @@ const IoTManagement = () =>{
       };
       const onClick2 = (id) =>{
         setshowSearch2(!showSearch2);
-        setshows2(id)
+        setPartid(id)
 
       };
       const onClick3 = (id) =>{
@@ -333,7 +335,7 @@ GetData()
                <p className="addDeviceText">
                    مشاهده دستگاه ها
                </p>
-               <Button onClick={()=>onClick2()} className="caretDownBtn">
+               <Button onClick={()=>onClick2(item2.PartID)} className="caretDownBtn">
                    <CaretDownFill color="#FF6900" size={20}/>
                </Button>
                <Modal
@@ -371,7 +373,7 @@ GetData()
            </div>
            
           </div>
-      {showSearch2? 
+      {showSearch2 && partid==item2.PartID? 
          dev.filter(x=>x.PartID==item2.PartID).map((item3)=>{
             return(
       <div>

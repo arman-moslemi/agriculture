@@ -23,6 +23,7 @@ import GroupProduct from 'src/components/Pages/Gruop/GroupProduct';
 import MainGroupProduct from 'src/components/Pages/Gruop/MainGroupProduct';
 import MainLayout from 'src/components/Pages/ChatVideo/layout/MainLayout';
 import LoginChat from 'src/components/Pages/ChatVideo/LoginChat';
+import LoginChatFake from 'src/components/Pages/ChatVideo/LoginChatFake';
 import SmartFarming from 'src/components/Pages/SmartFarming/SmartFarming';
 import Rules from 'src/components/Pages/Rules/Rules';
 const MainRoutes = (props) => {
@@ -204,6 +205,15 @@ const MainRoutes = (props) => {
 					path='/Rules'
 					name='خبر'
 					element={<Rules/>}
+				/></Routes> 
+
+<Routes>
+				
+				<Route
+					exact
+					path='/LoginChatFake/:id'
+					name='محصول'
+					element={<LoginChatFake/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

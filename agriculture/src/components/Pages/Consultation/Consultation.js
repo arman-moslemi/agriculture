@@ -155,8 +155,13 @@ const Consultation = () =>{
                     .then(function (response) {
                         console.log(8768)
                         console.log(response.data)
-               
-                        window.open("/VideoChat")
+               if(type==3){
+
+                   window.open("/VideoChat")
+               }
+               else if(type==1){
+                navigate("/UserHistory")
+               }
                    
                         //   navigate("/VideoChat")
                       })

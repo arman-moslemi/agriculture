@@ -19,6 +19,7 @@ const UserHistory = () =>{
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
   const [conReqID, setConReqID] = useState(0);
+  const [second, setSeconds] = useState(0);
   const [text,setText]=useState("")
   const [titleSup,setTitleSup]=useState("")
   const [chat,setChat]=useState([])
@@ -129,8 +130,9 @@ const UserHistory = () =>{
       };
     useEffect(() => {
       GetData();
-      const interval = setInterval(() => {
-        // setSeconds(seconds => seconds + 1);
+ setInterval(() => {
+        setSeconds(seconds => seconds + 1);
+        console.log(8989)
         if(conReqID){
 
           GetChat(conReqID)
@@ -141,7 +143,7 @@ const UserHistory = () =>{
         GetChat(conReqID)
       }
 
-    }, []);
+    }, [second]);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>

@@ -159,26 +159,25 @@ const ContextProvider = ({ children }) => {
     if (connectionRef.current) {
       connectionRef.current.destroy();
     }
-    // window.location.reload();
-          const axios = require("axios");
-          const userId = localStorage.getItem("user_id");
+//           const axios = require("axios");
+//           const userId = localStorage.getItem("user_id");
 
-      axios.post("https://admin.gsmartnet.com/api/VideoEnd",{id:userId})
-      .then(function (response) {
- console.log(666)
- console.log(response)
- localStorage.setItem("user_id", "");
+//       axios.post("https://admin.gsmartnet.com/api/VideoEnd",{id:userId})
+//       .then(function (response) {
+//  console.log(666)
+//  console.log(response)
+//  localStorage.setItem("user_id", "");
 
- localStorage.setItem("cons_id","");
- localStorage.setItem("cons_fname","");
- localStorage.setItem("cons_lname","");
- navigate("/")
-            }
+//  localStorage.setItem("cons_id","");
+//  localStorage.setItem("cons_fname","");
+//  localStorage.setItem("cons_lname","");
+//  navigate("/")
+//             }
      
-     )
-      .catch(function (error) {
-        console.log(error);
-      });
+//      )
+//       .catch(function (error) {
+//         console.log(error);
+//       });
   };
 
   const logout = () => {

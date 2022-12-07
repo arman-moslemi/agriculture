@@ -39,21 +39,22 @@ const Header = () =>{
     const onClick = () =>{
         setShowMega(!showMega);
      };
-     const  _handleKeyDownAuto = async(e) => {
+     const  _handleKeyDownAuto = async(aa) => {
         const axios = require("axios");
  
             axios
                 .post(apiUrl + "SearchProduct",{
-                    ProductName:search
+                    ProductName:aa
                 })
             .then(function (response) {
-              if (response.data.result == "True") {
+              if (response.data.result == "True" && aa.length>0) {
       
                 setAuto(response.data.Data)
                 console.log(response.data.Data)
       
             }
             else{
+              setAuto([])
               console.log(response.data.result)
       
             }})
@@ -172,7 +173,7 @@ const Header = () =>{
             </Link>
         <div className="searchDiv">
 
-            <input onChange={(e)=>{setSearch(e.target.value);_handleKeyDownAuto()}} className="searchInput" placeholder="نام محصول یا برند مورد نظر را جستجو کنید ..."/>
+            <input onChange={(e)=>{_handleKeyDownAuto(e.target.value)}} className="searchInput" placeholder="نام محصول یا برند مورد نظر را جستجو کنید ..."/>
             <Search color="#009959"/>
         
         </div>
@@ -313,7 +314,7 @@ const Header = () =>{
     <div>
             <ul class="suggestions">
              {
-               auto && search?
+               auto ?
 auto.map((item)=>{
   return(
             <li className="suggestions li" 

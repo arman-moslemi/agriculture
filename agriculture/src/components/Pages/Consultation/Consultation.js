@@ -50,7 +50,17 @@ const Consultation = () =>{
       const [show, setShow] = useState(false);
 
       const handleClose = () => {setShow(false);};
-      const handleShow = (types,names,specialtys,wait,cons) => {setShow(true);setName(names);setType(types);setSpecialty(specialtys);setConsultant(cons)};
+      const handleShow = (types,names,specialtys,wait,cons) => {
+        if(                    localStorage.getItem("CustomerID")
+        )
+      {
+
+          setShow(true);setName(names);setType(types);setSpecialty(specialtys);setConsultant(cons)
+      }
+        else{
+            alert("ابتدا لاگین کنید")
+        }
+    }
       const [show2, setShow2] = useState(false);
       const [name, setName] = useState();
       const [subject, setubject] = useState();

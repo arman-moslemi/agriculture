@@ -122,7 +122,7 @@ const Login = () =>{
               
                 <Button onClick={()=>login()} className="greenBtn mt-5" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>ورود به حساب کاربری</Button>
                 <p className="hasAcoount text-center mt-3" style={{fontSize:10}}>
-                    رمز عبور خود را فراموش کردید؟<a href="#">ایجاد رمز جدید</a>
+                    رمز عبور خود را فراموش کردید؟<a href="/ForgetPassword">ایجاد رمز جدید</a>
                 </p>
                
             </div>

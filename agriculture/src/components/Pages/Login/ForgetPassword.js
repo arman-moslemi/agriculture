@@ -11,7 +11,6 @@ const SignUp = () =>{
     const [open,setOpen]=useState(false)
     const [title,setTitle]=useState("")
     const [mobile,setMobile]=useState()
-    const [check,setCheck]=useState(true)
     
     let navigate = useNavigate();
 
@@ -20,6 +19,9 @@ const SignUp = () =>{
         // inverse the boolean state of passwordShown
         setPasswordShown(!passwordShown);
       };
+    
+
+
       const login=()=>{
         const axios = require("axios");
         if(!mobile)
@@ -31,33 +33,34 @@ const SignUp = () =>{
         }
         else{
     
-        axios.post(apiUrl + "Register",{Mobile:mobile})
+        axios.post(apiUrl + "Forgetting",{Mobile:mobile})
         .then(function (response) {
-            console.log(String(response.data).substring(29,33))
-            var mm=String(response.data).substring(16,20)
+          console.log(response.data)
+          var mm=String(response.data).substring(16,20)
+    
           if (mm == "True") {
             console.log(777)
+            console.log(response.data.Data)
+           console.log( String(response.data).substring(29,33))
             // auth.login(response.data.Data.CustomerID);
             console.log(88)
-    navigate("/Verify",{state:{
-        Mobile:mobile,
-        VerifyCode:String(response.data).substring(29,33)}
-    });
-
+            setOpen(true)
+            setTitle("رمز عبور جدید برای شما فرستاده شد")
+            navigate("/Login");
+    
             // console.log("auth", auth.isLoggedIn);
             // localStorage.setItem("guest","");
             // history.push("/EditInformation/"+response.data.Data.CustomerID)
     
         }
         else{
-          setTitle("موبایل با این شماره وجود دارد")
-          setOpen(true)
-
+          alert("موبایل با این شماره وجود دارد")
+    
         }})
         .catch(function (error) {
           console.log(777)
-          console.log(error);
-
+          alert(error)
+    
           console.log(error);
         });
       }
@@ -84,7 +87,7 @@ const SignUp = () =>{
                     حساب کاربری دارید ؟<Link to={"/Login"}>وارد شوید</Link>
                 </p>
                 <p className="loginTitle">
-                    ثبت نام
+                    فراموشی رمز عبور
                 </p>
                 <div className="ta-right">
                 <div className="customHeight2"></div>
@@ -105,30 +108,10 @@ const SignUp = () =>{
                 </button>
                 </div> */}
                
-                <div className="d-flex align-items-center">
-                <Checkbox
-     checked={check}
-     onChange={(e)=>setCheck(!check)
-     
-     
-       
-      }
-                defaultChecked
-                sx={{
-                color: '#009959',
-                '&.Mui-checked': {
-                color: '#009959',
-                },
-                }}
-                />
-                    <span className="checkBoxLable">
-                       اینجانب <a href="#">قوانین و مقررات</a> را مطالعه کرده و آن ها را پذیرفته ام.
-                    </span>
-                
-                </div>
+         
                 </div>
               
-                <Button onClick={()=>login()} disabled={!check} className="greenBtn mt-3" style={{marginRight:'auto',marginLeft:'auto',display:'block'}} >ایجاد حساب کاربری</Button>
+                <Button onClick={()=>login()} className="greenBtn mt-3" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}> فراموشی رمز عبور</Button>
                 
                
             </div>

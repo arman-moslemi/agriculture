@@ -23,6 +23,7 @@ const UserHistory = () =>{
   const [text,setText]=useState("")
   const [titleSup,setTitleSup]=useState("")
   const [chat,setChat]=useState([])
+  const [disable,setDisable]=useState(false)
 
   const GetData=async()=>{
       const axios = require("axios");
@@ -75,8 +76,9 @@ const UserHistory = () =>{
       });
    
     }
-  const GetChat=(id)=>{
+  const GetChat=(id,status)=>{
     setShowSub(true)
+    setDisable(status?true:false)
       const axios = require("axios");
   setConReqID(id)
     axios.post(apiUrl + 'ChatDetail',{ConsultantReqID:id})
@@ -135,12 +137,12 @@ const UserHistory = () =>{
         console.log(8989)
         if(conReqID){
 
-          GetChat(conReqID)
+          GetChat(conReqID,disable)
         }
             }, 10000);
       if(conReqID){
 
-        GetChat(conReqID)
+        GetChat(conReqID,disable)
       }
 
     }, [second]);
@@ -276,7 +278,7 @@ cons.map((item,index)=>{
                 + تکرار مشاوره
             </Button> */}
             <Button
-             onClick={()=>item.Type==1 ? GetChat(item.ConsultantReqID) :null} 
+             onClick={()=>item.Type==1 ? GetChat(item.ConsultantReqID,item.Status==3?true:false) :null} 
              className="viewBtn">
                 <EyeFill color="#AAB7CA" size={25}/>
             </Button>
@@ -358,11 +360,17 @@ cons.map((item,index)=>{
                                                 </Form>
                                                
                                                 </Modal.Body>
+                                                {
+                                                  !disable?
+
                                                 <Modal.Footer>
                                                     <Button  
                                                     onClick={()=>NewMessage()} 
                                                     className="modalSaveBtn" >ارسال پیام</Button>
                                                 </Modal.Footer>
+                                                  :
+                                                  null
+                                                }
                                              </Modal>
        {/* <div className="consultBoxF2">
        <div className="d-flex">

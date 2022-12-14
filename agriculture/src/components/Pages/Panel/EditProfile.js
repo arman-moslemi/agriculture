@@ -152,6 +152,9 @@ const EditProfile = () =>{
                 console.log(response.data.Data)
                 setDataAddress(response.data.Data)
 
+            }else if(response.data.result == "Duplicate"){
+                setDataAddress([])
+
             }})
             .catch(function (error) {
               console.log(999)

@@ -19,8 +19,8 @@ const Cart = () =>{
       const [show, setShow] = useState(false);
       const [count,setCount]=useState(1);
       const [count2,setCount2]=useState(1);
-      const handleClose = () => setShow(false);
-      const handleShow = () => setShow(true);
+      const handleClose = () => setShowAddress(false);
+      const handleShow = () => setShowAddress(true);
       const [dataAddress,setDataAddress]=useState([])
       const [dataProvince,setDataProvince]=useState([])
       const [dataCity,setDataCity]=useState([])
@@ -106,6 +106,9 @@ const Cart = () =>{
 dd=item.SpecialCost?dd+parseInt(item.SpecialCost*item.ShoppingBasketNumber):dd+parseInt(item.Cost*item.ShoppingBasketNumber)
 })
 setCostTotal(dd)
+}else if(response.data.result == "Duplicate"){
+  setData([])
+
 }})
                 .catch(function (error) {
                   console.log(777)
@@ -132,7 +135,10 @@ setCostTotal(dd)
                     console.log(response.data.Data)
                     setDataAddress(response.data.Data)
     
-                }})
+                }else if(response.data.result == "Duplicate"){
+                  setDataAddress([])
+  
+              }})
                 axios.get(apiUrl + "GetProvince")
                 .then(function (response) {
                     
@@ -176,15 +182,16 @@ setCostTotal(dd)
               }
               const AddAddress=()=>{
                 const axios = require("axios");
-            
-                axios.post(apiUrl + "InsertAddress",{CustomerID:state.CustomerID,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
+                var ss=localStorage.getItem("CustomerID")
+
+                axios.post(apiUrl + "InsertAddress",{CustomerID:ss,CityID:newCity,PostalCode:newPostalCode,Address:newAddress})
                 .then(function (response) {
                   if (response.data.result == "True") {
                     console.log(111)
                     console.log(response.data.Data)
                     setNewPostalCode("")
                     setNewAddress("")
-                    GetData(response.data.Data)
+                    GetAddress()
                     handleClose();
     
                 
@@ -229,7 +236,7 @@ setCostTotal(dd)
                   if (response.data.result == "True") {
                     console.log(111)
                     console.log(response.data.Data)
-                    GetData(response.data.Data)
+                    GetAddress()
     
                 
         
@@ -251,7 +258,7 @@ setCostTotal(dd)
            
               const handleEditShow = (id,city,province,postal,address) => {setShowEditAddress(true);setEditAddressID(id);
                   GetCity(province);
-              setNewCity(city);setNewProvince(province);setNewPostalCode(postal);setNewAddress(address);alert(city)
+              setNewCity(city);setNewProvince(province);setNewPostalCode(postal);setNewAddress(address);
               }
               const {state} = useLocation();
               useEffect(() => {

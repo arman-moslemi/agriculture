@@ -219,7 +219,7 @@ index+1>item.Rate?
                     <div className="d-flex align-items-center">
                         <img src={Avatr} className="consultAvatar"/>
                         <p className="productName " style={{fontFamily:'IRANSansMedium'}}>
-{item.Name}{item.Family}                            </p>
+{item.Name} {item.Family}                            </p>
                     </div>
                     <div className="d-flex align-items-center justify-content-between">
                     {/* <div style={{marginLeft:20}}>

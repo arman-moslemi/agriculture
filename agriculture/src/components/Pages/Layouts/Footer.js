@@ -27,7 +27,7 @@ const Footer = () =>{
                </div>
                <ul className="footerList">
                 <li>
-                    <a href="#">
+                    <a href="/">
                         صفحه اصلی
                     </a>
                 </li>
@@ -42,7 +42,7 @@ const Footer = () =>{
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/Rules">
                       قوانین و مقررات
                     </a>
                 </li>
@@ -56,7 +56,7 @@ const Footer = () =>{
                </div>
                <ul className="footerList">
                 <li>
-                    <a href="#">
+                    <a href="/">
                         صفحه اصلی
                     </a>
                 </li>
@@ -76,12 +76,12 @@ const Footer = () =>{
                </div>
                <ul className="footerList">
                 <li>
-                    <a href="#">
+                    <a href="/">
                         صفحه اصلی
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/">
                         درباره ما
                     </a>
                 </li>
@@ -91,7 +91,7 @@ const Footer = () =>{
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/Rules">
                       قوانین و مقررات
                     </a>
                 </li>

@@ -10,16 +10,27 @@ import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams, Link } from "react-router-dom";
 const News = () =>{
     const [data, setData] = useState([]);
+    const [data2, setData2] = useState([]);
     const [type, setType] = useState([]);
+    const [cat,setCat]=useState(0)
+
 
     const GetData=()=>{
         const axios = require("axios");
         axios.get(apiUrl + "AllBlog")
         .then(function (response) {
           if (response.data.result == "True") {
+            console.log(response.data.Data);
 
-            setData(response.data.Data)
+            setData2(response.data.Data)
+if(cat!=0){
+    setData(response.data.Data.filter(x=>x.BlogTypeID==cat))
 
+}
+else{
+    setData(response.data.Data)
+
+}
         }})
         .catch(function (error) {
           console.log(777)
@@ -31,6 +42,8 @@ const News = () =>{
         .then(function (response) {
           if (response.data.result == "True") {
             setType(response.data.Data)
+            console.log(response.data.Data);
+
         }})
         .catch(function (error) {
           console.log(777)
@@ -45,7 +58,7 @@ const News = () =>{
       useEffect(() => {
         GetData();
 
-      }, []);
+      }, [cat]);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -64,9 +77,9 @@ const News = () =>{
                     type.map((item)=>{
                         return(
 
-                <li>
-                    <a href="#">
-{item?.Name}                    </a>
+                <li style={{cursor:'pointer'}} onClick={()=>setCat(item.BlogTypeID)}>
+                    {/* <Link > */}
+ {item?.Name}                    {/*</Link> */}
                 </li>
                         )
                     })
@@ -180,6 +193,9 @@ const News = () =>{
                 </div>
                  </div>
                 </div>
+                {
+                    data[3]?
+
                 <div className="miniNewsBox">
                     <img 
                         src={apiAsset+data[3]?.Pic}
@@ -211,7 +227,12 @@ const News = () =>{
                 </div>
                  </div>
                 </div>
+                    :
+                    null
+                }
             </div>
+            {data[4]?
+
             <div className="d-flex align-items-stretch mt-3 justify-content-center flex-wrap">
                 <div className="mediumNewsBox">
                 <div className="bigNewsCol bigPad">
@@ -281,8 +302,11 @@ const News = () =>{
                  </div>
                 </div>
             </div>
+:
+null
+                }
             {
-                data[6]?
+                data[6]?.length>0?
 
             <div className="bigNewsBox">
                 <div className="bigNewsCol bigPad">

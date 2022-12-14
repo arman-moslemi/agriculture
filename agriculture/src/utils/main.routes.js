@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter,Routes , Route } from 'react-router-dom';
 import Login from 'src/components/Pages/Login/Login';
+import ForgetPassword from 'src/components/Pages/Login/ForgetPassword';
 import Verify from 'src/components/Pages/Login/Verify';
 import SignUp2 from 'src/components/Pages/Login/SignUp2';
 import SignUp from 'src/components/Pages/Login/SignUp';
@@ -205,6 +206,14 @@ const MainRoutes = (props) => {
 					path='/Rules'
 					name='خبر'
 					element={<Rules/>}
+				/></Routes> 
+
+					<Routes>
+				<Route
+					exact
+					path='/ForgetPassword'
+					name='خبر'
+					element={<ForgetPassword/>}
 				/></Routes> 
 
 <Routes>

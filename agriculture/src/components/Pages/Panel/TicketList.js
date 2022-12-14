@@ -21,12 +21,14 @@ const TicketList = () =>{
     const [text,setText]=useState("")
     const [textSub,setTextSub]=useState("")
     const [titleSup,setTitleSup]=useState("")
+    const [disable,setDisable]=useState(false)
 
-    const GetData=()=>{
+    const GetData=async()=>{
         const axios = require("axios");
       
-    
-        axios.post(apiUrl + "ReadCustomer",{CustomerID:1})
+        var customer=await localStorage.getItem("CustomerID")
+
+        axios.post(apiUrl + "ReadCustomer",{CustomerID:customer})
         .then(function (response) {
           if (response.data.result == "True") {
             console.log(777)
@@ -42,7 +44,7 @@ const TicketList = () =>{
           console.log(error);
         });
         
-        axios.post(apiUrl + "CustomerSupport",{CustomerID:1})
+        axios.post(apiUrl + "CustomerSupport",{CustomerID:customer})
         .then(function (response) {
           if (response.data.result == "True") {
             console.log(777);
@@ -58,11 +60,12 @@ const TicketList = () =>{
   
       }
 
-      const AddSupport=()=>{
+      const AddSupport=async()=>{
         const axios = require("axios");
       
-    
-        axios.post(apiUrl + "InsertSupport",{CustomerID:1,Text:text,Title:titleSup})
+        var customer=await localStorage.getItem("CustomerID")
+
+        axios.post(apiUrl + "InsertSupport",{CustomerID:customer,Text:text,Title:titleSup})
         .then(function (response) {
           if (response.data.result == "True") {
             console.log(777)
@@ -253,14 +256,14 @@ const TicketList = () =>{
                                                     </span>
                                                     
                                                 </p>
-                                                <textarea onChange={(e)=>setTextSub(e.target.value)} className="inputCLass" type="text" style={{height:150,resize:"none"}}/>
+                                                <textarea disabled={disable} onChange={(e)=>setTextSub(e.target.value)} className="inputCLass" type="text" style={{height:150,resize:"none"}}/>
                                             
                                               
                                                 </Form>
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={()=>AddSubSupport(subSupport[0]?.SupportID)} className="modalSaveBtn" >ارسال پیام</Button>
+                                                    <Button disabled={disable} onClick={()=>AddSubSupport(subSupport[0]?.SupportID)} className="modalSaveBtn" >ارسال پیام</Button>
                                                 </Modal.Footer>
                                              </Modal>
        {/* <div className="ticketListBox">
@@ -309,13 +312,13 @@ const TicketList = () =>{
         </p>
        </div>
        <div>
-   {    item.Status==2?
+   {    item.Status==1?
 
         <div className="ticketStatus" id="waiting">
             <span>در انتظار پاسخ</span>
         </div>
     :
-    item.Status==1?
+    item.Status==2?
     <div className="ticketStatus" id="answered">
     <span>پاسخ داده شده</span>
 </div>
@@ -326,7 +329,9 @@ const TicketList = () =>{
     }
        </div>
         <div>
-            <Button onClick={()=>{GetSubSupport(item.SupportID);setShowSub(true)}} className="viewBtn">
+            <Button onClick={()=>{GetSubSupport(item.SupportID);setShowSub(true);
+            item.Status==3?setDisable(true):setDisable(false)
+            }} className="viewBtn">
                 <EyeFill color="#AAB7CA" size={25}/>
             </Button>
         </div>

@@ -104,7 +104,12 @@ const Footer = () =>{
                         <Whatsapp className="footerIcon ml-2"/>
                         <Instagram className="footerIcon ml-2"/>
                         <Telegram className="footerIcon"/>
+                     
                     </div>
+                    <a referrerpolicy="origin" target="_blank" href="https://trustseal.enamad.ir/?id=310907&amp;Code=YakUjIavkOXx4SRsnbGL">
+                            <img referrerpolicy="origin" src="https://Trustseal.eNamad.ir/logo.aspx?id=310907&amp;Code=YakUjIavkOXx4SRsnbGL" alt="" style={{cursor:"pointer" ,width:100,height:100}}id="YakUjIavkOXx4SRsnbGL"/>
+
+                            </a>
                 </Col>
                 </Row>
         </Container>

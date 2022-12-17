@@ -4,6 +4,7 @@ import { Grid, IconButton, Paper, Typography } from "@material-ui/core";
 import CallIcon from "@material-ui/icons/Call";
 import MessageIcon from "@material-ui/icons/Message";
 import VideocamIcon from "@material-ui/icons/Videocam";
+import CloseIcon from "@material-ui/icons/Close";
 import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
 import { SocketContext } from "../../../SocketContext";
 import DialogBox from "./DialogBox";
@@ -42,15 +43,15 @@ const UsersListGrid = () => {
         );
       },
     },
-    {
-      field: "id",
-      headerName: "ردیف",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "iran-sans",
-      cellClassName: "iran-sans",
-    },
+    // {
+    //   field: "id",
+    //   headerName: "ردیف",
+    //   flex: 1,
+    //   headerAlign: "center",
+    //   align: "center",
+    //   headerClassName: "iran-sans",
+    //   cellClassName: "iran-sans",
+    // },
     {
       field: "fname",
       headerName: "نام",
@@ -156,11 +157,12 @@ const UsersListGrid = () => {
             <VideocamIcon />
           </IconButton>
         ) : (
-          <IconButton color="primary"
-          component="span"
-          onClick={() => callAction(cellValues.row)}>
-              <MessageIcon />
-          </IconButton>
+          // <IconButton color="primary"
+          // component="span"
+          // onClick={() => callAction(cellValues.row)}>
+          //     <MessageIcon />
+          // </IconButton>
+          null
           );
         }
     },
@@ -174,10 +176,10 @@ const UsersListGrid = () => {
       cellClassName: "iran-sans",
       renderCell: (cellValues) => {
         return (
-          <IconButton color="red"
+          <IconButton color="#FF0000"
           component="span"
           onClick={() => callEnd(cellValues.row)}>
-              <MessageIcon />
+              <CloseIcon />
           </IconButton>
           );
         }

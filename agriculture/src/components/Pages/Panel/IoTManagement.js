@@ -118,6 +118,24 @@ const IoTManagement = () =>{
         });
      
       }
+      const DeleteProject=(id)=>{
+        const axios = require("axios");
+        var ss=localStorage.getItem("CustomerID")
+      
+          axios.post(apiUrl + "DeleteProject",{ProjectID:id})
+          .then(function (response) {
+            if (response.data.result == "True") {
+              console.log(777)
+  handleClose()
+GetData()  
+          }})
+          .catch(function (error) {
+            console.log(777)
+            console.log(error);
+  
+            console.log(error);
+          });
+      }
       const InsertProject=()=>{
         const axios = require("axios");
         var ss=localStorage.getItem("CustomerID")
@@ -262,6 +280,9 @@ GetData()
                 <Button onClick={handleShow2} className="addSection" >
                     + افزودن بخش
                 </Button> |
+                <Button onClick={()=>DeleteProject(item[0].ProjectID)} className="deleteProject" >
+                    - حذف پروژه
+                </Button> |
                 <p className="addDeviceText">
                     مشاهده بخش ها
                 </p>
@@ -386,9 +407,9 @@ GetData()
           </Tooltip>
             </div>
             <div>
-                <Button className="deviceManage" style={{marginLeft:10}} onClick={()=>setSerial(item3.Serial)}>
+                {/* <Button className="deviceManage" style={{marginLeft:10}} onClick={()=>setSerial(item3.Serial)}>
                     قواعد دستگاه
-                    </Button>
+                    </Button> */}
                 <Button className="deviceManage" onClick={handleShow4}>
                     مدیریت دستگاه
                     </Button>
@@ -490,14 +511,16 @@ GetData()
             }
                   </div> 
                   {
-                    serial?
+                    // serial?
+                    part.length!=0?
 
                   <div className="whiteBox mt-3">
                 <div className="d-flex align-items-center justify-content-between topBox">
                    <div className="d-flex align-items-center">
                    <img src={Setting} width="30px"/>
                    <p className="panelTitle">
-                   قواعد دستگاه  {serial}
+                   قواعد دستگاه  
+                   {/* {serial} */}
                    </p>
                    </div>
                    </div>

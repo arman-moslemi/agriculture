@@ -14,7 +14,7 @@ import {
 } from 'react-accessible-accordion';
 import 'react-accessible-accordion/dist/fancy-example.css';
 import FlashUp from "src/components/assets/img/flashUp.png";
-import { ArrowUpSquare ,ArrowDownSquare,CaretDownFill ,ExclamationCircleFill ,Plus} from 'react-bootstrap-icons';
+import { ArrowUpSquare ,ArrowDownSquare,CaretDownFill ,ExclamationCircleFill ,Plus,Dash} from 'react-bootstrap-icons';
 import IotImg from "src/components/assets/img/IotImg.png";
 import Filter from "src/components/assets/img/Filter.png";
 import Setting from "src/components/assets/img/setting.png";
@@ -35,6 +35,17 @@ const IoTManagement = () =>{
     const [projectName, setProjectName] = useState("");
     const [partName, setPartName] = useState("");
     const [partid, setPartid] = useState();
+    const [rules, setRules] = useState([]);
+    const [sensor, setSensor] = useState();
+    const [pipe, setPipe] = useState();
+    const [conditionSensor, setConditionSensor] = useState();
+    const [conditionPipe, setConditionPipe] = useState();
+    const [forceSensor, setForseSensore] = useState();
+    const [forcePipe, setForsePipe] = useState();
+    const [statusPipe, setStatusPipe] = useState();
+    const [value, setValue] = useState();
+    const [sensorList, setSensorList] = useState([]);
+    const [pipeList, setPipeList] = useState([]);
 
     const [serial, setSerial] = useState();
     const [deviceName, setDeviceName] = useState("");
@@ -116,6 +127,38 @@ const IoTManagement = () =>{
 
           console.log(error);
         });
+        axios.post(apiUrl + "Rules",{CustomerID:ss})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log("rules")
+            console.log(response.data.Data)
+
+            setRules(response.data.Data)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          console.log(error);
+
+          console.log(error);
+        });
+
+        axios.post(apiUrl + "GetSensor",{CustomerID:ss})
+        .then(function (response) {
+          if (response.data.result == "True") {
+            console.log("sensor")
+
+            setSensorList(response.data.SensorData)
+            setPipeList(response.data.PipeData)
+            console.log(response.data.SensorData);
+            console.log(response.data.PipeData);
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+
+          console.log(error);
+        });
      
       }
       const DeleteProject=(id)=>{
@@ -123,6 +166,24 @@ const IoTManagement = () =>{
         var ss=localStorage.getItem("CustomerID")
       
           axios.post(apiUrl + "DeleteProject",{ProjectID:id})
+          .then(function (response) {
+            if (response.data.result == "True") {
+              console.log(777)
+  handleClose()
+GetData()  
+          }})
+          .catch(function (error) {
+            console.log(777)
+            console.log(error);
+  
+            console.log(error);
+          });
+      }
+      const DeleteRule=(id)=>{
+        const axios = require("axios");
+        var ss=localStorage.getItem("CustomerID")
+      
+          axios.post(apiUrl + "DeleteRules",{RuleID:id})
           .then(function (response) {
             if (response.data.result == "True") {
               console.log(777)
@@ -177,6 +238,26 @@ GetData()
         var ss=localStorage.getItem("CustomerID")
       
           axios.post(apiUrl + "InsertDevice",{PartID:id,Serial:deviceName})
+          .then(function (response) {
+            if (response.data.result == "True") {
+              console.log(777)
+              handleClose3()
+GetData()  
+          }})
+          .catch(function (error) {
+            console.log(777)
+            console.log(error);
+  
+            console.log(error);
+          });
+      }
+      const InsertRule=(type)=>{
+        const axios = require("axios");
+        var ss=localStorage.getItem("CustomerID")
+      
+          axios.post(apiUrl + "InsertRules",{CustomerID:ss,Type:type,SensorID:type==0?sensor:sensorList[0]?.SensorID,PipeID:type==1?parseInt(pipe):null,Value:value,
+            Condition:type==0?conditionSensor:conditionPipe,StatusPipe:type==1?parseInt(statusPipe):null,Force:type==0?parseInt(forceSensor):1
+          })
           .then(function (response) {
             if (response.data.result == "True") {
               console.log(777)
@@ -514,74 +595,186 @@ GetData()
                     // serial?
                     part.length!=0?
 
-                  <div className="whiteBox mt-3">
-                <div className="d-flex align-items-center justify-content-between topBox">
-                   <div className="d-flex align-items-center">
-                   <img src={Setting} width="30px"/>
-                   <p className="panelTitle">
-                   قواعد دستگاه  
-                   {/* {serial} */}
-                   </p>
-                   </div>
-                   </div>
-                   <div className="d-flex conditionBox align-items-center">
-                    <p className="condition">
-                        اگر
-                    </p>
-                    <Form.Select className="bSelect2">
-                                            
-                        <option>سنسور 1</option>
-                        <option>سنسور 2</option>
-                        <option>سنسور 3</option>
-                        <option>سنسور 4</option>
-                     </Form.Select>
-                     <Form.Select className="bSelect2">
-                                            
-                        <option>مساوی</option>
-                        <option>بزرگتر-مساوی</option>
-                        <option>کمتر-مساوی</option>
-                    </Form.Select>
-                    <input className="conditionInput" placeholder="27 درجه"/>
-                    <Form.Select className="bSelect3">
-                                            
-                        <option>و</option>
-                        <option>یا</option>
 
-                    </Form.Select>
-                    <Button className="addBtn" onClick={()=>onClick3()}>
-                        <Plus color="#fff" size="30"/>
-                    </Button>  
-                    </div>
-                    {showCondition?
-                    <div className="d-flex conditionBox align-items-center">
-                        <p className="condition">
-                        آنگاه
-                    </p>
-                    <Form.Select className="bSelect2">
-                                            
-                        <option>شیر آب</option>
-                        <option>شیر آب</option>
-                        
-                     </Form.Select>
-                     <Form.Select className="bSelect2">
-                                            
-                        <option>مساوی</option>
-                        <option>بزرگتر-مساوی</option>
-                        <option>کمتر-مساوی</option>
-                    </Form.Select>
-                    <Form.Select className="bSelect3">
-                                            
-                                            <option>باز</option>
-                                            <option>بسته</option>
-                                        
-                                        </Form.Select>
-                    </div>
-                    :null}                  
-                  
-                   </div>
-                    :
-                    null
-                  }
+
+    <div className="whiteBox mt-3">
+    <div className="d-flex align-items-center justify-content-between topBox">
+       <div className="d-flex align-items-center">
+       <img src={Setting} width="30px"/>
+       <p className="panelTitle">
+       قواعد دستگاه  
+       {/* {serial} */}
+       </p>
+       </div>
+       </div>
+
+       <div className="d-flex conditionBox align-items-center">
+      <p className="condition">
+          اگر
+      </p>
+      <Form.Select  onChange={(ss)=>setSensor(ss.target.value)} className="bSelect2">
+                {
+                  sensorList?.map((item2)=>{
+                    return(
+item2!=null?
+                      <option value={item2?.SensorID}>{item2?.Sensor}</option>
+                      :
+                      null
+                    )
+                  })
+                }              
+ 
+       </Form.Select>
+       <Form.Select onChange={(ss)=>setConditionSensor(ss.target.value)}  className="bSelect2">
+                              
+          <option  value={"="}>مساوی</option>
+          <option  value={"b"}>بزرگتر-مساوی</option>
+          <option  value={"<="}>کمتر-مساوی</option>
+      </Form.Select>
+      <input className="conditionInput" onChange={(ss)=>setValue(ss.target.value)}  placeholder="27 درجه"/>
+      <Form.Select  onChange={(ss)=>setForseSensore(ss.target.value)} className="bSelect3">
+                              
+          <option value={0}>و</option>
+          <option value={1}>یا</option>
+
+      </Form.Select>
+      <Button className="addBtn" onClick={()=>InsertRule(0)}>
+          <Plus color="#fff" size="30"/>
+      </Button>  
+      </div>
+
+
+      <div className="d-flex conditionBox align-items-center">
+      <p className="condition">
+      آنگاه
+  </p>
+  <Form.Select onChange={(ss)=>setPipe(ss.target.value)} className="bSelect2">
+              {
+                pipeList?.map((item)=>{
+return(
+item!=null?
+
+  <option value={item?.PipeID}>{item?.Pipe}</option>
+  :
+  null
+)
+                })
+              }            
+      
+   </Form.Select>
+   <Form.Select onChange={(ss)=>setConditionPipe(ss.target.value)} className="bSelect2">
+                          
+      <option value={"="}>مساوی</option>
+      <option value={"b"}>بزرگتر-مساوی</option>
+      <option value={"c"}>کمتر-مساوی</option>
+  </Form.Select>
+  <Form.Select onChange={(ss)=>setStatusPipe(ss.target.value)} className="bSelect3">
+                          
+                          <option value={0}>باز</option>
+                          <option value={1}>بسته</option>
+                      
+                      </Form.Select>
+                      <Button className="addBtn" onClick={()=>InsertRule(1)}>
+          <Plus color="#fff" size="30"/>
+      </Button>  
+  </div>
+       {rules?.map((item)=>{
+  return(
+    <>
+    {
+      item?.Type==0?
+      <div className="d-flex conditionBox align-items-center">
+      <p className="condition">
+          اگر
+      </p>
+      <Form.Select defaultValue={item?.SensorID} className="bSelect2">
+                {
+                  sensorList?.map((item2)=>{
+                    return(
+item2!=null?
+                      <option value={item2?.SensorID}>{item2?.Sensor}</option>
+                      :
+                      null
+                    )
+                  })
+                }              
+ 
+       </Form.Select>
+       <Form.Select defaultValue={item?.Condition} className="bSelect2">
+                              
+          <option  value={"="}>مساوی</option>
+          <option  value={"b"}>بزرگتر-مساوی</option>
+          <option  value={"<="}>کمتر-مساوی</option>
+      </Form.Select>
+      <input className="conditionInput" value={item?.Value} placeholder="27 درجه"/>
+      <Form.Select defaultValue={item?.Force} className="bSelect3">
+                              
+          <option value={0}>و</option>
+          <option value={1}>یا</option>
+
+      </Form.Select>
+      <Button className="addBtn" onClick={()=>DeleteRule(item?.RuleID)}>
+          <Dash color="#fff" size="30"/>
+      </Button>  
+      </div>
+      :
+     null
+    }
+    
+
+
+
+   
+        </>         
+      
+  )
+})}
+  {rules?.map((item)=>{
+  return(
+    <>
+    {  item?.Type==1?
+       <div className="d-flex conditionBox align-items-center">
+       <p className="condition">
+       آنگاه
+   </p>
+   <Form.Select defaultValue={item?.PipeID} className="bSelect2">
+                           
+   {
+                 pipeList?.map((item)=>{
+ return(
+ item!=null?
+ 
+   <option value={item?.PipeID}>{item?.Pipe}</option>
+   :
+   null
+ )
+                 })
+               }    
+    </Form.Select>
+    <Form.Select defaultValue={item?.Condition} className="bSelect2">
+                           
+       <option value={"="}>مساوی</option>
+       <option value={"b"}>بزرگتر-مساوی</option>
+       <option value={"c"}>کمتر-مساوی</option>
+   </Form.Select>
+   <Form.Select defaultValue={item?.StatusPipe}  className="bSelect3">
+                           
+                           <option value={0}>باز</option>
+                           <option value={1}>بسته</option>
+                       
+                       </Form.Select>
+                       <Button className="addBtn" onClick={()=>DeleteRule(item?.RuleID)}>
+           <Dash color="#fff" size="30"/>
+       </Button> 
+   </div>
+   :
+   null
+      }
+      </>)})}
+       </div>
+
+                
+                  :null}
         </Col>
         
         

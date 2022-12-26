@@ -23,7 +23,7 @@ const VideoPlayer = () => {
     return ( 
         <Grid container spacing={2} className={callAccepted ? 'call-accepted d-flex align-items-center justify-content-center video-container p-0 p-md-5' : 'd-flex align-items-center justify-content-center video-container p-0 p-md-5'}>  
             {/* our own video */}
-            {/* {stream &&(
+            {stream &&(
                 <Grid item xs={12} md={6} className={!callAccepted ? 'me-grid' : ''}>
                     <Paper className="video-paper">
                         <Typography varient="h5" gutterBottom className="text-center">
@@ -35,7 +35,7 @@ const VideoPlayer = () => {
                         </audio>
                     </Paper>
                 </Grid>    
-            )} */}
+            )}
             {/* user's video */}
             {callAccepted && !callEnded && (
                 <Grid item xs={12} md={6}>

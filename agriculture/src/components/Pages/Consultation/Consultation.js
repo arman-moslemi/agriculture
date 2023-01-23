@@ -50,12 +50,12 @@ const Consultation = () =>{
       const [show, setShow] = useState(false);
 
       const handleClose = () => {setShow(false);};
-      const handleShow = (types,names,specialtys,wait,cons) => {
+      const handleShow = (types,names,specialtys,wait,cons,degree) => {
         if(                    localStorage.getItem("CustomerID")
         )
       {
 
-          setShow(true);setName(names);setType(types);setSpecialty(specialtys);setConsultant(cons)
+          setShow(true);setName(names);setType(types);setSpecialty(specialtys);setConsultant(cons);setDegree(degree)
       }
         else{
             alert("ابتدا لاگین کنید")
@@ -65,6 +65,7 @@ const Consultation = () =>{
       const [name, setName] = useState();
       const [subject, setubject] = useState();
       const [Specialty, setSpecialty] = useState();
+      const [degree, setDegree] = useState();
       const [type, setType] = useState();
       const [time, setTime] = useState();
       const [cost, setCost] = useState();
@@ -72,7 +73,7 @@ const Consultation = () =>{
       const [consultant, setConsultant] = useState();
       let navigate = useNavigate();
 
-      const handleClose2 = () => {setShow2(false);setName("");setType("");setSpecialty("");setTime("");setConsultant()};
+      const handleClose2 = () => {setShow2(false);setName("");setType("");setSpecialty("");setTime("");setConsultant();setDegree("")};
       const handleShow2 = () => {setShow2(true);setShow(false)};
       const [data, setData] = useState([]);
       const [data2, setData2] = useState([]);
@@ -508,13 +509,13 @@ index+1>item.Rate?
                                         </p>
                                         </div>
                                         <div className="d-flex">
-                                            <Link to="" className="callBtn borderLeftGreen" onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID)}>
+                                            <Link to="" className="callBtn borderLeftGreen" onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
                                                 متنی
                                             </Link>
-                                            <Link to=""  className="callBtn borderLeftGreen" onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID)}>
+                                            <Link to=""  className="callBtn borderLeftGreen" onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
                                                صوتی
                                             </Link>
-                                            <Link to=""  className="callBtn" onClick={()=>handleShow("3",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID)}>
+                                            <Link to=""  className="callBtn" onClick={()=>handleShow("3",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
                                                 تصویری
                                             </Link>
                                             <Modal
@@ -538,7 +539,7 @@ index+1>item.Rate?
                                                     <span>
                                                        تحصیلات : 
                                                     </span>
-                                                     {Specialty}
+                                                     {degree}
                                                 </p>
                                                 <p className="modalText">
                                                     <span>

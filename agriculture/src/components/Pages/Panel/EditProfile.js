@@ -107,7 +107,7 @@ const EditProfile = () =>{
         const handleShow = () => setShowAddress(true);
         const handleEditShow = (id,city,province,postal,address) => {setShowEditAddress(true);setEditAddressID(id);
             GetCity(province);
-        setNewCity(city);setNewProvince(province);setNewPostalCode(postal);setNewAddress(address);alert(city)
+        setNewCity(city);setNewProvince(province);setNewPostalCode(postal);setNewAddress(address)
         }
         const {state} = useLocation();
 

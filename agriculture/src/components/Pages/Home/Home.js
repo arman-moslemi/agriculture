@@ -484,7 +484,7 @@ const Home = () =>{
            {/* <Button className="heartmini">
               <Heart/>
             </Button> */}
-          <img src={Product} className="miniSliderImg"/>
+          <img src={apiAsset+item.Pic1} className="miniSliderImg"/>
           <br/>
           <Link to={"/SingleProduct/"+item.Name2}  className="pName pLink">{item.Name}</Link>
           <div className="d-flex justify-content-between align-items-center">

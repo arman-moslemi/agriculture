@@ -18,8 +18,8 @@ const Wallet = () =>{
     const GetData=()=>{
         const axios = require("axios");
       
-    
-        axios.post(apiUrl + "ReadCustomer",{CustomerID:1})
+        var ss=localStorage.getItem("CustomerID")
+        axios.post(apiUrl + "ReadCustomer",{CustomerID:ss})
         .then(function (response) {
           if (response.data.result == "True") {
             console.log(777)

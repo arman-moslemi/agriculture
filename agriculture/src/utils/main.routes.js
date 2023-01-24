@@ -27,6 +27,7 @@ import LoginChat from 'src/components/Pages/ChatVideo/LoginChat';
 import LoginChatFake from 'src/components/Pages/ChatVideo/LoginChatFake';
 import SmartFarming from 'src/components/Pages/SmartFarming/SmartFarming';
 import Rules from 'src/components/Pages/Rules/Rules';
+import Dargah from 'src/components/Pages/Dargah/Dargah';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -223,6 +224,14 @@ const MainRoutes = (props) => {
 					path='/LoginChatFake/:id'
 					name='محصول'
 					element={<LoginChatFake/>}
+				/></Routes> 
+<Routes>
+				
+				<Route
+					exact
+					path='/Dargah/:id'
+					name='محصول'
+					element={<Dargah/>}
 				/></Routes> 
 		</BrowserRouter>
 	);

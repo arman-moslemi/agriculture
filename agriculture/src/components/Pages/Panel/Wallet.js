@@ -12,8 +12,9 @@ import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { ArrowUpSquare ,ArrowDownSquare } from 'react-bootstrap-icons';
 const Wallet = () =>{
     const [show, setShow] = useState(false);
+    const [cost, setCost] = useState(10000);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () =>{ setShow(false);chargeWallet()}
     const handleShow = () => setShow(true);
     const GetData=()=>{
         const axios = require("axios");
@@ -26,6 +27,30 @@ const Wallet = () =>{
             console.log(response.data.Data)
             console.log(response.data.Data[0]?.Name)
             setData(response.data.Data)
+
+        }})
+        .catch(function (error) {
+          console.log(777)
+          console.log(error);
+
+          console.log(error);
+        });
+        
+  
+  
+      }
+    const chargeWallet=()=>{
+        const axios = require("axios");
+      
+        var ss=localStorage.getItem("CustomerID")
+        axios.post(apiUrl + "ChargeWallet",{CustomerID:ss,Money:cost,orderId:123456})
+        .then(function (response) {
+            console.log(111)
+            console.log(response)
+          if (response.status== 200) {
+            console.log(777)
+            console.log(response.data.refId)
+     
 
         }})
         .catch(function (error) {
@@ -90,7 +115,7 @@ const Wallet = () =>{
                                                     </span>
                                                     
                                                 </p>
-                                                <input className="inputCLass" type="text"/>
+                                                <input className="inputCLass" onChange={(e)=>setCost(e.target.value)} type="text"/>
                                                 <div className="d-flex align-items-center">
                                                 <p className="modalText mb-0">
                                                     <span>
@@ -102,9 +127,9 @@ const Wallet = () =>{
                                                 <Form.Select className="bSelect">
                                             
                                                     <option>ملت</option>
-                                                    <option>صادرات</option>
+                                                    {/* <option>صادرات</option>
                                                     <option>پارسیان</option>
-                                                    <option>پاسارگاد</option>
+                                                    <option>پاسارگاد</option> */}
                                                 </Form.Select>
                                                 </div>
                                                 </Form>

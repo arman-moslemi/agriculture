@@ -8,11 +8,13 @@ import Updown from "src/components/assets/img/Updown.png";
 import Purse from "src/components/assets/img/purse.png";
 import FlashUp from "src/components/assets/img/flashUp.png";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { Link, useNavigate,useLocation } from "react-router-dom";
 
 import { ArrowUpSquare ,ArrowDownSquare } from 'react-bootstrap-icons';
 const Wallet = () =>{
     const [show, setShow] = useState(false);
     const [cost, setCost] = useState(10000);
+    let navigate = useNavigate();
 
     const handleClose = () =>{ setShow(false);chargeWallet()}
     const handleShow = () => setShow(true);
@@ -50,8 +52,10 @@ const Wallet = () =>{
           if (response.status== 200) {
             console.log(777)
             console.log(response.data.refId)
-     
-
+//             navigate("/Dargah"
+// , { replace: true,state:{id:response.data?.refId} }
+// );
+window.location.href="/dargahh.html?id="+response.data?.refId;
         }})
         .catch(function (error) {
           console.log(777)

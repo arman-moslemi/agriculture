@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>درحال هدایت به درگاه ملت</title>
+</head>
+<body>
+<form action="https://bpm.shaparak.ir/pgwchannel/startpay.mellat" method="post" target="_self" id="myfrm">
+    <input type="hidden" name="RefId" id="RefId"
+    >
+    <!-- value="74860D65D595A6E6" -->
+</form>
+<script>
+// alert(document.location?.split("?")[1])
+var str=new String(document.location);
+date=str.substr(str.indexOf('?')+4,str.length-str.indexOf('?'));
+// alert(date)
+        var frm = document.getElementById('myfrm');
+        document.getElementById("RefId").setAttribute('value',date);       
+                 frm.submit();
+
+</script>
+</body>
+</html>

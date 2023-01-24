@@ -229,7 +229,7 @@ const MainRoutes = (props) => {
 				
 				<Route
 					exact
-					path='/Dargah/:id'
+					path='/Dargah'
 					name='محصول'
 					element={<Dargah/>}
 				/></Routes> 

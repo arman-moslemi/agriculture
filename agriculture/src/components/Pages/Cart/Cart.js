@@ -265,6 +265,33 @@ setCostTotal(dd)
                 GetData();
                 GetAddress();
               }, []);
+
+              const payment=()=>{
+                const axios = require("axios");
+              
+                var ss=localStorage.getItem("CustomerID")
+                axios.post(apiUrl + "ChargeWallet",{CustomerID:ss,Money:costTotal,orderId:123456})
+                .then(function (response) {
+                    console.log(111)
+                    console.log(response)
+                  if (response.status== 200) {
+                    console.log(777)
+                    console.log(response.data.refId)
+        //             navigate("/Dargah"
+        // , { replace: true,state:{id:response.data?.refId} }
+        // );
+        window.location.href="/dargahh.html?id="+response.data?.refId;
+                }})
+                .catch(function (error) {
+                  console.log(777)
+                  console.log(error);
+        
+                  console.log(error);
+                });
+                
+          
+          
+              }
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -601,7 +628,7 @@ setCostTotal(dd)
                   </div>
                   </div>
                   <Button className="yellowColor" 
-                  // onClick={()=>onClick()}
+                  onClick={()=>payment()}
                   
                   >
                     پرداخت

@@ -5,7 +5,8 @@ import { Link, useNavigate,useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 const Dargah = () =>{
-    const params = useParams().id;
+    // const params = useParams().id;
+    const {state} = useLocation();
 
     const VerifyClick=()=>{
         // var frm = document.getElementById('myfrm');
@@ -13,7 +14,7 @@ const Dargah = () =>{
         const axios = require("axios");
       
     
-        axios.post("https://bpm.shaparak.ir/pgwchannel/startpay.mellat",{RefId:params})
+        axios.post("https://bpm.shaparak.ir/pgwchannel/startpay.mellat",{RefId:state?.id})
         .then(function (response) {
             console.log(555)
             console.log(response)
@@ -28,22 +29,27 @@ const Dargah = () =>{
           console.log(error);
         });
     }
-    useEffect(() => {
-        VerifyClick();
+    // useEffect(() => {
+    //     VerifyClick();
 
-      }, []);
+    //   }, []);
     return(
-        <Container className="loginBody" fluid>
-        <div  className="loginBox">
-        {/* <form onSubmit={()=>VerifyClick()} action="https://bpm.shaparak.ir/pgwchannel/startpay.mellat" method="post" target="_self" id="myfrm"> */}
-        {/* <input type="hidden" name="RefId" value="{{$refId}}"> */}
-            {/* <input type="hidden" name="RefId" value="F08C77EECE66353D"/>
+        // <Container className="loginBody" fluid>
+        <div >
+        <form  action="https://bpm.shaparak.ir/pgwchannel/startpay.mellat" method="post" target="_self" id="myfrm"> */}
+        {/* <input type="hidden" name="RefId" value="{{$refId}}">  */}
+        <input type="hidden" name="RefId" value="74860D65D595A6E6"/>
 <button />
-        </form> */}
-     
+        </form>
+        <script>
+
+var frm = document.getElementById('myfrm');
+frm.submit();
+
+</script>
      </div>
-     {/* <p>sallllm</p> */}
-     </Container>
+
+    //  </Container>
     );
 };
 export default Dargah;

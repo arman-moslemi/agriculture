@@ -6,20 +6,28 @@ import dial from 'src/components/assets/audio/dial.mp3';
 
 const VideoPlayer = () => {
     const {me,callAccepted, userVideo, myVideo, callEnded, stream, call, myAudioRef} = useContext(SocketContext);
-    // const [second, setSeconds] = useState(0);
+   
+    const handleLoadedMetadata = () => {
+        const video = userVideo.current;
+        if (!video) return;
+        // console.log(`The video is ${video.duration} seconds long.`);
+        console.log(video?.currentTime)
+      };
+    const [second, setSeconds] = useState(0);
 
-//     useEffect(() => {
+    useEffect(() => {
 //    if(     callAccepted && !callEnded)
 // {
-//     setInterval(() => {
-// setSeconds(second + 1);
+    setInterval(() => {
+setSeconds(second + 1);
 // console.log(second)
-
-//     }, 1000);
+// console.log(userVideo.currentTime);
+handleLoadedMetadata()
+    }, 20000);
 // }
-     
+
   
-//       }, [second]);
+      }, [second]);
     return ( 
         <Grid container spacing={2} className={callAccepted ? 'call-accepted d-flex align-items-center justify-content-center video-container p-0 p-md-5' : 'd-flex align-items-center justify-content-center video-container p-0 p-md-5'}>  
             {/* our own video */}
@@ -29,7 +37,7 @@ const VideoPlayer = () => {
                         <Typography varient="h5" gutterBottom className="text-center">
                             {me != null && Object.keys(me).length > 0 ? `You(${me.fname} ${me.lname})` : <Loader width="50" />}
                         </Typography>
-                        <video controls playsInline muted ref={myVideo} autoPlay className="w-100" />
+                        <video  controls playsInline muted ref={myVideo} autoPlay className="w-100" />
                         <audio muted autoPlay loop ref={myAudioRef} className="d-none">
                             <source src={dial} type="audio/mpeg" />
                         </audio>
@@ -43,7 +51,7 @@ const VideoPlayer = () => {
                         <Typography varient="h5" gutterBottom className="text-center">
                         {call.from || call.to}
                         </Typography>
-                        <video controls playsInline muted ref={userVideo} autoPlay className="w-100" />
+                        <video controls playsInline muted ref={userVideo} autoPlay onLoadedMetadata={handleLoadedMetadata} className="w-100" />
                     </Paper>
                 </Grid>   
           )} 

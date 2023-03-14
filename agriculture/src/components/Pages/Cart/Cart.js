@@ -30,6 +30,8 @@ const Cart = () =>{
       const [newAddress,setNewAddress]=useState("")
       const [editAddressID,setEditAddressID]=useState("")
       const [costTotal,setCostTotal]=useState(0)
+      const [radio,setRadio]=useState(0)
+
   
       const [newPostalCode,setNewPostalCode]=useState("")
       const increment = (id,type) => {
@@ -268,9 +270,10 @@ setCostTotal(dd)
 
               const payment=()=>{
                 const axios = require("axios");
-              
+              // alert(dataAddress[radio]?.Address)
                 var ss=localStorage.getItem("CustomerID")
-                axios.post(apiUrl + "ChargeWallet",{CustomerID:ss,Money:costTotal,orderId:123456})
+                // axios.post(apiUrl + "ChargeWallet",{CustomerID:ss,Money:costTotal,orderId:123456})
+                axios.post(apiUrl + "CardSuccess",{CustomerID:ss,Money:costTotal*10,orderId:123456,Address:dataAddress[radio]?.Address})
                 .then(function (response) {
                     console.log(111)
                     console.log(response)
@@ -543,7 +546,7 @@ setCostTotal(dd)
                                              </Modal>
                 </div>
                 {
-                    dataAddress.map((item)=>{
+                    dataAddress.map((item,index)=>{
                         return(
                 <div className="addressBox">
                 <div className="d-flex align-items-center">
@@ -555,6 +558,8 @@ setCostTotal(dd)
                     color: '#FF6900',
                 },
                 }}
+                checked={radio === index }
+onChange={()=>{setRadio(index)}}
             />
                 <p>
 {item.Address}                </p>

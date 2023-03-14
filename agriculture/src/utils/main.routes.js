@@ -6,6 +6,8 @@ import Verify from 'src/components/Pages/Login/Verify';
 import SignUp2 from 'src/components/Pages/Login/SignUp2';
 import SignUp from 'src/components/Pages/Login/SignUp';
 import Home from 'src/components/Pages/Home/Home';
+import AboutUs from 'src/components/Pages/Home/AboutUs';
+import ContactUs from 'src/components/Pages/Home/ContactUs';
 import SingleProduct from 'src/components/Pages/SingleProduct/SingleProduct';
 import Consultation from 'src/components/Pages/Consultation/Consultation';
 import EditProfile from 'src/components/Pages/Panel/EditProfile';
@@ -28,6 +30,7 @@ import LoginChatFake from 'src/components/Pages/ChatVideo/LoginChatFake';
 import SmartFarming from 'src/components/Pages/SmartFarming/SmartFarming';
 import Rules from 'src/components/Pages/Rules/Rules';
 import Dargah from 'src/components/Pages/Dargah/Dargah';
+import Factor from 'src/components/Pages/Dargah/Factor';
 const MainRoutes = (props) => {
 	return (
   <BrowserRouter basename="/">
@@ -232,6 +235,34 @@ const MainRoutes = (props) => {
 					path='/Dargah'
 					name='محصول'
 					element={<Dargah/>}
+					
+				/></Routes> 
+				<Routes>
+				
+				<Route
+					exact
+					path='/about-us'
+					name='درباره ما'
+					element={<AboutUs/>}
+					
+				/></Routes> 
+				<Routes>
+				
+				<Route
+					exact
+					path='/contact-us'
+					name='تماس با ما'
+					element={<ContactUs/>}
+					
+				/></Routes> 
+				<Routes>
+				
+				<Route
+					exact
+					path='/factor/:id'
+					name='فاکتور'
+					element={<Factor/>}
+					
 				/></Routes> 
 		</BrowserRouter>
 	);

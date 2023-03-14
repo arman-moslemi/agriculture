@@ -23,6 +23,7 @@ import CustomizedDialogs from '../Layouts/AlertModal';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
+
 const IoTManagement = () =>{
     const [show, setShow] = useState(false);
     const [search, setSearch] = useState("");
@@ -46,7 +47,8 @@ const IoTManagement = () =>{
     const [value, setValue] = useState();
     const [sensorList, setSensorList] = useState([]);
     const [pipeList, setPipeList] = useState([]);
-
+    const [open,setOpen]=useState(false)
+    const [title,setTitle]=useState("")
     const [serial, setSerial] = useState();
     const [deviceName, setDeviceName] = useState("");
    const handleClose = () => setShow(false);
@@ -171,6 +173,7 @@ const IoTManagement = () =>{
               console.log(777)
   handleClose()
 GetData()  
+setOpen(false)
           }})
           .catch(function (error) {
             console.log(777)
@@ -328,7 +331,22 @@ GetData()
                                                     
                                                 </p>
                                                 <input onChange={(e)=>setPartName(e.target.value)} className="inputCLass" type="text"/>
+                                                <div className="d-flex align-items-center">
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                     نوع بخش را انتخاب کنید 
+                                                    </span>
+                                                    
+                                                </p>
+                                                <br/>
+                                                <Form.Select className="bSelect">
                                             
+                                                    <option>باغچه</option>
+                                                    <option>زمین</option>
+                                                    <option>باغ</option>
+                                                 
+                                                </Form.Select>
+                                                </div>
                                                 </Form>
                                                
                                                 </Modal.Body>
@@ -361,12 +379,14 @@ GetData()
                 <Button onClick={handleShow2} className="addSection" >
                     + افزودن بخش
                 </Button> |
-                <Button onClick={()=>DeleteProject(item[0].ProjectID)} className="deleteProject" >
+                <Button onClick={()=>setOpen(true)} className="deleteProject" >
                     - حذف پروژه
                 </Button> |
                 <p className="addDeviceText">
                     مشاهده بخش ها
                 </p>
+                <CustomizedDialogs Title={"ایا از حذف مطمئن هستید؟"} open={open} Delete={true} setOpen={setOpen} DeleteAction={()=>DeleteProject(item[0].ProjectID)}/>
+
                 <Button onClick={()=>onClick(item[0].ProjectID)} className="caretDownBtn">
                     <CaretDownFill color="#FF6900" size={20}/>
                 </Button>

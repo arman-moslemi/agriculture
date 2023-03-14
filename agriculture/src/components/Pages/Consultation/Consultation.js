@@ -71,6 +71,8 @@ const Consultation = () =>{
       const [cost, setCost] = useState();
       const [property, setProperty] = useState();
       const [consultant, setConsultant] = useState();
+      const [open,setOpen]=useState(false)
+      const [title,setTitle]=useState("")
       let navigate = useNavigate();
 
       const handleClose2 = () => {setShow2(false);setName("");setType("");setSpecialty("");setTime("");setConsultant();setDegree("")};
@@ -112,8 +114,7 @@ const Consultation = () =>{
           axios.get(apiUrl + "Specialty")
           .then(function (response) {
             if (response.data.result == "True") {
-                setProperty(response.data.Data)
-                
+                setProperty(response.data.Data)                
               }})
               .catch(function (error) {
                   console.log(777)
@@ -160,13 +161,14 @@ const Consultation = () =>{
               localStorage.setItem("cons_lname",response.data.Data2?.lname);
 
                   handleClose2()
-                  alert("با موفقیت ثبت شد")
+                  setTitle("با موفقیت ثبت شد")
+                  setOpen(true)
            
                     axios.post(apiUrl + "SetSMSChat",{id:response.data.Data1?.id})
                     .then(function (response) {
                         console.log(8768)
                         console.log(response.data)
-               if(type==3){
+               if(type==3 || type==2){
 
                    window.open("/VideoChat")
                }
@@ -187,12 +189,12 @@ const Consultation = () =>{
                 }
             
             else{
-                alert("هم اکنون چت فعال وجود دارد")
+                // alert("هم اکنون چت فعال وجود دارد")
+                setTitle("هم اکنون چت فعال وجود دارد");
+                setOpen(true)
             }})
                 .catch(function (error) {
                     console.log(777)
-                    console.log(error);
-                    
                     console.log(error);
                 });
        
@@ -206,7 +208,9 @@ const Consultation = () =>{
             axios.post(apiUrl + "InsertFavorite",{CustomerID:ss,CustomerID2:id})
             .then(function (response) {
               if (response.data.result == "True") {
-                  alert("با موفقیت ثبت شد")
+                //   alert("با موفقیت ثبت شد")
+                  setTitle("با موفقیت ثبت شد")
+                  setOpen(true)
                 }})
                 .catch(function (error) {
                     console.log(777)
@@ -327,22 +331,16 @@ const Consultation = () =>{
             <div className="d-flex align-items-center">
                    
                     <Checkbox
-
-                        
                         sx={{
                         color: '#009959',
                         '&.Mui-checked': {
                         color: '#009959',
                         },
                     }}
-
                     value={item.SpecialtyID}
                     onChange={(e)=>e.target.checked? proFilter(1,e.target.value,item)
-                      :
-                    
-                     proFilter(2,e.target.value,item)
-                    
-                    
+                      :                   
+                     proFilter(2,e.target.value,item)                                       
                       
                      }
                 />
@@ -459,10 +457,12 @@ const Consultation = () =>{
                     <p className="consultationDescription">
                     لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
                     </p>
+                    <CustomizedDialogs Title={title} open={open} setOpen={setOpen} />
+
                     <Row>
                         <Col md={6} className="mb-3">
                             {
-                                data?.map((item)=>{
+                                data?.filter((x)=>x.CustomerID!=localStorage.getItem("CustomerID")).map((item)=>{
                                     return(
 
                             <div className="consultBox" style={{margin:10}}>
@@ -478,9 +478,7 @@ const Consultation = () =>{
                                         <p className="consultDegree">
 {item.Specialty}                                        </p>
                                         
-                                        {/* <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی : {item.WaitTime} دقیقه
-                                        </p> */}
+
                                     </div>
                                    </div>
                                     <div className="d-flex justify-space-between">
@@ -508,16 +506,27 @@ index+1>item.Rate?
                                             زمان انتظار جهت پاسخگویی :  {item.WaitTime} دقیقه
                                         </p>
                                         </div>
-                                        <div className="d-flex">
-                                            <Link to="" className="callBtn borderLeftGreen" onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
+                                        <div className="d-flex ">
+                                            <div className="borderLeftGreen" style={{alignItems:'center',justifyContent:'center',padding:10}}>
+                                            <Link to="" className="callBtn " onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
                                                 متنی
                                             </Link>
-                                            <Link to=""  className="callBtn borderLeftGreen" onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
+                                            <p className="consultDegree">تعداد:۵۰</p>
+                                            </div>
+                                            <div className="borderLeftGreen" style={{alignItems:'center',justifyContent:'center',padding:10}}>
+
+                                            <Link to=""  className="callBtn " onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
                                                صوتی
                                             </Link>
+                                            <p className="consultDegree">تعداد:۵۰</p>
+                                            </div>
+                                            <div className="borderLeftGreen" style={{alignItems:'center',justifyContent:'center',padding:10}}>
+
                                             <Link to=""  className="callBtn" onClick={()=>handleShow("3",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
                                                 تصویری
                                             </Link>
+                                            <p className="consultDegree">تعداد:۵۰</p>
+                                            </div>
                                             <Modal
                                                 show={show} onHide={handleClose}
                                                 className="consultModal"

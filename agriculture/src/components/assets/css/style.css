@@ -61,7 +61,27 @@
     box-shadow:3px 6px 15px rgba(255, 227, 77, 0.6);
   }
   .ta-right{
-    text-align: right;
+    text-align: right !important;
+  }
+  
+  .ta-left{
+    text-align: left !important;
+  }
+  .ta-center{
+    text-align: center !important;
+  }
+  .borderBottomTable{
+    border-bottom: 1px solid #d4d4d4;
+  }
+  .fontWeightNormal2{
+    font-family: "IRANSans";
+    color:#111;
+    font-size: 12px;
+  }
+  .fontWeightBold2{
+    font-family: "IRANSansBold";
+    color:#111;
+    font-size: 14px;
   }
   textarea:focus, input:focus{
     border-color: rgba(229, 103, 23, 0.8);
@@ -2788,4 +2808,63 @@ margin-bottom: 10px; */
   width: 100%;
   margin-top: 50px;
   padding: 25px;
+}
+.factorHeader{
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  margin-bottom: 30px;
+}
+.tableBorderLeft{
+  border-left: 1px solid #d4d4d4;
+}
+.pdTable{
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+.pdTable2{
+  padding: 15px;
+}
+.borderBottomTable{
+  border-bottom: 1px solid #d4d4d4;
+  width:100% !important;
+  margin:0px !important;
+}
+.topBarTable{
+  background-color: rgb(202, 202, 202);
+  padding: 10px 15px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.backGray{
+  background-color: rgb(202, 202, 202);
+  padding: 10px 15px;
+  width:100% !important;
+  margin:0px !important;
+}
+.fontWeightBold2{
+  font-family: "IRANSansBold";
+  color:#111;
+  font-size: 14px;
+}
+.pd15{
+  padding: 15px;
+}
+.backBlueLight{
+  background-color: #24e0ff2b;
+  width: 100% !important;
+  margin:0px !important;
+}
+.pdM{
+  padding: 15px;
+}
+.w-33{
+  width:33% !important;
+}
+.fontWeightBold{
+  font-family: "IRANSansBold";
+}
+.fontWeightNormal{
+  font-family: "IRANSansMedium";
 }

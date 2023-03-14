@@ -19,7 +19,7 @@ const Footer = () =>{
                     لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد 
                     </p>
                 </Col>
-                <Col md={2}>
+                <Col md={6}>
                <div className="w90 borderBottom">
                <span className="footerTitle">
                         میانبر
@@ -32,12 +32,12 @@ const Footer = () =>{
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/about-us">
                         درباره ما
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/contact-us">
                         تماس با ما
                     </a>
                 </li>
@@ -48,7 +48,7 @@ const Footer = () =>{
                 </li>
                </ul>
                 </Col>
-                <Col md={2}>
+                {/* <Col md={2}>
                 <div className="w90 borderBottom">
                <span className="footerTitle">
                         میانبر
@@ -96,7 +96,7 @@ const Footer = () =>{
                     </a>
                 </li>
                </ul>
-                </Col>
+                </Col> */}
                 <Col md={3} className="d-grid">
                     <img src={Logo} className="footerLogo"/>
                     <br/>

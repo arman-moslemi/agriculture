@@ -131,10 +131,9 @@ const UserHistory = () =>{
   
       };
     useEffect(() => {
-      GetData();
  setInterval(() => {
         setSeconds(seconds => seconds + 1);
-        console.log(8989)
+        // console.log(8989)
         if(conReqID){
 
           GetChat(conReqID,disable)
@@ -146,6 +145,9 @@ const UserHistory = () =>{
       }
 
     }, [second]);
+    useEffect(() => {
+      GetData();
+    }, []);
     return(
    <div style={{backgroundColor:'#f4f4f4'}}>
    <Header/>
@@ -229,13 +231,17 @@ cons.map((item,index)=>{
        <p className="productName" style={{marginLeft:10,width:10}}>
             {index+1}
         </p>
-        <p className="productName" style={{width:45}}>
+        <p className="productName" style={{width:70}}>
 {item.Subject}        </p>
+<p className="productVolume" style={{width:100}}>
+تاریخ:{item.DateReq
++" ساعت:"+item.Time}       </p>
        </div>
      
        <div>
        <p className="productVolume">
 {item.Name}{item.Family}        </p>
+<p>قیمت:{item.Cost}</p>
        </div>
        <div>
         {
@@ -278,7 +284,7 @@ cons.map((item,index)=>{
                 + تکرار مشاوره
             </Button> */}
             <Button
-             onClick={()=>item.Type==1 ? GetChat(item.ConsultantReqID,item.Status==3?true:false) :null} 
+             onClick={()=>item.Type==1 ? GetChat(item.ConsultantReqID,item.Status==3?true:false) :    item.Status==3?null:               window.open("/LoginChat")            } 
              className="viewBtn">
                 <EyeFill color="#AAB7CA" size={25}/>
             </Button>
@@ -410,7 +416,166 @@ cons.map((item,index)=>{
     
                 </Tab>
                
-              
+                <Tab eventKey="cons" title="مشاوره های داده شده">
+                  {
+cons?.filter((x)=>x.CustomerID2==localStorage.getItem("CustomerID")).map((item,index)=>{
+  return(
+
+    <div className="consultBoxF2">
+<div className="d-flex">
+<p className="productName" style={{marginLeft:10,width:10}}>
+{index+1}
+</p>
+<p className="productName" style={{width:70}}>
+{item.Subject}        </p>
+<p className="productVolume" style={{width:100}}>
+تاریخ:{item.DateReq
++" ساعت:"+item.Time}       </p>
+</div>
+
+<div>
+<p className="productVolume">
+{item.Name}{item.Family}        </p>
+<p>قیمت:{item.Cost}</p>
+</div>
+<div>
+{
+item.Status==3?
+<p className="productVolume">
+بسته شده
+</p>
+:
+item.Status==2?
+<p className="productVolume">
+پاسخ داده شده
+</p>
+:
+<p className="productVolume">
+در انتظار پاسخ
+</p>
+
+}
+
+</div>
+<div>
+<div className="ticketStatus" id="answered">
+{
+item.Type==1?
+<span>متنی</span>
+
+:
+item.Type==2?
+<span>صوتی</span>
+
+:
+
+<span>تصویری</span>
+
+}
+</div>
+</div>
+<div className="d-flex">
+{/* <Button className="repeatConsult">
+    + تکرار مشاوره
+</Button> */}
+<Button
+ onClick={()=>item.Type==1 ? GetChat(item.ConsultantReqID,item.Status==3?true:false) :    item.Status==3?null:               window.open("/LoginChat")            } 
+ className="viewBtn">
+    <EyeFill color="#AAB7CA" size={25}/>
+</Button>
+{/* <Button className="editProfileBtn"  onClick={handleShow}> 
+       + ایجاد پیام جدید
+       </Button> */}
+
+</div>
+
+</div>
+)
+})
+                  }
+                       <Modal
+                                                show={showSub} onHide={setShowSub}
+                                                className="ticketShowModal"
+                                                aria-labelledby="contained-modal-title-vcenter"
+                                                centered
+                                                >
+                                                <Modal.Header closeButton>
+                                                    <Modal.Title id="contained-modal-title-vcenter">
+                                                  چت
+                                                    </Modal.Title>
+                                                </Modal.Header>
+                                                <Modal.Body>
+                                              
+                                                
+                                           
+                                                <Form>
+                                                {/* <p className="modalText mb-0">
+                                                    <span>
+                                                     موضوع تیکت : {subSupport[0]?.Title}
+                                                    </span>
+                                                    
+                                                </p>
+                                            <br/> */}
+                                           <Row className="modalScroll">
+                                            {
+                                                chat?.map((item)=>{
+                                                    return(
+                                                        item.isCustomer==1?
+
+                                     <Col md={12} style={{display:'flex',alignItems:'center',marginBottom:10,marginTop:10,justifyContent:'end'}}>
+                                              
+                                    <div className="answerText"  style={{backgroundColor:'rgb(236 235 236 / 46%)',height:'auto',minHeight:50,margin:0,padding:10,borderRadius:'15px 15px 15px 0px'}} >
+                                                    <p style={{fontFamily:'IRANSans'}}>
+                                                    {item.Text}
+                                                    </p>
+                                                  
+                                                </div>
+                                                <p style={{fontFamily:'IRANSans',color:'#cecece',fontSize:12,marginBottom:0,marginRight:10}}>{item.Date}</p>        
+                                    
+                                     </Col>
+                                                        :
+
+                                            <Col md={12} style={{display:'flex',alignItems:'center',marginBottom:10,marginTop:10,justifyContent:'start'}}>
+                                                   <p style={{fontFamily:'IRANSans',color:'#cecece',fontSize:12,marginBottom:0,marginLeft:10}}>{item.Date}</p>
+                                                   
+                                            <div className="sendText" style={{height:'auto',minHeight:50,margin:0,padding:10,borderRadius:'15px 15px 0px 15px'}} >
+                                                   
+                                            <p style={{fontFamily:'IRANSans'}}>
+                                                    {item.Text}
+                                                    </p>
+                                                </div>
+                                            </Col>
+                                                    )
+                                                })
+                                            }
+                                                </Row>
+                                                <p className="modalText mb-0">
+                                                    <span>
+                                                    ارسال پیام 
+                                                    </span>
+                                                    
+                                                </p>
+                                                <textarea onChange={(e)=>setText(e.target.value)} className="inputCLass" type="text" style={{maxHeight:150,minHeight:50}}/>
+                                            
+                                              
+                                                </Form>
+                                               
+                                                </Modal.Body>
+                                                {
+                                                  !disable?
+
+                                                <Modal.Footer>
+                                                    <Button  
+                                                    onClick={()=>NewMessage()} 
+                                                    className="modalSaveBtn" >ارسال پیام</Button>
+                                                </Modal.Footer>
+                                                  :
+                                                  null
+                                                }
+                                             </Modal>
+    
+    
+                </Tab>
             </Tabs>
               </div>
        

@@ -126,11 +126,11 @@ const Header = () =>{
             navigate("/Cart")
           }
           else{
-            alert("سبد شما خالی می یاشد")
+            alert("سبد شما خالی می باشد")
           }
                 }
                 else{
-                  alert("سبد شما خالی می یاشد")
+                  alert("سبد شما خالی می باشد")
                   console.log(response.data.result)
           
                 }})

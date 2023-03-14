@@ -79,6 +79,16 @@ export default function CustomizedDialogs(props) {
 }          </Typography>
 
         </DialogContent>
+        {
+          props.Delete?
+       <DialogActions>
+          <Button autoFocus onClick={props.DeleteAction} style={{color:"red"}}>
+           حذف
+          </Button>
+        </DialogActions> 
+          :
+          null
+        }
         {/* <DialogActions>
           <Button autoFocus onClick={handleClose}>
             بازگشت به عقب

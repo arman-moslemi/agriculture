@@ -146,7 +146,107 @@ const Consultation = () =>{
             
       
           }
-        const InsertConsultant=async()=>{
+        const InsertConsultant=async(id)=>{
+    
+            const axios = require("axios");
+            var ss= localStorage.getItem("CustomerID")
+if(id==1)
+{
+    axios.post(apiUrl + "CustomerWallet",{CustomerID:ss})
+    .then(function (response) {
+        console.log("Wallet")
+        console.log(response.data.result)
+      if (response.data.result == "True") {
+        console.log("Wallet")
+        console.log(response.data.Data)
+var tot=0
+response.data.Data?.map((item)=>{
+if(item?.Status==1){
+    tot+=item?.Cost
+}
+else if(item?.Status==2){
+    tot-=item?.Cost
+}
+
+
+})
+if(tot>=cost){
+
+    dechargeWallet()
+}
+else{
+    setTitle("موجودی کیف پول شما کافی نیست")
+    setOpen(true)
+}
+    }})
+    .catch(function (error) {
+      console.log(777)
+      console.log(error);
+
+      console.log(error);
+    });
+}
+else{
+    chargeWallet()
+}
+
+       
+       
+         
+            
+      
+          }
+          const chargeWallet=()=>{
+            const axios = require("axios");
+          
+            var ss=localStorage.getItem("CustomerID")
+            axios.post(apiUrl + "ChargeWallet",{CustomerID:ss,Money:cost*10,orderId:123456})
+            .then(function (response) {
+                console.log(111)
+                console.log(response)
+              if (response.status== 200) {
+                console.log(777)
+                console.log(response.data.refId)
+    //             navigate("/Dargah"
+    // , { replace: true,state:{id:response.data?.refId} }
+    // );
+    window.location.href="/dargahh.html?id="+response.data?.refId;
+            }})
+            .catch(function (error) {
+              console.log(777)
+              console.log(error);
+    
+              console.log(error);
+            });
+            
+      
+      
+          }
+          const dechargeWallet=()=>{
+            const axios = require("axios");
+          
+            var ss=localStorage.getItem("CustomerID")
+            axios.post(apiUrl + "DeChargeWallet",{CustomerID:ss,Money:cost*10,orderId:123456})
+            .then(function (response) {
+                console.log(111)
+                console.log(response)
+              if (response.data.result== "True") {
+                console.log(777)
+                console.log(response.data)
+                SetConsultant()
+
+            }})
+            .catch(function (error) {
+              console.log(777)
+              console.log(error);
+    
+              console.log(error);
+            });
+            
+      
+      
+          }
+          const SetConsultant=async()=>{
             const axios = require("axios");
             var ss= localStorage.getItem("CustomerID")
             axios.post(apiUrl + "SetConsultant",{Customer:ss,Consultant:consultant,Cost:cost,Time:time,Type:type,Subject:subject})
@@ -197,10 +297,6 @@ const Consultation = () =>{
                     console.log(777)
                     console.log(error);
                 });
-       
-         
-            
-      
           }
         const InsertFavorite=(id)=>{
             const axios = require("axios");
@@ -511,21 +607,21 @@ index+1>item.Rate?
                                             <Link to="" className="callBtn " onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
                                                 متنی
                                             </Link>
-                                            <p className="consultDegree">تعداد:۵۰</p>
+                                            {/* <p className="consultDegree">تعداد:۵۰</p> */}
                                             </div>
                                             <div className="borderLeftGreen" style={{alignItems:'center',justifyContent:'center',padding:10}}>
 
                                             <Link to=""  className="callBtn " onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
                                                صوتی
                                             </Link>
-                                            <p className="consultDegree">تعداد:۵۰</p>
+                                            {/* <p className="consultDegree">تعداد:۵۰</p> */}
                                             </div>
                                             <div className="borderLeftGreen" style={{alignItems:'center',justifyContent:'center',padding:10}}>
 
                                             <Link to=""  className="callBtn" onClick={()=>handleShow("3",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
                                                 تصویری
                                             </Link>
-                                            <p className="consultDegree">تعداد:۵۰</p>
+                                            {/* <p className="consultDegree">تعداد:۵۰</p> */}
                                             </div>
                                             <Modal
                                                 show={show} onHide={handleClose}
@@ -585,7 +681,7 @@ index+1>item.Rate?
                                                 </Modal.Body>
                                                 <Modal.Footer>
                                                     <Button  
-                                                    onClick={()=>GetCost(item.CustomerID)}
+                                                    onClick={()=>GetCost(consultant)}
                                                     // onClick={()=>alert(consultant)}
                                                     
                                                     className="modalSaveBtn">ثبت درخواست</Button>
@@ -637,8 +733,8 @@ index+1>item.Rate?
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                <Button  onClick={InsertConsultant}className="modalSaveBtn2">پرداخت از کیف پول</Button>
-                                                    <Button  onClick={InsertConsultant}className="modalSaveBtn">پرداخت آنلاین</Button>
+                                                <Button  onClick={()=>InsertConsultant(1)}className="modalSaveBtn2">پرداخت از کیف پول</Button>
+                                                    <Button  onClick={()=>InsertConsultant(2)}className="modalSaveBtn">شارژ کیف پول</Button>
                                                    
                                                 </Modal.Footer>
                                              </Modal>

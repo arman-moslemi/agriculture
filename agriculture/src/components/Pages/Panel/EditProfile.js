@@ -133,6 +133,9 @@ const EditProfile = () =>{
              setCardNumber(response.data.Data[0]?.CardNumber)
              setSheba(response.data.Data[0]?.Sheba)
              setIsConsultant(response.data.Data[0]?.IsConsultant)
+             setTextType(response.data.Data[0]?.TextType)
+             setVideoType(response.data.Data[0]?.VideoType)
+             setVoiceType(response.data.Data[0]?.VoiceType)
 
             
     
@@ -422,7 +425,7 @@ isConsultant?
         <br/>
         {/* <div className="inputCLass d-flex align-items-center"> */}
             {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کارشناسی ارشد</p> */}
-            <input value={degre} onChange={(e)=>setDegre(e.target.value)}  className="inputCLass" type="text"/>
+            <input value={degre} disabled={true} onChange={(e)=>setDegre(e.target.value)}  className="inputCLass" type="text"/>
 
         {/* </div> */}
         
@@ -431,7 +434,7 @@ isConsultant?
         <span className="inputTitle">تخصص</span>
         <br/>
             {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کشاورزی</p> */}
-            <input value={specialty} onChange={(e)=>setSpecialty(e.target.value)}  className="inputCLass" type="text"/>
+            <input value={specialty} disabled={true} onChange={(e)=>setSpecialty(e.target.value)}  className="inputCLass" type="text"/>
 
         </Col>
     </Row>
@@ -442,7 +445,7 @@ isConsultant?
         <div className="grayBox">
         <div className="d-flex align-items-center">
    
-   <Checkbox
+   {/* <Checkbox
 
        
        sx={{
@@ -451,7 +454,7 @@ isConsultant?
        color: '#009959',
        },
    }}
-/>
+/> */}
 <span className="categoryLable">
        متنی
    </span>
@@ -460,15 +463,15 @@ isConsultant?
         <br/>
         <div className="d-flex justify-content-between">
             <div className="priceShow">
-                100.000 تومان
+                {textType} تومان
             </div>
-            <Form.Select className="priceSelect" >
+            {/* <Form.Select className="priceSelect" >
                             
                                     <option>تومان</option>
                                     <option>پوند</option>
                                     <option>درهم</option>
                                    
-                                </Form.Select>
+                                </Form.Select> */}
         </div>
         </div>
 
@@ -476,7 +479,7 @@ isConsultant?
         <Col md={4}>
         <div className="grayBox">
         <div className="d-flex align-items-center">
-   
+{/*    
    <Checkbox
 
        
@@ -486,7 +489,7 @@ isConsultant?
        color: '#009959',
        },
    }}
-/>
+/> */}
 <span className="categoryLable">
       صوتی 
    </span>
@@ -495,15 +498,15 @@ isConsultant?
         <br/>
         <div className="d-flex justify-content-between">
             <div className="priceShow">
-                150.000 تومان
+                {voiceType} تومان
             </div>
-            <Form.Select className="priceSelect" disabled>
+            {/* <Form.Select className="priceSelect" disabled>
                             
                                     <option>تومان</option>
                                     <option>پوند</option>
                                     <option>درهم</option>
                                    
-                                </Form.Select>
+                                </Form.Select> */}
         </div>
         </div>
 
@@ -511,7 +514,7 @@ isConsultant?
         <Col md={4}>
         <div className="grayBox">
         <div className="d-flex align-items-center">
-   
+{/*    
    <Checkbox
 
        
@@ -521,7 +524,7 @@ isConsultant?
        color: '#009959',
        },
    }}
-/>
+/> */}
 <span className="categoryLable">
        تصویری
    </span>
@@ -530,15 +533,15 @@ isConsultant?
         <br/>
         <div className="d-flex justify-content-between">
             <div className="priceShow">
-                200.000 تومان
+                {videoType} تومان
             </div>
-            <Form.Select className="priceSelect" disabled>
+            {/* <Form.Select className="priceSelect" disabled>
                             
                                     <option>تومان</option>
                                     <option>پوند</option>
                                     <option>درهم</option>
                                    
-                                </Form.Select>
+                                </Form.Select> */}
         </div>
         </div>
 

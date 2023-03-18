@@ -13,11 +13,15 @@ import { Link, useNavigate,useLocation } from "react-router-dom";
 import { ArrowUpSquare ,ArrowDownSquare } from 'react-bootstrap-icons';
 const Wallet = () =>{
     const [show, setShow] = useState(false);
-    const [cost, setCost] = useState(10000);
+    const [cost, setCost] = useState(0);
     let navigate = useNavigate();
 
     const handleClose = () =>{ setShow(false);chargeWallet()}
     const handleShow = () => setShow(true);
+    const [data, setData] = useState([]);
+    const [wallet, setWallet] = useState([]);
+    const [total, setTotal] = useState([]);
+
     const GetData=()=>{
         const axios = require("axios");
       
@@ -25,11 +29,36 @@ const Wallet = () =>{
         axios.post(apiUrl + "ReadCustomer",{CustomerID:ss})
         .then(function (response) {
           if (response.data.result == "True") {
-            console.log(777)
+            console.log("customer")
             console.log(response.data.Data)
             console.log(response.data.Data[0]?.Name)
             setData(response.data.Data)
 
+        }})
+        .catch(function (error) {
+          console.log(777)
+          console.log(error);
+
+          console.log(error);
+        });
+        axios.post(apiUrl + "CustomerWallet",{CustomerID:ss})
+        .then(function (response) {
+            console.log("Wallet")
+            console.log(response.data.result)
+          if (response.data.result == "True") {
+            console.log("Wallet")
+            console.log(response.data.Data)
+            setWallet(response.data.Data)
+var tot=0
+response.data.Data?.map((item)=>{
+    if(item?.Status==1){
+        tot+=item?.Cost
+    }
+    else if(item?.Status==2){
+        tot-=item?.Cost
+    }
+})
+setTotal(tot)
         }})
         .catch(function (error) {
           console.log(777)
@@ -67,7 +96,6 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
   
   
       }
-      const [data, setData] = useState([]);
 
     useEffect(() => {
         GetData();
@@ -91,9 +119,9 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                    </p>
                    </div>
                    <div>
-                   <Button className="editProfileBtn">
+                   {/* <Button className="editProfileBtn">
                     دریافت خروجی اکسل
-                   </Button>
+                   </Button> */}
                    <Button className="editProfileBtn marginRight1rem" onClick={handleShow}>
                    + افزایش موجودی
                    </Button>
@@ -115,7 +143,7 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                                                 <Form>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                       مبلغ مورد نظر خود را وارد کنید : 
+                                                     مبلغ مورد نظر خود را وارد کنید :  (ریال) 
                                                     </span>
                                                     
                                                 </p>
@@ -154,7 +182,7 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                    موجودی کیف پول شما :
                    </p>
                    <p className="panelTitle blackColor">
-                   125.000 تومان
+                 {total}تومان
                    </p>
                     </div>
 
@@ -165,60 +193,47 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                    تاریخچه تراکنش های شما
                    </p>
                    </div>
-                   <Row className="mt-4">
-                    <Col md={6}>
-                        <div className="whiteBox d-flex align-items-center justify-content-between pd15 r2">
-                             <ArrowUpSquare size={35} color="#009959"/>
-                             <p className="variz">واریز وجه</p>
-                             <p className="tarikh">120.000 تومان</p>
-                             <p className="tarikh">01/02/28</p>
-                        </div>
-                    </Col>
-                    <Col md={6}>
-                    <div className="whiteBox d-flex align-items-center justify-content-between pd15">
-                             <ArrowDownSquare size={35} color="#FF2525"/>
-                             <p className="bardasht">برداشت وجه</p>
-                             <p className="tarikh">120.000 تومان</p>
-                             <p className="tarikh">01/02/28</p>
-                        </div>
-                    </Col>
+                   {
+                    wallet?.map((item)=>{
+                        return(
+                            item.Status!=0?
+<Row className="mt-4">
+   
+        <Col md={12}>
+        <div className="whiteBox d-flex align-items-center justify-content-between pd15 r2">
+        {
+        item?.Status==1?
+        <>
+             <ArrowUpSquare size={35} color="#009959"/>
+             <p className="variz" style={{width:100}}>واریز وجه</p>
+             </>
+             :
+        item?.Status==2?
+        <>
+
+        <ArrowDownSquare size={35} color="#FF2525"/>
+        <p className="bardasht" style={{width:100}}>برداشت وجه</p>
+        </>
+        :
+        null}
+             <p className="tarikh">{item?.Cost} تومان</p>
+             <p className="tarikh">{item?.Date} {item?.Time}</p>
+             <p className="tarikh">{item?.FactorNumber} </p>
+        </div>
+    </Col>
+        
+   
+       
+                 
+                  
                    </Row>
-                   <Row className="mt-3">
-                    <Col md={6}>
-                        <div className="whiteBox d-flex align-items-center justify-content-between pd15">
-                             <ArrowUpSquare size={35} color="#009959"/>
-                             <p className="variz">واریز وجه</p>
-                             <p className="tarikh">120.000 تومان</p>
-                             <p className="tarikh">01/02/28</p>
-                        </div>
-                    </Col>
-                    <Col md={6}>
-                    <div className="whiteBox d-flex align-items-center justify-content-between pd15">
-                             <ArrowDownSquare size={35} color="#FF2525"/>
-                             <p className="bardasht">برداشت وجه</p>
-                             <p className="tarikh">120.000 تومان</p>
-                             <p className="tarikh">01/02/28</p>
-                        </div>
-                    </Col>
-                   </Row>
-                   <Row className="mt-3">
-                    <Col md={6}>
-                        <div className="whiteBox d-flex align-items-center justify-content-between pd15">
-                             <ArrowUpSquare size={35} color="#009959"/>
-                             <p className="variz">واریز وجه</p>
-                             <p className="tarikh">120.000 تومان</p>
-                             <p className="tarikh">01/02/28</p>
-                        </div>
-                    </Col>
-                    <Col md={6}>
-                    <div className="whiteBox d-flex align-items-center justify-content-between pd15">
-                             <ArrowDownSquare size={35} color="#FF2525"/>
-                             <p className="bardasht">برداشت وجه</p>
-                             <p className="tarikh">120.000 تومان</p>
-                             <p className="tarikh">01/02/28</p>
-                        </div>
-                    </Col>
-                   </Row>
+                   :
+                   null
+                        )
+                    })
+                   }
+                   
+                   
                    </div>
         </Col>
         </Row>

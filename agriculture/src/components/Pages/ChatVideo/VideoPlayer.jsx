@@ -56,7 +56,7 @@ handleLoadedMetadata()
                 </Grid>   
           )} 
           {/* <Fab color="primary" aria-label="add">
-{second}
+{userVideo.current?.currentTime}
 </Fab>  */}
         </Grid>
     );

@@ -11,9 +11,11 @@ const VideoPlayer = () => {
         const video = userVideo.current;
         if (!video) return;
         // console.log(`The video is ${video.duration} seconds long.`);
-        console.log(video?.currentTime)
+        // console.log(video?.currentTime)
+        setTime(video?.currentTime)
       };
     const [second, setSeconds] = useState(0);
+    const [time, setTime] = useState(0);
 
     useEffect(() => {
 //    if(     callAccepted && !callEnded)
@@ -23,7 +25,7 @@ setSeconds(second + 1);
 // console.log(second)
 // console.log(userVideo.currentTime);
 handleLoadedMetadata()
-    }, 20000);
+    }, 1000);
 // }
 
   
@@ -55,9 +57,12 @@ handleLoadedMetadata()
                     </Paper>
                 </Grid>   
           )} 
-          {/* <Fab color="primary" aria-label="add">
-{userVideo.current?.currentTime}
-</Fab>  */}
+          <Fab color="primary" aria-label="add">
+{/* {userVideo.current?.currentTime} */}
+{
+  parseInt(time/60)+":"+parseInt(time%60)
+}
+</Fab> 
         </Grid>
     );
 }

@@ -38,6 +38,7 @@ const EditProfile = () =>{
     const [newAddress,setNewAddress]=useState("")
     const [editAddressID,setEditAddressID]=useState("")
     const [isConsultant,setIsConsultant]=useState()
+    const [avaible,setAvaible]=useState()
 
     const [newPostalCode,setNewPostalCode]=useState("")
     const [title,setTitle]=useState("")
@@ -84,7 +85,7 @@ const EditProfile = () =>{
                 var ss=localStorage.getItem("CustomerID")
         
             axios.post(apiUrl + "EditCustomer",{CustomerID:ss,Mobile:mobile,Name:name,Family:family,Password:pass,Email:email,
-                Degree:degre,CardNumber:cardNumber,Sheba:sheba,Specialty:specialty
+                Degree:degre,CardNumber:cardNumber,Sheba:sheba,Specialty:specialty,Avaible:avaible
             })
             .then(function (response) {
               if (response.data.result == "True") {
@@ -136,6 +137,7 @@ const EditProfile = () =>{
              setTextType(response.data.Data[0]?.TextType)
              setVideoType(response.data.Data[0]?.VideoType)
              setVoiceType(response.data.Data[0]?.VoiceType)
+             setAvaible(response.data.Data[0]?.Avaible)
 
             
     
@@ -419,6 +421,18 @@ isConsultant?
    
 </div>
 <Form className="mt-3">
+<Row>
+        <Col md={12}>
+        <span className="inputTitle">ساعات کاری</span>
+        <br/>
+        {/* <div className="inputCLass d-flex align-items-center"> */}
+            {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کارشناسی ارشد</p> */}
+            <input value={avaible} onChange={(e)=>setAvaible(e.target.value)}  className="inputCLass" type="text"/>
+
+        {/* </div> */}
+        
+        </Col>
+        </Row>
     <Row>
         <Col md={6}>
         <span className="inputTitle">مدرک تحصیلی</span>

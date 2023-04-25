@@ -607,7 +607,13 @@ index<parseInt(item.RateAvg)?
                                     <p className="consultDegree">
                                             زمان انتظار جهت پاسخگویی :  {item.WaitTime} دقیقه
                                         </p>
+                                        <div>
+                                    <p className="consultDegree">
+                                           زمان کاری:  {item.Avaible} 
+                                        </p>
                                         </div>
+                                        </div>
+                                  
                                         <div className="d-flex ">
                                             <div className="borderLeftGreen" style={{alignItems:'center',justifyContent:'center',padding:10}}>
                                             <Link to="" className="callBtn " onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>

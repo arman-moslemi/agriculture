@@ -550,7 +550,7 @@ top: 15%;
     border-right: none !important;
     border-top: none !important;
     border-bottom: none !important;
-    border-left: 1px solid #7B808C !important;
+    /* border-left: 1px solid #7B808C !important; */
     margin-left: 5px;
   }
   .favorite{
@@ -2093,6 +2093,12 @@ margin-bottom: 10px; */
 .ticketShowModal .modal-dialog{
   width: 70% !important;
   max-width: 70% !important;
+
+}
+.rateModal .modal-dialog{
+  width: 30% !important;
+  max-width: 30% !important;
+  padding: 50px;
 
 }
 .senderData{

@@ -41,6 +41,7 @@ const Login = () =>{
             // auth.login(response.data.Data.CustomerID);
             localStorage.setItem("CustomerID",response.data.Data[0].CustomerID);
             localStorage.setItem("Guest","");
+            localStorage.setItem("IsConsultant",response.data.Data[0].IsConsultant);
     navigate("/EditProfile"
     , { replace: true,state:{CustomerID:response.data.Data[0].CustomerID} }
     );

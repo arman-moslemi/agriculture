@@ -10,10 +10,17 @@ import { SocketContext } from "../../../SocketContext";
 import DialogBox from "./DialogBox";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import StartRate from 'src/components/Pages/Layouts/StarRate';
+import { Container, Row ,Col ,Button} from "react-bootstrap";
+import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 
 const UsersListGrid = () => {
   const { usersList, callUser, leaveCall, openCallDialog, call, setCall } =
     useContext(SocketContext);
+    const [modalRate, setModalRate] = useState(false);
+    const [rate,setRate]=useState(5)
+    const [text, setText] = useState();
   const [otherPartyInfo, setOtherPartyInfo] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
@@ -185,6 +192,27 @@ const UsersListGrid = () => {
         }
     },
   ];
+  const InsertComment=async()=>{
+    var ss=await localStorage.getItem("CustomerID")
+ 
+
+  var cons= await   localStorage.getItem("cons_id")
+    const axios = require("axios");
+    axios.post(apiUrl + "InsertRateConsultant",{CustomerID:ss,CustomerID2:cons,Rate:rate})
+    .then(function (response) {
+      if (response.data.result == "True") {
+navigate("/login");
+     
+        }})
+        .catch(function (error) {
+            console.log(777)
+            console.log(error);
+            
+            console.log(error);
+        });
+      ;
+
+}
 
   const callActionStart = () => {
   // if(  usersList.length > 0 ){
@@ -212,12 +240,12 @@ const UsersListGrid = () => {
     const { clientId, fname, lname, userId } = info;
     const userIds = localStorage.getItem("user_id");
     const axios = require("axios");
-
     axios.post("https://admin.gsmartnet.com/api/VideoEnd",{id:userIds})
     .then(function (response) {
 console.log(666)
 console.log(response)
-navigate("/login");
+setModalRate(true)
+
           }
    
    )
@@ -276,6 +304,43 @@ navigate("/login");
         handleClose={leaveCall}
         otherPartyInfo={otherPartyInfo}
       />
+         <Modal
+       show={modalRate} onHide={setModalRate}
+        className="rateModal"
+       aria-labelledby="contained-modal-title-vcenter"
+       centered
+       
+     >
+
+<div style={{width:'100%'}}>
+                        <p className="headerNews">
+ثبت دیدگاه                     </p>
+                 
+
+                    
+                       <div className="d-flex align-items-center mt-3">
+                       <p style={{fontFamily:'IRANSans',marginBottom:0}}>
+                        امتیاز شما : 
+                       </p>
+                       <div className="d-flex align-items-center justify-center" style={{marginRight:25}}>
+                       <StartRate  setRate={setRate} />
+
+                        </div>
+                        
+                       </div>
+{/*                      
+                       <div className="d-flex mt-3 align-items-start">
+                       <p style={{fontFamily:'IRANSans',marginBottom:0}}>
+                        متن پیام شما :
+                       </p>
+                       <textarea onChange={(e)=>setText(e.target.value)} className="inputCLass cInput" type="text" style={{minHeight:200}}/>
+                       </div> */}
+                        <Row>
+                            <Col md={12} style={{textAlign:'left'}}>
+                                <Button onClick={()=>InsertComment()} className="sendComment" style={{marginTop:20,marginRight:'auto',marginLeft:'auto',display:'block'}}>ارسال دیدگاه</Button>
+                            </Col>
+                        </Row>
+                    </div>     </Modal>
     </Grid>
   );
 };

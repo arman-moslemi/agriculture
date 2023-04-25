@@ -6,7 +6,7 @@ import MicOffIcon from '@material-ui/icons/MicOff';
 import VideocamOffIcon from '@material-ui/icons/VideocamOff';
 
 const Options = ({children}) => {
-    const {endCall, callAccepted, callEnded, call, handleCameraToggle, handleMicToggle, micStatus, cameraStatus} = useContext(SocketContext);
+    const {endCall, callAccepted, callEnded, call, handleCameraToggle, handleMicToggle, micStatus, cameraStatus,modal,setModal,modalRate,setModalRate} = useContext(SocketContext);
     return ( 
         <>
         {callAccepted && !callEnded && (
@@ -49,6 +49,8 @@ const Options = ({children}) => {
                     </Grid>
                 </Grid>
                 {children}
+
+             
             </Container>
         )}
         </>

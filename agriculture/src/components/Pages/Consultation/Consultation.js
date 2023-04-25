@@ -88,10 +88,16 @@ const Consultation = () =>{
           axios.get(apiUrl + "AllConsultant")
           .then(function (response) {
             if (response.data.result == "True") {
-                setData(response.data.Data)
-                setData2(response.data.Data)
+                setData(response.data.Data.sort((a, b) =>
+                a.RateAvg < b.RateAvg ? 1 : -1,
+              ))
+                setData2(response.data.Data.sort((a, b) =>
+                a.RateAvg < b.RateAvg ? 1 : -1,
+              ))
                 console.log(345678)
-                console.log(response.data.Data)
+                console.log(response.data.Data.sort((a, b) =>
+                a.RateAvg < b.RateAvg ? 1 : -1,
+              ))
               }})
               .catch(function (error) {
                   console.log(777)
@@ -581,11 +587,11 @@ else{
                                     {
                       [...new Array(5)].map((item2,index)=>{
                         return(
-index+1>item.Rate?
-<StarFill color="#ffb921" className="marginLeft5"/>
+index<parseInt(item.RateAvg)?
 
+<StarFill color="#ffb921" className="marginLeft5"/>
 :
-                          <Star color="#000" className="marginLeft5"/>
+<Star color="#000" className="marginLeft5"/>
 
 
                         )

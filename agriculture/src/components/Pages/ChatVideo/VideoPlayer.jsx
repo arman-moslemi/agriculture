@@ -33,7 +33,7 @@ handleLoadedMetadata()
     return ( 
         <Grid container spacing={2} className={callAccepted ? 'call-accepted d-flex align-items-center justify-content-center video-container p-0 p-md-5' : 'd-flex align-items-center justify-content-center video-container p-0 p-md-5'}>  
             {/* our own video */}
-            {stream &&(
+            {/* {stream &&(
                 <Grid item xs={12} md={6} className={!callAccepted ? 'me-grid' : ''}>
                     <Paper className="video-paper">
                         <Typography varient="h5" gutterBottom className="text-center">
@@ -45,9 +45,10 @@ handleLoadedMetadata()
                         </audio>
                     </Paper>
                 </Grid>    
-            )}
+            )} */}
             {/* user's video */}
             {callAccepted && !callEnded && (
+                <>
                 <Grid item xs={12} md={6}>
                     <Paper className="video-paper">
                         <Typography varient="h5" gutterBottom className="text-center">
@@ -55,14 +56,16 @@ handleLoadedMetadata()
                         </Typography>
                         <video controls playsInline muted ref={userVideo} autoPlay onLoadedMetadata={handleLoadedMetadata} className="w-100" />
                     </Paper>
-                </Grid>   
+                </Grid>  
+                     <Fab color="primary" aria-label="add">
+                     {/* {userVideo.current?.currentTime} */}
+                     {
+                       parseInt(time/60)+":"+parseInt(time%60)
+                     }
+                     </Fab>  
+                     </>
           )} 
-          <Fab color="primary" aria-label="add">
-{/* {userVideo.current?.currentTime} */}
-{
-  parseInt(time/60)+":"+parseInt(time%60)
-}
-</Fab> 
+  
         </Grid>
     );
 }

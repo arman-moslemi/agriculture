@@ -21,6 +21,7 @@ const ContextProvider = ({ children }) => {
   const [selectedVideoInput, setSelectedVideoInput] = useState("");
   const [micStatus, setMicStatus] = useState(true);
   const [cameraStatus, setCameraStatus] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const myVideo = useRef();
   const userVideo = useRef();
@@ -209,6 +210,8 @@ const ContextProvider = ({ children }) => {
     setShowUsersList(true);
     connectionRef.current.destroy();
     window.location.reload();
+    setModal(true)
+
   };
 
   const handleMicToggle = () => {
@@ -219,6 +222,9 @@ const ContextProvider = ({ children }) => {
   const handleCameraToggle = () => {
     setCameraStatus(!stream.getVideoTracks()[0].enabled);
     stream.getVideoTracks()[0].enabled = !stream.getVideoTracks()[0].enabled;
+    // if(!stream.getVideoTracks()[0].enabled==false){
+
+    // }
   };
 
 
@@ -249,6 +255,7 @@ const ContextProvider = ({ children }) => {
     cameraStatus,
     myAudioRef,
     userAudioRef,
+ 
   };
 
   return (

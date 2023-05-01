@@ -48,7 +48,7 @@ const UserHistory = () =>{
       axios.post(apiUrl + "CustomerSubFactor",{CustomerID:ss})
       .then(function (response) {
         if (response.data.result == "True") {
-          console.log(777)
+          console.log(33)
 
           setHis(response.data.Data)
           console.log(response.data.Data);
@@ -202,11 +202,11 @@ return(
            </div>
            <div style={{textAlign:'left'}}>
         <span className="historyPrice">
-          قیمت کالا : {item2.SubFactorCost} تومان
+          قیمت کالا : {item2?.SpecialCost?item2?.SpecialCost:item2?.Cost} تومان
         </span>
         <br/>
         <span className="historyPrice">
-         تعداد : {item2.SubFactorNumber} عدد
+         تعداد : {item2.NumberFactor} عدد
         </span>
         </div>
         </div>

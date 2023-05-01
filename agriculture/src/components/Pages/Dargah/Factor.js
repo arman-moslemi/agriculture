@@ -60,7 +60,7 @@ const Factor = () => {
         console.log(response.data.Data)
         var tot=0
         response.data.Data.map((item)=>{
-tot+=item?.Cost
+tot+=item?.SpecialCost?item?.SpecialCost:item?.Cost
         })
 setTotal(tot)
     }
@@ -218,7 +218,7 @@ setTotal(tot)
       
       <Col md={2} className="ta-right">
       <p className="fontWeightNormal2 mb-2">
-         {item.Cost?.toLocaleString("en-de")} {t("تومان")}
+         {item?.SpecialCost?item?.SpecialCost:item.Cost?.toLocaleString("en-de")} {t("تومان")}
         </p>
       </Col>
       {/* <Col md={1} className="ta-right">
@@ -228,12 +228,13 @@ setTotal(tot)
       </Col> */}
       <Col md={1} className="ta-right">
       <p className="fontWeightNormal2 mb-2">
-         {item.Number}
+         {item.NumberFactor}
         </p>
       </Col>
       <Col md={2} className="ta-right">
       <p className="fontWeightNormal2 mb-2">
-        {(item.Cost*item.Number)?.toLocaleString("en-de")} {t("تومان")}
+        {(item.SpecialCost*item.NumberFactor)?.toLocaleString("en-de")} {t("تومان")}
+        {/* {(item.SpecialCost)?.toLocaleString("en-de")} {t("تومان")} */}
         </p>
       </Col>
     </div>

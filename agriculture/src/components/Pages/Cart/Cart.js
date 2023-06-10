@@ -12,10 +12,13 @@ import Location from "src/components/assets/icon/Location";
 
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams } from "react-router-dom";
+import CustomizedDialogs from '../Layouts/AlertModal';
+
 const Cart = () =>{
   const [showAlert, setshowAlert] = useState(false);
   const [data, setData] = useState([]);
-
+  const [open,setOpen]=useState(false)
+  const [title,setTitle]=useState("")
       const [show, setShow] = useState(false);
       const [count,setCount]=useState(1);
       const [count2,setCount2]=useState(1);
@@ -30,7 +33,7 @@ const Cart = () =>{
       const [newAddress,setNewAddress]=useState("")
       const [editAddressID,setEditAddressID]=useState("")
       const [costTotal,setCostTotal]=useState(0)
-      const [radio,setRadio]=useState(0)
+      const [radio,setRadio]=useState(5)
 
   
       const [newPostalCode,setNewPostalCode]=useState("")
@@ -273,24 +276,32 @@ setCostTotal(dd)
               // alert(dataAddress[radio]?.Address)
                 var ss=localStorage.getItem("CustomerID")
                 // axios.post(apiUrl + "ChargeWallet",{CustomerID:ss,Money:costTotal,orderId:123456})
-                axios.post(apiUrl + "CardSuccess",{CustomerID:ss,Money:costTotal*10,orderId:123456,Address:dataAddress[radio]?.Address})
-                .then(function (response) {
-                    console.log(111)
-                    console.log(response)
-                  if (response.status== 200) {
+                
+                if(radio!=5)
+          {        axios.post(apiUrl + "CardSuccess",{CustomerID:ss,Money:costTotal*10,orderId:123456,Address:dataAddress[radio]?.Address})
+                  .then(function (response) {
+                      console.log(111)
+                      console.log(response)
+                    if (response.status== 200) {
+                      console.log(777)
+                      console.log(response.data.refId)
+          //             navigate("/Dargah"
+          // , { replace: true,state:{id:response.data?.refId} }
+          // );
+          window.location.href="/dargahh.html?id="+response.data?.refId;
+                  }})
+                  .catch(function (error) {
                     console.log(777)
-                    console.log(response.data.refId)
-        //             navigate("/Dargah"
-        // , { replace: true,state:{id:response.data?.refId} }
-        // );
-        window.location.href="/dargahh.html?id="+response.data?.refId;
-                }})
-                .catch(function (error) {
-                  console.log(777)
-                  console.log(error);
-        
-                  console.log(error);
-                });
+                    console.log(error);
+          
+                    console.log(error);
+                  })}
+                else{
+                  setTitle("آدرس انتخاب نشده است")
+                  setOpen(true)
+                }
+                
+       
                 
           
           
@@ -300,6 +311,8 @@ setCostTotal(dd)
    <Header/>
    <Container className="bodyPadding">
         <Row>
+        <CustomizedDialogs Title={title} open={open} setOpen={setOpen}/>
+
         <Col md={9}>
                 <div className="whiteBox">
                <div className="whiteBoxGrayborder" style={{padding:0}}>

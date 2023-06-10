@@ -3,6 +3,7 @@ import { io } from "socket.io-client";
 import { useNavigate } from "react-router-dom";
 import Peer from "simple-peer";
 import config from "./config.json";
+import { apiUrl ,apiAsset} from "./commons/inFormTypes";
 
 const SocketContext = createContext();
 const socket = io(config.WEBRTC_api);
@@ -22,6 +23,7 @@ const ContextProvider = ({ children }) => {
   const [micStatus, setMicStatus] = useState(true);
   const [cameraStatus, setCameraStatus] = useState(true);
   const [modal, setModal] = useState(false);
+  const [ftime, setFtime] = useState(0);
 
   const myVideo = useRef();
   const userVideo = useRef();
@@ -118,7 +120,7 @@ const ContextProvider = ({ children }) => {
 
   const callUser = (id) => {
     setOpenCallDialog(true);
-    myAudioRef.current.muted = false;
+    // myAudioRef.current.muted = false;
     const peer = new Peer({ initiator: true, trickle: false, stream });
     peer.on("signal", (data) => {
       socket.emit("callRequest", {
@@ -135,7 +137,7 @@ const ContextProvider = ({ children }) => {
       userVideo.current.muted = false;
     });
     socket.on("callAccepted", (signal) => {
-      myAudioRef.current.muted = true;
+      // myAudioRef.current.muted = true;
       setCallAccepted(true);
       setOpenCallDialog(false);
       setCallEnded(false);
@@ -148,12 +150,12 @@ const ContextProvider = ({ children }) => {
   };
 
   const leaveCall = (clientId) => {
-    if (userAudioRef.current) {
-      userAudioRef.current.muted = true;
-    }
-    if (myAudioRef.current) {
-      myAudioRef.current.muted = true;
-    }
+    // if (userAudioRef.current) {
+    //   userAudioRef.current.muted = true;
+    // }
+    // if (myAudioRef.current) {
+    //   myAudioRef.current.muted = true;
+    // }
     socket.emit("callEnded", {
       otherParty: { clientId },
     });
@@ -194,23 +196,57 @@ const ContextProvider = ({ children }) => {
     window.location.reload();
     navigate("/login");
   };
+  const dechargeWallet=()=>{
+    const axios = require("axios");
+  
+    var ss=localStorage.getItem("CustomerID")
+    var time=localStorage.getItem("cons_time")
+    var cost=localStorage.getItem("cons_cost")
+    var tt=parseInt(ftime/60)
+    var finalCost=parseInt(tt*100/time)*cost;
+    console.log(time)
+    console.log(cost)
 
+    axios.post(apiUrl + "DeChargeWallet",{CustomerID:ss,Money:finalCost*10,orderId:123456})
+    .then(function (response) {
+        console.log(111)
+        console.log(response)
+      if (response.data.result== "True") {
+        console.log(777)
+        console.log(response.data)
+
+    }})
+    .catch(function (error) {
+      console.log(777)
+      console.log(error);
+
+      console.log(error);
+    });
+    
+
+
+  }
   const endCall = (clientId) => {
-    if (userAudioRef.current) {
-      userAudioRef.current.muted = true;
-    }
-    if (myAudioRef.current) {
-      myAudioRef.current.muted = true;
-    }
+    // if (userAudioRef.current) {
+    //   userAudioRef.current.muted = true;
+    // }
+    // if (myAudioRef.current) {
+    //   myAudioRef.current.muted = true;
+    // }
+
+
+// alert(ftime)
+
     socket.emit("callEnded", {
       otherParty: { clientId },
     });
     setCallAccepted(false);
     setCallEnded(true);
     setShowUsersList(true);
-    connectionRef.current.destroy();
-    window.location.reload();
-    setModal(true)
+    dechargeWallet()
+    // connectionRef.current.destroy();
+    // window.location.reload();
+    // setModal(true)
 
   };
 
@@ -255,6 +291,7 @@ const ContextProvider = ({ children }) => {
     cameraStatus,
     myAudioRef,
     userAudioRef,
+    setFtime
  
   };
 

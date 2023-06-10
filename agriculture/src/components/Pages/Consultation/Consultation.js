@@ -178,7 +178,9 @@ else if(item?.Status==2){
 })
 if(tot>=cost){
 
-    dechargeWallet()
+    // dechargeWallet()
+    SetConsultant()
+
 }
 else{
     setTitle("موجودی کیف پول شما کافی نیست")
@@ -265,6 +267,8 @@ else{
               localStorage.setItem("cons_id",response.data.Data2?.id);
               localStorage.setItem("cons_fname",response.data.Data2?.fname);
               localStorage.setItem("cons_lname",response.data.Data2?.lname);
+              localStorage.setItem("cons_cost",cost);
+              localStorage.setItem("cons_time",time);
 
                   handleClose2()
                   setTitle("با موفقیت ثبت شد")

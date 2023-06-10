@@ -5,7 +5,7 @@ import Loader from "./Loader";
 import dial from 'src/components/assets/audio/dial.mp3';
 
 const VideoPlayer = () => {
-    const {me,callAccepted, userVideo, myVideo, callEnded, stream, call, myAudioRef} = useContext(SocketContext);
+    const {me,callAccepted, userVideo, myVideo, callEnded, stream, call, myAudioRef,setFtime} = useContext(SocketContext);
    
     const handleLoadedMetadata = () => {
         const video = userVideo.current;
@@ -13,6 +13,11 @@ const VideoPlayer = () => {
         // console.log(`The video is ${video.duration} seconds long.`);
         // console.log(video?.currentTime)
         setTime(video?.currentTime)
+        setFtime(video?.currentTime)
+        // if(callEnded){
+        //     alert(12345)
+        // }
+    
       };
     const [second, setSeconds] = useState(0);
     const [time, setTime] = useState(0);

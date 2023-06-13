@@ -189,7 +189,12 @@ setTotal(tot)
       {t("تعداد")}
         </p>
       </Col>
-      <Col md={2} className="ta-right">
+      <Col md={1} className="ta-right">
+      <p className="fontWeightBold2 mb-2">
+      {t("سریال")}
+        </p>
+      </Col>
+      <Col md={1} className="ta-right">
       <p className="fontWeightBold2 mb-2">
       {t("قیمت کل")}
         </p>
@@ -231,7 +236,12 @@ setTotal(tot)
          {item.NumberFactor}
         </p>
       </Col>
-      <Col md={2} className="ta-right">
+      <Col md={1} className="ta-right">
+      <p className="fontWeightNormal2 mb-2">
+         {item.FactorSerial}
+        </p>
+      </Col>
+      <Col md={1} className="ta-right">
       <p className="fontWeightNormal2 mb-2">
         {(item.SpecialCost*item.NumberFactor)?.toLocaleString("en-de")} {t("تومان")}
         {/* {(item.SpecialCost)?.toLocaleString("en-de")} {t("تومان")} */}

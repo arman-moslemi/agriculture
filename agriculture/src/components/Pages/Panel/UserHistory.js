@@ -130,21 +130,21 @@ const UserHistory = () =>{
   
   
       };
-    useEffect(() => {
- setInterval(() => {
-        setSeconds(seconds => seconds + 1);
-        // console.log(8989)
-        if(conReqID){
+//     useEffect(() => {
+//  setInterval(() => {
+//         setSeconds(seconds => seconds + 1);
+//         // console.log(8989)
+//         if(conReqID){
 
-          GetChat(conReqID,disable)
-        }
-            }, 10000);
-      if(conReqID){
+//           GetChat(conReqID,disable)
+//         }
+//             }, 10000);
+//       if(conReqID){
 
-        GetChat(conReqID,disable)
-      }
+//         GetChat(conReqID,disable)
+//       }
 
-    }, [second]);
+//     }, [second]);
     useEffect(() => {
       GetData();
     }, []);
@@ -165,16 +165,20 @@ const UserHistory = () =>{
             <Tab eventKey="news" title="سفارشات">
               {
                 Object.values(his).map((item)=>{
+                  var tot=0;
+                  item.forEach(element => {
+                    tot+=element?.SpecialCost?element.SpecialCost*element.NumberFactor:element.Cost*element.NumberFactor;
+                  });
 return(
 
-<div className="historyBox">
+<Link to={"/Factor/"+item[0].FactorID} className="historyBox">
     <div className="d-flex align-items-center justify-content-between borderBottomGray">
         <span className="historyTitle">
             تاریخ : {item[0].Date}
         </span>
        <div style={{textAlign:'left'}}>
        <span className="historyTitle">
-          مبلغ پرداختی : {item[0].TotalCost} تومان
+          مبلغ پرداختی : {tot} تومان
         </span>
         <br/>
         <span className="vaziyat">
@@ -208,6 +212,10 @@ return(
         <span className="historyPrice">
          تعداد : {item2.NumberFactor} عدد
         </span>
+        <br/>
+        <span className="historyPrice">
+         سریال : {item2.FactorSerial} 
+        </span>
         </div>
         </div>
           )
@@ -215,7 +223,7 @@ return(
       }
      
     </div>
-</div>
+</Link>
 )
                 })
               }

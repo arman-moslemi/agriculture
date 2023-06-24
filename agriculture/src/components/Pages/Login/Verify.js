@@ -2,9 +2,11 @@ import {React ,useState } from "react";
 import { Container, Row ,Col ,Button} from "react-bootstrap";
 import LoginImg from "src/components/assets/img/login.png";
 import { Link, useNavigate,useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const Verify = () =>{
     const {state} = useLocation();
+    const {t,i18n} = useTranslation();
 // console.log(state)
 let navigate = useNavigate();
 
@@ -52,7 +54,7 @@ navigate("/SignUp2"
         <Col md={6} className="whiteBack">
             <div className="loginDetailBox">
                 <p className="hasAcoount">
-                    حساب کاربری ندارید؟<a href="#">ثبت نام کنید</a>
+                    {t("حساب کاربری ندارید؟")}<a href="#">{t("ثبت نام کنید")}</a>
                 </p>
                 <div className="customHeight1"></div>
                 <p className="loginTitle">
@@ -60,7 +62,7 @@ navigate("/SignUp2"
                 </p>
                 <div className="ta-right">
                 <div className="customHeight1"></div>
-                <span className="inputTitle">کد تایید ارسال شده را وارد نمایید</span>
+                <span className="inputTitle">{t("کد تایید ارسال شده را وارد نمایید")}</span>
                 <br/>
                 <input className="inputCLass"  onChange={(e)=>setCode(e.target.value)} type="number"/>
                
@@ -68,7 +70,7 @@ navigate("/SignUp2"
              
                 </div>
               
-                <Button onClick={()=>VerifyClick()} className="greenBtn mt-5" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>تایید</Button>
+                <p onClick={()=>VerifyClick()} className="greenBtn mt-5" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>{t("تایید")}</p>
                
                
             </div>

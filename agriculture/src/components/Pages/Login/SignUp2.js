@@ -7,6 +7,7 @@ import CustomizedDialogs from '../Layouts/AlertModal';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const SignUp2 = () =>{
     const [passwordShown, setPasswordShown] = useState(false);
@@ -22,6 +23,7 @@ const SignUp2 = () =>{
     const [open,setOpen]=useState(false)
     const [moshaver,setMoshaver]=useState(false)
     const {state} = useLocation();
+    const {t,i18n} = useTranslation();
 
     let navigate = useNavigate();
 
@@ -103,17 +105,17 @@ const SignUp2 = () =>{
      
         <Col md={6} className="grayBack">
             <div className="siteSlogan">
-                <p>شعار سایت اینجا قرار میگیرد!</p>
+                <p>{t("شعار سایت اینجا قرار میگیرد!")}</p>
             </div>
         <img src={LoginImg} className="loginImg"/>
         </Col>
         <Col md={6} className="whiteBack">
             <div className="loginDetailBox">
                 <p className="hasAcoount">
-                    حساب کاربری دارید؟<a href="#">وارد شوید</a>
+                    {t("حساب کاربری دارید؟")}<a href="#">{t("وارد شوید")}</a>
                 </p>
                 <p className="loginTitle">
-                   تکمیل ثبت نام
+                   {t("تکمیل ثبت نام")}
                 </p>
                 <div className="ta-right">
                 <div className="customHeight1"></div>
@@ -124,12 +126,12 @@ const SignUp2 = () =>{
                 <input onChange={(e)=>setName(e.target.value)} className="inputCLass" type="text"/>
                     </Col>
                     <Col md={6}>
-                    <span className="inputTitle">نام خانوادگی</span>
+                    <span className="inputTitle">{t("نام خانوادگی")}</span>
                 <br/>
                 <input onChange={(e)=>setFamily(e.target.value)} className="inputCLass" type="text"/>
                     </Col>
                 </Row>
-                <span className="inputTitle">رمز عبور</span>
+                <span className="inputTitle">{t("رمز عبور")}</span>
                 <br/>
                 <div className="passwordBox">
                 <input onChange={(e)=>setPass(e.target.value)}  className="passwordInput"type={passwordShown ? "text" : "password"}/>
@@ -140,7 +142,7 @@ const SignUp2 = () =>{
                 </button>
                 </div>
                 
-                <span className="inputTitle">تکرار رمز عبور</span>
+                <span className="inputTitle">{t("تکرار رمز عبور")}</span>
                 <br/>
                 <div className="passwordBox">
                 <input onChange={(e)=>setAgain(e.target.value)} className="passwordInput"type={passwordShown2 ? "text" : "password"}/>
@@ -165,12 +167,12 @@ checked={moshaver}
                         },
                     }}
                 />    <span className="checkBoxLable" style={{fontFamily:'IRANSansBold'}}>
-               ثبت نام به عنوان مشاور
+               {t("ثبت نام به عنوان مشاور")} 
             </span>
                 </div>
                 </div>
               
-                <Button onClick={()=>Signups()} className="greenBtn mt-2"  style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>ایجاد حساب کاربری</Button>
+                <p onClick={()=>Signups()} className="greenBtn mt-2"  style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>{t("ایجاد حساب کاربری")}</p>
               
                
             </div>

@@ -22,6 +22,8 @@ import { renderIntoDocument } from "react-dom/test-utils";
 import CarouselMulti from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import { truncate } from "src/utils/helper";
+import { useTranslation } from 'react-i18next';
+
 const Home = () =>{
   const settings = {
     dots: false,
@@ -56,10 +58,14 @@ const Home = () =>{
   const [newest,setNew]=useState([])
   const [blog,setBlog]=useState([])
   const [cons,setCons]=useState([])
+  const {t,i18n} = useTranslation();
 
-  const GetData=()=>{
+  const GetData=async()=>{
     const axios = require("axios");
-  
+    const lang=await localStorage.getItem("lang")
+    console.log(444)
+    console.log(lang)
+    i18n.changeLanguage(lang)
 
     axios.get(apiUrl + "Info")
     .then(function (response) {
@@ -156,19 +162,19 @@ const Home = () =>{
     <img style={{width:'100%',position:'relative'}}
                         src={apiAsset+data[0]?.Slider1}
                         />
-   <Button className="slideGreenBtn">مشاهده محصولات</Button>
+   <p className="slideGreenBtn">{t("مشاهده محصولات")}</p>
   </Carousel.Item>
   <Carousel.Item>
     <img style={{width:'100%',position:'relative'}}
                         src={apiAsset+data[0]?.Slider2}
                         />
-   <Button className="slideGreenBtn">مشاهده محصولات</Button>
+   <p className="slideGreenBtn">{t("مشاهده محصولات")}</p>
   </Carousel.Item>
   <Carousel.Item>
     <img style={{width:'100%',position:'relative'}}
                         src={apiAsset+data[0]?.Slider3}
                         />
-   <Button className="slideGreenBtn">مشاهده محصولات</Button>
+   <p className="slideGreenBtn">{t("مشاهده محصولات")}</p>
   </Carousel.Item>
     
 
@@ -181,12 +187,12 @@ const Home = () =>{
     <div className="cardBack">
           <img src={Slide2} className="cardImg"/>
           <img src={Back} className="gBack"/>
-          <p className="cardText">انواع دستگاه های IoT</p>
-          <Button onClick={()=>navigate("/SmartFarming")} className="yellowBtn">مشاهده محصولات</Button>
+          <p className="cardText">{t("انواع دستگاه های IoT")}</p>
+          <p onClick={()=>navigate("/SmartFarming")} className="yellowBtn">{t("مشاهده محصولات")}</p>
         </div>
         <div className="productSlider">
           <div className="d-flex mt-3">
-          <p className="productSliderTitle">پر فروش ترین محصولات ما</p>
+          <p className="productSliderTitle">{t("پر فروش ترین محصولات ما")}</p>
           <hr className="hrgray"/>
           </div>
           <div>
@@ -253,10 +259,10 @@ const Home = () =>{
           <div className="d-flex justify-content-between align-items-center">
          
           <p className="productPriceStroke">
-                                        {item.Cost} تومان
+                                        {item.Cost} {t("تومان")}
                                     </p>
                                     <p className="productPrice">
-                                        {item.SpecialCost} تومان
+                                        {item.SpecialCost} {t("تومان")}
                                     </p>
                                                                         {/* <div className="d-flex justify-space-between">
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
@@ -269,7 +275,7 @@ const Home = () =>{
           </div>
           <hr/>
           <p className="tamin">
-          نام تامین کننده کالا : {item.WarrantyName}
+          {t("نام تامین کننده کالا")}: {item.WarrantyName}
             </p>
           </div>
           </div>
@@ -292,15 +298,15 @@ const Home = () =>{
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'}}>
-        <p className="cardText">انواع دستگاه های IoT</p>
+        <p className="cardText">{t("انواع دستگاه های IoT")}</p>
         <br/>
-          <Button onClick={()=>navigate("/SmartFarming")} className="yellowBtn">مشاهده محصولات</Button>
+          <p onClick={()=>navigate("/SmartFarming")} className="yellowBtn">{t("مشاهده محصولات")}</p>
         </div>
         </div>
     
         <div className="productSlider">
           <div className="d-flex mt-3">
-          <p className="productSliderTitle">جدیدترین محصولات ما</p>
+          <p className="productSliderTitle">{t("جدیدترین محصولات ما")}</p>
           <hr className="hrgray"/>
           </div>
           <div>
@@ -367,10 +373,10 @@ const Home = () =>{
           <div className="d-flex justify-content-between align-items-center">
          
           <p className="productPriceStroke">
-                                        {item.Cost} تومان
+                                        {item.Cost} {t("تومان")}
                                     </p>
                                     <p className="productPrice">
-                                        {item.SpecialCost} تومان
+                                        {item.SpecialCost} {t("تومان")}
                                     </p>
                                                                         {/* <div className="d-flex justify-space-between">
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
@@ -383,7 +389,7 @@ const Home = () =>{
           </div>
           <hr/>
           <p className="tamin">
-          نام تامین کننده کالا : {item.WarrantyName}
+          {t("نام تامین کننده کالا ")}: {item.WarrantyName}
             </p>
           </div>
           </div>
@@ -408,14 +414,14 @@ const Home = () =>{
           </Col>
           <Col md={6}>
             <p className="home2Title">
-              کشاورزی هوشمند
+              {t("کشاورزی هوشمند")}
             </p>
             <p className="home2Des">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+            {t("لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ")}
             </p>
-            <Button className="home2View">
-              بیشتر بدانیم ...
-            </Button>
+            <p className="home2View">
+              {t("بیشتر بدانیم ...")}
+            </p>
           </Col>
          
         </Row>
@@ -427,7 +433,7 @@ const Home = () =>{
     
         <div className="productSlider" style={{marginRight:0,marginLeft:"2%"}}>
           <div className="d-flex mt-3">
-          <p className="productSliderTitle">پر فروش ترین محصولات ما</p>
+          <p className="productSliderTitle">{t("پر فروش ترین محصولات ما")}</p>
           <hr className="hrgray"/>
           </div>
           <div>
@@ -490,10 +496,10 @@ const Home = () =>{
           <div className="d-flex justify-content-between align-items-center">
          
           <p className="productPriceStroke">
-                                        {item.Cost} تومان
+                                        {item.Cost} {t("تومان")}
                                     </p>
                                     <p className="productPrice">
-                                        {item.SpecialCost} تومان
+                                        {item.SpecialCost} {t("تومان")}
                                     </p>
                                                                         {/* <div className="d-flex justify-space-between">
                                     <Star color={'#000'} className="marginLeft5" size={10}/>
@@ -506,7 +512,7 @@ const Home = () =>{
           </div>
           <hr/>
           <p className="tamin">
-          نام تامین کننده کالا : {item.WarrantyName}
+          {t("نام تامین کننده کالا ")}: {item.WarrantyName}
             </p>
           </div>
           </div>
@@ -522,8 +528,8 @@ const Home = () =>{
         <div className="cardBack">
           <img src={Slide2} className="cardImg"/>
           <img src={Back} className="gBack"/>
-          <p className="cardText">انواع دستگاه های IoT</p>
-          <Button onClick={()=>navigate("/SmartFarming")} className="yellowBtn">مشاهده محصولات</Button>
+          <p className="cardText">{t("انواع دستگاه های IoT")}</p>
+          <p onClick={()=>navigate("/SmartFarming")} className="yellowBtn">{t("مشاهده محصولات")}</p>
         </div>
     
 
@@ -532,7 +538,7 @@ const Home = () =>{
     
     <div className="productSlider" style={{marginRight:0,marginLeft:"2%"}}>
       <div className="d-flex mt-3">
-      <p className="productSliderTitle">پر فروش ترین محصولات ما</p>
+      <p className="productSliderTitle">{t("پر فروش ترین محصولات ما")}</p>
       <hr className="hrgray"/>
       </div>
       <div>
@@ -595,10 +601,10 @@ const Home = () =>{
       <div className="d-flex justify-content-between align-items-center">
      
       <p className="productPriceStroke">
-                                    {item.Cost} تومان
+                                    {item.Cost} {t("تومان")}
                                 </p>
                                 <p className="productPrice">
-                                    {item.SpecialCost} تومان
+                                    {item.SpecialCost} {t("تومان")}
                                 </p>
                                                                     {/* <div className="d-flex justify-space-between">
                                 <Star color={'#000'} className="marginLeft5" size={10}/>
@@ -611,7 +617,7 @@ const Home = () =>{
       </div>
       <hr/>
       <p className="tamin">
-      نام تامین کننده کالا : {item.WarrantyName}
+      {t("نام تامین کننده کالا ")}: {item.WarrantyName}
         </p>
       </div>
       </div>
@@ -630,9 +636,9 @@ const Home = () =>{
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'}}>
-        <p className="cardText">انواع دستگاه های IoT</p>
+        <p className="cardText">{t("انواع دستگاه های IoT")}</p>
         <br/>
-          <Button onClick={()=>navigate("/SmartFarming")} className="yellowBtn">مشاهده محصولات</Button>
+          <p onClick={()=>navigate("/SmartFarming")} className="yellowBtn">{t("مشاهده محصولات")}</p>
         </div>
         </div>
 
@@ -644,32 +650,32 @@ const Home = () =>{
         <Row className="align-items-center">
         <Col md={6} className="col1" xs={{order:2}}>
         <p className="home2Title">
-              ارائه ی انواع مشاوره در حوزه کشاورزی
+              {t ("ارائه ی انواع مشاوره در حوزه کشاورزی")}
             </p>
             <p className="home2Des">
-            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
+            {t("لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است ")}
             </p>
             <div className="d-flex align-items-center mb-3">
               <img src={Video} className="videoIcon"/>
               <p className="home3Des">
-                مشاوره تصویری
+                {t("مشاوره تصویری")}
               </p>
             </div>
             <div className="d-flex align-items-center mb-3">
               <img src={Voice} className="videoIcon"/>
               <p className="home3Des">
-               مشاوره صوتی
+               {t("مشاوره صوتی")}
               </p>
             </div>
             <div className="d-flex align-items-center mb-3">
               <img src={Chat} className="videoIcon"/>
               <p className="home3Des">
-                مشاوره متنی
+                {t("مشاوره متنی")} 
               </p>
             </div>
-            <Button onClick={()=>navigate("/Consultation")} className="home2View">
-            دریافت مشاوره
-            </Button>
+            <p onClick={()=>navigate("/Consultation")} className="home2View">
+            {t("دریافت مشاوره")}
+            </p>
           </Col>
           <Col md={6} className="col2" xs={{order:1}}>
           <img src={Consult} className="home3"/>
@@ -681,7 +687,7 @@ const Home = () =>{
     <Container fluid className="containerWhite">
    <Container>
    <div>
-        <h2 className="sliderTitle">برترین مشاوران ما</h2>
+        <h2 className="sliderTitle">{t("برترین مشاوران ما")}</h2>
         <CarouselMulti responsive={responsive} rtl={true}>
         {
             cons?.map((item)=>{
@@ -709,7 +715,7 @@ const Home = () =>{
    <Container>
    <div className="d-flex justify-content-between mb-2">
      <p className="boxTitle">
-      اخبار و مقالات
+      {t("اخبار و مقالات")} 
      </p>
      <Link className="seeALL" to={"/News"}>
       مشاهده همه
@@ -735,7 +741,7 @@ const Home = () =>{
                   
                     <div>
                     <Link to={"/SingleNews/"+blog[0]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                           {t("ادامه مطلب")}<ChevronLeft/>
                         </Link>
                     </div>
                 </div>
@@ -761,7 +767,7 @@ const Home = () =>{
                   
                     <div>
                     <Link to={"/SingleNews/"+blog[1]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                           {t("ادامه مطلب")}<ChevronLeft/>
                         </Link>
                     </div>
                 </div>
@@ -786,7 +792,7 @@ const Home = () =>{
                   
                     <div>
                     <Link to={"/SingleNews/"+blog[2]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                           {t("ادامه مطلب")}<ChevronLeft/>
                         </Link>
                     </div>
                 </div>
@@ -814,7 +820,7 @@ const Home = () =>{
                   
                     <div>
                     <Link to={"/SingleNews/"+blog[3]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                          {t("ادامه مطلب")}<ChevronLeft/>
                         </Link>
                     </div>
                 </div>
@@ -840,7 +846,7 @@ null
                   
                     <div>
                     <Link to={"/SingleNews/"+blog[4]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                          {t("ادامه مطلب")}<ChevronLeft/>
                         </Link>
                     </div>
                 </div>

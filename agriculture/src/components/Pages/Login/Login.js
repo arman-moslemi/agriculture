@@ -6,6 +6,7 @@ import Checkbox from '@mui/material/Checkbox';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import CustomizedDialogs from '../Layouts/AlertModal';
+import { useTranslation } from 'react-i18next';
 
 const Login = () =>{
     const [passwordShown, setPasswordShown] = useState(false);
@@ -14,6 +15,7 @@ const Login = () =>{
     const [mobile,setMobile]=useState()
     const [pass,setPass]=useState()
     let navigate = useNavigate();
+    const {t,i18n} = useTranslation();
 
     const togglePassword = () => {
         // When the handler is invoked
@@ -75,25 +77,25 @@ const Login = () =>{
      
         <Col md={6} className="grayBack">
             <div className="siteSlogan">
-                <p>شعار سایت اینجا قرار میگیرد!</p>
+                <p>{t("شعار سایت اینجا قرار میگیرد!")}</p>
             </div>
         <img src={LoginImg} className="loginImg"/>
         </Col>
         <Col md={6} className="whiteBack">
             <div className="loginDetailBox">
                 <p className="hasAcoount">
-                    حساب کاربری ندارید؟<Link to="/SignUp">ثبت نام کنید</Link>
+                    {t("حساب کاربری ندارید؟")}<Link to="/SignUp">{t("ثبت نام کنید")}</Link>
                 </p>
                 <p className="loginTitle">
-                    ورود
+                    {t("ورود")}
                 </p>
                 <div className="ta-right">
                 <div className="customHeight1"></div>
-                <span className="inputTitle">شماره تلفن همراه</span>
+                <span className="inputTitle">{t("شماره تلفن همراه")}</span>
                 <br/>
                 <input className="inputCLass" type="number" onChange={(e)=>setMobile(e.target.value)}/>
                 <br/>
-                <span className="inputTitle" >کلمه عبور</span>
+                <span className="inputTitle" >{t("کلمه عبور")}</span>
                 <br/>
                 <div className="passwordBox">
                 <input className="passwordInput"type={passwordShown ? "text" : "password"} onChange={(e)=>setPass(e.target.value)}/>
@@ -116,14 +118,14 @@ const Login = () =>{
                         },
                     }}
                 />    <span className="checkBoxLable">
-                مرا به خاطر بسپار
+                {t("مرا به خاطر بسپار ")}
             </span>
                 </div>
                 </div>
               
-                <Button onClick={()=>login()} className="greenBtn mt-5" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>ورود به حساب کاربری</Button>
+                <p onClick={()=>login()} className="greenBtn mt-5" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}>{t("ورود به حساب کاربری")}</p>
                 <p className="hasAcoount text-center mt-3" style={{fontSize:10}}>
-                    رمز عبور خود را فراموش کردید؟<a href="/ForgetPassword">ایجاد رمز جدید</a>
+                    {t("رمز عبور خود را فراموش کردید؟")}<Link to="/ForgetPassword">{t("ایجاد رمز جدید")}</Link>
                 </p>
                
             </div>

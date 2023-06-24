@@ -6,12 +6,15 @@ import Checkbox from '@mui/material/Checkbox';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import CustomizedDialogs from '../Layouts/AlertModal';
+import { useTranslation } from 'react-i18next';
+
 const SignUp = () =>{
     const [passwordShown, setPasswordShown] = useState(false);
     const [open,setOpen]=useState(false)
     const [title,setTitle]=useState("")
     const [mobile,setMobile]=useState()
     const [check,setCheck]=useState(true)
+    const {t,i18n} = useTranslation();
     
     let navigate = useNavigate();
 
@@ -74,23 +77,23 @@ const SignUp = () =>{
      
         <Col md={6} className="grayBack">
             <div className="siteSlogan">
-                <p>شعار سایت اینجا قرار میگیرد!</p>
+                <p>{t("شعار سایت اینجا قرار میگیرد!")}</p>
             </div>
         <img src={LoginImg} className="loginImg"/>
         </Col>
         <Col md={6} className="whiteBack">
             <div className="loginDetailBox">
                 <p className="hasAcoount">
-                    حساب کاربری دارید ؟<Link to={"/Login"}>وارد شوید</Link>
+                    {t("حساب کاربری دارید ؟")}<Link to={"/Login"}>{t("وارد شوید")}</Link>
                 </p>
                 <p className="loginTitle">
-                    ثبت نام
+                    {t("ثبت نام ")}
                 </p>
                 <div className="ta-right">
                 <div className="customHeight2"></div>
                 
                
-                <span className="inputTitle">شماره تلفن همراه</span>
+                <span className="inputTitle">{t("شماره تلفن همراه")}</span>
                 <br/>
                 <input  onChange={(e)=>setMobile(e.target.value)} className="inputCLass" type="number"/>
                 <br/>
@@ -122,13 +125,13 @@ const SignUp = () =>{
                 }}
                 />
                     <span className="checkBoxLable">
-                       اینجانب <a href="#">قوانین و مقررات</a> را مطالعه کرده و آن ها را پذیرفته ام.
+                       {t("اینجانب")}<a href="#">{t("قوانین و مقررات")}</a> {t("را مطالعه کرده و آن ها را پذیرفته ام.")}
                     </span>
                 
                 </div>
                 </div>
               
-                <Button onClick={()=>login()} disabled={!check} className="greenBtn mt-3" style={{marginRight:'auto',marginLeft:'auto',display:'block'}} >ایجاد حساب کاربری</Button>
+                <Button onClick={()=>login()} disabled={!check} className="greenBtn mt-3" style={{marginRight:'auto',marginLeft:'auto',display:'block'}} >{t("ایجاد حساب کاربری")}</Button>
                 
                
             </div>

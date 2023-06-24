@@ -6,11 +6,13 @@ import Checkbox from '@mui/material/Checkbox';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import CustomizedDialogs from '../Layouts/AlertModal';
-const SignUp = () =>{
+import { useTranslation } from 'react-i18next';
+const ForgetPassword = () =>{
     const [passwordShown, setPasswordShown] = useState(false);
     const [open,setOpen]=useState(false)
     const [title,setTitle]=useState("")
     const [mobile,setMobile]=useState()
+    const {t} = useTranslation();
     
     let navigate = useNavigate();
 
@@ -24,6 +26,7 @@ const SignUp = () =>{
 
       const login=()=>{
         const axios = require("axios");
+
         if(!mobile)
         {
             
@@ -77,23 +80,23 @@ const SignUp = () =>{
      
         <Col md={6} className="grayBack">
             <div className="siteSlogan">
-                <p>شعار سایت اینجا قرار میگیرد!</p>
+                <p>{t("شعار سایت اینجا قرار میگیرد!")}</p>
             </div>
         <img src={LoginImg} className="loginImg"/>
         </Col>
         <Col md={6} className="whiteBack">
             <div className="loginDetailBox">
                 <p className="hasAcoount">
-                    حساب کاربری دارید ؟<Link to={"/Login"}>وارد شوید</Link>
+                    {t("حساب کاربری دارید ؟")}<Link to={"/Login"}>{t("وارد شوید")}</Link>
                 </p>
                 <p className="loginTitle">
-                    فراموشی رمز عبور
+                    {t("فراموشی رمز عبور")}
                 </p>
                 <div className="ta-right">
                 <div className="customHeight2"></div>
                 
                
-                <span className="inputTitle">شماره تلفن همراه</span>
+                <span className="inputTitle">{t("شماره تلفن همراه")}</span>
                 <br/>
                 <input  onChange={(e)=>setMobile(e.target.value)} className="inputCLass" type="number"/>
                 <br/>
@@ -111,7 +114,7 @@ const SignUp = () =>{
          
                 </div>
               
-                <Button onClick={()=>login()} className="greenBtn mt-3" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}> فراموشی رمز عبور</Button>
+                <p onClick={()=>login()} className="greenBtn mt-3" style={{marginRight:'auto',marginLeft:'auto',display:'block'}}> {t("فراموشی رمز عبور")}</p>
                 
                
             </div>
@@ -122,4 +125,4 @@ const SignUp = () =>{
     </Container>
     );
 };
-export default SignUp;
+export default ForgetPassword;

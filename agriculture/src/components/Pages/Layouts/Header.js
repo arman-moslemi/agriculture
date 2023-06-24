@@ -25,6 +25,7 @@ import M4B from 'src/components/assets/img/m4B.png';
 import M4G from 'src/components/assets/img/m4G.png';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useTranslation } from 'react-i18next';
 
 
 const Header = () =>{
@@ -39,6 +40,19 @@ const Header = () =>{
     const onClick = () =>{
         setShowMega(!showMega);
      };
+     const {t,i18n} = useTranslation();
+
+     const changeLang=async(dd)=>{
+      console.log(123456)
+      console.log(dd)
+      await localStorage.setItem("lang",dd)
+      i18n.changeLanguage(dd);
+    
+      // setLanguage(dd)
+      localStorage.setItem("lang",dd)
+      window.location.reload()
+  
+    }
      const  _handleKeyDownAuto = async(aa) => {
         const axios = require("axios");
  
@@ -206,32 +220,21 @@ const Header = () =>{
          className="languageSelect"
           label="Age"
           value={10}
-          
+          onChange={(e) =>{ changeLang(e.target.value)}}
         >
-          <MenuItem value={10}>
+          <MenuItem value={"ir"}>
             <img src={Iran} className="flag"/>
             <span className="flagName">
                 فارسی
             </span>
           </MenuItem>
-          <MenuItem value={20}>
+          <MenuItem value={"en"}>
           <img src={England} className="flag"/>
             <span className="flagName">
                 انگلیسی
             </span>
           </MenuItem>
-          <MenuItem value={30}>
-            <img src={Iran} className="flag"/>
-            <span className="flagName">
-                عربی
-            </span>
-          </MenuItem>
-          <MenuItem value={40}>
-          <img src={England} className="flag"/>
-            <span className="flagName">
-                فرانسوی
-            </span>
-          </MenuItem>
+        
         </Select>
       </FormControl>
     </Box>

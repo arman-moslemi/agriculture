@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 import { truncate } from "src/utils/helper";
 import { ChevronLeft,Heart} from "react-bootstrap-icons";
 
+import { useTranslation } from 'react-i18next';
 
 const Favorite = () =>{
     const [data, setData] = useState([]);
@@ -21,6 +22,7 @@ const Favorite = () =>{
     const [favBlog, setFavBlog] = useState([]);
     const [key, setKey] = useState('product');
     const [show, setShow] = useState(false);
+    const {t,i18n} = useTranslation();
 
     const handleClose = () => {setShow(false);};
       const handleShow = (types,names,specialtys,wait) => {setShow(true);setName(names);setType(types);setSpecialty(specialtys)};
@@ -121,7 +123,7 @@ const Favorite = () =>{
         axios.post(apiUrl + "DeleteFavorite",{FavoriteID:mm})
         .then(function (response) {
           if (response.data.result == "True") {
-            alert("با موفقیت حذف شد")
+            alert(t("با موفقیت حذف شد"))
   GetData()              
             }})
             .catch(function (error) {
@@ -150,7 +152,7 @@ const Favorite = () =>{
                
               <div>
             <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3"  activeKey={key} onSelect={(k) => setKey(k)}>
-                <Tab eventKey="product" title="محصولات برگزیده">
+                <Tab eventKey="product" title={t("محصولات برگزیده")}>
                     <div className="d-flex mt-3 flex-wrap justify-content-center">
                         {
                             favPro.filter(x=>x.ProductID!=null).map((item)=>{
@@ -159,7 +161,7 @@ const Favorite = () =>{
                         <div to={"/SingleProduct/"+item.ProductName2} className="productCard">
                              <Button onClick={()=>DeleteFavorite(item.FavoriteID)} className="heartmini">
               <Heart/>
-              حذف از برگزیده ها
+              {t("حذف از برگزیده ها")}
             </Button>
             <div style={{marginRight:20,padding:5,}}>
                            <Link  to={"/SingleProduct/"+item.ProductName2} style={{  textDecoration: "none" }}>
@@ -170,7 +172,7 @@ const Favorite = () =>{
                             {item.ProductName}  
                                                         </p>
                             <p className="productVolume">
-                            موجودی : {item.Number} {item.Unit}
+                            {t("موجودی")} : {item.Number} {item.Unit}
                             </p>
                             <div className="d-flex align-items-center justify-content-between mt-3">
                                 {/* <div className="d-flex align-items-center">
@@ -190,10 +192,10 @@ index+1>item.Rate?
                                 </div> */}
                                 <div>
                                 <p className="productPriceStroke">
-                                        {item.Cost} تومان
+                                        {item.Cost} {t("تومان")}
                                     </p>
                                     <p className="productPrice">
-                                        {item.SpecialCost} تومان
+                                        {item.SpecialCost} {t("تومان")}
                                     </p>
                                 </div>
                             </div>
@@ -201,7 +203,7 @@ index+1>item.Rate?
                            </div>
                            <div className="box2Div">
                            <p className="productVolume">
-                           نام تامین کننده کالا : {item.WarrantyName}
+                           {t("نام تامین کننده کالا")} : {item.WarrantyName}
                             </p>
                            </div>
                         </div>
@@ -211,7 +213,7 @@ index+1>item.Rate?
                
                     </div>
                 </Tab>
-                <Tab eventKey="consult" title="مشاوران برگزیده">
+                <Tab eventKey="consult" title={t("مشاوران برگزیده")}>
                 {
                             favCustomer.filter(x=>x.CustomerID2!=null).map((item)=>{
                                 return(
@@ -236,13 +238,13 @@ index+1>item.Rate?
                                 </div> */}
                                         <div className="d-flex">
                                             <Link to="" className="callBtn borderLeftGreen" onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime )}>
-                                                متنی
+                                            {t("متنی")}
                                             </Link>
                                             <Link to=""  className="callBtn borderLeftGreen" onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime )}>
-                                               صوتی
+                                            {t("صوتی")}
                                             </Link>
                                             <Link to=""  className="callBtn" onClick={()=>handleShow("3",item.Name+" "+item.Family,item.Specialty,item.WaitTime )}>
-                                                تصویری
+                                            {t("تصویری")}
                                             </Link>
                                             <Modal
                                                 show={show} onHide={handleClose}
@@ -252,32 +254,32 @@ index+1>item.Rate?
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    زمان مورد نیاز برای انجام مشاوره
+                                                    {t("زمان مورد نیاز برای انجام مشاوره")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
                                                 <p className="modalText">
                                                     <span>
-                                                        نام مشاور : 
+                                                    {t("نام مشاور")} : 
                                                     </span>
 {name}                                                </p>
                                                 <p className="modalText">
                                                     <span>
-                                                       تحصیلات : 
+                                                    {t("تحصیلات")} : 
                                                     </span>
                                                      {Specialty}
                                                 </p>
                                                 <p className="modalText">
                                                     <span>
-                                                        نوع مشاوره : 
+                                                    {t("نوع مشاوره")} : 
                                                     </span>
-                                                    {type==1?"متنی":type==2?"صوتی":"تصویری"}
+                                                    {type==1?t("متنی"):type==2?t("صوتی"):t("تصویری")}
                                                 </p>
                                            
                                                 <Form>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                        موضوع مشاوره : 
+                                                    {t("موضوع مشاوره")} : 
                                                     </span>
                                                     
                                                 </p>
@@ -285,16 +287,16 @@ index+1>item.Rate?
                                                 <div className="d-flex align-items-center">
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                        مدت زمان مشاوره : 
+                                                    {t("مدت زمان مشاوره")} : 
                                                     </span>
                                                 </p>
                                                 <Form.Select onChange={(ss)=>setTime(ss.target.value)} className="bSelect">
                                             
                                                     <option value={""}>انتخاب</option>
-                                                    <option value={15}>15 دقیقه</option>
-                                                    <option value={30}>30 دقیقه</option>
-                                                    <option value={45}>45 دقیقه</option>
-                                                    <option value={60}>60 دقیقه</option>
+                                                    <option value={15}>15{t("دقیقه")}</option>
+                                                    <option value={30}>30 {t("دقیقه")}</option>
+                                                    <option value={45}>45 {t("دقیقه")}</option>
+                                                    <option value={60}>60 {t("دقیقه")}</option>
                                                 </Form.Select>
                                                 </div>
                                                 </Form>
@@ -312,46 +314,46 @@ index+1>item.Rate?
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    تایید درخواست
+                                                    {t("تایید درخواست")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
                                                 <p className="modalText">
                                                     <span>
-                                                        نام مشاور : 
+                                                    {t("نام مشاور")} : 
                                                     </span>
 {name}                                                </p>
                                                 <p className="modalText">
                                                     <span>
-                                                       تحصیلات : 
+                                                    {t("تحصیلات")} : 
                                                     </span>
 {Specialty}                                                </p>
                                                 <p className="modalText">
                                                     <span>
-                                                        نوع مشاوره : 
+                                                    {t("نوع مشاوره")} : 
                                                     </span>
-                                                     {type==1?"متنی":type==2?"صوتی":"تصویری"}
+                                                    {type==1?t("متنی"):type==2?t("صوتی"):t("تصویری")}
                                                 </p>
                                            
                                              
                                                 <p className="modalText">
                                                     <span>
-                                                        موضوع مشاوره : 
+                                                    {t("موضوع مشاوره")} : 
                                                     </span>
 {subject}                                                </p>
                                                 <p className="modalText colorOrange">
                                                     <span>
-                                                        هزینه مشاوره : 
+                                                    {t("هزینه مشاوره")} : 
                                                     </span>
-                                                   {cost} تومان
+                                                   {cost} {t("تومان")}
                                                 </p>
                                             
                                             
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                <Button  onClick={InsertConsultant}className="modalSaveBtn2">پرداخت از کیف پول</Button>
-                                                    <Button  onClick={InsertConsultant}className="modalSaveBtn">پرداخت آنلاین</Button>
+                                                <Button  onClick={InsertConsultant}className="modalSaveBtn2">{t("پرداخت از کیف پول")}</Button>
+                                                    <Button  onClick={InsertConsultant}className="modalSaveBtn">{t("پرداخت آنلاین")}</Button>
                                                    
                                                 </Modal.Footer>
                                              </Modal>
@@ -360,14 +362,14 @@ index+1>item.Rate?
                                 <div className="d-flex align-items-center">
                                      <Button onClick={()=>DeleteFavorite(item.FavoriteID)} className="heartCons">
               <Heart/>
-              حذف از برگزیده ها
+              {t("حذف از برگزیده ها")}
             </Button>
             </div>
                             </div>
                    </div>
                                 )})}
                 </Tab>
-                <Tab eventKey="news" title="اخبار برگزیده">
+                <Tab eventKey="news" title={t("اخبار برگزیده")}>
                 <div className="d-flex mt-3 flex-wrap justify-content-start">
 
                   {
@@ -383,7 +385,7 @@ index+1>item.Rate?
                                 >
                                            <Button onClick={()=>DeleteFavorite(item.FavoriteID)} className="heartCons">
               <Heart/>
-              حذف از برگزیده ها
+              {t("حذف از برگزیده ها")}
             </Button>
                                               <img 
                                                   src={apiAsset+item?.Pic}
@@ -402,7 +404,7 @@ index+1>item.Rate?
                                             
                                               <div>
                                               <Link to={"/SingleNews/"+item?.Title} className="textDetail">
-                                                     ادامه مطلب <ChevronLeft/>
+                                              {t("ادامه مطلب")} <ChevronLeft/>
                                                   </Link>
                                               </div>
                                           </div>

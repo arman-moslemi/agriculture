@@ -29,6 +29,8 @@ import CustomizedDialogs from '../Layouts/AlertModal';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 const IoTDashboard = () =>{
     const [showSearch, setshowSearch] = useState(false);
     const onClick = () =>{
@@ -46,6 +48,8 @@ const IoTDashboard = () =>{
     const [dev, setDev] = useState([]);
     const [part, setPart] = useState([]);
     const [partid, setPartid] = useState();
+    const {t,i18n} = useTranslation();
+
     const GetData=()=>{
         const axios = require("axios");
       var ss=localStorage.getItem("CustomerID")
@@ -115,7 +119,7 @@ const IoTDashboard = () =>{
                    <div className="d-flex align-items-center">
                    <img src={Category} width="30px"/>
                    <p className="panelTitle">
-                  داشبورد IoT
+                   {t("داشبورد IoT")}
                    </p>
                    </div>
                    <div>
@@ -158,7 +162,7 @@ const IoTDashboard = () =>{
             <div className="d-flex">
               
                 <p className="addDeviceText">
-                    مشاهده دستگاه ها
+                {t("مشاهده دستگاه ها")}
                 </p>
                 <Button onClick={()=>onClick2(item2.PartID)} className="caretDownBtn">
                     <CaretDownFill color="#FF6900" size={20}/>
@@ -183,9 +187,9 @@ const IoTDashboard = () =>{
              
            <div className="d-flex justify-content-center mt-4 boxRow">
             <a className="whiteMiniBox" href="#" onClick={handleShow}>
-                <p className="whiteMiniBoxTitle">دمای هوا</p>
+                <p className="whiteMiniBoxTitle">{t("دمای هوا")}</p>
                 <img src={WeatherDeg} />
-                <p className="whiteMiniBoxTitle">{item3?.air_temp} درجه</p>
+                <p className="whiteMiniBoxTitle">{item3?.air_temp} {t("درجه")}</p>
                 {/* <p className="whiteMiniBoxStatus">وضعیت : سالم</p> */}
             </a>
             <Modal
@@ -196,7 +200,7 @@ const IoTDashboard = () =>{
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    سوابق دستگاه
+                                                    {t("سوابق دستگاه")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -208,34 +212,34 @@ const IoTDashboard = () =>{
                                              
                                              </Modal>
             <a className="whiteMiniBox" href="#">
-                <p className="whiteMiniBoxTitle">دمای خاک</p>
+                <p className="whiteMiniBoxTitle">{t("دمای خاک")}</p>
                 <img src={SoulDeg} />
-                <p className="whiteMiniBoxTitle">{item3.soil_temp} درجه</p>
-                <p className="whiteMiniBoxStatus">وضعیت : </p>
+                <p className="whiteMiniBoxTitle">{item3.soil_temp} {t("درجه")}</p>
+                <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
             </a>
             <a className="whiteMiniBox" href="#">
-                <p className="whiteMiniBoxTitle">دمای آب</p>
+                <p className="whiteMiniBoxTitle">{t("دمای آب")}</p>
                 <img src={WaterDeg} />
                 <p className="whiteMiniBoxTitle"> درجه</p>
-                <p className="whiteMiniBoxStatus">وضعیت : </p>
+                <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
             </a>
             <a className="whiteMiniBox" href="#">
-                <p className="whiteMiniBoxTitle">رطوبت هوا</p>
+                <p className="whiteMiniBoxTitle">{t("رطوبت هوا")}</p>
                 <img src={Humidity} />
                 <p className="whiteMiniBoxTitle">{item3?.air_hum} %</p>
-                <p className="whiteMiniBoxStatus">وضعیت : </p>
+                <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
             </a>
             <a className="whiteMiniBox" href="#">
-                <p className="whiteMiniBoxTitle">رطوبت خاک</p>
+                <p className="whiteMiniBoxTitle">{t("رطوبت خاک")}</p>
                 <img src={SoulHumidity} />
                 <p className="whiteMiniBoxTitle">{item3?.soil_hum} %</p>
-                <p className="whiteMiniBoxStatus">وضعیت : </p>
+                <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
             </a>
             <a className="whiteMiniBox" href="#">
-                <p className="whiteMiniBoxTitle">شیرآب کنترلی</p>
+                <p className="whiteMiniBoxTitle">{t("شیرآب کنترلی")}</p>
                 <img src={Faucet} />
                 <p className="whiteMiniBoxTitle"></p>
-                <p className="whiteMiniBoxStatus">وضعیت : </p>
+                <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
             </a>
             </div>
          </div>    

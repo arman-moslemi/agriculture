@@ -23,6 +23,7 @@ import CustomizedDialogs from '../Layouts/AlertModal';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const IoTManagement = () =>{
     const [show, setShow] = useState(false);
@@ -54,7 +55,8 @@ const IoTManagement = () =>{
    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [show2, setShow2] = useState(false);
-   
+    const {t,i18n} = useTranslation();
+
     const handleClose2 = () => setShow2(false);
      const handleShow2 = () => setShow2(true);
      const [show3, setShow3] = useState(false);
@@ -293,13 +295,13 @@ GetData()
                    <div className="d-flex align-items-center">
                    <img src={Filter} width="30px"/>
                    <p className="panelTitle">
-                   مدیریت دستگاه های IoT
+                   {t("مدیریت دستگاه های IoT")}
                    </p>
                    </div>
                    <div>
                   
                    <Button className="editProfileBtn marginRight1rem" onClick={handleShow}>
-                   + افزودن پروژه
+                   +  {t("افزودن پروژه")}
                    </Button>
                    <Modal
                                                 show={show} onHide={handleClose}
@@ -309,7 +311,7 @@ GetData()
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    افزودن پروژه جدید
+                                                    {t("افزودن پروژه جدید")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -319,14 +321,14 @@ GetData()
                                                 <Form>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                       نام پروژه خود را وارد کنید : 
+                                                    {t("نام پروژه خود را وارد کنید")} : 
                                                     </span>
                                                     
                                                 </p>
                                                 <input onChange={(e)=>setProjectName(e.target.value)} className="inputCLass" type="text"/>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                       نام بخش اول را وارد کنید : 
+                                                    {t("نام بخش اول را وارد کنید")} : 
                                                     </span>
                                                     
                                                 </p>
@@ -334,7 +336,7 @@ GetData()
                                                 <div className="d-flex align-items-center">
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                     نوع بخش را انتخاب کنید 
+                                                    {t("نوع بخش را انتخاب کنید")} 
                                                     </span>
                                                     
                                                 </p>
@@ -362,7 +364,7 @@ GetData()
                     <>
                     
                     <img src={IotImg} className="IotImg"/>
-                    <p className="tarikh" style={{fontSize:20,margin:30,textAlign:"center",fontWeight:"bold"}}>تاکنون پروژه ای تعریف نکرده اید !</p>
+                    <p className="tarikh" style={{fontSize:20,margin:30,textAlign:"center",fontWeight:"bold"}}> {t("تاکنون پروژه ای تعریف نکرده اید")}!</p>
                      
                     </>
                     :
@@ -377,15 +379,15 @@ GetData()
             </div>
             <div className="d-flex">
                 <Button onClick={handleShow2} className="addSection" >
-                    + افزودن بخش
+                    +  {t("افزودن بخش")}
                 </Button> |
                 <Button onClick={()=>setOpen(true)} className="deleteProject" >
-                    - حذف پروژه
+                    -  {t("حذف پروژه")}
                 </Button> |
                 <p className="addDeviceText">
-                    مشاهده بخش ها
+                {t("مشاهده بخش ها")}
                 </p>
-                <CustomizedDialogs Title={"ایا از حذف مطمئن هستید؟"} open={open} Delete={true} setOpen={setOpen} DeleteAction={()=>DeleteProject(item[0].ProjectID)}/>
+                <CustomizedDialogs Title={t("ایا از حذف مطمئن هستید؟")} open={open} Delete={true} setOpen={setOpen} DeleteAction={()=>DeleteProject(item[0].ProjectID)}/>
 
                 <Button onClick={()=>onClick(item[0].ProjectID)} className="caretDownBtn">
                     <CaretDownFill color="#FF6900" size={20}/>
@@ -400,7 +402,7 @@ GetData()
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    افزودن بخش
+                                                    {t("افزودن بخش")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -410,7 +412,7 @@ GetData()
                                                 <Form>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                     نام بخش مورد نظر را وارد کنید : 
+                                                    {t("نام بخش مورد نظر را وارد کنید")} : 
                                                     </span>
                                                     
                                                 </p>
@@ -418,7 +420,7 @@ GetData()
                                                 <div className="d-flex align-items-center">
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                     نوع بخش را انتخاب کنید 
+                                                    {t("نوع بخش را انتخاب کنید")} 
                                                     </span>
                                                     
                                                 </p>
@@ -452,10 +454,10 @@ GetData()
            </div>
            <div className="d-flex">
                <Button className="addSection" onClick={handleShow3}>
-                   + افزودن دستگاه
+                   +  {t("افزودن دستگاه")}
                </Button> |
                <p className="addDeviceText">
-                   مشاهده دستگاه ها
+               {t("مشاهده دستگاه ها")}
                </p>
                <Button onClick={()=>onClick2(item2.PartID)} className="caretDownBtn">
                    <CaretDownFill color="#FF6900" size={20}/>
@@ -468,7 +470,7 @@ GetData()
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    افزودن دستگاه
+                                                    {t("افزودن دستگاه")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -478,7 +480,7 @@ GetData()
                                                 <Form>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                     شماره سریال دستگاه را وارد کنید
+                                                    {t("شماره سریال دستگاه را وارد کنید")}
                                                     </span>
                                                     
                                                 </p>
@@ -489,7 +491,7 @@ GetData()
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={()=>InsertDevice(item2.PartID)} className="modalSaveBtn" >ثبت دستگاه</Button>
+                                                    <Button  onClick={()=>InsertDevice(item2.PartID)} className="modalSaveBtn" > {t("ثبت دستگاه")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
            </div>
@@ -622,7 +624,7 @@ GetData()
        <div className="d-flex align-items-center">
        <img src={Setting} width="30px"/>
        <p className="panelTitle">
-       قواعد دستگاه  
+       {t("قواعد دستگاه")}  
        {/* {serial} */}
        </p>
        </div>
@@ -630,7 +632,7 @@ GetData()
 
        <div className="d-flex conditionBox align-items-center">
       <p className="condition">
-          اگر
+      {t("اگر")}
       </p>
       <Form.Select  onChange={(ss)=>setSensor(ss.target.value)} className="bSelect2">
                 {
@@ -647,15 +649,15 @@ item2!=null?
        </Form.Select>
        <Form.Select onChange={(ss)=>setConditionSensor(ss.target.value)}  className="bSelect2">
                               
-          <option  value={"="}>مساوی</option>
-          <option  value={"b"}>بزرگتر-مساوی</option>
-          <option  value={"<="}>کمتر-مساوی</option>
+          <option  value={"="}> {t("مساوی")}</option>
+          <option  value={"b"}> {t("بزرگتر-مساوی")}</option>
+          <option  value={"<="}> {t("کمتر-مساوی")}</option>
       </Form.Select>
       <input className="conditionInput" onChange={(ss)=>setValue(ss.target.value)}  placeholder="27 درجه"/>
       <Form.Select  onChange={(ss)=>setForseSensore(ss.target.value)} className="bSelect3">
                               
-          <option value={0}>و</option>
-          <option value={1}>یا</option>
+          <option value={0}> {t("و")}</option>
+          <option value={1}> {t("یا")}</option>
 
       </Form.Select>
       <Button className="addBtn" onClick={()=>InsertRule(0)}>
@@ -666,7 +668,7 @@ item2!=null?
 
       <div className="d-flex conditionBox align-items-center">
       <p className="condition">
-      آنگاه
+      {t("آنگاه")}
   </p>
   <Form.Select onChange={(ss)=>setPipe(ss.target.value)} className="bSelect2">
               {
@@ -684,14 +686,14 @@ item!=null?
    </Form.Select>
    <Form.Select onChange={(ss)=>setConditionPipe(ss.target.value)} className="bSelect2">
                           
-      <option value={"="}>مساوی</option>
-      <option value={"b"}>بزرگتر-مساوی</option>
-      <option value={"c"}>کمتر-مساوی</option>
+   <option  value={"="}> {t("مساوی")}</option>
+          <option  value={"b"}> {t("بزرگتر-مساوی")}</option>
+          <option  value={"<="}> {t("کمتر-مساوی")}</option>
   </Form.Select>
   <Form.Select onChange={(ss)=>setStatusPipe(ss.target.value)} className="bSelect3">
                           
-                          <option value={0}>باز</option>
-                          <option value={1}>بسته</option>
+                          <option value={0}>{t("باز")}</option>
+                          <option value={1}>{t("بسته")}</option>
                       
                       </Form.Select>
                       <Button className="addBtn" onClick={()=>InsertRule(1)}>
@@ -705,7 +707,7 @@ item!=null?
       item?.Type==0?
       <div className="d-flex conditionBox align-items-center">
       <p className="condition">
-          اگر
+      {t("اگر")}
       </p>
       <Form.Select defaultValue={item?.SensorID} className="bSelect2">
                 {
@@ -722,15 +724,15 @@ item2!=null?
        </Form.Select>
        <Form.Select defaultValue={item?.Condition} className="bSelect2">
                               
-          <option  value={"="}>مساوی</option>
-          <option  value={"b"}>بزرگتر-مساوی</option>
-          <option  value={"<="}>کمتر-مساوی</option>
+       <option  value={"="}> {t("مساوی")}</option>
+          <option  value={"b"}> {t("بزرگتر-مساوی")}</option>
+          <option  value={"<="}> {t("کمتر-مساوی")}</option>
       </Form.Select>
       <input className="conditionInput" value={item?.Value} placeholder="27 درجه"/>
       <Form.Select defaultValue={item?.Force} className="bSelect3">
                               
-          <option value={0}>و</option>
-          <option value={1}>یا</option>
+      <option value={0}>{t("باز")}</option>
+                          <option value={1}>{t("بسته")}</option>
 
       </Form.Select>
       <Button className="addBtn" onClick={()=>DeleteRule(item?.RuleID)}>
@@ -773,14 +775,14 @@ item2!=null?
     </Form.Select>
     <Form.Select defaultValue={item?.Condition} className="bSelect2">
                            
-       <option value={"="}>مساوی</option>
-       <option value={"b"}>بزرگتر-مساوی</option>
-       <option value={"c"}>کمتر-مساوی</option>
+    <option  value={"="}> {t("مساوی")}</option>
+          <option  value={"b"}> {t("بزرگتر-مساوی")}</option>
+          <option  value={"<="}> {t("کمتر-مساوی")}</option>
    </Form.Select>
    <Form.Select defaultValue={item?.StatusPipe}  className="bSelect3">
                            
-                           <option value={0}>باز</option>
-                           <option value={1}>بسته</option>
+   <option value={0}>{t("باز")}</option>
+                          <option value={1}>{t("بسته")}</option>
                        
                        </Form.Select>
                        <Button className="addBtn" onClick={()=>DeleteRule(item?.RuleID)}>

@@ -13,6 +13,8 @@ import CustomizedDialogs from '../Layouts/AlertModal';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 const EditProfile = () =>{
     const [passwordShown, setPasswordShown] = useState(false);
     const [name,setName]=useState("")
@@ -39,7 +41,7 @@ const EditProfile = () =>{
     const [editAddressID,setEditAddressID]=useState("")
     const [isConsultant,setIsConsultant]=useState()
     const [avaible,setAvaible]=useState()
-
+    const {t,i18n} = useTranslation();
     const [newPostalCode,setNewPostalCode]=useState("")
     const [title,setTitle]=useState("")
     const [open,setOpen]=useState(false)
@@ -73,12 +75,12 @@ const EditProfile = () =>{
             if(!name || !family || !pass || !again) 
             {
                 
-                setTitle("همه موارد را وارد نمائید")
+                setTitle(t("همه موارد را وارد نمائید"))
                 setOpen(true)
                 
             }
             else if(pass != again){
-                setTitle("پسورد و تکرار با هم منطبق نیستند")
+                setTitle(t("پسورد و تکرار با هم منطبق نیستند"))
                 setOpen(true)
             }
             else{
@@ -91,7 +93,7 @@ const EditProfile = () =>{
               if (response.data.result == "True") {
                 console.log(777)
                 console.log(response.data.Data)
-                setTitle("تغییرات با موفیت ذخیره شد")
+                setTitle(t("تغییرات با موفیت ذخیره شد"))
                 setOpen(true)
 
             
@@ -300,12 +302,12 @@ const EditProfile = () =>{
                    <div className="d-flex">
                    <Pen/>
                    <p className="panelTitle">
-                    ویرایش اطلاعات کاربری
+                   {t("ویرایش اطلاعات کاربری")}
                    </p>
                    </div>
                    {/* <Button className="editProfileBtn" onClick={handleShow}> */}
                    <Button className="editProfileBtn" onClick={saveDatas}>
-                    ذخیره اطلاعات
+                   {t("ذخیره اطلاعات")}
                    </Button>
                    <Modal
                                                 show={show} onHide={AddAddress}
@@ -316,19 +318,19 @@ const EditProfile = () =>{
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    ویرایش اطلاعات کاربری
+                                                    {t("ویرایش اطلاعات کاربری")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
                                                 <Row>
                         <Col md={6}>
-                        <span className="inputTitle">نام <span style={{color:"red"}}>*</span></span>
+                        <span className="inputTitle">{t("نام")} <span style={{color:"red"}}>*</span></span>
                         <br/>
                         <input className="inputCLass" value={name}  onChange={(e)=>setName(e.target.value)} type="text"/>
-                        <span className="inputTitle">شماره تلفن همراه <span style={{color:"red"}}>*</span></span>
+                        <span className="inputTitle">{t("شماره تلفن همراه")} <span style={{color:"red"}}>*</span></span>
                         <br/>
                         <input className="inputCLass" value={mobile}  onChange={(e)=>setMobile(e.target.value)}type="number"/>
-                        <span className="inputTitle">کلمه عبور</span>
+                        <span className="inputTitle">{t("کلمه عبور")}</span>
                 <br/>
                 <div className="passwordBox">
                 <input  onChange={(e)=>setPass(e.target.value)} className="passwordInput"type={passwordShown ? "text" : "password"}/>
@@ -340,13 +342,13 @@ const EditProfile = () =>{
                 </div>
                         </Col>
                         <Col md={6}>
-                        <span className="inputTitle">نام خانوادگی <span style={{color:"red"}}>*</span></span>
+                        <span className="inputTitle">{t("نام خانوادگی")} <span style={{color:"red"}}>*</span></span>
                         <br/>
                         <input value={family}  onChange={(e)=>setFamily(e.target.value)} className="inputCLass" type="text"/>
-                        <span className="inputTitle">ایمیل <span style={{color:"red"}}>*</span></span>
+                        <span className="inputTitle">{t("ایمیل")} <span style={{color:"red"}}>*</span></span>
                         <br/>
                         <input value={email}  onChange={(e)=>setEmail(e.target.value)} className="inputCLass" type="email"/>
-                        <span className="inputTitle">تکرار کلمه عبور </span>
+                        <span className="inputTitle">{t("تکرار کلمه عبور")} </span>
                 <br/>
                 <div className="passwordBox">
                 <input  onChange={(e)=>setAgain(e.target.value)} className="passwordInput"type={passwordShown3 ? "text" : "password"}/>
@@ -363,20 +365,20 @@ const EditProfile = () =>{
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={saveDatas}className="modalSaveBtn">ذخیره اطلاعات</Button>
+                                                    <Button  onClick={saveDatas}className="modalSaveBtn">{t("ذخیره اطلاعات")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
                 </div>
                 <Form className="mt-3">
                     <Row>
                         <Col md={6}>
-                        <span className="inputTitle">نام <span style={{color:"red"}}>*</span></span>
+                        <span className="inputTitle">{t("نام")} <span style={{color:"red"}}>*</span></span>
                         <br/>
                         <input value={name} onChange={(e)=>setName(e.target.value)}  className="inputCLass" type="text"/>
-                        <span className="inputTitle">شماره تلفن همراه <span style={{color:"red"}}>*</span></span>
+                        <span className="inputTitle">{t("شماره تلفن همراه")} <span style={{color:"red"}}>*</span></span>
                         <br/>
                         <input value={mobile} onChange={(e)=>setMobile(e.target.value)}  className="inputCLass" type="number"/>
-                        <span className="inputTitle">کلمه عبور</span>
+                        <span className="inputTitle">{t("کلمه عبور")}</span>
                 <br/>
                 <div className="passwordBox">
                 <input className="passwordInput" onChange={(e)=>setPass(e.target.value)} type={passwordShown ? "text" : "password"}/>
@@ -388,13 +390,13 @@ const EditProfile = () =>{
                 </div>
                         </Col>
                         <Col md={6}>
-                        <span className="inputTitle">نام خانوادگی <span style={{color:"red"}}>*</span></span>
+                        <span className="inputTitle">{t("نام خانوادگی")} <span style={{color:"red"}}>*</span></span>
                         <br/>
                         <input value={family} onChange={(e)=>setFamily(e.target.value)}  className="inputCLass" type="text"/>
-                        <span className="inputTitle">ایمیل <span style={{color:"red"}}>*</span></span>
+                        <span className="inputTitle">{t("ایمیل")} <span style={{color:"red"}}>*</span></span>
                         <br/>
                         <input value={email} onChange={(e)=>setEmail(e.target.value)}  className="inputCLass" type="email"/>
-                        <span className="inputTitle">تکرار کلمه عبور </span>
+                        <span className="inputTitle">{t("تکرار کلمه عبور")} </span>
                 <br/>
                 <div className="passwordBox">
                 <input className="passwordInput" onChange={(e)=>setAgain(e.target.value)} type={passwordShown2 ? "text" : "password"}/>
@@ -423,7 +425,7 @@ isConsultant?
 <Form className="mt-3">
 <Row>
         <Col md={12}>
-        <span className="inputTitle">ساعات کاری</span>
+        <span className="inputTitle">{t("ساعات کاری")}</span>
         <br/>
         {/* <div className="inputCLass d-flex align-items-center"> */}
             {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کارشناسی ارشد</p> */}
@@ -435,7 +437,7 @@ isConsultant?
         </Row>
     <Row>
         <Col md={6}>
-        <span className="inputTitle">مدرک تحصیلی</span>
+        <span className="inputTitle">{t("مدرک تحصیلی")}</span>
         <br/>
         {/* <div className="inputCLass d-flex align-items-center"> */}
             {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کارشناسی ارشد</p> */}
@@ -445,14 +447,14 @@ isConsultant?
         
         </Col>
         <Col md={6}>
-        <span className="inputTitle">تخصص</span>
+        <span className="inputTitle">{t("تخصص")}</span>
         <br/>
             {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>کشاورزی</p> */}
             <input value={specialty} disabled={true} onChange={(e)=>setSpecialty(e.target.value)}  className="inputCLass" type="text"/>
 
         </Col>
     </Row>
-    <span className="inputTitle">نوع مشاوره </span>
+    <span className="inputTitle">{t("نوع مشاوره")} </span>
         <br/>
     <Row>
         <Col md={4}>
@@ -470,14 +472,14 @@ isConsultant?
    }}
 /> */}
 <span className="categoryLable">
-       متنی
+       {("متنی")}
    </span>
 </div>
-<span className="inputTitle">تعرفه هر دقیقه مشاوره متنی : </span>
+<span className="inputTitle">{t("تعرفه هر دقیقه مشاوره متنی")} : </span>
         <br/>
         <div className="d-flex justify-content-between">
             <div className="priceShow">
-                {textType} تومان
+                {textType} {t("تومان")}
             </div>
             {/* <Form.Select className="priceSelect" >
                             
@@ -505,14 +507,14 @@ isConsultant?
    }}
 /> */}
 <span className="categoryLable">
-      صوتی 
+{t("صوتی")} 
    </span>
 </div>
-<span className="inputTitle">تعرفه هر دقیقه مشاوره صوتی : </span>
+<span className="inputTitle">{t("تعرفه هر دقیقه مشاوره صوتی")} : </span>
         <br/>
         <div className="d-flex justify-content-between">
             <div className="priceShow">
-                {voiceType} تومان
+                {voiceType} {t("تومان")}
             </div>
             {/* <Form.Select className="priceSelect" disabled>
                             
@@ -540,14 +542,14 @@ isConsultant?
    }}
 /> */}
 <span className="categoryLable">
-       تصویری
+{t("تصویری")}
    </span>
 </div>
-<span className="inputTitle">تعرفه هر دقیقه مشاوره تصویری :</span>
+<span className="inputTitle">{t("تعرفه هر دقیقه مشاوره تصویری")} :</span>
         <br/>
         <div className="d-flex justify-content-between">
             <div className="priceShow">
-                {videoType} تومان
+                {videoType} {t("تومان")}
             </div>
             {/* <Form.Select className="priceSelect" disabled>
                             
@@ -563,7 +565,7 @@ isConsultant?
     </Row>
     <Row>
         <Col md={6}>
-        <span className="inputTitle">شماره کارت</span>
+        <span className="inputTitle">{t("شماره کارت")}</span>
         <br/>
         {/* <div className="inputCLass d-flex align-items-center"> */}
             {/* <p style={{marginBottom:0,color:'#c1c1c1'}}>5022221022102250</p> */}
@@ -573,7 +575,7 @@ isConsultant?
         
         </Col>
         <Col md={6}>
-        <span className="inputTitle">شماره شبا</span>
+        <span className="inputTitle">{t("شماره شبا")}</span>
         <br/>
         {/* <div className="inputCLass d-flex align-items-center">
             <p style={{marginBottom:0,color:'#c1c1c1'}}>IR2255000000000000005556</p>
@@ -593,11 +595,11 @@ null
                    <div className="d-flex">
                    <Location/>
                    <p className="panelTitle">
-                    آدرس های ذخیره شده
+                   {t("آدرس های ذخیره شده")}
                    </p>
                    </div>
                    <Button className="editProfileBtn" onClick={handleShow}>
-                    + افزودن آدرس جدید
+                    + {t("افزودن آدرس جدید")}
                    </Button>
                    <Modal
                                                 show={showAddress} onHide={handleClose}
@@ -607,7 +609,7 @@ null
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                   افزودن آدرس
+                                                    {t("افزودن آدرس")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -615,7 +617,7 @@ null
                                                 <Col md={6}>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                       استان
+                                                    {t("استان")}
                                                     </span>
                                                     
                                                 </p>
@@ -635,13 +637,13 @@ null
                                                 <Col md={6}>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                      شهر
+                                                    {t("شهر")}
                                                     </span>
                                                     
                                                 </p>
                                                 
                                                 <Form.Select onChange={(ss)=>setNewCity(ss.target.value)} className="addressSelect">
-                                                <option value={""}>انتخاب کنید</option>
+                                                <option value={""}>{t("انتخاب کنید")}</option>
 
                                                 {
                                                 dataCity?.map((item)=>{
@@ -654,7 +656,7 @@ null
                                                 </Form.Select>
                                                 </Col>
                                               </Row>
-                                              <span className="inputTitle">کدپستی</span>
+                                              <span className="inputTitle">{t("کدپستی")}</span>
                         <br/>
                         <input onChange={(e)=>setNewPostalCode(e.target.value)} className="inputCLass" type="text"/>
                         <br/>
@@ -666,7 +668,7 @@ null
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={()=>AddAddress()}className="modalSaveBtn">ذخیره</Button>
+                                                    <Button  onClick={()=>AddAddress()}className="modalSaveBtn">{t("ذخیره")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
 
@@ -681,7 +683,7 @@ null
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                   افزودن آدرس
+                                                    {t("افزودن آدرس")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -689,7 +691,7 @@ null
                                                 <Col md={6}>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                       استان
+                                                    {t("استان")}
                                                     </span>
                                                     
                                                 </p>
@@ -709,7 +711,7 @@ null
                                                 <Col md={6}>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                      شهر
+                                                    {t("شهر")}
                                                     </span>
                                                     
                                                 </p>
@@ -729,7 +731,7 @@ null
                                                 </Form.Select>
                                                 </Col>
                                               </Row>
-                                              <span className="inputTitle">کدپستی</span>
+                                              <span className="inputTitle">{t("کدپستی")}</span>
                         <br/>
                         <input value={newPostalCode} onChange={(e)=>setNewPostalCode(e.target.value)} className="inputCLass" type="text"/>
                         <br/>
@@ -741,7 +743,7 @@ null
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={()=>EditAddress()}className="modalSaveBtn">ذخیره</Button>
+                                                    <Button  onClick={()=>EditAddress()}className="modalSaveBtn">{t("ذخیره")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
                 </div>
@@ -764,15 +766,15 @@ null
                 </div>
                 <div className="d-flex justify-content-between mt-4">
                 <p style={{marginRight:42}}>
-                   کد پستی : {item.PostalCode}
+                {t("کد پستی")} : {item.PostalCode}
                 </p>
                 <div className="d-flex">
                     <Button onClick={()=>handleEditShow(item.AddressID,item.CityID,item.ProvinceID,item.PostalCode,item.Address)} className="gTransparentBtn">
-                        ویرایش
+                    {t("ویرایش")}
                     </Button>
                     
                     <Button onClick={()=>DeleteAddress(item.AddressID)} className="oTransparentBtn">
-                        حذف
+                    {t("حذف")}
                     </Button>
                 </div>
                 </div>

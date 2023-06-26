@@ -18,12 +18,16 @@ import R5G from "src/components/assets/img/r5G.png";
 import R6G from "src/components/assets/img/r6G.png";
 import R7G from "src/components/assets/img/r7G.png";
 import R8G from "src/components/assets/img/r8G.png";
+import { useTranslation } from 'react-i18next';
+
 import { Link } from "react-router-dom";
 import { Explicit } from "react-bootstrap-icons";
 const RightPanelMenu = ({data}) =>{
     const Exit= async()=>{
         localStorage.setItem("CustomerID","")
     }
+    const {t,i18n} = useTranslation();
+
     return(
         <div className="whiteBoxRight">
         <div className="rightBox1 d-flex align-items-center">
@@ -42,49 +46,49 @@ const RightPanelMenu = ({data}) =>{
                 <li>
                     <Link to={"/EditProfile"}>
                         <img src={R1B}/>
-                        اطلاعات کاربری
+                        {t("اطلاعات کاربری")}
                     </Link>
                 </li>
                 <li>
                 <Link to={"/IoTManagement"}>
                         <img src={R2B}/>
-                       مدیریت دستگاه های IoT
+                        {t("مدیریت دستگاه های IoT")}
                     </Link>
                 </li>
                 <li>
                 <Link to={"/IoTDashboard"}>
                         <img src={R3B}/>
-                       داشبورد IoT
+                        {t("داشبورد IoT")}
                     </Link>
                 </li>
                 <li>
                 <Link to={"/Wallet"}>
                         <img src={R4B}/>
-                        کیف پول
+                        {t("کیف پول")}
                     </Link>
                 </li>
                 <li>
                 <Link to={"/UserHistory"}>
                         <img src={R5B}/>
-                        تاریخچه
+                        {t("تاریخچه")}
                     </Link>
                 </li>
                 <li>
                 <Link to={"/Favorite"}>
                         <img src={R6B}/>
-                        برگزیده ها
+                        {t("برگزیده ها")}
                     </Link>
                 </li>
                 <li>
                 <Link to={"/TicketList"}>
                         <img src={R7B}/>
-                        تیکت ها
+                        {t("تیکت ها")}
                     </Link>
                 </li>
                 <li>
                 <Link to={"/Login"} onClick={()=>Exit()}>
                         <img src={R8B}/>
-                        خروج از حساب کاربری
+                        {t("خروج از حساب کاربری")}
                     </Link>
                 </li>
             </ul>

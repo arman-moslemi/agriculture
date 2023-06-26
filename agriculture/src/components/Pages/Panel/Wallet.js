@@ -9,12 +9,14 @@ import Purse from "src/components/assets/img/purse.png";
 import FlashUp from "src/components/assets/img/flashUp.png";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { Link, useNavigate,useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 import { ArrowUpSquare ,ArrowDownSquare } from 'react-bootstrap-icons';
 const Wallet = () =>{
     const [show, setShow] = useState(false);
     const [cost, setCost] = useState(0);
     let navigate = useNavigate();
+    const {t,i18n} = useTranslation();
 
     const handleClose = () =>{ setShow(false);chargeWallet()}
     const handleShow = () => setShow(true);
@@ -115,7 +117,7 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                    <div className="d-flex align-items-center">
                    <WalletIcon/>
                    <p className="panelTitle">
-                   کیف پول
+                   {t("کیف پول")}
                    </p>
                    </div>
                    <div>
@@ -123,7 +125,7 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                     دریافت خروجی اکسل
                    </Button> */}
                    <Button className="editProfileBtn marginRight1rem" onClick={handleShow}>
-                   + افزایش موجودی
+                   +  {t("افزایش موجودی")}
                    </Button>
                    <Modal
                                                 show={show} onHide={handleClose}
@@ -133,7 +135,7 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    افزایش موجودی کیف پول
+                                                    {t("افزایش موجودی کیف پول")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -143,7 +145,7 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                                                 <Form>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                     مبلغ مورد نظر خود را وارد کنید :  (ریال) 
+                                                    {t("مبلغ مورد نظر خود را وارد کنید")} :  ( {t("ریال")}) 
                                                     </span>
                                                     
                                                 </p>
@@ -151,14 +153,14 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                                                 <div className="d-flex align-items-center">
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                        بانک مقصد
+                                                    {t("بانک مقصد")}
                                                     </span>
                                                     
                                                 </p>
                                                 <br/>
                                                 <Form.Select className="bSelect">
                                             
-                                                    <option>ملت</option>
+                                                    <option> {t("ملت")}</option>
                                                     {/* <option>صادرات</option>
                                                     <option>پارسیان</option>
                                                     <option>پاسارگاد</option> */}
@@ -168,7 +170,7 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={handleClose} className="modalSaveBtn">پرداخت</Button>
+                                                    <Button  onClick={handleClose} className="modalSaveBtn">{t("پرداخت")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
                    </div>
@@ -179,10 +181,10 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                    </div>
                     <div>
                     <p className="panelTitle">
-                   موجودی کیف پول شما :
+                    {t("موجودی کیف پول شما")} :
                    </p>
                    <p className="panelTitle blackColor">
-                 {total}تومان
+                 {total} {t("تومان")}
                    </p>
                     </div>
 
@@ -190,7 +192,7 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
                    <div className="d-flex align-items-center">
                   <img src={Updown} width="44"/>
                    <p className="panelTitle">
-                   تاریخچه تراکنش های شما
+                   {t("تاریخچه تراکنش های شما")}
                    </p>
                    </div>
                    {
@@ -205,18 +207,18 @@ window.location.href="/dargahh.html?id="+response.data?.refId;
         item?.Status==1?
         <>
              <ArrowUpSquare size={35} color="#009959"/>
-             <p className="variz" style={{width:100}}>واریز وجه</p>
+             <p className="variz" style={{width:100}}> {t("واریز وجه")}</p>
              </>
              :
         item?.Status==2?
         <>
 
         <ArrowDownSquare size={35} color="#FF2525"/>
-        <p className="bardasht" style={{width:100}}>برداشت وجه</p>
+        <p className="bardasht" style={{width:100}}> {t("برداشت وجه")}</p>
         </>
         :
         null}
-             <p className="tarikh">{item?.Cost} تومان</p>
+             <p className="tarikh">{item?.Cost}  {t("تومان")}</p>
              <p className="tarikh">{item?.Date} {item?.Time}</p>
              <p className="tarikh">{item?.FactorNumber} </p>
         </div>

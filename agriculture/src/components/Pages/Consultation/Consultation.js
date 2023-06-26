@@ -20,6 +20,8 @@ import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams } from "react-router-dom";
 import CustomizedDialogs from '../Layouts/AlertModal';
 import CarouselMulti from 'react-multi-carousel';
+import { useTranslation } from 'react-i18next';
+
 const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
@@ -81,6 +83,7 @@ const Consultation = () =>{
       const [data2, setData2] = useState([]);
       const [similar, setSimilar] = useState([]);
       const [recent, setRecent] = useState([]);
+      const {t,i18n} = useTranslation();
 
   
       const GetData=()=>{
@@ -271,7 +274,7 @@ else{
               localStorage.setItem("cons_time",time);
 
                   handleClose2()
-                  setTitle("با موفقیت ثبت شد")
+                  setTitle(t("با موفقیت ثبت شد"))
                   setOpen(true)
            
                     axios.post(apiUrl + "SetSMSChat",{id:response.data.Data1?.id})
@@ -300,7 +303,7 @@ else{
             
             else{
                 // alert("هم اکنون چت فعال وجود دارد")
-                setTitle("هم اکنون چت فعال وجود دارد");
+                setTitle(t("هم اکنون چت فعال وجود دارد"));
                 setOpen(true)
             }})
                 .catch(function (error) {
@@ -315,7 +318,7 @@ else{
             .then(function (response) {
               if (response.data.result == "True") {
                 //   alert("با موفقیت ثبت شد")
-                  setTitle("با موفقیت ثبت شد")
+                  setTitle(t("با موفقیت ثبت شد"))
                   setOpen(true)
                 }})
                 .catch(function (error) {
@@ -420,14 +423,14 @@ else{
         <Row>
             <Col md={3}>
             <Button className="greenBtn searchBtn">
-                فیلترهای جستجو
+            {t("فیلترهای جستجو")}
             </Button>
             <Accordion allowZeroExpanded className="accardionBox">
     
             <AccordionItem >
                 <AccordionItemHeading>
                     <AccordionItemButton>
-تخصص                    </AccordionItemButton>
+                    {t("تخصص")}                    </AccordionItemButton>
                  </AccordionItemHeading>
             <AccordionItemPanel>
                 {
@@ -558,11 +561,10 @@ else{
             <Col md={9}>
                 <div className="whiteBox">
                     <span className="whiteBoxTitle">
-                        لیست مشاوران
+                    {t("لیست مشاوران")}
                     </span>
                     <p className="consultationDescription">
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است 
-                    </p>
+.                    </p>
                     <CustomizedDialogs Title={title} open={open} setOpen={setOpen} />
 
                     <Row>
@@ -609,11 +611,11 @@ index<parseInt(item.RateAvg)?
                                 <div className="consultBox2">
                                     <div>
                                     <p className="consultDegree">
-                                            زمان انتظار جهت پاسخگویی :  {item.WaitTime} دقیقه
+                                    {t("زمان انتظار جهت پاسخگویی")} :  {item.WaitTime} {t("دقیقه")}
                                         </p>
                                         <div>
                                     <p className="consultDegree">
-                                           زمان کاری:  {item.Avaible} 
+                                    {t("زمان کاری")}:  {item.Avaible} 
                                         </p>
                                         </div>
                                         </div>
@@ -621,21 +623,21 @@ index<parseInt(item.RateAvg)?
                                         <div className="d-flex ">
                                             <div className="borderLeftGreen" style={{alignItems:'center',justifyContent:'center',padding:10}}>
                                             <Link to="" className="callBtn " onClick={()=>handleShow("1",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
-                                                متنی
+                                            {t("متنی")}
                                             </Link>
                                             {/* <p className="consultDegree">تعداد:۵۰</p> */}
                                             </div>
                                             <div className="borderLeftGreen" style={{alignItems:'center',justifyContent:'center',padding:10}}>
 
                                             <Link to=""  className="callBtn " onClick={()=>handleShow("2",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
-                                               صوتی
+                                            {t("صوتی")}
                                             </Link>
                                             {/* <p className="consultDegree">تعداد:۵۰</p> */}
                                             </div>
                                             <div className="borderLeftGreen" style={{alignItems:'center',justifyContent:'center',padding:10}}>
 
                                             <Link to=""  className="callBtn" onClick={()=>handleShow("3",item.Name+" "+item.Family,item.Specialty,item.WaitTime ,item.CustomerID,item.Degree)}>
-                                                تصویری
+                                            {t("تصویری")}
                                             </Link>
                                             {/* <p className="consultDegree">تعداد:۵۰</p> */}
                                             </div>
@@ -647,32 +649,32 @@ index<parseInt(item.RateAvg)?
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    زمان مورد نیاز برای انجام مشاوره
+                                                    {t("زمان مورد نیاز برای انجام مشاوره")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
                                                 <p className="modalText">
                                                     <span>
-                                                        نام مشاور : 
+                                                    {t("نام مشاور")} : 
                                                     </span>
 {name}                                                </p>
                                                 <p className="modalText">
                                                     <span>
-                                                       تحصیلات : 
+                                                    {t("تحصیلات")} : 
                                                     </span>
                                                      {degree}
                                                 </p>
                                                 <p className="modalText">
                                                     <span>
-                                                        نوع مشاوره : 
+                                                    {t("نوع مشاوره")} : 
                                                     </span>
-                                                    {type==1?"متنی":type==2?"صوتی":"تصویری"}
+                                                    {type==1?t("متنی"):type==2?t("صوتی"):t("تصویری")}
                                                 </p>
                                            
                                                 <Form>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                        موضوع مشاوره : 
+                                                    {t("موضوع مشاوره")} : 
                                                     </span>
                                                     
                                                 </p>
@@ -680,16 +682,16 @@ index<parseInt(item.RateAvg)?
                                                 <div className="d-flex align-items-center">
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                        مدت زمان مشاوره : 
+                                                    {t("مدت زمان مشاوره")} : 
                                                     </span>
                                                 </p>
                                                 <Form.Select onChange={(ss)=>setTime(ss.target.value)} className="bSelect">
                                             
-                                                    <option value={""}>انتخاب</option>
-                                                    <option value={15}>15 دقیقه</option>
-                                                    <option value={30}>30 دقیقه</option>
-                                                    <option value={45}>45 دقیقه</option>
-                                                    <option value={60}>60 دقیقه</option>
+                                                <option value={""}>انتخاب</option>
+                                                    <option value={15}>15{t("دقیقه")}</option>
+                                                    <option value={30}>30 {t("دقیقه")}</option>
+                                                    <option value={45}>45 {t("دقیقه")}</option>
+                                                    <option value={60}>60 {t("دقیقه")}</option>
                                                 </Form.Select>
                                                 </div>
                                                 </Form>
@@ -700,7 +702,7 @@ index<parseInt(item.RateAvg)?
                                                     onClick={()=>GetCost(consultant)}
                                                     // onClick={()=>alert(consultant)}
                                                     
-                                                    className="modalSaveBtn">ثبت درخواست</Button>
+                                                    className="modalSaveBtn">{t("ثبت درخواست")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
                                              <Modal
@@ -711,46 +713,46 @@ index<parseInt(item.RateAvg)?
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    تایید درخواست
+                                                    {t("تایید درخواست")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
                                                 <p className="modalText">
                                                     <span>
-                                                        نام مشاور : 
+                                                    {t("نام مشاور")} : 
                                                     </span>
 {name}                                                </p>
                                                 <p className="modalText">
                                                     <span>
-                                                       تحصیلات : 
+                                                    {t("تحصیلات")} : 
                                                     </span>
 {Specialty}                                                </p>
                                                 <p className="modalText">
                                                     <span>
-                                                        نوع مشاوره : 
+                                                    {t("نوع مشاوره")} : 
                                                     </span>
-                                                     {type==1?"متنی":type==2?"صوتی":"تصویری"}
+                                                    {type==1?t("متنی"):type==2?t("صوتی"):t("تصویری")}
                                                 </p>
                                            
                                              
                                                 <p className="modalText">
                                                     <span>
-                                                        موضوع مشاوره : 
+                                                    {t("موضوع مشاوره")} : 
                                                     </span>
 {subject}                                                </p>
                                                 <p className="modalText colorOrange">
                                                     <span>
-                                                        هزینه مشاوره : 
+                                                    {t("هزینه مشاوره")} : 
                                                     </span>
-                                                   {cost} تومان
+                                                   {cost} {t("تومان")}
                                                 </p>
                                             
                                             
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                <Button  onClick={()=>InsertConsultant(1)}className="modalSaveBtn2">پرداخت از کیف پول</Button>
-                                                    <Button  onClick={()=>InsertConsultant(2)}className="modalSaveBtn">شارژ کیف پول</Button>
+                                                <Button  onClick={()=>InsertConsultant(1)}className="modalSaveBtn2">{t("پرداخت از کیف پول")}</Button>
+                                                    <Button  onClick={()=>InsertConsultant(2)}className="modalSaveBtn">{t("شارژ کیف پول")}</Button>
                                                    
                                                 </Modal.Footer>
                                              </Modal>
@@ -760,7 +762,7 @@ index<parseInt(item.RateAvg)?
                                 <Button onClick={()=>InsertFavorite(item.CustomerID)} className="favorite">
                                     <Heart color={'#FF2525'}/>
                                    <p>
-                                   افزودن به برگزیده ها
+                                   {t("افزودن به برگزیده ها")}
                                    </p>
                                 </Button>
                             </div>
@@ -780,7 +782,7 @@ index<parseInt(item.RateAvg)?
    <Container fluid className="containerWhite">
    <Container>
    <div>
-        <h2 className="sliderTitle mb-4"> جدیدترین مشاوران ما</h2>
+        <h2 className="sliderTitle mb-4"> {t("جدیدترین مشاوران ما")}</h2>
         <CarouselMulti responsive={responsive} rtl={true}>
             {
                 similar?.map((item)=>{

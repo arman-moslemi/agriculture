@@ -13,6 +13,8 @@ import { useLocation, useSearchParams, useParams } from "react-router-dom";
 import CustomizedDialogs from '../Layouts/AlertModal';
 import { StarFill, Star, Heart, TextLeft, ChevronLeft, Share, ChatDots } from "react-bootstrap-icons";
 import StartRate from 'src/components/Pages/Layouts/StarRate';
+import { useTranslation } from 'react-i18next';
+
 const SingleProduct = () => {
   let navigate = useNavigate();
 
@@ -25,6 +27,8 @@ const SingleProduct = () => {
   const [rate, setRate] = useState(5)
   const [com, setCom] = useState([]);
   const [text, setText] = useState([]);
+  const {t,i18n} = useTranslation();
+
   const images = [
     {
       original: apiAsset + data?.Pic1,
@@ -125,7 +129,7 @@ const SingleProduct = () => {
           console.log(222)
           console.log(response.data.Data)
           localStorage.setItem("Guest", response.data.Data)
-          setTitle("محصول با موفقیت به سبدخرید اضافه شد")
+          setTitle(t("محصول با موفقیت به سبدخرید اضافه شد"))
           setOpen(true)
         }
       })
@@ -143,7 +147,7 @@ const SingleProduct = () => {
   const InsertComment = () => {
     var ss = localStorage.getItem("CustomerID")
     if (ss == null) {
-      setTitle("لطفاابتدا وارد شوید")
+      setTitle(t("لطفاابتدا وارد شوید"))
       setOpen(true)
     }
     else {
@@ -153,7 +157,7 @@ const SingleProduct = () => {
       axios.post(apiUrl + "InsertProductComment", { CustomerID: ss, ProductID: data.ProductID, Text: text, Rate: rate })
         .then(function (response) {
           if (response.data.result == "True") {
-            setTitle("پیام با موفقیت ثبت شد")
+            setTitle(t("پیام با موفقیت ثبت شد"))
             setOpen(true)
             GetData()
           }
@@ -173,7 +177,7 @@ const SingleProduct = () => {
     axios.post(apiUrl + "InsertFavorite", { CustomerID: ss, ProductID: data.ProductID })
       .then(function (response) {
         if (response.data.result == "True") {
-          setTitle("با موفقیت ثبت شد")
+          setTitle(t("با موفقیت ثبت شد"))
           setOpen(true)
         }
       })
@@ -199,7 +203,7 @@ const SingleProduct = () => {
         <div className="breadCrumbs">
           <ul>
             <li onClick={() => navigate("/")}>
-              خانه
+              {t("خانه")}
             </li>
             /
             <li>
@@ -230,20 +234,20 @@ const SingleProduct = () => {
                 </div>
                 <div className="d-flex">
 
-                  <p className="singleModelP">مدل:{data.BrandName}</p>
+                  <p className="singleModelP">{t("مدل")}:{data.BrandName}</p>
                 </div>
                 <div className="d-flex flex-row">
                   <StarFill color="#FF6900" size="16" />
                   <p className="singleRateP">{data.RateAVG}</p>
 
-                  <p className="singleTitleCatP">دسته بندی:</p>
+                  <p className="singleTitleCatP">{t("دسته بندی")}:</p>
                   <p className="singleCatP">{data.Title}</p>
                 </div>
               </div>
               <div className="d-flex justify-content-between flex-wrap">
                 <div>
                   <p className="singleTitleProperty">
-                    ویژگی های محصول:
+                  {t("ویژگی های محصول")}:
                   </p>
                   {
                     Object.values(property)?.map((item, index) => {
@@ -282,35 +286,35 @@ const SingleProduct = () => {
 
                     <Garranty />
                     <p className="titleGrayBox">
-                      گارانتی 12 ماهه {data?.WarrantyName}
+                    {t("گارانتی 12 ماهه")} {data?.WarrantyName}
                     </p>
                   </div>
                   <div className="d-flex boxGreyBox2">
                     <File />
                     <p className="titleGrayBox">
-                      موجود در انبار
+                    {t("موجود در انبار")}
                     </p>
                   </div>
                   <div className="boxGreyBox">
                     <p className="costTitleGrayBox">
-                      قیمت کالا:</p>
+                    {t("قیمت کالا")}:</p>
                     {
                       data.SpecialCost ?
                         <>
                           <p className="costGrayBoxStroke">
-                            {data?.Cost?.toLocaleString("en-de")} تومان</p>
+                            {data?.Cost?.toLocaleString("en-de")} {t("تومان")}</p>
                           <p className="costGrayBox">
-                            {data.SpecialCost?.toLocaleString("en-de")} تومان</p>
+                            {data.SpecialCost?.toLocaleString("en-de")} {t("تومان")}</p>
                         </>
                         :
 
                         <p className="costGrayBox">
-                          {data.Cost?.toLocaleString("en-de")} تومان</p>
+                          {data.Cost?.toLocaleString("en-de")} {t("تومان")}</p>
                     }
                   </div>
                   <div className="d-flex boxGreyBox2 justify-content-between">
                     <p className="costTitleGrayBox">
-                      تعداد:</p>
+                    {t("تعداد")}:</p>
                     <div className="counterDiv d-flex justify-content-center">
                       <button onClick={() => number > 1 ? setNumber(number - 1) : null} className="decBTN">-</button>
                       <span className="costNumber">{number}</span>
@@ -323,12 +327,12 @@ const SingleProduct = () => {
                       <CartSingle color="#fff" />
                       <p className="addToCartTitle">
 
-                        افزودن به سبد خرید
+                      {t("افزودن به سبد خرید")}
                       </p>
                     </Button>
                     <Button onClick={() => InsertFavorite()} className="addFavorite mt-1" style={{ marginRight: 'auto', marginLeft: 'auto', display: 'block' }}>
                       <Heart className="customM" size={20} />
-                      افزودن به برگزیده ها
+                      {t("افزودن به برگزیده ها")}
                     </Button>
                   </div>
                 </div>
@@ -350,9 +354,9 @@ const SingleProduct = () => {
           <div dir="rtl">
             <Tabs dir={'rtl'}>
               <TabList className="cTabList">
-                <Tab>مشخصات فنی</Tab>
-                <Tab>نقد و بررسی</Tab>
-                <Tab>نظرات کاربران</Tab>
+                <Tab>{t("مشخصات فنی")}</Tab>
+                <Tab>{t("نقد و بررسی")}</Tab>
+                <Tab>{t("نظرات کاربران")}</Tab>
               </TabList>
               <TabPanel>
                 <div className="d-flex" style={{ width: '100%' }}>
@@ -399,7 +403,7 @@ const SingleProduct = () => {
                     <div className="headBox">
                       <div>
                         <p className="headerNews">
-                          دیدگاه های ثبت شده
+                        {t("دیدگاه های ثبت شده")}
                         </p>
 
                       </div>
@@ -415,7 +419,7 @@ const SingleProduct = () => {
                                 {item.Name} {item.Family}                        </p>
                               <div className="d-flex align-items-center" >
                                 <p className="writerScore">
-                                  امتیاز ثبت شده :
+                                {t("امتیاز ثبت شده")} :
                                 </p>
                                 <div className="d-flex align-items-center">
                                   {
@@ -447,22 +451,22 @@ const SingleProduct = () => {
                     <div className="headBox" style={{ border: 0 }}>
                       <div style={{ width: '100%' }}>
                         <p className="headerNews">
-                          ثبت دیدگاه                        </p>
+                        {t("ثبت دیدگاه")}                        </p>
                         {
                           com ?
                             null
                             :
 
                             <p style={{ fontFamily: 'IRANSansBold' }}>
-                              هیچ دیدگاهی برای این موضوع ثبت نشده است شما اولین نفر باشید !
+                              {t("هیچ دیدگاهی برای این موضوع ثبت نشده است شما اولین نفر باشید")}!
                             </p>
                         }
                         <p style={{ fontFamily: 'IRANSans' }}>
-                          نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند *
+                        {t("نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند")} *
                         </p>
                         <div className="d-flex align-items-center mt-3">
                           <p style={{ fontFamily: 'IRANSans', marginBottom: 0 }}>
-                            امتیاز شما :
+                          {t("امتیاز شما")} :
                           </p>
                           <div className="d-flex align-items-center" style={{ marginRight: 25 }}>
                             <StartRate setRate={setRate} />
@@ -486,13 +490,13 @@ const SingleProduct = () => {
                         </Row>
                         <div className="d-flex mt-3 align-items-start">
                           <p style={{ fontFamily: 'IRANSans', marginBottom: 0 }}>
-                            متن پیام شما :
+                          {t("متن پیام شما")} :
                           </p>
                           <textarea onChange={(e) => setText(e.target.value)} className="inputCLass cInput" type="text" style={{ minHeight: 200 }} />
                         </div>
                         <Row>
                           <Col md={12}>
-                            <Button onClick={() => InsertComment()} className="sendComment">ارسال پیام</Button>
+                            <Button onClick={() => InsertComment()} className="sendComment">{t("ارسال پیام")}</Button>
                           </Col>
                         </Row>
                       </div>

@@ -94,6 +94,8 @@ const Header = () =>{
     const  GetLang = async(e) => {
     var ss=  await localStorage.getItem("lang")
 setLang(ss)
+i18n.changeLanguage(ss);
+
     }
      const  _handleKeyDownAuto = async(aa) => {
         const axios = require("axios");

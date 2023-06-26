@@ -9,6 +9,8 @@ import { StarFill ,Star ,EyeFill} from 'react-bootstrap-icons';
 import Product2 from "src/components/assets/img/p2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useTranslation } from 'react-i18next';
+
 const UserHistory = () =>{
   const [data, setData] = useState([]);
   const [his, setHis] = useState([]);
@@ -24,6 +26,7 @@ const UserHistory = () =>{
   const [titleSup,setTitleSup]=useState("")
   const [chat,setChat]=useState([])
   const [disable,setDisable]=useState(false)
+  const {t,i18n} = useTranslation();
 
   const GetData=async()=>{
       const axios = require("axios");
@@ -162,7 +165,7 @@ const UserHistory = () =>{
                
               <div>
             <Tabs defaultActiveKey="profile" onSelect={(k) => setKey(k)} id="uncontrolled-tab-example" className="mb-3" activeKey={key}>
-            <Tab eventKey="news" title="سفارشات">
+            <Tab eventKey="news" title={t("سفارشات")}>
               {
                 Object.values(his).map((item)=>{
                   var tot=0;
@@ -174,15 +177,15 @@ return(
 <Link to={"/Factor/"+item[0].FactorID} className="historyBox">
     <div className="d-flex align-items-center justify-content-between borderBottomGray">
         <span className="historyTitle">
-            تاریخ : {item[0].Date}
+        {t("تاریخ")} : {item[0].Date}
         </span>
        <div style={{textAlign:'left'}}>
        <span className="historyTitle">
-          مبلغ پرداختی : {tot} تومان
+       {t("مبلغ پرداختی")} : {tot} {t("تومان")}
         </span>
         <br/>
         <span className="vaziyat">
-          وضعیت سفارش : {item[0].Status}
+        {t("وضعیت سفارش")} : {item[0].Status}
         </span>
        </div>
     </div>
@@ -200,21 +203,21 @@ return(
          <p className="HistoryProductTitle">
 {item2.Name}           </p>
            <p className="HistoryProductModel">
-           مدل : {item2.BrandName}
+           {t("مدل")} : {item2.BrandName}
            </p>
          </div>
            </div>
            <div style={{textAlign:'left'}}>
         <span className="historyPrice">
-          قیمت کالا : {item2?.SpecialCost?item2?.SpecialCost:item2?.Cost} تومان
+        {t("قیمت کالا")} : {item2?.SpecialCost?item2?.SpecialCost:item2?.Cost} {t("تومان")}
         </span>
         <br/>
         <span className="historyPrice">
-         تعداد : {item2.NumberFactor} عدد
+        {t("تعداد")} : {item2.NumberFactor} {t("عدد")}
         </span>
         <br/>
         <span className="historyPrice">
-         سریال : {item2.FactorSerial} 
+        {t("سریال")} : {item2.FactorSerial} 
         </span>
         </div>
         </div>
@@ -229,7 +232,7 @@ return(
               }
                 
                 </Tab>
-                <Tab eventKey="product" title="مشاوره های دریافت شده">
+                <Tab eventKey="product" title={t("مشاوره های دریافت شده")}>
                   {
 cons.map((item,index)=>{
   return(
@@ -242,29 +245,29 @@ cons.map((item,index)=>{
         <p className="productName" style={{width:70}}>
 {item.Subject}        </p>
 <p className="productVolume" style={{width:100}}>
-تاریخ:{item.DateReq
+{t("تاریخ")}:{item.DateReq
 +" ساعت:"+item.Time}       </p>
        </div>
      
        <div>
        <p className="productVolume">
 {item.Name}{item.Family}        </p>
-<p>قیمت:{item.Cost}</p>
+<p>{t("قیمت")}:{item.Cost}</p>
        </div>
        <div>
         {
           item.Status==3?
           <p className="productVolume">
-            بسته شده
+            {t("بسته شده")}
           </p>
           :
           item.Status==2?
           <p className="productVolume">
-            پاسخ داده شده
+            {t("پاسخ داده شده")}
           </p>
           :
           <p className="productVolume">
-            در انتظار پاسخ
+            {t("در انتظار پاسخ")}
           </p>
 
         }
@@ -274,15 +277,15 @@ cons.map((item,index)=>{
         <div className="ticketStatus" id="answered">
           {
             item.Type==1?
-            <span>متنی</span>
+            <span>{t("متنی")}</span>
 
             :
             item.Type==2?
-            <span>صوتی</span>
+            <span>{t("صوتی")}</span>
 
             :
 
-            <span>تصویری</span>
+            <span>{t("تصویری")}</span>
 
           }
         </div>
@@ -314,7 +317,7 @@ cons.map((item,index)=>{
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                  چت
+                                                    {t("چت")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -364,7 +367,7 @@ cons.map((item,index)=>{
                                                 </Row>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                    ارسال پیام 
+                                                    {t("ارسال پیام")} 
                                                     </span>
                                                     
                                                 </p>
@@ -380,7 +383,7 @@ cons.map((item,index)=>{
                                                 <Modal.Footer>
                                                     <Button  
                                                     onClick={()=>NewMessage()} 
-                                                    className="modalSaveBtn" >ارسال پیام</Button>
+                                                    className="modalSaveBtn" >{t("ارسال پیام")}</Button>
                                                 </Modal.Footer>
                                                   :
                                                   null
@@ -424,7 +427,7 @@ cons.map((item,index)=>{
     
                 </Tab>
                
-                <Tab eventKey="cons" title="مشاوره های داده شده">
+                <Tab eventKey="cons" title={t("مشاوره های داده شده")}>
                   {
 cons?.filter((x)=>x.CustomerID2==localStorage.getItem("CustomerID")).map((item,index)=>{
   return(
@@ -469,15 +472,15 @@ item.Status==2?
 <div className="ticketStatus" id="answered">
 {
 item.Type==1?
-<span>متنی</span>
+<span>{t("متنی")}</span>
 
 :
 item.Type==2?
-<span>صوتی</span>
+<span>{t("صوتی")}</span>
 
 :
 
-<span>تصویری</span>
+<span>{t("تصویری")}</span>
 
 }
 </div>
@@ -509,7 +512,7 @@ item.Type==2?
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                  چت
+                                                    {t("چت")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -575,7 +578,7 @@ item.Type==2?
                                                 <Modal.Footer>
                                                     <Button  
                                                     onClick={()=>NewMessage()} 
-                                                    className="modalSaveBtn" >ارسال پیام</Button>
+                                                    className="modalSaveBtn" >{t("ارسال پیام")}</Button>
                                                 </Modal.Footer>
                                                   :
                                                   null

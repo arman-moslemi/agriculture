@@ -19,6 +19,7 @@ import Product from "src/components/assets/img/product.png";
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const GroupProduct = () =>{
     const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -28,6 +29,7 @@ const GroupProduct = () =>{
     const [filter,setFilter]=useState([])
     const [data2,setData2]=useState([])
         const params = useParams().id;
+        const {t,i18n} = useTranslation();
 
     const viewset=()=>{
 
@@ -185,7 +187,7 @@ const GroupProduct = () =>{
         <Row>
             <Col md={3}>
             <Button className="greenBtn searchBtn">
-                فیلترهای جستجو
+            {t("فیلترهای جستجو")}
             </Button>
             {/* <div className="accardionBox5 d-flex align-items-center justify-content-between">
                 <div>
@@ -264,21 +266,21 @@ return(
             <div className="d-flex">
             <TextLeft color="#ffb921" size={30}/>
             <span className="sortText">
-                مرتب سازی بر اساس :
+            {t("مرتب سازی بر اساس :")}
             </span>
             </div>
             <div className="d-flex align-items-center justify-content-start">
-                <Button onClick={()=>viewset()} className="sortBtn">
-                    پربازدید ترین
+            <Button onClick={()=>viewset()} className="sortBtn">
+                {t("پربازدید ترین")}            
                 </Button>
                 <Button onClick={()=>GetData()} className="sortBtn">
-                    جدید ترین
+                {t("جدید ترین")}                 
                 </Button>
                 <Button onClick={()=>chep()} className="sortBtn">
-                    ارزان ترین
+                {t("ارزان ترین")}                   
                 </Button>
                 <Button onClick={()=>expensive()} className="sortBtn">
-                   گران ترین
+                {t("گران ترین")}                 
                 </Button>
             </div>
             </div>
@@ -296,7 +298,7 @@ Object.values(data)?.map((item,index)=>{
                             <p className="productName">
 {item[0].Name}                            </p>
                             <p className="productVolume">
-                                موجودی : {item[0].Number} {item[0].Unit}
+                            {t("موجودی")}: {item[0].Number} {item[0].Unit}
                             </p>
                             <div className="d-flex align-items-center justify-content-between mt-3">
                                 <div className="d-flex align-items-center">
@@ -308,17 +310,17 @@ Object.values(data)?.map((item,index)=>{
                                 </div>
                                 <div>
                                     <p className="productPriceStroke">
-                                        {item[0].Cost} تومان
+                                        {item[0].Cost} {t("تومان")}
                                     </p>
                                     <p className="productPrice">
-                                        {item[0].SpecialCost} تومان
+                                        {item[0].SpecialCost} {t("تومان")}
                                     </p>
                                 </div>
                             </div>
                            </div>
                            <div className="box2Div">
                            <p className="productVolume">
-                               نام تامین کننده کالا : {item[0].WarrantyName}
+                           {t("نام تامین کننده کالا")}: {item[0].WarrantyName}
                             </p>
                            </div>
                         </Link>

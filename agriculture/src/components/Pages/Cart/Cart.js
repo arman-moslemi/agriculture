@@ -13,6 +13,7 @@ import Location from "src/components/assets/icon/Location";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams } from "react-router-dom";
 import CustomizedDialogs from '../Layouts/AlertModal';
+import { useTranslation } from 'react-i18next';
 
 const Cart = () =>{
   const [showAlert, setshowAlert] = useState(false);
@@ -34,6 +35,7 @@ const Cart = () =>{
       const [editAddressID,setEditAddressID]=useState("")
       const [costTotal,setCostTotal]=useState(0)
       const [radio,setRadio]=useState(5)
+      const {t,i18n} = useTranslation();
 
   
       const [newPostalCode,setNewPostalCode]=useState("")
@@ -308,7 +310,7 @@ else{
                     console.log(error);
                   })}
                 else{
-                  setTitle("آدرس انتخاب نشده است")
+                  setTitle(t("آدرس انتخاب نشده است"))
                   setOpen(true)
                 }
                 
@@ -328,10 +330,10 @@ else{
                 <div className="whiteBox">
                <div className="whiteBoxGrayborder" style={{padding:0}}>
                <p className="panelTitle" style={{fontSize:20}}>
-                    سبد خرید
+               {t("سبد خرید")}
                    </p>
                    <p className="zirNevis">
-                    {data.length} کالا
+                    {data.length} {t("کالا")}
                    </p>
                </div>
                {
@@ -345,19 +347,19 @@ else{
                     <p className="HistoryProductTitle mb-2">
 {item.Name}                               </p>
                                <p className="HistoryProductModel mb-2">
-                               مدل : {item.BrandName}
+                               {t("مدل")} : {item.BrandName}
                                </p>
                               <div className="d-flex align-items-center">
                               <p className="historyPrice" style={{textAlign:'right'}}>
-                              قیمت کالا : {item.SpecialCost}تومان
+                              {t("قیمت کالا")} : {item.SpecialCost}{t("تومان")}
                             </p>
                             <p className="costGrayBoxStroke ml-2" style={{marginRight:15}}>
-                            {item.Cost}تومان
+                            {item.Cost}{t("تومان")}
                             </p>
                                 </div>
                             <div className="d-flex align-items-center">
                             <p className="historyPrice" style={{textAlign:'right',marginBottom:0}}>
-                             تعداد :
+                            {t("تعداد")} :
                             </p>
                             <div className="counterDiv d-flex justify-content-center" style={{marginRight:10}}>
                             <button onClick={()=>increment(item.ShoppingBasketID,"add")} className="inBTN">+</button>
@@ -417,11 +419,11 @@ else{
                    <div className="d-flex">
                    <Location/>
                    <p className="panelTitle">
-                    آدرس های ذخیره شده
+                   {t("آدرس های ذخیره شده")}
                    </p>
                    </div>
                    <Button className="editProfileBtn" onClick={handleShow}>
-                    + افزودن آدرس جدید
+                    + {t("افزودن آدرس جدید")}
                    </Button>
                    <Modal
                                                 show={showAddress} onHide={handleClose}
@@ -431,7 +433,7 @@ else{
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                   افزودن آدرس
+                                                    {t("افزودن آدرس")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -439,7 +441,7 @@ else{
                                                 <Col md={6}>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                       استان
+                                                    {t("استان")}
                                                     </span>
                                                     
                                                 </p>
@@ -459,13 +461,13 @@ else{
                                                 <Col md={6}>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                      شهر
+                                                    {t("شهر")}
                                                     </span>
                                                     
                                                 </p>
                                                 
                                                 <Form.Select onChange={(ss)=>setNewCity(ss.target.value)} className="addressSelect">
-                                                <option value={""}>انتخاب کنید</option>
+                                                <option value={""}>{t("انتخاب کنید")}</option>
 
                                                 {
                                                 dataCity?.map((item)=>{
@@ -478,11 +480,11 @@ else{
                                                 </Form.Select>
                                                 </Col>
                                               </Row>
-                                              <span className="inputTitle">کدپستی</span>
+                                              <span className="inputTitle">{t("کدپستی")}</span>
                         <br/>
                         <input onChange={(e)=>setNewPostalCode(e.target.value)} className="inputCLass" type="text"/>
                         <br/>
-                        <span className="inputTitle">آدرس</span>
+                        <span className="inputTitle">{t("آدرس")}</span>
                         <br/>
                         <textarea onChange={(e)=>setNewAddress(e.target.value)} className="inputCLass" type="text" style={{height:160,resize:'none'}}/>
                                                 
@@ -490,7 +492,7 @@ else{
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={()=>AddAddress()}className="modalSaveBtn">ذخیره</Button>
+                                                    <Button  onClick={()=>AddAddress()}className="modalSaveBtn">{t("ذخیره")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
 
@@ -505,7 +507,7 @@ else{
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                   افزودن آدرس
+                                                    {t("افزودن آدرس")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -513,7 +515,7 @@ else{
                                                 <Col md={6}>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                       استان
+                                                    {t("استان")}
                                                     </span>
                                                     
                                                 </p>
@@ -533,13 +535,13 @@ else{
                                                 <Col md={6}>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                      شهر
+                                                    {t("شهر")}
                                                     </span>
                                                     
                                                 </p>
                                                 
                                                 <Form.Select onChange={(ss)=>setNewCity(ss.target.value)} defaultValue={newCity}  className="addressSelect">
-                                                <option value={""}>انتخاب کنید</option>
+                                                <option value={""}>{t("انتخاب کنید")}</option>
 
                                                 {
                                                 dataCity?.map((item)=>{
@@ -553,11 +555,11 @@ else{
                                                 </Form.Select>
                                                 </Col>
                                               </Row>
-                                              <span className="inputTitle">کدپستی</span>
+                                              <span className="inputTitle">{t("کدپستی")}</span>
                         <br/>
                         <input value={newPostalCode} onChange={(e)=>setNewPostalCode(e.target.value)} className="inputCLass" type="text"/>
                         <br/>
-                        <span className="inputTitle">آدرس</span>
+                        <span className="inputTitle">{t("آدرس")}</span>
                         <br/>
                         <textarea value={newAddress} onChange={(e)=>setNewAddress(e.target.value)} className="inputCLass" type="text" style={{height:160,resize:'none'}}/>
                                                 
@@ -565,7 +567,7 @@ else{
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={()=>EditAddress()}className="modalSaveBtn">ذخیره</Button>
+                                                    <Button  onClick={()=>EditAddress()}className="modalSaveBtn">{t("ذخیره")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
                 </div>
@@ -590,15 +592,15 @@ onChange={()=>{setRadio(index)}}
                 </div>
                 <div className="d-flex justify-content-between mt-4">
                 <p style={{marginRight:42}}>
-                   کد پستی : {item.PostalCode}
+                {t("کد پستی")} : {item.PostalCode}
                 </p>
                 <div className="d-flex">
                     <Button onClick={()=>handleEditShow(item.AddressID,item.CityID,item.ProvinceID,item.PostalCode,item.Address)} className="gTransparentBtn">
-                        ویرایش
+                    {t("ویرایش")}
                     </Button>
                     
                     <Button onClick={()=>DeleteAddress(item.AddressID)} className="oTransparentBtn">
-                        حذف
+                    {t("حذف")}
                     </Button>
                 </div>
                 </div>
@@ -623,36 +625,36 @@ onChange={()=>{setRadio(index)}}
                   <div className="whiteBoxGrayborder customPad">
                   <div className="text-right">
                     <span className="boxText">
-                        قیمت کالاها :
+                    {t("قیمت کالاها")} :
                     </span>
                   </div>
                   <div className="" style={{textAlign:'left'}}>
                     <span className="boxText">
-                        {costTotal} تومان
+                        {costTotal} {t("تومان")}
                     </span>
                   </div>
                   </div>
                   <div className="whiteBoxGrayborder customPad">
                   <div className="text-right">
                     <span className="boxText">
-                       هزینه ارسال :
+                    {t("هزینه ارسال")} :
                     </span>
                   </div>
                   <div className="" style={{textAlign:'right'}}>
                     <span className="boxText2">
-                      بعد از انتخاب آدرس لحاظ می شود
+                    {t("بعد از انتخاب آدرس لحاظ می شود")}
                     </span>
                   </div>
                   </div>
                   <div className="customPad">
                   <div className="text-right">
                     <span className="boxText">
-                        مجموع سبد خرید :
+                    {t("مجموع سبد خرید")} :
                     </span>
                   </div>
                   <div className="" style={{textAlign:'left'}}>
                     <span className="boxText">
-                        {costTotal} تومان
+                        {costTotal} {t("تومان")}
                     </span>
                   </div>
                   </div>
@@ -660,13 +662,13 @@ onChange={()=>{setRadio(index)}}
                   onClick={()=>payment()}
                   
                   >
-                    پرداخت
+                    {t("پرداخت")}
                   </Button>
                  
                 </div>
                 {showAlert ?
                   <p className="alertText">
-                    ! ابتدا آدرس را وارد کنید تا به گام بعد جهت پرداخت منتقل شوید
+                    ! {t("ابتدا آدرس را وارد کنید تا به گام بعد جهت پرداخت منتقل شوید")}
                   </p>
                   : null}
             </Col>

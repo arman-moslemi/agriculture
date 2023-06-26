@@ -9,6 +9,8 @@ import CustomizedDialogs from '../Layouts/AlertModal';
 import { Link, useNavigate } from "react-router-dom";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 const TicketList = () =>{
     const [show, setShow] = useState(false);
     const [showSub, setShowSub] = useState(false);
@@ -22,6 +24,7 @@ const TicketList = () =>{
     const [textSub,setTextSub]=useState("")
     const [titleSup,setTitleSup]=useState("")
     const [disable,setDisable]=useState(false)
+    const {t,i18n} = useTranslation();
 
     const GetData=async()=>{
         const axios = require("axios");

@@ -54,6 +54,9 @@
     font-family: 'IRANSansMedium';
     font-size: 15px;
     padding-right: 25px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
     padding-left:25px !important;
   }
   .greenBtn:hover{
@@ -324,6 +327,9 @@ top: 15%;
     box-shadow: 0px 4px 10px rgba(0, 153, 89, 0.24);
     border:2px solid var(--dark-green) !important;
     margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .profileBtn:hover{
     color: var(--dark-green) !important;
@@ -545,6 +551,7 @@ top: 15%;
     width: 60px;
     text-align: center;
     text-decoration: none !important;
+    
   }
   .borderLeftGreen{
     border-right: none !important;
@@ -700,7 +707,9 @@ border-right: none !important;
     font-family: 'IRANSansBold' !important;
     color: #fff !important;
     border-radius: 5px !important;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 2px solid var(--orange) !important;
   }
   .modal-footer{
@@ -734,6 +743,9 @@ border-right: none !important;
     border-radius: 5px !important;
     color: var(--orange) !important;
     font-family: 'IRANSans' !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .modalSaveBtn:hover{
     background-color: var(--yellow) !important;
@@ -843,6 +855,9 @@ border-right: none !important;
     color: #fff !important;
     border-radius: 5px !important;
     border: 2px solid var(--orange) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .topBox{
     border-bottom: 1px solid rgba(186, 186, 186, 0.5);
@@ -897,6 +912,9 @@ border-right: none !important;
     border: none !important;
     background-color: transparent !important;
     padding-top: 0px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-bottom: 0px !important;
   }
   .oTransparentBtn{
@@ -907,6 +925,9 @@ border-right: none !important;
     font-size: 15px;
     border: none !important;
     background-color: transparent !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   /*********Single Product************/
 
@@ -1087,6 +1108,7 @@ padding-right: 18px;
   color: var(--dark-green);
   font-size: 18px;
   font-family: 'IRANSansMedium';
+  
 
 }
 .inBTN{
@@ -1423,6 +1445,9 @@ margin-bottom: 10px; */
   background-color: transparent !important;
   color: var(--orange) !important;
   border: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: 'IRANSansMedium' !important;
 }
 .whiteMiniBox{
@@ -1587,7 +1612,9 @@ margin-bottom: 10px; */
 .viewBtn{
   background-color: transparent !important;
   border: none !important;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .ticketStatus{
   border-width: 2px;
@@ -1721,6 +1748,9 @@ margin-bottom: 10px; */
   padding-left: 20px;
   padding-top: 5px !important;
   padding-bottom: 5px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .sortBtn:active{
  
@@ -1885,6 +1915,9 @@ margin-bottom: 10px; */
   background-color: transparent !important;
   border: none !important;
   padding: 0px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: 10px;
 }
 .newsBtn2{
@@ -1892,6 +1925,9 @@ margin-bottom: 10px; */
   border: none !important;
   padding: 0px !important;
   margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .textDetail2{
   font-family: 'IRANSansMedium';
@@ -2017,6 +2053,9 @@ margin-bottom: 10px; */
   font-size: 25px !important;
   border: none !important;
   background-color: var(--dark-green) !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .slideGreenBtn:hover{
   background-color: var(--yellow) !important;
@@ -2034,6 +2073,9 @@ margin-bottom: 10px; */
   position: absolute;
   bottom: 20px;
   left: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .cardBack{
   background-color:  rgba(168, 181, 125, 0.56);
@@ -2150,6 +2192,7 @@ margin-bottom: 10px; */
 }
 .miniSliderImg{
   width: 60%;
+  height: 130px;
   margin-right: auto;
   margin-left: auto;
 }
@@ -2220,6 +2263,10 @@ margin-bottom: 10px; */
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   width: 150px;
   margin: 30px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .heartmini{
   position: absolute;
@@ -2759,6 +2806,9 @@ margin-bottom: 10px; */
     font-size: 12px !important;
     width: 120px !important;
     height: 25px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .productSlider{
     width: 100% !important;

@@ -71,7 +71,8 @@ const Home = () =>{
     .then(function (response) {
       console.log(response)
       if (response.data.result == "True") {
-
+console.log(123098)
+console.log(response.data.Data)
         setData(response.data.Data)
 
     }})
@@ -718,7 +719,9 @@ const Home = () =>{
       {t("اخبار و مقالات")} 
      </p>
      <Link className="seeALL" to={"/News"}>
-      مشاهده همه
+     {t("مشاهده همه")} 
+
+      
      </Link>
     </div>
     <Row>

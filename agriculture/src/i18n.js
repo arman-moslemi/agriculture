@@ -49,7 +49,19 @@ const resources = {
       "کد تایید ارسال شده را وارد نمایید":"Enter the verification code sent",
       "تایید":"confirmation",
       "ورود":"log in",
-      "فراموشی رمز عبور":"forget password"
+      "فراموشی رمز عبور":"forget password",
+      "زبان":"language",
+      "محصولات":"Products",
+      "کشاورزی هوشمند":"Iot Agriculture",
+      "مشاوره کشاورزی":"Agricultural Consulting",
+      "اخبار و اعلانات":"Consulting News",
+      "سبد خرید":"Cart",
+      "داشبورد":"Dashboard",
+      "ورود / عضویت":"Login/Sign up",
+      "بخش فروش":"sales department",
+      "نام محصول یا برند مورد نظر را جستجو کنید":"Search the desired product or brand name",
+      "مشاهده همه":"View All",
+      "سبد شما خالی می باشد":"Your Cart is empty"
 
 
   }

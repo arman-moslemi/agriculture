@@ -91,7 +91,11 @@ const Cart = () =>{
       
               const GetData=()=>{
                 const axios = require("axios");
-              
+              var lng=localStorage.getItem("lang")
+              var rate=localStorage.getItem("rate")
+              console.log(3443)
+              console.log(lng)
+              console.log(rate)
                 var customer=localStorage.getItem("CustomerID")
                 var guest=localStorage.getItem("Guest")?localStorage.getItem("Guest"):0;
 
@@ -110,7 +114,14 @@ const Cart = () =>{
                     response.data.Data.map((item)=>{
 dd=item.SpecialCost?dd+parseInt(item.SpecialCost*item.ShoppingBasketNumber):dd+parseInt(item.Cost*item.ShoppingBasketNumber)
 })
-setCostTotal(dd)
+if(lng!="ir"){
+  setCostTotal(dd*parseFloat(rate))
+
+}
+else{
+
+  setCostTotal(dd)
+}
 }else if(response.data.result == "Duplicate"){
   setData([])
 

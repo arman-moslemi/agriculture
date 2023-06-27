@@ -147,12 +147,12 @@ const TicketList = () =>{
                    <div className="d-flex align-items-center">
                   <img src={Ticket} width="30px"/>
                    <p className="panelTitle">
-                   تیکت ها و پشتیبانی
+                   {t("تیکت ها و پشتیبانی")}
                    </p>
                    </div>
                    <div>
                    <Button className="editProfileBtn"  onClick={handleShow}> 
-                   + ایجاد پیام جدید
+                   + {t("ایجاد پیام جدید")}
                    </Button>
                    <Modal
                                                 show={show} onHide={handleClose}
@@ -162,7 +162,7 @@ const TicketList = () =>{
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                    ایجاد تیکت جدید
+                                                    {t("ایجاد تیکت جدید")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -172,7 +172,7 @@ const TicketList = () =>{
                                                 <Form>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                      موضوع پیام  
+                                                    {t("موضوع پیام")} 
                                                     </span>
                                                     
                                                 </p>
@@ -180,7 +180,7 @@ const TicketList = () =>{
                                             <br/>
                                             <p className="modalText mb-0">
                                                     <span>
-                                                    متن پیام
+                                                    {t("متن پیام")}
                                                     </span>
                                                     
                                                 </p>
@@ -190,7 +190,7 @@ const TicketList = () =>{
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button  onClick={()=>AddSupport()} className="modalSaveBtn" >ارسال پیام</Button>
+                                                    <Button  onClick={()=>AddSupport()} className="modalSaveBtn" >{t("ارسال پیام")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
                
@@ -204,7 +204,7 @@ const TicketList = () =>{
                                                 >
                                                 <Modal.Header closeButton>
                                                     <Modal.Title id="contained-modal-title-vcenter">
-                                                   مشاهده تیکت
+                                                    {t("مشاهده تیکت")}
                                                     </Modal.Title>
                                                 </Modal.Header>
                                                 <Modal.Body>
@@ -230,8 +230,8 @@ const TicketList = () =>{
 
                                      <div className="answerText" >
                                                     <div className="senderData">
-                                                        <p>ادمین</p>
-                                                        <p>تاریخ : {item.Date}</p>
+                                                        <p>{t("ادمین")}</p>
+                                                        <p>{t("تاریخ")} : {item.Date}</p>
                                                     </div>
                                                 <textarea value={item.Text} className="inputCLass" type="text" style={{height:150,resize:"none"}}/>
                                             
@@ -242,8 +242,8 @@ const TicketList = () =>{
                                             <Col md={12}>
                                             <div className="sendText" >
                                                     <div className="senderData">
-                                                        <p> کاربر</p>
-                                                        <p>تاریخ : {item.Date}</p>
+                                                        <p> {t("کاربر")}</p>
+                                                        <p>{t("تاریخ")} : {item.Date}</p>
                                                     </div>
                                                 <textarea value={item.Text} className="inputCLass" type="text" style={{height:150,resize:"none"}}/>
                                             
@@ -255,7 +255,7 @@ const TicketList = () =>{
                                                 </Row>
                                                 <p className="modalText mb-0">
                                                     <span>
-                                                    ارسال پیام 
+                                                    {t("ارسال پیام")} 
                                                     </span>
                                                     
                                                 </p>
@@ -266,7 +266,7 @@ const TicketList = () =>{
                                                
                                                 </Modal.Body>
                                                 <Modal.Footer>
-                                                    <Button disabled={disable} onClick={()=>AddSubSupport(subSupport[0]?.SupportID)} className="modalSaveBtn" >ارسال پیام</Button>
+                                                    <Button disabled={disable} onClick={()=>AddSubSupport(subSupport[0]?.SupportID)} className="modalSaveBtn" >{t("ارسال پیام")}</Button>
                                                 </Modal.Footer>
                                              </Modal>
        {/* <div className="ticketListBox">
@@ -311,23 +311,23 @@ const TicketList = () =>{
        </div>
        <div>
        <p className="productVolume">
-           تاریخ ایجاد : {item.Date}
+       {t("تاریخ ایجاد")} : {item.Date}
         </p>
        </div>
        <div>
    {    item.Status==1?
 
         <div className="ticketStatus" id="waiting">
-            <span>در انتظار پاسخ</span>
+            <span>{t("در انتظار پاسخ")}</span>
         </div>
     :
     item.Status==2?
     <div className="ticketStatus" id="answered">
-    <span>پاسخ داده شده</span>
+    <span>{t("پاسخ داده شده")}</span>
 </div>
     :
     <div className="ticketStatus" id="closed">
-    <span>بسته شده</span>
+    <span>{t("بسته شده")}</span>
 </div>
     }
        </div>

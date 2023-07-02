@@ -251,7 +251,7 @@ cons.map((item,index)=>{
      
        <div>
        <p className="productVolume">
-{item.Name}{item.Family}        </p>
+{item.Name} {item.Family}        </p>
 <p>{t("قیمت")}:{item.Cost}</p>
        </div>
        <div>
@@ -446,7 +446,7 @@ cons?.filter((x)=>x.CustomerID2==localStorage.getItem("CustomerID")).map((item,i
 
 <div>
 <p className="productVolume">
-{item.Name}{item.Family}        </p>
+{item.Name} {item.Family}        </p>
 <p>قیمت:{item.Cost}</p>
 </div>
 <div>

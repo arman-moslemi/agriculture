@@ -4,16 +4,18 @@ import Instagram from 'src/components/assets/icon/Instagram';
 import Telegram from 'src/components/assets/icon/Telegram';
 import Whatsapp from 'src/components/assets/icon/Whatsapp';
 import Logo from 'src/components/assets/img/logo.png';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () =>{
-  
+    const {t,i18n} = useTranslation();
+
     return(
    <Container fluid className="footerBox">
         <Container>
             <Row>
                 <Col md={3} className="text-right">
                     <span className="footerTitle">
-                        درباره ما
+                    {t("درباره ما")}
                     </span>
                     <p className="footerDescription">
                     لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد 
@@ -22,28 +24,28 @@ const Footer = () =>{
                 <Col md={6}>
                <div className="w90 borderBottom">
                <span className="footerTitle">
-                        میانبر
+               {t("میانبر")}
                     </span>
                </div>
                <ul className="footerList">
                 <li>
                     <a href="/">
-                        صفحه اصلی
+                    {t("صفحه اصلی")}
                     </a>
                 </li>
                 <li>
                     <a href="/about-us">
-                        درباره ما
+                    {t("درباره ما")}
                     </a>
                 </li>
                 <li>
                     <a href="/contact-us">
-                        تماس با ما
+                    {t("تماس با ما")}
                     </a>
                 </li>
                 <li>
                     <a href="/Rules">
-                      قوانین و مقررات
+                    {t("قوانین و مقررات")}
                     </a>
                 </li>
                </ul>

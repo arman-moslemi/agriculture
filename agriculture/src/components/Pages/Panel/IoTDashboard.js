@@ -184,14 +184,17 @@ const IoTDashboard = () =>{
                      <ExclamationCircleFill color="#AAADB3"/>
            </Tooltip>
              </div>
-             
-           <div className="d-flex justify-content-center mt-4 boxRow">
-            <a className="whiteMiniBox" href="#" onClick={handleShow}>
+             <div className="d-flex justify-content-center mt-4 boxRow">
+             {item3?.air_temp?
+            
+            <a className="whiteMiniBox" 
+            //  onClick={handleShow}
+             >
                 <p className="whiteMiniBoxTitle">{t("دمای هوا")}</p>
                 <img src={WeatherDeg} />
                 <p className="whiteMiniBoxTitle">{item3?.air_temp} {t("درجه")}</p>
-                {/* <p className="whiteMiniBoxStatus">وضعیت : سالم</p> */}
             </a>
+            :null}
             <Modal
                                                 show={show} onHide={handleClose}
                                                 className="historyModal"
@@ -211,36 +214,58 @@ const IoTDashboard = () =>{
                                                 </Modal.Body>
                                              
                                              </Modal>
-            <a className="whiteMiniBox" href="#">
+                                             {
+                                              item3.soil_temp?
+<a className="whiteMiniBox" >
                 <p className="whiteMiniBoxTitle">{t("دمای خاک")}</p>
                 <img src={SoulDeg} />
                 <p className="whiteMiniBoxTitle">{item3.soil_temp} {t("درجه")}</p>
-                <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
+                {/* <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p> */}
             </a>
-            <a className="whiteMiniBox" href="#">
+                                              :
+                                              null
+                                             }
+                                                   {/* {
+                                              item3.soil_temp?
+            
+            <a className="whiteMiniBox" >
                 <p className="whiteMiniBoxTitle">{t("دمای آب")}</p>
                 <img src={WaterDeg} />
                 <p className="whiteMiniBoxTitle"> درجه</p>
                 <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
             </a>
-            <a className="whiteMiniBox" href="#">
+            :
+            null} */}
+                  {
+                                              item3?.air_hum?
+            <a className="whiteMiniBox" >
                 <p className="whiteMiniBoxTitle">{t("رطوبت هوا")}</p>
                 <img src={Humidity} />
                 <p className="whiteMiniBoxTitle">{item3?.air_hum} %</p>
-                <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
+                {/* <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p> */}
             </a>
-            <a className="whiteMiniBox" href="#">
+            :
+            null}
+                  {
+                                              item3.soil_hum?
+            <a className="whiteMiniBox">
                 <p className="whiteMiniBoxTitle">{t("رطوبت خاک")}</p>
                 <img src={SoulHumidity} />
                 <p className="whiteMiniBoxTitle">{item3?.soil_hum} %</p>
-                <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
+                {/* <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p> */}
             </a>
-            <a className="whiteMiniBox" href="#">
+            :
+            null}
+                  {/* {
+                                              item3.soil_temp?
+            <a className="whiteMiniBox">
                 <p className="whiteMiniBoxTitle">{t("شیرآب کنترلی")}</p>
                 <img src={Faucet} />
                 <p className="whiteMiniBoxTitle"></p>
                 <p className="whiteMiniBoxStatus">{t("وضعیت")} : </p>
             </a>
+            :
+            null} */}
             </div>
          </div>    
        

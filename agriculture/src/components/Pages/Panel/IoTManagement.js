@@ -248,7 +248,14 @@ GetData()
               console.log(777)
               handleClose3()
 GetData()  
-          }})
+          }
+          if (response.data.result == "Duplicate") {
+         alert("شماره دستگاه وجود دارد")  
+        }
+        }
+          
+          )
+      
           .catch(function (error) {
             console.log(777)
             console.log(error);
@@ -636,7 +643,7 @@ GetData()
       </p>
       <Form.Select  onChange={(ss)=>setSensor(ss.target.value)} className="bSelect2">
                 {
-                  sensorList?.map((item2)=>{
+                  sensorList[0]?.map((item2)=>{
                     return(
 item2!=null?
                       <option value={item2?.SensorID}>{item2?.Sensor}</option>
@@ -672,7 +679,7 @@ item2!=null?
   </p>
   <Form.Select onChange={(ss)=>setPipe(ss.target.value)} className="bSelect2">
               {
-                pipeList?.map((item)=>{
+                pipeList[0]?.map((item)=>{
 return(
 item!=null?
 
@@ -711,7 +718,7 @@ item!=null?
       </p>
       <Form.Select defaultValue={item?.SensorID} className="bSelect2">
                 {
-                  sensorList?.map((item2)=>{
+                  sensorList[0]?.map((item2)=>{
                     return(
 item2!=null?
                       <option value={item2?.SensorID}>{item2?.Sensor}</option>
@@ -762,7 +769,7 @@ item2!=null?
    <Form.Select defaultValue={item?.PipeID} className="bSelect2">
                            
    {
-                 pipeList?.map((item)=>{
+                 pipeList[0]?.map((item)=>{
  return(
  item!=null?
  

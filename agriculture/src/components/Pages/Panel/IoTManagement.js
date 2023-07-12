@@ -52,6 +52,7 @@ const IoTManagement = () =>{
     const [title,setTitle]=useState("")
     const [serial, setSerial] = useState();
     const [deviceName, setDeviceName] = useState("");
+    const [partsel, setPartsel] = useState();
    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [show2, setShow2] = useState(false);
@@ -62,7 +63,7 @@ const IoTManagement = () =>{
      const [show3, setShow3] = useState(false);
    
      const handleClose3 = () => setShow3(false);
-      const handleShow3 = () => setShow3(true);
+      const handleShow3 = (xx) => {setShow3(true);setPartsel(xx)};
       const [show4, setShow4] = useState(false);
    
       const handleClose4 = () => setShow4(false);
@@ -239,10 +240,11 @@ GetData()
           });
       }
       const InsertDevice=(id)=>{
+        // alert(partsel)
         const axios = require("axios");
         var ss=localStorage.getItem("CustomerID")
       
-          axios.post(apiUrl + "InsertDevice",{PartID:id,Serial:deviceName})
+          axios.post(apiUrl + "InsertDevice",{PartID:partsel,Serial:deviceName})
           .then(function (response) {
             if (response.data.result == "True") {
               console.log(777)
@@ -252,6 +254,9 @@ GetData()
           if (response.data.result == "Duplicate") {
          alert("شماره دستگاه وجود دارد")  
         }
+        if (response.data.result == "Duplicate2") {
+          alert("این دستگاه وجود ندارد")  
+         }
         }
           
           )
@@ -460,7 +465,7 @@ GetData()
                </p>
            </div>
            <div className="d-flex">
-               <Button className="addSection" onClick={handleShow3}>
+               <Button className="addSection" onClick={()=>handleShow3(item2.PartID)}>
                    +  {t("افزودن دستگاه")}
                </Button> |
                <p className="addDeviceText">

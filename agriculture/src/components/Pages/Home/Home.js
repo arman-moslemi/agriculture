@@ -63,6 +63,7 @@ const Home = () =>{
   const GetData=async()=>{
     const axios = require("axios");
     const lang=await localStorage.getItem("lang")
+    const rate=await localStorage.getItem("rate")
     console.log(444)
     console.log(lang)
     i18n.changeLanguage(lang)
@@ -82,7 +83,10 @@ console.log(response.data.Data)
 
       console.log(error);
     });
-    axios.get(apiUrl + "BestSellersProduct")
+    axios.get(apiUrl + "BestSellersProduct",{  headers: {
+      lang: i18n.language,
+      rate:rate
+    }})
     .then(function (response) {
       console.log(response)
       if (response.data.result == "True") {
@@ -98,7 +102,10 @@ console.log(response.data.Data)
       console.log(error);
     });
  
-    axios.get(apiUrl + "LastProduct")
+    axios.get(apiUrl + "LastProduct",{  headers: {
+      lang: i18n.language,
+      rate:rate
+    }})
     .then(function (response) {
       console.log(response)
       if (response.data.result == "True") {

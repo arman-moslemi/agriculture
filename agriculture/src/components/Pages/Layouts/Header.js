@@ -77,8 +77,11 @@ const Header = () =>{
     
   
       }
+
       else{
         setRates(1)
+        window.location.reload()
+
       }
   
     }

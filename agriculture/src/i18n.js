@@ -7,6 +7,7 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
+
       "IoT انواع دستگاه های": "IOT Devices",
       "پر فروش ترین محصولات ما":"Our best selling products",
       "مشاهده محصولات":"View products",
@@ -205,37 +206,82 @@ const resources = {
       "تایید درخواست":"Accept",
       "هزینه مشاوره":"Cost",
       "اخبار برگزیده":"Favorite News",
-      "ادامه مطلب":"Read More",
       "هم اکنون چت فعال وجود دارد":"There is currently active chat",
-      "تخصص":"تخصص",
       "لیست مشاوران":"Consultant List",
       "زمان انتظار جهت پاسخگویی":"Waiting time for response",
       "زمان کاری":"Work time",
-      "افزودن به برگزیده ها":"Add to FAvorite",
       "جدیدترین مشاوران ما":"Our New Consultants",
       "ثبت درخواست":"Request registration",
-      "تایید درخواست":"Accept request",
       "تیکت ها و پشتیبانی":"Tickets",
       "ایجاد پیام جدید":"Create Message",
       "ایجاد تیکت جدید":"Create Ticket",
       "موضوع پیام":"Subject",
       "متن پیام":"Text",
-      "ارسال پیام":"Send",
       "مشاهده تیکت":"View Ticket",
       "ادمین":"Admin",
-      "تاریخ":"Date",
       "تاریخ ایجاد":"Create Date",
       "درباره ما":"About Us",
       "میانبر":"Shortcut",
       "صفحه اصلی":"Home",
       "تماس با ما":"Contact US",
-      "قوانین و مقررات":"Rules",
+      "دما":"Temeture",
+      "رطوبت":"Humidity",
+      "باد":"Wind",
+      "شماره دستگاه":"Serial Number",
+      "شیر آب کنترلی":"Control valve",
+      "خروج":"Log out",
+      "مشاوران":"Consultants",
+      "اخبار":"News",
+      "ویرایش اطلاعات":"Edit Profile",
+      "انتخاب زبان":"Select Language",
+      "ویرایش حساب کاربری":"Edit Profile",
+      "فارسی":"Persian",
+      "English":"English",
+      "جستجو کنید":"Search",
+      "مرتب سازی بر اساس":"Sort on",
+      "پربازدیدترین":"Viewest",
+      "فقط کالاهای موجود":"Available products only",
+      "مشاهده محصول":"View Product",
+      "دسته بندی":"Grouping",
+      "دیدگاه شما":"Your Comment",
+      "ادامه فرآیند خرید":"Continue the purchase process",
+      "مجموع قیمت کالاها":"Total Products",
+      "مقاله":"Article",
+      "درخواست مشاوره":"Consultant Request",
+      "زمان انتظار":"waite time",
+      "بدون فیلتر":"No Filter",
+      "زمان مورد نیاز برای مشاوره":"Time For Consultant",
+      "تحصیلات":"degree",
+      "پرداخت آنلاین":"online Pay",
+      "پرداخت از کیف":"wallet Pay",
+      "مدیریت Iot":"Iot Managment",
+      "ایجاد پروژه":"Create Project",
+      "قواعد":"Rules",
+      "مشاهده پروژه":"View Project",
+      "نام پروژه":"Project Name",
+      "عنوان بخش اول":"Part One Title",
+      "نام بخش اول را وارد نمایید":"Part One Title",
+      "افزودن":"Add",
+      "ایجاد بخش":"create Part",
+      "ایجاد دستگاه":"create Device",
+      "شماره سریال":"Serial Number",
+      "افزودن اگر":"Add If",
+      "افزودن آنگاه":"Add Then",
+      "سنسور":"sensor",
+      "مقدار":"value",
+      "پایپ":"pipe",
+      "شرط":"Condition",
+      "قواعد Iot":"Iot Rules",
+      "داشبورد Iot":"Iot Dashboard",
+  
       "خانه":"Home",
-      "خانه":"Home",
-      
-
-
-
+  
+  
+  
+  
+  
+  
+  
   }
     
   }

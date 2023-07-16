@@ -56,11 +56,15 @@ const SubGroup = () =>{
         setData([...Object.values(data)].sort((a, b) => (a.Cost > b.Cost) ? 1 : -1))
       
       }
-    const GetData=()=>{
+    const GetData=async()=>{
         const axios = require("axios");
       
+        const rate2=await localStorage.getItem("rate")
     
-        axios.post(apiUrl + "SubGroupProduct",{Title:params})
+        axios.post(apiUrl + "SubGroupProduct",{Title:params},{  headers: {
+          lang: i18n.language,
+          rate:rate2
+      }})
         .then(function (response) {
           if (response.data.result == "True") {
 
@@ -73,7 +77,10 @@ const SubGroup = () =>{
 
           console.log(error);
         });
-        axios.post(apiUrl + "GetPropertySubGroup",{Title:params})
+        axios.post(apiUrl + "GetPropertySubGroup",{Title:params},{  headers: {
+          lang: i18n.language,
+          rate:rate2
+      }})
         .then(function (response) {
           if (response.data.result == "True") {
 
@@ -112,12 +119,12 @@ const SubGroup = () =>{
           var count=0;
           console.log(item2)
 
-          item2?.map((item3,index2)=>{
+          // item2?.map((item3,index2)=>{
         gg?.map((item,index3)=>{
         
          
         
-            if(item3.SubGroupPropertyID==item.id)
+            if(item2.SubGroupPropertyID==item.id)
            {
              count+=1;
              if (count==gg.length){
@@ -128,8 +135,9 @@ const SubGroup = () =>{
           
           }
           })
-        })
-        })
+        // })
+        }
+        )
         console.log(ff)
         // if(ff.length!=0){
         
@@ -292,15 +300,15 @@ return(
 Object.values(data)?.map((item,index)=>{
 //     item2?.map((item)=>{
     return(
-                        <Link to={"/SingleProduct/"+item[0].Name2} className="productCard">
+                        <Link to={"/SingleProduct/"+item.Name2} className="productCard">
                            <div style={{padding:20,paddingBottom:5}}>
                            <img 
-                        src={apiAsset+item[0].Pic1}
+                        src={apiAsset+item.Pic1}
                            className="productImg"/>
                             <p className="productName">
-{item[0].Name}                            </p>
+{item.Name}                            </p>
                             <p className="productVolume">
-                            {t("موجودی")} : {item[0].Number} {item[0].Unit}
+                            {t("موجودی")} : {item.Number} {item.Unit}
                             </p>
                             <div className="d-flex align-items-center justify-content-between mt-3">
                                 {/* <div className="d-flex align-items-center">
@@ -320,17 +328,17 @@ index+1>item.Rate?
                                 </div> */}
                                 <div>
                                     <p className="productPriceStroke">
-                                        {item[0].Cost} {t("تومان")}
+                                        {item.Cost} {t("تومان")}
                                     </p>
                                     <p className="productPrice">
-                                        {item[0].SpecialCost} {t("تومان")}
+                                        {item.SpecialCost} {t("تومان")}
                                     </p>
                                 </div>
                             </div>
                            </div>
                            <div className="box2Div">
                            <p className="productVolume">
-                           {t("نام تامین کننده کالا")} : {item[0].WarrantyName}
+                           {t("نام تامین کننده کالا")} : {item.WarrantyName}
                             </p>
                            </div>
                         </Link>

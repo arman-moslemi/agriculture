@@ -52,11 +52,15 @@ const SingleProduct = () => {
     // },
 
   ];
-  const GetData = () => {
+  const GetData = async() => {
     const axios = require("axios");
 
+    const rate2=await localStorage.getItem("rate")
 
-    axios.post(apiUrl + "SingleProduct", { ProductName: params })
+    axios.post(apiUrl + "SingleProduct", { ProductName: params },{  headers: {
+      lang: i18n.language,
+      rate:rate2
+  }})
       .then(function (response) {
         console.log(response)
 
@@ -73,7 +77,10 @@ const SingleProduct = () => {
 
         console.log(error);
       });
-    axios.post(apiUrl + "ProductProperty", { ProductName: params })
+    axios.post(apiUrl + "ProductProperty", { ProductName: params },{  headers: {
+      lang: i18n.language,
+      rate:rate2
+  }})
       .then(function (response) {
         console.log(response)
 

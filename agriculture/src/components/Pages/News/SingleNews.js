@@ -12,6 +12,7 @@ import CustomizedDialogs from '../Layouts/AlertModal';
 import parse  from 'html-react-parser';
 import { StarFill ,Star ,Heart ,TextLeft ,ChevronLeft ,Share ,ChatDots} from "react-bootstrap-icons";
 import StartRate from 'src/components/Pages/Layouts/StarRate';
+import { useTranslation } from 'react-i18next';
 
 const SingleNews = () =>{
     
@@ -21,6 +22,7 @@ const SingleNews = () =>{
     const [rate,setRate]=useState(5)
     const [com, setCom] = useState([]);
     const [text, setText] = useState([]);
+    const {t,i18n} = useTranslation();
 
     const GetData=()=>{
         const axios = require("axios");
@@ -50,7 +52,9 @@ const SingleNews = () =>{
 
           console.log(error);
         });
-        axios.get(apiUrl + "AllBlogType")
+        axios.get(apiUrl + "AllBlogType",{  headers: {
+            lang: i18n.language,
+          }})
         .then(function (response) {
           if (response.data.result == "True") {
             setType(response.data.Data)
@@ -70,7 +74,7 @@ const SingleNews = () =>{
         axios.post(apiUrl + "InsertFavorite",{CustomerID:ss,BlogID:data[0].BlogID})
         .then(function (response) {
           if (response.data.result == "True") {
-              alert("با موفقیت ثبت شد")
+              alert( t("با موفقیت ثبت شد"))
             }})
             .catch(function (error) {
                 console.log(777)
@@ -86,7 +90,7 @@ const SingleNews = () =>{
       const InsertComment=()=>{
         var ss=localStorage.getItem("CustomerID")
         if(ss==null){
-alert("لطفاابتدا وارد شوید")
+alert( t("لطفاابتدا وارد شوید"))
         }
         else{
 
@@ -95,7 +99,7 @@ alert("لطفاابتدا وارد شوید")
         axios.post(apiUrl + "InsertBlogComment",{CustomerID:ss,BlogID:data[0].BlogID,Text:text,Rate:rate})
         .then(function (response) {
           if (response.data.result == "True") {
-            alert("پیام با موفقیت ثبت شد")
+            alert( t("پیام با موفقیت ثبت شد"))
 GetData()              
             }})
             .catch(function (error) {
@@ -121,7 +125,7 @@ GetData()
             <div className="d-flex sortNews">
             <TextLeft color="#ffb921" size={30}/>
             <span className="sortText">
-                دسته بندی مطالب
+            {t("دسته بندی مطالب")}
             </span>
             </div>
             <ul className="newsCategory">
@@ -146,7 +150,7 @@ GetData()
                         <p className="headerNews">
 {data[0]?.Title}                        </p>
                         <p className="headerDate">
-                            تاریخ انتشار : {data[0]?.Date}
+                        {t("تاریخ انتشار")} : {data[0]?.Date}
                         </p>
                     </div>
                     <div>
@@ -184,7 +188,7 @@ GetData()
                 <div className="headBox">
                     <div>
                         <p className="headerNews">
-                           دیدگاه های ثبت شده
+                        {t("دیدگاه های ثبت شده")}
                         </p>
                        
                     </div>
@@ -200,7 +204,7 @@ GetData()
 {item.Name} {item.Family}                        </p>
                         <div className="d-flex align-items-center" >
                             <p className="writerScore">
-                                امتیاز ثبت شده : 
+                            {t("امتیاز ثبت شده")} : 
                             </p>
                             <div className="d-flex align-items-center">
                             {
@@ -232,7 +236,7 @@ index+1>item.Rate?
                 <div className="headBox" style={{border:0}}>
                     <div style={{width:'100%'}}>
                         <p className="headerNews">
-ثبت دیدگاه                        </p>
+                        {t("ثبت دیدگاه")}                        </p>
                         {
                             com?
 null
@@ -242,12 +246,12 @@ null
                         هیچ دیدگاهی برای این موضوع ثبت نشده است شما اولین نفر باشید !
                        </p>
                         }
-                       <p style={{fontFamily:'IRANSans'}}>
+                       {/* <p style={{fontFamily:'IRANSans'}}>
                        نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز علامت‌گذاری شده‌اند *
-                       </p>
+                       </p> */}
                        <div className="d-flex align-items-center mt-3">
                        <p style={{fontFamily:'IRANSans',marginBottom:0}}>
-                        امتیاز شما : 
+                       {t("امتیاز شما")} : 
                        </p>
                        <div className="d-flex align-items-center" style={{marginRight:25}}>
                        <StartRate  setRate={setRate} />
@@ -271,13 +275,13 @@ null
                        </Row>
                        <div className="d-flex mt-3 align-items-start">
                        <p style={{fontFamily:'IRANSans',marginBottom:0}}>
-                        متن پیام شما :
+                       {t("متن پیام شما")} :
                        </p>
                        <textarea onChange={(e)=>setText(e.target.value)} className="inputCLass cInput" type="text"/>
                        </div>
                         <Row>
                             <Col md={12}>
-                                <Button onClick={()=>InsertComment()} className="sendComment">ارسال پیام</Button>
+                                <Button onClick={()=>InsertComment()} className="sendComment"> {t("ارسال پیام")}</Button>
                             </Col>
                         </Row>
                     </div>

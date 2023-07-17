@@ -120,7 +120,10 @@ console.log(response.data.Data)
 
       console.log(error);
     });
-    axios.get(apiUrl + "RecentlyBlog")
+    axios.get(apiUrl + "RecentlyBlog",{  headers: {
+      lang: i18n.language,
+      rate:rate
+    }})
     .then(function (response) {
       console.log(response)
       if (response.data.result == "True") {

@@ -63,8 +63,15 @@ const Header = () =>{
           if (response.data.result == "True") {
     console.log(123098)
     console.log(response.data.Data[0].Rate2)
-    mm=response.data.Data[0].Rate2;
-  setRates(mm)
+    if(mm=="en"){
+      mm=response.data.Data[0].Rate2;
+      setRates(mm)
+    }
+    else{
+      mm=response.data.Data[0].Rate3;
+      setRates(mm)
+    }
+   
   window.location.reload()
 
         }})
@@ -106,7 +113,9 @@ i18n.changeLanguage(ss);
             axios
                 .post(apiUrl + "SearchProduct",{
                     ProductName:aa
-                })
+                },{  headers: {
+                  lang: i18n.language,
+                }})
             .then(function (response) {
               if (response.data.result == "True" && aa.length>0) {
       
@@ -124,16 +133,19 @@ i18n.changeLanguage(ss);
             });}
      const  GetData = async(e) => {
         const axios = require("axios");
- 
+        const rate=await localStorage.getItem("rate")
+
             axios
-                .get(apiUrl + "MainMenu",{
-                    ProductName:search
-                })
+                .get(apiUrl + "MainMenu",{  headers: {
+                  lang: i18n.language,
+                  rate:rate
+                }})
             .then(function (response) {
               if (response.data.result == "True") {
       
                 setData(response.data.Data)
                 console.log(response.data.Data)
+                console.log("Mainmen99")
       
             }
             else{
@@ -145,10 +157,14 @@ i18n.changeLanguage(ss);
             });}
      const  GetGroup = async(aa) => {
         const axios = require("axios");
- 
+        const rate=await localStorage.getItem("rate")
+
             axios.post(apiUrl + "MenuAll",{
                     GroupID:aa
-                })
+                },{  headers: {
+                  lang: i18n.language,
+                  rate:rate
+                }})
             .then(function (response) {
               if (response.data.result == "True") {
       
@@ -270,15 +286,21 @@ i18n.changeLanguage(ss);
           defaultValue={"ir"}
         >
           <MenuItem value={"ir"}>
-            <img src={Iran} className="flag"/>
+            {/* <img src={Iran} className="flag"/> */}
             <span className="flagName">
                 فارسی
             </span>
           </MenuItem>
           <MenuItem value={"en"}>
-          <img src={England} className="flag"/>
+          {/* <img src={England} className="flag"/> */}
             <span className="flagName">
                 English
+            </span>
+          </MenuItem>
+          <MenuItem value={"ar"}>
+          {/* <img src={England} className="flag"/> */}
+            <span className="flagName">
+                عربی
             </span>
           </MenuItem>
         
@@ -326,15 +348,21 @@ i18n.changeLanguage(ss);
           
         >
           <MenuItem value={"ir"}>
-            <img src={Iran} className="flag"/>
+            {/* <img src={Iran} className="flag"/> */}
             <span className="flagName">
                 فارسی
             </span>
           </MenuItem>
           <MenuItem value={"en"}>
-          <img src={England} className="flag"/>
+          {/* <img src={England} className="flag"/> */}
             <span className="flagName">
                 انگلیسی
+            </span>
+          </MenuItem>
+          <MenuItem value={"ar"}>
+          {/* <img src={England} className="flag"/> */}
+            <span className="flagName">
+                عربی
             </span>
           </MenuItem>
           {/* <MenuItem value={30}>

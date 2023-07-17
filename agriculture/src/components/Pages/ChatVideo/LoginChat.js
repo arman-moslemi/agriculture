@@ -9,12 +9,14 @@ import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 import AlertBox from "./AlertBox";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
+import { useTranslation } from 'react-i18next';
 
 const Login = () => {
   const [userInfo, setUserInfo] = useState({});
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({});
   const navigate = useNavigate();
+  const {t,i18n} = useTranslation();
 
   useEffect(() => {
     return () => {
@@ -123,16 +125,18 @@ const Login = () => {
   };
 
   return (
+    
     <Grid
       container
       spacing={2}
       className="d-flex align-items-center justify-content-center login-container rtl"
     >
+      
       <Grid item xs={12} md={6} className="rtl d-flex justify-content-center">
         <form autoComplete="off" className="login-form">
           <Box mb={3}>
             <Typography color="textPrimary" variant="h4">
-              ورود به سیستم
+            {t("ورود به سیستم")}
             </Typography>
             <Typography
               color="textSecondary"
@@ -141,13 +145,13 @@ const Login = () => {
               className="mt-4"
 
             >
-              سیستم تماس تصویری
+               {t("سیستم تماس تصویری")}
             </Typography>
           </Box>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">
               <AccountCircleIcon />
-              <span className="me-1" style={{fontFamily:'IRANSans'}}>نام کاربری</span>
+              <span className="me-1" style={{fontFamily:'IRANSans'}}>{t("نام کاربری")}</span>
             </label>
             <input
             style={{fontFamily:'IRANSans'}}
@@ -167,7 +171,7 @@ const Login = () => {
           <div className="mb-3">
             <label htmlFor="password" className="form-label"style={{fontFamily:'IRANSans'}}>
               <LockIcon />
-              <span className="me-1"style={{fontFamily:'IRANSans'}}>رمز عبور</span>
+              <span className="me-1"style={{fontFamily:'IRANSans'}}>{t("رمز عبور")}</span>
             </label>
             <input
             style={{fontFamily:'IRANSans'}}
@@ -197,7 +201,7 @@ const Login = () => {
                 variant="contained"
                 onClick={() => handleSubmit()}
               >
-                ورود
+                 {t("ورود")}
               </Button>
             )}
           </Box>

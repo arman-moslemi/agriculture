@@ -8,16 +8,23 @@ import PaginationCustom from "src/components/Pages/Layouts/Pagination";
 import News1 from "src/components/assets/img/news1.jpg";
 import { apiUrl ,apiAsset} from "../../../commons/inFormTypes";
 import { useLocation,useSearchParams,useParams, Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+
 const News = () =>{
     const [data, setData] = useState([]);
     const [data2, setData2] = useState([]);
     const [type, setType] = useState([]);
     const [cat,setCat]=useState(0)
+    const {t,i18n} = useTranslation();
 
 
-    const GetData=()=>{
+    const GetData=async()=>{
         const axios = require("axios");
-        axios.get(apiUrl + "AllBlog")
+        const lang=await localStorage.getItem("lang")
+
+        axios.get(apiUrl + "AllBlog",{  headers: {
+            lang: lang,
+          }})
         .then(function (response) {
           if (response.data.result == "True") {
             console.log(response.data.Data);
@@ -38,7 +45,9 @@ else{
 
           console.log(error);
         });
-        axios.get(apiUrl + "AllBlogType")
+        axios.get(apiUrl + "AllBlogType",{  headers: {
+            lang: i18n.language,
+          }})
         .then(function (response) {
           if (response.data.result == "True") {
             setType(response.data.Data)
@@ -69,7 +78,7 @@ else{
             <div className="d-flex sortNews">
             <TextLeft color="#ffb921" size={30}/>
             <span className="sortText">
-                دسته بندی مطالب
+            {t("دسته بندی مطالب")}
             </span>
             </div>
             <ul className="newsCategory">
@@ -91,7 +100,7 @@ else{
             <Col md={9}>
             <div className="whiteBox mb-2 borderBottomGray" style={{padding:20}}>
             <span className="whiteBoxTitle">
-                      اخبار و مقالات
+            {t("اخبار و مقالات")}
                     </span>
             <div className="bigNewsBox">
                 
@@ -117,7 +126,7 @@ else{
                     </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[0]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                    {t("ادامه مطلب")} <ChevronLeft/>
                         </Link>
                     </div>
                 </div>
@@ -156,7 +165,7 @@ else{
                     </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[1]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                    {t("ادامه مطلب")}<ChevronLeft/>
                         </Link>
                     </div>
                 </div>
@@ -187,7 +196,7 @@ else{
                     </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[2]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                    {t("ادامه مطلب")}<ChevronLeft/>
                         </Link>
                     </div>
                 </div>
@@ -221,7 +230,7 @@ else{
                     </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[3]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                    {t("ادامه مطلب")}<ChevronLeft/>
                         </Link>
                     </div>
                 </div>
@@ -333,7 +342,7 @@ null
                     </div> */}
                     <div>
                     <Link to={"/SingleNews/"+data[6]?.Title} className="textDetail">
-                           ادامه مطلب <ChevronLeft/>
+                    {t("ادامه مطلب")}<ChevronLeft/>
                         </Link>
                     </div>
                 </div>

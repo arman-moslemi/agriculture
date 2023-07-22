@@ -120,7 +120,9 @@ const Consultation = () =>{
                   
                   console.log(error);
               });
-          axios.get(apiUrl + "Specialty")
+          axios.get(apiUrl + "Specialty",{  headers: {
+            lang: i18n.language,
+          }})
           .then(function (response) {
             if (response.data.result == "True") {
                 setProperty(response.data.Data)                

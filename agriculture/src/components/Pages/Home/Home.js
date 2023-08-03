@@ -68,7 +68,10 @@ const Home = () =>{
     console.log(lang)
     i18n.changeLanguage(lang)
 
-    axios.get(apiUrl + "Info")
+    axios.get(apiUrl + "Info",{  headers: {
+      lang: i18n.language,
+      rate:rate
+    }})
     .then(function (response) {
       console.log(response)
       if (response.data.result == "True") {
